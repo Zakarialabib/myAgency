@@ -1,0 +1,559 @@
+/*------------------------------------------------------------------
+ * Theme Name: CRE8
+ * Theme URI: https://www.brandio.io/envato/crea8
+ * Author: Brandio
+ * Author URI: https://www.brandio.io/
+ * Copyright 2019 Brandio.
+ -------------------------------------------------------------------*/
+/* -----------------------------------
+    1 - General Styles
+------------------------------------*/
+::selection {
+    background-color: rgba(137, 139, 145, 0.7);
+}
+
+.cr-btn {
+    color: #fff;
+    -webkit-box-shadow: inset 0 0 0 0.25rem #fff;
+    box-shadow: inset 0 0 0 0.25rem #fff;
+}
+
+.cr-btn:hover, .cr-btn:focus {
+    color: #5A6771;
+    -webkit-box-shadow: inset 0 0 0 3.25rem #fff;
+    box-shadow: inset 0 0 0 3.25rem #fff;
+}
+
+.cr-btn.primary {
+    color: #fff;
+    -webkit-box-shadow: inset 0 0 0 0.28rem #FFF96C;
+    box-shadow: inset 0 0 0 0.28rem #FFF96C;
+}
+
+.cr-btn.primary:hover, .cr-btn.primary:focus {
+    color: #fff;
+    -webkit-box-shadow: inset 0 0 0 3.25rem #FFF96C;
+    box-shadow: inset 0 0 0 3.25rem #FFF96C;
+}
+
+.cr-btn.black {
+    color: #000;
+    -webkit-box-shadow: inset 0 0 0 0.28rem #000;
+    box-shadow: inset 0 0 0 0.28rem #000;
+}
+
+.cr-btn.black:hover, .cr-btn.black:focus {
+    color: #fff;
+    -webkit-box-shadow: inset 0 0 0 3.25rem #000;
+    box-shadow: inset 0 0 0 3.25rem #000;
+}
+
+.menu-toggle .icon {
+    background-color: #FFF96C;
+}
+
+.menu-toggle .icon:before, .menu-toggle .icon:after {
+    background-color: #FFF96C;
+}
+
+.main-menu {
+    background-color: #393E46;
+}
+
+.main-menu .contant-info div {
+    color: #777A80;
+}
+
+.main-menu .contant-info div a {
+    color: #777A80;
+}
+
+.main-menu .contant-info div a:hover, .main-menu .contant-info div a:focus {
+    color: #FFF96C;
+}
+
+.main-menu .menu-links ul li a {
+    color: #14181C;
+}
+
+.main-menu .menu-links ul li a:hover, .main-menu .menu-links ul li a:focus {
+    color: #fff;
+}
+
+.main-menu .social-media .social-link-holder a {
+    color: #A8AAAD;
+}
+
+.main-menu .social-media .social-link-holder a:hover, .main-menu .social-media .social-link-holder a:focus {
+    color: #8b8d91;
+}
+
+/* -----------------------------------
+    2 - Header Styles
+------------------------------------*/
+.cnav .social-media .social-link-holder a {
+    color: #fff;
+}
+
+.cnav .social-media .social-link-holder a:hover, .cnav .social-media .social-link-holder a:focus {
+    color: #898b91;
+}
+
+.header {
+    background-color: #5A6771;
+}
+
+.header .mouse-scroll {
+    background-color: rgba(255, 255, 255, 0.15);
+    -webkit-box-shadow: 0 0.3rem 5rem rgba(0, 0, 0, 0.24);
+    box-shadow: 0 0.3rem 5rem rgba(0, 0, 0, 0.24);
+}
+
+.header .mouse-scroll:before {
+    background-color: rgba(255, 255, 255, 0.21);
+}
+
+.extra-lg-text {
+    color: #fff;
+}
+
+.extra-lg-text .other-color {
+    color: #FFF96C;
+}
+
+/* -----------------------------------
+    3 - Box Contentt Styles
+------------------------------------*/
+.boxy .bottom-text .link {
+    color: #fff;
+}
+
+.boxy .bottom-text .link a {
+    color: #fff;
+}
+
+.boxy .bottom-text .link a:hover, .boxy .bottom-text .link a:focus {
+    color: #abadb3;
+}
+
+.boxy .bottom-text .text {
+    color: #fff;
+}
+
+.boxy.c1-color {
+    background-color: #EEEEEE;
+}
+
+.boxy.c1-color h1.title {
+    color: #232931;
+}
+
+.boxy.c1-color .text {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.boxy.c1-color .slg-text {
+    color: #232931;
+}
+
+.boxy.c1-color .normal-lg-text p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.boxy.primary-color {
+    background-color: #FFF96C;
+}
+
+.boxy.primary-color h1.title {
+    color: #232931;
+}
+
+.boxy.primary-color .text {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.boxy.primary-color .slg-text {
+    color: #232931;
+}
+
+.boxy.primary-color .normal-lg-text p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.boxy.default-color {
+    background-color: #5A6771;
+}
+
+.boxy.default-color h1.title {
+    color: #EEEEEE;
+}
+
+.boxy.default-color .text {
+    color: rgba(216, 216, 216, 0.66);
+}
+
+.boxy.default-color .slg-text {
+    color: #fff;
+}
+
+.boxy.default-color .normal-lg-text p {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+.boxy.c2-color {
+    background-color: #D0D3D5;
+}
+
+.boxy.c2-color h1.title {
+    color: #5A6771;
+}
+
+.boxy.c2-color .text {
+    color: #5A6771;
+}
+
+.boxy.c2-color .slg-text {
+    color: #5A6771;
+}
+
+.boxy.c2-color .normal-lg-text p {
+    color: #5A6771;
+}
+
+.boxy.img-box:before {
+    background-color: #5A6771;
+}
+
+/* -----------------------------------
+    4 - Default Content Styles
+------------------------------------*/
+.default-content {
+    background-color: #232931;
+}
+
+.default-content p {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+.lg-text {
+    color: #fff;
+}
+
+.lg-text .other-color {
+    color: #FFF96C;
+}
+
+.normal-text p {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+.slg-text {
+    color: #fff;
+}
+
+.slg-text .other-color {
+    color: #FFF96C;
+}
+
+.normal-lg-text p {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+.normal-lg-text p a {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+/* -----------------------------------
+    5 - Clients Section Styles
+------------------------------------*/
+.clients-section {
+    background-color: #fff;
+}
+
+.clients-section .lg-text {
+    color: #000;
+}
+
+.clients-section p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+/* -----------------------------------
+    6 - Other Content Styles
+------------------------------------*/
+.other-content {
+    background-color: #FFF96C;
+}
+
+.other-content .lg-text {
+    color: #212221;
+}
+
+.other-content p {
+    color: rgba(33, 34, 33, 0.66);
+}
+
+.other-content .cr-btn {
+    color: #000;
+    -webkit-box-shadow: inset 0 0 0 0.25rem #000;
+    box-shadow: inset 0 0 0 0.25rem #000;
+}
+
+.other-content .cr-btn:hover, .other-content .cr-btn:focus {
+    color: #fff;
+    -webkit-box-shadow: inset 0 0 0 3.25rem #000;
+    box-shadow: inset 0 0 0 3.25rem #000;
+}
+
+/* -----------------------------------
+    7 - Process Section Styles
+------------------------------------*/
+.process-section {
+    background-color: #fff;
+}
+
+.process-section .lg-text .other-color {
+    color: #202528;
+}
+
+.process-section p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.text-box p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+/* -----------------------------------
+    8 - Team Section Styles
+------------------------------------*/
+.team-section {
+    background-color: #393E46;
+}
+
+/* -----------------------------------
+    9 - Jobs Section Styles
+------------------------------------*/
+.jobs-section {
+    background-color: #fff;
+}
+
+.jobs-section .lg-text .other-color {
+    color: #202528;
+}
+
+.jobs-section .job-box .subtitle {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+/* -----------------------------------
+    10 - Blog Section Styles
+------------------------------------*/
+.blog-section {
+    background-color: #fff;
+}
+
+.post-box {
+    background-color: #EEEEEE;
+}
+
+.post-box .text-holder .title {
+    color: #232931;
+}
+
+.post-box .text-holder .title:hover, .post-box .text-holder .title:focus {
+    color: #60666d;
+}
+
+.post-box .text-holder .text {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+/* -----------------------------------
+    11 - Post Section Styles
+------------------------------------*/
+.post-section {
+    background-color: #fff;
+}
+
+.post-section .post-header .post-info-holder .link-holder a {
+    color: #393E46;
+}
+
+.post-section .post-header .post-info-holder .link-holder a:hover, .post-section .post-header .post-info-holder .link-holder a:focus {
+    color: #60666d;
+}
+
+.post-section .post-header .post-info-holder .post-info .date {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.post-section .post-header .post-info-holder .post-info .auther {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.post-section .post-header .text-holder .title {
+    color: #232931;
+}
+
+.post-section .post-header .text-holder .text {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.post-section .post-content p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+/* -----------------------------------
+    12 - Few Contact Styles
+------------------------------------*/
+.few-contact {
+    background-color: #fff;
+}
+
+.few-contact .contact-info-holder .title {
+    color: #777A80;
+}
+
+.few-contact .contact-info-holder .contact-info {
+    color: #232931;
+}
+
+.few-contact .contact-info-holder .contact-info a {
+    color: #202528;
+}
+
+.few-contact .contact-info-holder .contact-info a:hover, .few-contact .contact-info-holder .contact-info a:focus {
+    color: #777A80;
+}
+
+/* -----------------------------------
+    13 - Jobs Section Styles
+------------------------------------*/
+.our-people-section {
+    background-color: #fff;
+}
+
+.our-people-section .extra-lg-text {
+    color: #393E46;
+}
+
+.our-people-section .normal-text p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.our-people-section .lg-text .other-color {
+    color: #202528;
+}
+
+.our-people-section .people-box .subtitle {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+/* -----------------------------------
+    14 - Social Row Styles
+------------------------------------*/
+.social-row {
+    background-color: #393E46;
+}
+
+.social-row .social-media .social-link-holder a {
+    color: #fff;
+}
+
+.social-row .social-media .social-link-holder a:hover, .social-row .social-media .social-link-holder a:focus {
+    color: #FFF96C;
+}
+
+/* -----------------------------------
+    15 - Project Info Styles
+------------------------------------*/
+.project-info {
+    background-color: #fff;
+}
+
+.project-info h2 {
+    color: #393E46;
+}
+
+.project-info .lg-text {
+    color: #000;
+}
+
+.project-info .normal-text p {
+    color: rgba(0, 0, 0, 0.66);
+}
+
+.project-info .text-box .title {
+    color: #393E46;
+}
+
+.project-imgs {
+    background-color: #fff;
+}
+
+/* -----------------------------------
+    16 - Footer Styles
+------------------------------------*/
+.footer {
+    background-color: #212221;
+}
+
+.footer .lg-text {
+    color: #FFF96C;
+}
+
+.footer p {
+    color: rgba(255, 255, 255, 0.66);
+}
+
+.footer .contact-info-holder .title {
+    color: #777A80;
+}
+
+.footer .contact-info-holder .contact-info {
+    color: #fff;
+}
+
+.footer .contact-info-holder .contact-info a {
+    color: #fff;
+}
+
+.footer .contact-info-holder .contact-info a:hover, .footer .contact-info-holder .contact-info a:focus {
+    color: #FFF96C;
+}
+
+.footer .contact-info-holder .social-media .social-link-holder a {
+    color: #fff;
+}
+
+.footer .contact-info-holder .social-media .social-link-holder a:hover, .footer .contact-info-holder .social-media .social-link-holder a:focus {
+    color: #898b91;
+}
+
+.footer.one-word .lg-text {
+    color: #fff;
+}
+
+/* -----------------------------------
+    17 - Responsive Styles
+------------------------------------*/
+@media (max-width: 992px) {
+    .boxy.img-box {
+        padding: 3.2rem;
+        min-height: 370px;
+    }
+
+    .boxy.img-box:before {
+        background: initial;
+        background-repeat: repeat-x;
+        background-image: -webkit-linear-gradient(0deg, rgba(90, 103, 113, 0.6), rgba(90, 103, 113, 0));
+        background-image: -o-linear-gradient(0deg, rgba(90, 103, 113, 0.6), rgba(90, 103, 113, 0));
+        background-image: linear-gradient(0deg, rgba(90, 103, 113, 0.6), rgba(90, 103, 113, 0));
+        opacity: 1;
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+}
