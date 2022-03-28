@@ -15,7 +15,7 @@ class CreateBlogsTable extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('language_id')->default(0)->constrained('languages')->onDelete('set null');
+            $table->integer('language_id')->default(0);
             $table->integer('bcategory_id')->nullable();
             $table->string('title', 255)->nullable();
             $table->string('slug', 255)->nullable();
