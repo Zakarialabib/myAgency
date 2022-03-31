@@ -7,9 +7,10 @@
                     <option value="{{ $value }}">{{ $value }}</option>
                 @endforeach
             </select>
-            <select class="form-control lang" id="languageSelect" data="{{url()->current() . '?language='}}">
-                @foreach($langs as $lang)
-                    <option value="{{$lang->code}}" {{$lang->code == request()->input('language') ? 'selected' : ''}} >{{$lang->name}}</option>
+            <select class="form-control lang" id="languageSelect" data="{{ url()->current() . '?language=' }}">
+                @foreach ($langs as $lang)
+                    <option value="{{ $lang->code }}"
+                        {{ $lang->code == request()->input('language') ? 'selected' : '' }}>{{ $lang->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -36,18 +37,15 @@
                 {{ __('Name') }}
             </x-table.th>
             <x-table.th>
-                {{ __('Order') }}
-            </x-table.th>
-            <x-table.th>
                 {{ __('Status') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Actions') }}
             </x-table.th>
-            
+
         </x-slot>
         <x-table.tbody>
-            @forelse($bcategories as $id=>$bcategory)
+            @forelse($bcategories as $bcategory)
                 <x-table.tr>
                     <x-table.td>
                         <input type="checkbox" value="{{ $bcategory->id }}" wire:model="selected">
@@ -56,32 +54,28 @@
                         {{ $bcategory->name }}
                     </x-table.td>
                     <x-table.td>
-                        {{ $bcategory->serial_number }}
-                    </x-table.td>
-                    <x-table.td>
-                        @if($bcategory->status == 1)
-                            <span class="badge badge-success">{{ __('Publish') }}</span>
-                        @else
-                            <span class="badge badge-warning">{{ __('Unpublish') }}</span>
+                        @if ($bcategory->status === \App\Models\Bcategory::BCATEGORY_ACITVE)
+                            <span class="badge text-white bg-green-500">{{ __('Active') }}</span>
+                        @elseif($bcategory->status === \App\Models\Bcategory::BCATEGORY_INACTIVE)
+                            <span class="badge text-white bg-red-500">{{ __('Inactive') }}</span>
                         @endif
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
-                            
-                                <a class="btn btn-sm text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                    href="{{ route('admin.bcategories.show', $bcategory) }}">
-                                    <x-heroicon-o-eye class="h-4 w-4" />
-                                </a>
-                                <a class="btn btn-sm text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
-                                    href="{{ route('admin.bcategories.edit', $bcategory) }}">
-                                    <x-heroicon-o-pencil-alt class="h-4 w-4" />
-                                </a>
-                                <button
-                                    class="btn btn-sm text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
-                                    type="button" wire:click="confirm('delete', {{ $bcategory->id }})"
-                                    wire:loading.attr="disabled">
-                                    <x-heroicon-o-trash class="h-4 w-4" />
-                                </button>
+                            <a class="btn btn-sm text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                                href="{{ route('admin.bcategories.show', $bcategory) }}">
+                                <x-heroicon-o-eye class="h-4 w-4" />
+                            </a>
+                            <a class="btn btn-sm text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
+                                href="{{ route('admin.bcategories.edit', $bcategory) }}">
+                                <x-heroicon-o-pencil-alt class="h-4 w-4" />
+                            </a>
+                            <button
+                                class="btn btn-sm text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
+                                type="button" wire:click="confirm('delete', {{ $bcategory->id }})"
+                                wire:loading.attr="disabled">
+                                <x-heroicon-o-trash class="h-4 w-4" />
+                            </button>
 
                         </div>
                     </x-table.td>
@@ -121,17 +115,17 @@
         });
 
         // Language filter
-    $('#languageSelect').on('change', function () {
-        let languageUrl = $(this).attr('data');
-        let languageVal = $(this).val();
-        languageUrl = languageUrl + languageVal;
-        window.location.href = languageUrl;
-    })
-    $('.languageSelect').on('change', function () {
-        let languageUrl = $(this).attr('data');
-        let languageVal = $(this).val();
-        languageUrl = languageUrl + languageVal;
-        window.location.href = languageUrl;
-    })
+        $('#languageSelect').on('change', function() {
+            let languageUrl = $(this).attr('data');
+            let languageVal = $(this).val();
+            languageUrl = languageUrl + languageVal;
+            window.location.href = languageUrl;
+        })
+        $('.languageSelect').on('change', function() {
+            let languageUrl = $(this).attr('data');
+            let languageVal = $(this).val();
+            languageUrl = languageUrl + languageVal;
+            window.location.href = languageUrl;
+        })
     </script>
 @endpush

@@ -11,24 +11,27 @@ class Bcategory extends Model
 
     public $table = 'bcategories';
 
+    const BCATEGORY_ACITVE = 1;
+    const BCATEGORY_INACTIVE = 0;
+
     public $orderable = [
            'id',
            'name',
-           'serial_number',
            'status',
+           'language_id'
        ];
    
        public $filterable = [
            'id',
            'name',
-           'serial_number',
            'status',
+           'language_id'
        ];
 
        protected $fillable = [
            'name',
-           'serial_number',
            'status',
+           'language_id'
     ];
 
 

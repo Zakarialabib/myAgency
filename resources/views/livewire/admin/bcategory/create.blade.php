@@ -8,48 +8,30 @@
             <x-label for="language_id" :value="__('Language')" />
             <select
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
-                wire:model="language_id" name="language_id">
+                wire:model="bcategory.language_id" name="language_id">
                 @foreach ($langs as $lang)
                     <option value="{{ $lang->id }}" {{ $lang->is_default == '1' ? 'selected' : '' }}>
                         {{ $lang->name }}
                     </option>
                 @endforeach
             </select>
-            @if ($errors->has('language_id'))
-                <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-            @endif
         </div>
         <div class="w-full row">
             <x-label for="name" :value="__('Name')" />
-            <input type="text" wire:model="name"
+            <input type="text" name="name" wire:model="bcategory.name"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}">
-            @if ($errors->has('name'))
-                <p class="text-danger"> {{ $errors->first('name') }} </p>
-            @endif
-        </div>
-
-        <div class="w-full row">
-            <x-label for="serial_number" :value="__('Order')" />
-            <input type="text" wire:model="serial_number"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="serial_number" placeholder="{{ __('Order') }}" value="{{ old('serial_number') }}">
-            @if ($errors->has('serial_number'))
-                <p class="text-danger"> {{ $errors->first('serial_number') }} </p>
-            @endif
+                placeholder="{{ __('Name') }}" value="{{ old('name') }}">
+            <x-input-error for="bcategory.name" />
         </div>
 
         <div class="w-full row">
             <x-label for="status" :value="__('Status')" />
-            <select wire:model="status"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="status">
+            <select name="status" wire:model="bcategory.status"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                 <option value="0">{{ __('Unpublish') }}</option>
                 <option value="1">{{ __('Publish') }}</option>
             </select>
-            @if ($errors->has('status'))
-                <p class="text-danger"> {{ $errors->first('status') }} </p>
-            @endif
+            <x-input-error for="bcategory.status" />
         </div>
 
         <div class="float-right p-2 mb-4">

@@ -2,93 +2,77 @@
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-    <form wire:submit.prevent="submit" class="py-10">
+    <form class="py-10" enctype="multipart/form-data" wire:submit.prevent="submit">
         <div class="w-full">
             <x-label for="language_id" :value="__('Language')" />
             <select
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
-                name="language_id" id="blog_lan" wire:model="language_id">
-                <option value="" selected disabled>{{ __('Select a Language') }}</option>
+                wire:model="blog.language_id" name="language_id">
                 @foreach ($langs as $lang)
-                    <option value="{{ $lang->id }}">{{ $lang->name }}</option>
+                    <option value="{{ $lang->id }}" {{ $lang->is_default == '1' ? 'selected' : '' }}>
+                        {{ $lang->name }}
+                    </option>
                 @endforeach
             </select>
-            @if ($errors->has('language_id'))
-                <p class="text-danger"> {{ $errors->first('language_id') }} </p>
-            @endif
         </div>
         <div class="w-full">
             <x-label for="image" :value="__('Image')" />
             <img class="mw-400 mb-3 show-img img-demo" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
             <div class="custom-file">
                 <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                <input type="file" class="custom-file-input up-img" name="image" id="image" wire:model="image">
+                <input type="file" class="custom-file-input up-img" name="image" id="image" wire:model="blog.image">
             </div>
-            @if ($errors->has('image'))
-                <p class="text-danger"> {{ $errors->first('image') }} </p>
-            @endif
+            <x-input-error for="blog.image" />
             <p class="help-block text-info">
                 {{ __('Upload 730X455 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
             </p>
         </div>
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
-            <input type="text" wire:model="title"
+            <input type="text" wire:model="blog.title"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">
-            @if ($errors->has('title'))
-                <p class="text-danger"> {{ $errors->first('title') }} </p>
-            @endif
+            <x-input-error for="blog.title" />
         </div>
         <div class="w-full">
             <x-label for="bcategory_id" :value="__('Category')" />
-                <x-select-list
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    required id="bcategory_id" name="bcategory_id" wire:model="bcategory_id"
-                    :options="$this->listsForFields['bcategories']" multiple />
-            @if ($errors->has('bcategory_id'))
-                <p class="text-danger"> {{ $errors->first('bcategory_id') }} </p>
-            @endif
+            <x-select-list
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                required id="bcategory_id" name="bcategory_id" wire:model="blog.bcategory_id"
+                :options="$this->listsForFields['bcategories']" multiple />
+            <x-input-error for="blog.bcategory_id" />
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Content')" />
-            <textarea name="content" wire:model="content"
+            <textarea name="content" wire:model="blog.content"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 summernote"
                 placeholder="{{ __('Content') }}">{{ old('content') }}</textarea>
-            @if ($errors->has('content'))
-                <p class="text-danger"> {{ $errors->first('content') }} </p>
-            @endif
+            <x-input-error for="blog.content" />
         </div>
         <div class="w-full">
             <x-label for="meta_keywords" :value="__('Meta Keywords')" />
             <input type="text"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                data-role="tagsinput" name="meta_keywords" wire:model="meta_keywords"
+                data-role="tagsinput" name="meta_keywords" wire:model="blog.meta_keywords"
                 placeholder="{{ __('Meta Keywords') }}" value="{{ old('meta_keywords') }}">
-            @if ($errors->has('meta_keywords'))
-                <p class="text-danger"> {{ $errors->first('meta_keywords') }} </p>
-            @endif
+            <x-input-error for="blog.meta_keywords" />
         </div>
         <div class="w-full">
             <x-label for="meta_description" :value="__('Meta Description')" />
             <textarea class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="meta_description" wire:model="meta_description" placeholder="{{ __('Meta Description') }}"
+                name="meta_description" wire:model="blog.meta_description" placeholder="{{ __('Meta Description') }}"
                 rows="4">{{ old('meta_description') }}</textarea>
-            @if ($errors->has('meta_description'))
-                <p class="text-danger"> {{ $errors->first('meta_description') }} </p>
-            @endif
+            <x-input-error for="blog.meta_description" />
         </div>
         <div class="w-full">
             <x-label for="status" :value="__('Status')" />
-            <select wire:model="status"
+            <select wire:model="blog.status"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="status">
                 <option value="0" selected>{{ __('Unpublish') }}</option>
                 <option value="1">{{ __('Publish') }}</option>
             </select>
-            @if ($errors->has('status'))
-                <p class="text-danger"> {{ $errors->first('status') }} </p>
-            @endif
+            <x-input-error for="blog.status" />
         </div>
 
         <div class="float-right p-2 mb-4">

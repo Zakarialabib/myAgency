@@ -5,22 +5,27 @@ namespace App\Http\Livewire\Admin\Bcategory;
 use Livewire\Component;
 use App\Models\Language;
 use App\Models\Bcategory;
-use App\Helpers\Helper;
+use Str;
 
 class Create extends Component
 {
     public Bcategory $bcategory;
     
-    public $name ,$language_id, $serial_number, $status, $slug, $blogs;
+    public $name ,$language_id, $status, $slug;
 
     protected $listeners = [
         'submit',
     ];
+    
+    protected $rules = [    
+        'bcategory.name' => 'required|unique:bcategories,name|max:191',
+        'bcategory.status' => 'required',
+        'slug' => 'nullable'
+    ]; 
 
     public function mount(Bcategory $bcategory)
     {
         $this->bcategory = $bcategory;
-        
     }
 
     public function render()
@@ -32,26 +37,13 @@ class Create extends Component
     {
         $this->validate();
         
-        $this->slug = Helper::make_slug($this->name);
-        $this->blogs = Bcategory::select('slug')->get();
+        $this->bcategory->slug = Str::slug($this->bcategory->name);
 
         $this->bcategory->save();
-
 
         // $this->alert('success', __('Bcategory created successfully!') );
 
         return redirect()->route('admin.bcategories.index');
     }
-
-    protected function rules(): array
-    {
-        return [
-            'name' => [
-                'required',
-                'unique:bcategories,name',
-                'max:150',
-            ],
-            'status' => 'required',
-        ];
-    }
+  
 }

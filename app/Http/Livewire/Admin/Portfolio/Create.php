@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin\Portfolio;
 
 use Livewire\Component;
 use App\Helpers\Helper;
-use App\Models\Service;
+use App\Models\Portfolio;
 use App\Models\Language;
 use App\Models\PortfolioImage;
 
@@ -26,33 +26,7 @@ class Create extends Component
         $slug = Helper::make_slug($request->title);
         $Portfolios = Portfolio::select('slug')->get();
 
-
-        $request->validate([
-            'image[]' => 'mimes:jpeg,jpg,png',
-            'featured_image' => 'required|mimes:jpeg,jpg,png',
-            'title' => [
-                'required',
-                'unique:portfolios,title',
-                'max:255',
-                function($attribute, $value, $fail) use ($slug, $Portfolios){
-                    foreach($Portfolios as $port){
-                        if($port->slug == $slug){
-                            return $fail('Title already taken!');
-                        }
-                    }
-                }
-            ],
-            'client_name' => 'required|max:250',
-            'start_date' => 'required|max:250',
-            'status' => 'required|max:250',
-            'service_id' => 'required',
-            'content' => 'required',
-            'serial_number' => 'required',
-            'language_id' => 'required',
-        ]);
-
-
-        $portfolio = new Portfolio();
+        $this->validate();
 
         if($request->hasFile('featured_image')){
 
@@ -64,26 +38,9 @@ class Create extends Component
             $portfolio->featured_image = $featured_image;
         }
 
+        $this->portfolio->save();
 
-        $portfolio->title = $request->title;
-        $portfolio->language_id = $request->language_id;
-        $portfolio->status = $request->status;
-        $portfolio->content = $request->content;
-        $portfolio->slug = $slug;
-        $portfolio->start_date = $request->start_date;
-        $portfolio->submission_date = $request->submission_date;
-        $portfolio->link = $request->link;
-        $portfolio->service_id = $request->service_id;
-        $portfolio->client_name = $request->client_name;
-        $portfolio->serial_number = $request->serial_number;
-        $portfolio->meta_keywords = $request->meta_keywords;
-        $portfolio->meta_description = $request->meta_description;
-        $portfolio->save();
-        $portfolio_id = $portfolio->id;
-
-  
-
-        if($request->hasFile('image')){
+        if($this->hasFile('image')){
             $files = $request->file('image');
             $count = 1;
             foreach ($files as $file){
@@ -102,4 +59,23 @@ class Create extends Component
     {
         return view('livewire.admin.portfolio.create');
     }
+
+    public function rules() { 
+        return [
+            'image[]' => 'mimes:jpeg,jpg,png',
+            'featured_image' => 'required|mimes:jpeg,jpg,png',
+            'title' => [
+                'required',
+                'unique:blogs,title',
+                'max:255',
+            ],
+            'client_name' => 'required|max:250',
+            'start_date' => 'required|max:250',
+            'status' => 'required|max:250',
+            'service_id' => 'required',
+            'content' => 'required',
+            'serial_number' => 'required',
+            'language_id' => 'required',
+    ]; 
+}
 }

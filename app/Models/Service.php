@@ -16,7 +16,6 @@ class Service extends Model
         'content',
         'icon',
         'language_id',
-        'serial_number',
         'status'
     ];
 
@@ -26,7 +25,6 @@ class Service extends Model
         'content',
         'icon',
         'language_id',
-        'serial_number',
         'status'
     ];
 
@@ -36,7 +34,6 @@ class Service extends Model
         'content',
         'icon',
         'language_id',
-        'serial_number',
         'status'
     ];
 

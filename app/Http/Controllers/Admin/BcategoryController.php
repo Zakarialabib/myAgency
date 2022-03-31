@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class BcategoryController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
         return view('admin.blog.blog-category.index');
     }

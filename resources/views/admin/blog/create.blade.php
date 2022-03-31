@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+@section('title', __('Create Blog'))
 @section('content')
     <div class="card bg-white dark:bg-dark-eval-1">
         <div class="p-6 rounded-t rounded-r mb-0 border-b border-slate-200">

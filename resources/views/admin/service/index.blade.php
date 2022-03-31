@@ -1,100 +1,22 @@
 @extends('layouts.dashboard')
-
+@section('title', __('Service List'))
 @section('content')
+<div class="card bg-white dark:bg-dark-eval-1">
+    <div class="p-6 rounded-t rounded-r mb-0 border-b border-slate-200">
+        <div class="card-header-container flex flex-wrap">
+            <h6 class="text-xl font-bold text-zinc700 dark:text-zinc300">
+                {{ __('Service list') }}
+            </h6>
 
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row">
-        <div class="col-sm-6">
-            <h1 class="m-0 text-dark">{{ __('Service') }} </h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="fas fa-home"></i>{{ __('Home') }}</a></li>
-            <li class="breadcrumb-item">{{ __('Service') }}</li>
-            </ol>
-        </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-<section class="content">
-    <div class="container-fluid">
-   
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-1">{{ __('Service List') }}</h3>
-                        <div class="card-tools d-flex">
-                            <div class="d-inline-block mr-4">
-                                <select class="form-control lang" id="languageSelect" data="{{url()->current() . '?language='}}">
-                                    @foreach($langs as $lang)
-                                        <option value="{{$lang->code}}" {{$lang->code == request()->input('language') ? 'selected' : ''}} >{{$lang->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <a href="{{ route('admin.service.add'). '?language=' . $currentLang->code }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-plus"></i> {{ __('Add') }}
-                            </a>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                    <table class="table table-striped table-bordered data_table">
-                        <thead>
-                            <tr>
-                                <th>{{ __('#') }}</th>
-                                <th>{{ __('Image') }}</th>
-                                <th>{{ __('Title') }}</th>
-                                <th>{{ __('Order') }}</th>
-                                <th>{{ __('Status') }}</th>
-                                <th>{{ __('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+            <a class="leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                href="{{ route('admin.services.create'). '?language=' . $currentLang->code }}" >
+                {{ __('Create service') }}
+            </a>
 
-                            @foreach ($services as $id=>$service)
-                            <tr>
-                                <td>
-                                    {{ $id }}
-                                </td>
-                                <td>
-                                    <img class="w-80" src="{{ asset('assets/front/img/service/'.$service->image) }}" alt="">
-                                </td>
-                                <td>
-                                    {{ $service->title }}
-                                </td>
-                                <td>
-                                    {{ $service->serial_number }}
-                                </td>
-                                <td>
-                                    @if($service->status == 1)
-                                        <span class="badge badge-success">{{ __('Publish') }}</span>
-                                    @else
-                                        <span class="badge badge-warning">{{ __('Unpublish') }}</span>
-                                    @endif
-
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.service.edit', $service->id) }}" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>{{ __('Edit') }}</a>
-                                    <form  id="deleteform" class="d-inline-block" action="{{ route('admin.service.delete', $service->id ) }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $service->id }}">
-                                        <button type="submit" class="btn btn-danger btn-sm" id="delete">
-                                        <i class="fas fa-trash"></i>{{ __('Delete') }}
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    <!-- /.row -->
-</section>
+    <div class="p-4">
+        @livewire('admin.service.index')
+    </div>
+</div>
 @endsection

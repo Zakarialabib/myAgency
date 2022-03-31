@@ -135,8 +135,6 @@ class PortfolioController extends Controller
         $portfolio->status = $request->status;
         $portfolio->content = $request->content;
         $portfolio->slug = $slug;
-        $portfolio->start_date = $request->start_date;
-        $portfolio->submission_date = $request->submission_date;
         $portfolio->link = $request->link;
         $portfolio->service_id = $request->service_id;
         $portfolio->client_name = $request->client_name;
