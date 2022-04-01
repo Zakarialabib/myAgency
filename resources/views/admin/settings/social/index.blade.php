@@ -87,7 +87,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($slinks as $id=>$slink)
+                            @foreach ($slinks as $slink)
                             <tr>
                                 <td>{{ ++$id }}</td>
                                 <td>{{ $slink->icon }}</td>

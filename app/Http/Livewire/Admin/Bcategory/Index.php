@@ -83,4 +83,13 @@ class Index extends Component
 
         return view('livewire.admin.bcategory.index', compact('bcategories'));
     }
+
+     // Blog Category  Delete
+     public function delete(Bcategory $bcategory)
+     {
+         // abort_if(Gate::denies('bcategory_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+ 
+         $bcategory->delete();
+     }
+     
 }

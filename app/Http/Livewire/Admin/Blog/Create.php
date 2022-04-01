@@ -13,7 +13,15 @@ class Create extends Component
 {
     use WithFileUploads;
 
-    public Blog $blog;
+    public Blog $blog; 
+    // public $title;
+    // public $status;
+    // public $content;
+    // public $bcategory_id;
+    // public $meta_keywords;
+    // public $meta_description;
+    // public $language_id;
+    public $image;
     
     public array $listsForFields = [];
     
@@ -33,8 +41,6 @@ class Create extends Component
     }
 
     protected $rules = [    
-
-        'blog.image' => 'nullable',
         'blog.title' => 'required|unique:blogs,title|max:191',
         'blog.status' => 'required',
         'blog.content' => 'required',
@@ -48,18 +54,13 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-
-        if(!empty($this->image)){
-
+        $this->blog->slug = Str::slug($this->blog->title);
+        if($this->image){
             $file = $this->image->store("/");
-
             $this->blog->image = $file;
         }
-
-        $this->blog->slug = Str::slug($this->blog->title);
-
         $this->blog->save();
-
+            
         // $this->alert('success', __('Blog created successfully!') );
         
         return redirect()->route('admin.blogs.index');

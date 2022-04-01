@@ -50,7 +50,7 @@
             
         </x-slot>
         <x-table.tbody>
-            @forelse($blogs as $id=>$blog)
+            @forelse($blogs as $blog)
                 <x-table.tr>
                     <x-table.td>
                         <input type="checkbox" value="{{ $blog->id }}" wire:model="selected">

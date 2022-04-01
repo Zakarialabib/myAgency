@@ -36,9 +36,6 @@
                 {{ __('Title') }}
             </x-table.th>
             <x-table.th>
-                {{ __('Order') }}
-            </x-table.th>
-            <x-table.th>
                 {{ __('Image') }}
             </x-table.th>
             <x-table.th>
@@ -50,16 +47,13 @@
             
         </x-slot>
         <x-table.tbody>
-            @forelse($services as $id=>$service)
+            @forelse($services as $service)
                 <x-table.tr>
                     <x-table.td>
                         <input type="checkbox" value="{{ $service->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
                         {{ $service->title }}
-                    </x-table.td>
-                    <x-table.td>
-                        {{ $service->serial_number }}
                     </x-table.td>
                     <x-table.td>
                         {{ $service->image }}

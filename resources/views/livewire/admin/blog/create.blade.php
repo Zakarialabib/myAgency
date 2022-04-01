@@ -20,9 +20,9 @@
             <img class="mw-400 mb-3 show-img img-demo" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
             <div class="custom-file">
                 <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                <input type="file" class="custom-file-input up-img" name="image" id="image" wire:model="blog.image">
+                <input type="file" class="custom-file-input up-img" name="image" wire:model="image">
             </div>
-            <x-input-error for="blog.image" />
+            <x-input-error for="image" />
             <p class="help-block text-info">
                 {{ __('Upload 730X455 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
             </p>
@@ -39,7 +39,7 @@
             <x-select-list
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 required id="bcategory_id" name="bcategory_id" wire:model="blog.bcategory_id"
-                :options="$this->listsForFields['bcategories']" multiple />
+                :options="$this->listsForFields['bcategories']" />
             <x-input-error for="blog.bcategory_id" />
         </div>
         <div class="w-full">

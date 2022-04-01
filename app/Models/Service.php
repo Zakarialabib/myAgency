@@ -11,19 +11,19 @@ class Service extends Model
     use HasAdvancedFilter;
 
     public $orderable = [
+        'id',
         'title',
         'image',
         'content',
-        'icon',
         'language_id',
         'status'
     ];
 
     public $filterable = [
+        'id',
         'title',
         'image',
         'content',
-        'icon',
         'language_id',
         'status'
     ];
@@ -32,7 +32,6 @@ class Service extends Model
         'title',
         'image',
         'content',
-        'icon',
         'language_id',
         'status'
     ];

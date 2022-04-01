@@ -90,4 +90,12 @@ class Index extends Component
 
         return view('livewire.admin.blog.index', compact('blogs','sectiontitle'));
     }
+
+    // Blog  Delete
+    public function delete(blog $blog)
+    {
+        // abort_if(Gate::denies('blog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $blog->delete();
+    }
 }

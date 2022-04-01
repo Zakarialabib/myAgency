@@ -56,8 +56,8 @@
          <x-sidebar.sublink title="{{ __('General Settings') }}" href="{{ route('admin.settings.index') }}"
         :active="request()->routeIs('admin.settings.index')" /> 
 
-        {{-- <x-sidebar.sublink title="{{ __('Languages') }}" href="{{ route('admin.translations') }}"
-        :active="request()->routeIs('admin.translations')" /> --}}
+        <x-sidebar.sublink title="{{ __('Languages') }}" href="{{ route('admin.language.index') }}"
+        :active="request()->routeIs('admin.language.index')" />
     </x-sidebar.dropdown>
 
     <x-sidebar.link title="{{ __('Logout') }}" onclick="event.preventDefault(); 

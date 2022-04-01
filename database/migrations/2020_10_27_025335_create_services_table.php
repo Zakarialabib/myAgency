@@ -19,7 +19,6 @@ class CreateServicesTable extends Migration
             $table->tinyInteger('status')->nullable();
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
-            $table->string('icon')->nullable();
             $table->string('image')->nullable();
             $table->text('content')->nullable();
             $table->timestamps();

@@ -86,4 +86,13 @@ class Index extends Component
 
         return view('livewire.admin.portfolio.index', compact('portfolios','sectiontitle'));
     }
+
+     // Blog Category  Delete
+     public function delete(Portfolio $portfolio)
+     {
+         // abort_if(Gate::denies('portfolio_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+ 
+         $portfolio->delete();
+     }
+     
 }

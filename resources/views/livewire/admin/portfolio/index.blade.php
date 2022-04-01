@@ -53,7 +53,7 @@
             </x-table.th>
         </x-slot>
         <x-table.tbody>
-            @forelse($portfolios as $id=>$portfolio)
+            @forelse($portfolios as $portfolio)
                 <x-table.tr>
                     <x-table.td>
                         <input type="checkbox" value="{{ $portfolio->id }}" wire:model="selected">

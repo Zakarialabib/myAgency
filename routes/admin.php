@@ -58,6 +58,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     // Setting
     Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);
 
+    Route::get('languages', [LanguageController::class, 'index'])->name('language.index');
+    Route::post('translations/update', [LanguageController::class , 'transUpdate'])->name('translation.update.json');
+    Route::post('translations/updateKey', [LanguageController::class, 'transUpdateKey'])->name('translation.update.json.key');
+    Route::delete('translations/destroy/{key}', [LanguageController::class, 'destroy'])->name('translations.destroy'); 
+    Route::post('translations/create', [LanguageController::class ,'store'])->name('translations.create');
 
-    
 });
