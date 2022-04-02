@@ -36,7 +36,7 @@ class TeamController extends Controller
         $request->validate([
             'image' => 'required|mimes:jpeg,jpg,png',
             'name' => 'required|max:100',
-            'dagenation' => 'required|max:100'
+            'role' => 'required|max:100'
         ]);
         
         $team = new Team();
@@ -54,7 +54,7 @@ class TeamController extends Controller
         $team->language_id = $request->language_id;
         $team->name = $request->name;
         $team->status = $request->status;
-        $team->dagenation = $request->dagenation;
+        $team->role = $request->role;
 
         if($request->icon1 && $request->url1){
             $team->icon1 = $request->icon1;
@@ -114,7 +114,7 @@ class TeamController extends Controller
         $request->validate([
             'image' => 'mimes:jpeg,jpg,png',
             'name' => 'required|max:100',
-            'dagenation' => 'required|max:100'
+            'role' => 'required|max:100'
         ]);
 
         $team = Team::findOrFail($id);
@@ -133,7 +133,7 @@ class TeamController extends Controller
         $team->language_id = $request->language_id;
         $team->name = $request->name;
         $team->status = $request->status;
-        $team->dagenation = $request->dagenation;
+        $team->role = $request->role;
 
         if($request->icon1 && $request->url1){
             $team->icon1 = $request->icon1;

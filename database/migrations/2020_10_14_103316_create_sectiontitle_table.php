@@ -69,6 +69,7 @@ class CreateSectionTitleTable extends Migration
             $table->text('about_text')->nullable();
             $table->string('about_experince_yers')->nullable();
             $table->string('about_intro_video')->nullable();
+            $table->text('about_image')->nullable();
 
             $table->string('get_quote_title')->nullable();
             $table->string('get_quote_sub_title')->nullable();
@@ -84,10 +85,10 @@ class CreateSectionTitleTable extends Migration
 
             $table->string('counter_bg_image')->nullable();
 
+            $table->string('meeet_us_text')->nullable();
             $table->string('meeet_us_bg_image')->nullable();
             $table->string('meeet_us_button_text')->nullable();
             $table->string('meeet_us_button_link')->nullable();
-            
 
             $table->timestamps();
         });

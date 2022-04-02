@@ -15,35 +15,43 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            
             $table->string('language_id')->nullable();
             $table->string('website_title')->nullable();
             $table->string('base_color')->nullable();
-            $table->string('header_logo')->nullable();
-            $table->string('footer_logo')->nullable();
+            
+            $table->string('site_logo')->nullable();
             $table->string('fav_icon')->nullable();
-            $table->string('breadcrumb_image')->nullable();
+            
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
-            $table->string('contactemail')->nullable();
             $table->string('address')->nullable();
+
             $table->text('footer_text')->nullable();
+            $table->string('copyright_text')->nullable();
+            
             $table->text('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
-            $table->string('copyright_text')->nullable();
 
-            $table->text('messenger_link')->nullable();
-            $table->text('facebook_pexel')->nullable();
-            $table->text('google_analytics')->nullable();
-            $table->string('whatsapp_link')->nullable();
+            $table->text('social_facebook')->nullable();
+            $table->string('social_twitter')->nullable();
+            $table->text('social_instagram')->nullable();
+            $table->string('social_linkedin')->nullable();
+            $table->string('social_whatsapp')->nullable();
+
+            $table->text('head_tags')->nullable();
+            $table->text('body_tags')->nullable();
+
             $table->string('announcement', 255)->nullable();
             $table->decimal('announcement_delay', 11, 2)->default(0.00);
-            $table->text('maintainance_text')->nullable();
             $table->binary('cookie_alert_text')->nullable();
-        
-            $table->tinyInteger('is_video_hero')->default(1);
+            
+            $table->tinyInteger('is_preloader')->default(1);
+            $table->string('preloader_icon')->nullable();
+            $table->string('preloader_bg_color')->nullable();
+
             $table->tinyInteger('is_whatsapp')->default(1);
-            $table->tinyInteger('is_call_button')->default(1);
-            $table->string('maintainance_image')->nullable();
+            $table->tinyInteger('is_cooki_alert')->default(1);
 
             $table->timestamps();
         });

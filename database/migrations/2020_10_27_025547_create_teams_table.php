@@ -18,7 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('status')->nullable();
             $table->string('image')->nullable();
             $table->string('name')->nullable();
-            $table->string('dagenation')->nullable();
+            $table->string('role')->nullable();
             $table->string('icon1')->nullable();
             $table->string('icon2')->nullable();
             $table->string('icon3')->nullable();
