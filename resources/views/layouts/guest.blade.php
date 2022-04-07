@@ -62,16 +62,20 @@
     <div class="font-sans text-zinc900 antialiased">
         {{ $slot }}
     </div>
+    
+    <!--    announcement banner section start   -->
+    <a class="announcement-banner absulute" href="{{asset('assets/front/img/'.$setting->announcement)}}"></a>
+    <!--    announcement banner section end   --> 
 
     @include('partials.footer')
 
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer=""></script>
-    <script type="text/javascript" src="{{ asset('/js/main.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/anime.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/scrollreveal.min.js') }}"></script>
 
     @livewireScripts
+
     <script>
         $(document).ready(function() {
             // Add smooth scrolling to all links
@@ -97,8 +101,62 @@
                 } // End if
             });
         });
+
+        $(window).on('load', function (event) {
+
+        if (mainbs.is_announcement == 1) {
+            // trigger announcement banner base on sessionStorage
+            let announcement = sessionStorage.getItem('announcement') != null ? false : true;
+            // console.log(sessionStorage.getItem('announcement'));
+            if (announcement) {
+                setTimeout(function () {
+                    $('.announcement-banner').trigger('click');
+                }, mainbs.announcement_delay * 1000);
+            }
+        }
+
+        });
+
+        // announcement banner magnific popup
+        if (mainbs.is_announcement == 1) {
+        $('.announcement-banner').magnificPopup({
+            type: 'image',
+            mainClass: 'mfp-fade',
+            callbacks: {
+                open: function () {
+                    $.magnificPopup.instance.close = function () {
+                        // Do whatever else you need to do here
+                        sessionStorage.setItem("announcement", "closed");
+                        // console.log(sessionStorage.getItem('announcement'));
+
+                        // Call the original close method to close the announcement
+                        $.magnificPopup.proto.close.call(this);
+                    };
+                }
+            }
+        });
+        }
+
     </script>
 
+	{{-- Cookie alert dialog start --}}
+	{{-- @if ($setting->is_cooki_alert == 1)
+		@include('cookieConsent::index')
+	@endif --}}
+	{{-- Cookie alert dialog end --}}
+
+    {{-- <input type="hidden" id="main_url" value="{{ route('front.index') }}">
+
+    @php
+        $mainbs = [];
+        $mainbs['is_announcement'] = $setting->is_announcement;
+        $mainbs['announcement_delay'] = $setting->announcement_delay;
+        $mainbs = json_encode($mainbs);
+    @endphp
+
+    <script>
+        var mainbs = {!! $mainbs !!};
+    </script> --}}
 </body>
 
 </html>

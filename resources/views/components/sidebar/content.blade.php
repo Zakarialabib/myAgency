@@ -5,31 +5,36 @@
             <x-icons.dashboard class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
     </x-sidebar.link>
+    
     <x-sidebar.link title="{{ __('Blogs') }}" href="{{ route('admin.blogs.index') }}" :isActive="request()->routeIs('admin.blogs.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
     </x-sidebar.link>
+
     <x-sidebar.link title="{{ __('Blog Categories') }}" href="{{ route('admin.bcategories.index') }}" :isActive="request()->routeIs('admin.bcategories.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
     </x-sidebar.link>
-    <x-sidebar.link title="{{ __('Portfolio') }}" href="{{ route('admin.portfolios.index') }}" :isActive="request()->routeIs('admin.portfolios.index')">
-        <x-slot name="icon">
-            <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
-        </x-slot>
-    </x-sidebar.link>
+
     <x-sidebar.link title="{{ __('Services') }}" href="{{ route('admin.services.index') }}" :isActive="request()->routeIs('admin.services.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
     </x-sidebar.link>
-    <x-sidebar.link title="{{ __('Menu') }}" href="{{ route('admin.menu.index') }}" :isActive="request()->routeIs('admin.menu.index')">
+
+    <x-sidebar.link title="{{ __('Portfolio') }}" href="{{ route('admin.portfolios.index') }}" :isActive="request()->routeIs('admin.portfolios.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>
     </x-sidebar.link>
+   
+    {{-- <x-sidebar.link title="{{ __('Menu') }}" href="{{ route('admin.menu.index') }}" :isActive="request()->routeIs('admin.menu.index')">
+        <x-slot name="icon">
+            <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+        </x-slot>
+    </x-sidebar.link> --}}
 
     <x-sidebar.link title="{{ __('Users') }}" href="{{ route('admin.users.index') }}" :isActive="request()->routeIs('admin.users.index')">
         <x-slot name="icon">

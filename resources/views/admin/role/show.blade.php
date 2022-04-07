@@ -13,7 +13,7 @@
                     <a href="{{ route('admin.roles.edit', $role) }}" class="md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 text-sm font-bold uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
                         {{ __('Edit') }}
                     </a>
-                <a href="{{ route('admin.roles.index') }}" class="btn rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition bg-zinc300 text-black hover:text-blue-800 hover:bg-blue-200 active:bg-blue-200 focus:ring-blue-300">
+                <a href="{{ route('admin.roles.index') }}" class="leading-4 md:text-sm sm:text-xs bg-gray-400 text-black hover:text-blue-800 hover:bg-gray-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                     {{ __('Go back') }}
                 </a>
             </div>

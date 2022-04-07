@@ -74,9 +74,9 @@ class Index extends Component
     {
         // $lang = Language::where('code', $this->language)->first()->id;
 
-        $sectiontitle = Sectiontitle::where('language_id', $this->lang)->first();
+        // $sectiontitle = Sectiontitle::where('language_id', $this->lang)->first();
 
-        $query = Service::where('language_id', $this->lang)->advancedFilter([
+        $query = Service::advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
@@ -84,6 +84,6 @@ class Index extends Component
 
         $services = $query->paginate($this->perPage);
 
-        return view('livewire.admin.service.index', compact('services','sectiontitle'));
+        return view('livewire.admin.service.index', compact('services'));
     }
 }

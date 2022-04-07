@@ -3,7 +3,7 @@
         <div class="w-full row">
             <x-label for="language_id" :value="__('Language')" />
             <select
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
                 name="language_id" id="portfolio_lan">
                 <option value="" selected disabled>Select a Language</option>
                 @foreach ($langs as $lang)
@@ -49,7 +49,7 @@
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
             <input type="text"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="title" placeholder="Title" value="{{ old('title') }}">
             @if ($errors->has('title'))
                 <p class="text-danger"> {{ $errors->first('title') }} </p>
@@ -58,7 +58,7 @@
         <div class="w-full">
             <x-label for="client_name" :value="__('Client Name')" />
             <input type="text"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="client_name" placeholder="Client Name" value="{{ old('client_name') }}">
             @if ($errors->has('client_name'))
                 <p class="text-danger"> {{ $errors->first('client_name') }} </p>
@@ -67,7 +67,7 @@
         <div class="w-full">
             <x-label for="service_id" :value="__('Category')" />
             <select
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="service_id" id="bcategory_id">
             </select>
             @if ($errors->has('service_id'))
@@ -78,7 +78,7 @@
         <div class="w-full">
             <x-label for="link" :value="__('Link')" />
             <input type="text"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="link" placeholder="Live Link" value="{{ old('link') }}">
             @if ($errors->has('link'))
                 <p class="text-danger"> {{ $errors->first('link') }} </p>
@@ -87,7 +87,7 @@
         <div class="w-full">
             <x-label for="status" :value="__('Status')" />
             <select
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="status">
                 <option value="0">{{ __('In Progress') }}</option>
                 <option value="1" selected>{{ __('Completed') }}</option>
@@ -100,7 +100,7 @@
         <div class="w-full">
             <x-label for="content" :value="__('Description')" />
             <textarea name="content"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 summernote"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 summernote"
                 rows="4" placeholder="{{ __('Description') }}">{{ old('content') }}</textarea>
             @if ($errors->has('content'))
                 <p class="text-danger"> {{ $errors->first('content') }} </p>
@@ -110,7 +110,7 @@
         <div class="w-full">
             <x-label for="meta_keywords" :value="__('Meta Keywords')" />
             <input type="text"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 data-role="tagsinput" name="meta_keywords" placeholder="{{ __('Meta Keywords') }}"
                 value="{{ old('meta_keywords') }}">
             @if ($errors->has('meta_keywords'))
@@ -119,7 +119,7 @@
         </div>
         <div class="w-full">
             <x-label for="meta_description" :value="__('Meta Description')" />
-            <textarea class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+            <textarea class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="meta_description" placeholder="{{ __('Meta Description') }}"
                 rows="4">{{ old('meta_description') }}</textarea>
             @if ($errors->has('meta_description'))
@@ -128,7 +128,7 @@
         </div>
         <div class="w-full">
             <div class="offset-sm-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                <button type="submit" class=" leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">{{ __('Save') }}</button>
             </div>
         </div>
     </form>

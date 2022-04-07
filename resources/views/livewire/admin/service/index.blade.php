@@ -39,6 +39,9 @@
                 {{ __('Image') }}
             </x-table.th>
             <x-table.th>
+                {{ __('Language') }}
+            </x-table.th>
+            <x-table.th>
                 {{ __('Status') }}
             </x-table.th>
             <x-table.th>
@@ -59,11 +62,10 @@
                         {{ $service->image }}
                     </x-table.td>
                     <x-table.td>
-                        @if($service->status == 1)
-                            <span class="badge badge-success">{{ __('Publish') }}</span>
-                        @else
-                            <span class="badge badge-warning">{{ __('Unpublish') }}</span>
-                        @endif
+                        {{ $service->language->name }}
+                    </x-table.td>
+                    <x-table.td>
+                        <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">

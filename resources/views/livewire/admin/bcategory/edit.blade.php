@@ -10,7 +10,7 @@
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
                 wire:model="bcategory.language_id" name="language_id">
                 @foreach ($langs as $lang)
-                    <option value="{{ $lang->id }}" {{ $lang->is_default == '1' ? 'selected' : '' }}>
+                    <option value="{{ $lang->id }}">
                         {{ $lang->name }}
                     </option>
                 @endforeach
@@ -40,7 +40,7 @@
                 {{ __('Save') }}
             </button>
             <a href="{{ route('admin.bcategories.index') }}"
-                class="btn rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition bg-zinc300 text-black hover:text-blue-800 hover:bg-blue-200 active:bg-blue-200 focus:ring-blue-300">
+                class="leading-4 md:text-sm sm:text-xs bg-gray-400 text-black hover:text-blue-800 hover:bg-gray-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                 {{ __('Go back') }}
             </a>
         </div>

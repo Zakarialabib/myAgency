@@ -26,6 +26,10 @@ class Index extends Component
 
     public array $paginationOptions;
 
+    public $language_id;
+
+    public array $listsForFields = [];
+
     protected $queryString = [
         'search' => [
             'except' => '',
@@ -58,7 +62,10 @@ class Index extends Component
         $this->selected = [];
     }
 
-    public $lang, $language;
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+    }
 
     public function mount()
     {
@@ -67,13 +74,14 @@ class Index extends Component
         $this->perPage           = 100;
         $this->paginationOptions = config('project.pagination.options');
         $this->orderable         = (new Bcategory())->orderable;
-        $this->lang = Language::where('is_default', 1)->first();
+        $this->initListsForFields();
     }
+
     public function render()
     {
-        // $lang = Language::where('code', $this->language)->first()->id;
-        
-        $query = Bcategory::where('language_id', $this->lang)->advancedFilter([
+        $query = Bcategory::when($this->language_id, function ($query) {
+                return $query->where('language_id', $this->language_id);
+            })->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,

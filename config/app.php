@@ -167,7 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
         /*
          * Application Service Providers...
          */

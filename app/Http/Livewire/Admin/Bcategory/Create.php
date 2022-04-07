@@ -19,6 +19,7 @@ class Create extends Component
     
     protected $rules = [    
         'bcategory.name' => 'required|unique:bcategories,name|max:191',
+        'bcategory.language_id' => 'required',
         'bcategory.status' => 'required',
         'slug' => 'nullable'
     ]; 

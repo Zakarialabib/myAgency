@@ -68,11 +68,7 @@
                         {{ $portfolio->service->title }}
                     </x-table.td>
                     <x-table.td>
-                        @if($portfolio->status == 1)
-                            <span class="badge badge-success">{{ __('Publish') }}</span>
-                        @else
-                            <span class="badge badge-warning">{{ __('Unpublish') }}</span>
-                        @endif
+                        <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">

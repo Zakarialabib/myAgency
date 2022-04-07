@@ -20,13 +20,17 @@ class Index extends Component
     public int $perPage;
 
     public array $orderable;
-
+    
     public string $search = '';
-
+    
     public array $selected = [];
-
+    
     public array $paginationOptions;
+    
+    public $language_id;
 
+    public array $listsForFields = [];
+    
     protected $queryString = [
         'search' => [
             'except' => '',
@@ -58,8 +62,11 @@ class Index extends Component
     {
         $this->selected = [];
     }
-
-    public $lang, $language;
+    
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+    }
 
     public function mount()
     {
@@ -68,18 +75,13 @@ class Index extends Component
         $this->perPage           = 100;
         $this->paginationOptions = config('project.pagination.options');
         $this->orderable         = (new Blog())->orderable;
-        // $this->lang = Language::where('is_default', 1)->first();
+        $this->initListsForFields();
     }
 
     public function render()
-    {
-        $lang = Language::where('id', $this->lang)->first();
-        // dd($this->lang->id);
-        $sectiontitle = Sectiontitle::where('language_id', $this->lang)->first();
-        // dd($query);
-        
-        $query = Blog::when($lang, function ($query) {
-            return $query->where('language_id', $lang);
+    { 
+        $query = Blog::when($this->language_id, function ($query) {
+            return $query->where('language_id', $this->language_id);
         })->advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
@@ -88,14 +90,13 @@ class Index extends Component
 
         $blogs = $query->paginate($this->perPage);
 
-        return view('livewire.admin.blog.index', compact('blogs','sectiontitle'));
+        return view('livewire.admin.blog.index', compact('blogs'));
     }
 
     // Blog  Delete
     public function delete(blog $blog)
     {
         // abort_if(Gate::denies('blog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
         $blog->delete();
     }
 }

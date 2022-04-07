@@ -7,12 +7,8 @@
         <div class="card-header-container flex flex-wrap">
             <h6 class="text-xl font-bold text-zinc700 dark:text-zinc300">
                 {{ __('Bcategory') }} - 
-                    {{ $bcategory->title }}
+                    {{ $bcategory->name }}
             </h6>
-            <a href="{{ route('admin.bcategories.index') . '?language=' . $currentLang->code }}"
-                class="btn btn-primary btn-sm">
-                <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
-            </a>
         </div>
     </div>
     <div class="p-4">

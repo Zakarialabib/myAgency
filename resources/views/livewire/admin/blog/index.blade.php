@@ -2,21 +2,20 @@
     <div class="flex flex-wrap justify-center">
         <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap my-md-0 my-2">
             <select wire:model="perPage"
-                class="w-20 block p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-300 mr-3">
+                class="w-20 block p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-300 mr-3">
                 @foreach ($paginationOptions as $value)
                     <option value="{{ $value }}">{{ $value }}</option>
                 @endforeach
             </select>
-            <select class="form-control" wire:model="language" >
-                @foreach($langs as $lang)
-                    <option value="{{$lang->code}}">{{$lang->name}}</option>
-                @endforeach
-            </select>
+            <x-select-list
+            class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+            required id="language_id" name="language_id" wire:model="language_id"
+            :options="$this->listsForFields['languages']" />
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
                 <input type="text" wire:model.debounce.300ms="search"
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                     placeholder="{{ __('Search') }}" />
             </div>
         </div>
@@ -65,11 +64,7 @@
                         {{ $blog->bcategory->name }}
                     </x-table.td>
                     <x-table.td>
-                        @if($blog->status == 1)
-                            <span class="badge badge-success">{{ __('Publish') }}</span>
-                        @else
-                            <span class="badge badge-warning">{{ __('Unpublish') }}</span>
-                        @endif
+                        <livewire:toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">

@@ -8,8 +8,8 @@
                     {{ __('Blog') }} - 
                         {{ $blog->title }}
                 </h6>
-                <a href="{{ route('admin.blogs.index') . '?language=' . $currentLang->code }}"
-                    class="btn btn-primary btn-sm">
+                <a href="{{ route('admin.blogs.index')  }}"
+                    class=" leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 btn-sm">
                     <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
                 </a>
             </div>
