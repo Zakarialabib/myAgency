@@ -5738,14 +5738,14 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
+
+
+
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
-
 window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
-
- // import ApexCharts from 'apexcharts'
+window.PerfectScrollbar = perfect_scrollbar__WEBPACK_IMPORTED_MODULE_3__["default"]; // import ApexCharts from 'apexcharts'
 // window.ApexCharts = ApexCharts;
 
-window.PerfectScrollbar = perfect_scrollbar__WEBPACK_IMPORTED_MODULE_3__["default"];
 document.addEventListener("alpine:init", function () {
   alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].data("mainState", function () {
     var lastScrollTop = 0;

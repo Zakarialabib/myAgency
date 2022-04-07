@@ -1,21 +1,19 @@
 require('./bootstrap');
 
 import swal from 'sweetalert2';
-window.Swal = swal;
-
 import Alpine from 'alpinejs'
+import collapse from "@alpinejs/collapse";
+import PerfectScrollbar from "perfect-scrollbar";
+
+window.Swal = swal;
  
 window.Alpine = Alpine;
 
-import collapse from "@alpinejs/collapse";
-
-import PerfectScrollbar from "perfect-scrollbar";
+window.PerfectScrollbar = PerfectScrollbar;
 
 // import ApexCharts from 'apexcharts'
 
 // window.ApexCharts = ApexCharts;
-
-window.PerfectScrollbar = PerfectScrollbar;
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("mainState", () => {

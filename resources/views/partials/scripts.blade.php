@@ -1,5 +1,10 @@
 
     @livewireScripts
+    
+    <script async type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+    
+    {{-- <!-- Alpinejs -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
     <!-- Jquery -->
     <script type="text/javascript"  src="{{ asset('assets/js/jquery.min.js') }}"></script>
@@ -21,8 +26,6 @@
     
     <!-- Trix -->
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js" integrity="sha512-2RLMQRNr+D47nbLnsbEqtEmgKy67OSCpWJjJM394czt99xj3jJJJBQ43K7lJpfYAYtvekeyzqfZTx2mqoDh7vg==" crossorigin="anonymous"></script> --}}
-    
-    <script defer type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
     @stack('scripts')
     

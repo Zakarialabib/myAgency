@@ -1,4 +1,7 @@
 <div>
+     <!-- Validation Errors -->
+     <x-auth-validation-errors class="mb-4" :errors="$errors" />
+     
     <form wire:submit.prevent="submit" class="py-10">
         <div class="w-full row">
             <x-label for="language_id" :value="__('Language')" />
@@ -66,9 +69,10 @@
         </div>
         <div class="w-full">
             <x-label for="service_id" :value="__('Category')" />
-            <select
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="service_id" id="bcategory_id">
+            <x-select-list
+            class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+            required id="service_id" name="service_id" wire:model="portfolio.service_id"
+            :options="$this->listsForFields['services']" />
             </select>
             @if ($errors->has('service_id'))
                 <p class="text-danger"> {{ $errors->first('service_id') }} </p>

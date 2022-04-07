@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <h3 class="card-title mt-1">{{ __('Languages List') }}</h3>
                             <div class="card-tools">
-                                <a class="btn btn-primary btn-sm box--shadow1 text-white text--small" data-toggle="modal"
+                                <a class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-sm box--shadow1 text-white text--small" data-toggle="modal"
                                     data-target="#myModal"><i class="la la-plus"></i>@lang('Add New
                                     Language')</a>
 
@@ -51,7 +51,7 @@
                                                 </a> --}}
 
                                                 <a href="javascript:void(0)"
-                                                    class="icon-btn ml-1 editBtn btn btn-primary btn-sm"
+                                                    class="icon-btn ml-1 editBtn btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-sm"
                                                     data-url="{{ route('admin.languages.edit', $item->id) }}"
                                                     data-lang="{{ json_encode($item->only('name', 'text_align', 'is_default', 'direction')) }}"
                                                     data-icon="">
@@ -136,7 +136,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                        <button type="submit" class="btn btn-primary" id="btn-save" value="add">@lang('Save')</button>
+                        <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500" id="btn-save" value="add">@lang('Save')</button>
                     </div>
                 </form>
             </div>
@@ -192,7 +192,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                        <button type="submit" class="btn btn-primary" id="btn-save" value="add">@lang('Update')</button>
+                        <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500" id="btn-save" value="add">@lang('Update')</button>
                     </div>
                 </form>
             </div>

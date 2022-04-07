@@ -27,9 +27,9 @@
                         <div class="card-header">
                             <h3 class="card-title mt-1">Language Keywords of {{ $la->name }}</h3>
                             <div class="card-tools">
-                                <a href="{{ route('admin.language-manage') }}" class="btn btn-sm btn-primary importBtn">@lang('All Languages')</a>
-                                <button type="button" class="btn btn-sm btn-success  importBtn"><i class="la la-download"></i>@lang('Import Language')</button>
-                                <button type="button" data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-primary "><i class="fa fa-plus"></i> @lang('Add New Key') </button>
+                                <a href="{{ route('admin.language-manage') }}" class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 importBtn">@lang('All Languages')</a>
+                                <button type="button" class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer btn-success  importBtn"><i class="la la-download"></i>@lang('Import Language')</button>
+                                <button type="button" data-toggle="modal" data-target="#addModal" class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 "><i class="fa fa-plus"></i> @lang('Add New Key') </button>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -61,7 +61,7 @@
                                                data-title="{{$k}}"
                                                data-key="{{$k}}"
                                                data-value="{{$lang}}"
-                                               class="editModal icon-btn ml-1 btn btn-primary  btn-sm"
+                                               class="editModal icon-btn ml-1 btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500  btn-sm"
                                                >
                                                 <i class="fas fa-edit"></i>Edit
                                             </a>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                        <button type="submit" class="btn btn-primary"> @lang('Save')</button>
+                        <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500"> @lang('Save')</button>
                     </div>
                 </form>
 
@@ -159,7 +159,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                        <button type="submit" class="btn btn-primary">@lang('Update')</button>
+                        <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500">@lang('Update')</button>
                     </div>
                 </form>
 
@@ -218,7 +218,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal">@lang('Close')</button>
-                    <button type="button" class="btn btn-primary import_lang"> @lang('Import Now')</button>
+                    <button type="button" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 import_lang"> @lang('Import Now')</button>
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <h3 class="card-title mt-1">{{ __('Add Language') }}</h3>
                             <div class="card-tools">
-                                <a href="{{ route('admin.language.index') }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('admin.language.index') }}" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-sm">
                                     <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
                                 </a>
                             </div>
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="offset-sm-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                        <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500">{{ __('Save') }}</button>
                                     </div>
                                 </div>
                               </form>

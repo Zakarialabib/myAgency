@@ -27,7 +27,7 @@
                     <div class="card-header">
                     <h3 class="card-title">Menu Builder</h3>
                     <div class="card-tools d-flex">
-                        <button id="updateMenu" class="btn btn-primary btn-sm mr-4">Update Main Menu</button>
+                        <button id="updateMenu" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-sm mr-4">Update Main Menu</button>
                         <div class="d-inline-block mr-4">
                             <select class="form-control lang" id="languageSelect" data="{{url()->current() . '?language='}}">
                                 @foreach($langs as $lang)

@@ -72,7 +72,7 @@
                         {{ $contact->subject }}
                     </x-table.td>
                     <x-table.td>
-                        <button class="btn btn-sm text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
+                        <button class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
                             wire:click="confirm('delete', {{ $contact->id }})" type="button">
                             <x-heroicon-o-trash class="h-4 w-4" />
                         </button>

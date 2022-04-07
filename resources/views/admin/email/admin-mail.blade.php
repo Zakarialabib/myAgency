@@ -47,7 +47,7 @@
 
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
-                                            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                                            <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500">{{ __('Save') }}</button>
                                         </div>
                                     </div>
 

@@ -32,7 +32,7 @@
                                     {{ __('Theme 3 Visibility') }}
                                 </h3>
                                 <div class="card-tools">
-                                    <a href="{{ route('admin.pagevisibility') }}" class="btn btn-primary btn-sm">
+                                    <a href="{{ route('admin.pagevisibility') }}" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-sm">
                                         <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
                                     </a>
                                 </div>
@@ -134,7 +134,7 @@
                         <div class="card-body">
                             <div class="form-group row mt-4">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-primary btn-block">{{ __('Update') }}</button>
+                                    <button type="submit" class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-block">{{ __('Update') }}</button>
                                 </div>
                             </div>
                         </div>

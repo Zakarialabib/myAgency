@@ -32,15 +32,15 @@
                         </x-table.td>
                         <x-table.td>
                             @if ($language['is_default'] == false)
-                                <a class="btn btn-sm bg-green-500 text-white"
+                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer bg-green-500 text-white"
                                     title="{{ __('Set as Default') }}"
                                     wire:click="onSetDefault( {{ $language['id'] }} )">{{ __('Set as Default') }}</a>
                             @endif
-                            <button class="btn btn-sm text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300" type="button"
+                            <button class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300" type="button"
                             wire:click="confirm('delete', {{ $language['id'] }})" wire:loading.attr="disabled">
                             {{ __('Delete') }}
                             </button>
-                            <a class="btn btn-sm text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300"
+                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300"
                                     wire:click="sync({{ $language['id'] }})">
                                     {{ __('Sync') }}
                             </a>

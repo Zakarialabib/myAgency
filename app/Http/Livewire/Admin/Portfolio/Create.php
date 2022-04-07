@@ -3,79 +3,58 @@
 namespace App\Http\Livewire\Admin\Portfolio;
 
 use Livewire\Component;
-use App\Helpers\Helper;
+use Str;
 use App\Models\Portfolio;
 use App\Models\Language;
 use App\Models\PortfolioImage;
+use App\Models\Service;
 
 class Create extends Component
 {
     public Portfolio $portfolio;
     
+    public array $listsForFields = [];
+
     protected $listeners = [
         'submit',
     ];
 
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['services'] = Service::pluck('title', 'id')->toArray();
+    }
+
     public function mount(Portfolio $portfolio)
     {
         $this->portfolio = $portfolio;
+        $this->initListsForFields();
     }
 
     public function submit()
     {
-        $slug = Helper::make_slug($request->title);
-        $Portfolios = Portfolio::select('slug')->get();
-
-        $this->validate();
-
-        if($request->hasFile('featured_image')){
-
-            $file = $request->file('featured_image');
-            $extension = $file->getClientOriginalExtension();
-            $featured_image = time().rand().'.'.$extension;
-            $file->move('assets/front/img/portfolio/', $featured_image);
-
-            $portfolio->featured_image = $featured_image;
+        $this->portfolio->slug = Str::slug($this->portfolio->title);
+        
+        if($this->featured_image){
+            $file = $this->featured_image->store("/");
+            $this->portfolio->featured_image = $file;
         }
-
+        
         $this->portfolio->save();
 
-        if($this->hasFile('image')){
-            $files = $request->file('image');
-            $count = 1;
-            foreach ($files as $file){
-                    $extension = $file->getClientOriginalExtension();
-                    $image = 'portfolio_'.$count.time().rand().'.'.$extension;
-                    $file->move('assets/front/img/portfolio/', $image);
-                    $portfolio_slider = new PortfolioImage();
-                    $portfolio_slider->image = $image;
-                    $portfolio_slider->portfolio_id = $portfolio_id;
-                    $portfolio_slider->save();
-                    $count++;
-            }
-        }
     }
     public function render()
     {
         return view('livewire.admin.portfolio.create');
     }
 
-    public function rules() { 
-        return [
-            'image[]' => 'mimes:jpeg,jpg,png',
-            'featured_image' => 'required|mimes:jpeg,jpg,png',
-            'title' => [
-                'required',
-                'unique:blogs,title',
-                'max:255',
-            ],
-            'client_name' => 'required|max:250',
-            'start_date' => 'required|max:250',
-            'status' => 'required|max:250',
-            'service_id' => 'required',
-            'content' => 'required',
-            'serial_number' => 'required',
-            'language_id' => 'required',
+    protected $rules = [    
+        'blog.title' => 'required|unique:portfolios,title|max:191',
+        'blog.status' => 'required',
+        'blog.content' => 'required',
+        'blog.service_id' => 'required',
+        'blog.meta_keywords' => 'required',
+        'blog.meta_description' => 'required',
+        'blog.language_id' => 'required',
     ]; 
-}
+
 }
