@@ -18,3 +18,40 @@ php artisan migrate --seed
 Username : admin1@admin.com
 
 Password : password
+
+
+## Task : In progress
+
+- Language translation 
+
+- Home Animation
+
+- Some Settings are statics like logo .... others needs to be dynamic depends on language
+
+- Menu ?? not ??
+
+- Blog category admin (Show - Clone)
+
+- Blog admin (Show) 
+
+- Services admin (Show - Clone)
+
+- Portfolio admin (Show - Clone - mutliple images array) 
+
+- Fix Alerts
+
+- Insert Image with title name in livewire (create and update)
+
+## Task : done 
+
+- Blog category admin (Index - Create - Update - Delete) 
+
+- Blog admin (Index - Create - Update - Delete - Clone) 
+
+- Services admin (Index - Create - Update - Delete) 
+
+- Portfolio admin (Index - Create - Update - Delete) 
+
+- Users admin (Show -   Index - Create - Update - Delete) 
+
+- Home flag and Language menu 

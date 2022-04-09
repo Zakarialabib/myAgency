@@ -5,13 +5,13 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\BcategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\BcategoryController;
+use App\Http\Controllers\Admin\MenuController;
 
 /*
 |--------------------------------------------------------------------------

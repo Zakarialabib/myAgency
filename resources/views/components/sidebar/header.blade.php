@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between flex-shrink-0 px-3">
     <!-- Logo -->
-    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center px-2 gap-2">
-        <x-application-logo aria-hidden="true" class="w-11 h-auto" />
+    <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2">
+        <x-application-logo aria-hidden="true" class="w-12 h-auto" />
         <span class="sr-only">{{ config('settings.site_title') }}</span>
     </a>
 

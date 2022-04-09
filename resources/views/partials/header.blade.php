@@ -1,6 +1,7 @@
 <div class="menu-toggle">
     <div class="icon"></div>
 </div>
+<div class="follow-us"> FOLLOW US </div>
 <div class="main-menu">
     <div class="contant-info">
         <div><a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></div>
@@ -15,33 +16,30 @@
             <li><a href="{{ route('front.contact') }}">Contact</a></li>
         </ul>
     </div>
-    <div class="social-media">
-        <div class="social-link-holder"><a href="#">Dribbble</a></div>
-        <div class="social-link-holder"><a href="#">Instagram</a></div>
-        <div class="social-link-holder"><a href="#">Twitter</a></div>
-        <div class="social-link-holder"><a href="#">Facebook</a></div>
-        <div class="social-link-holder"><a href="#">Whatsapp</a></div>
-    </div>
 </div>
 <nav class="container-fluid cnav">
-    <div class="row">
-        <div class="col">
+    <div class="flex flex-wrap">
+        <div class="flex-grow">
             <div class="logo-holder">
                 <a href="{{ route('front.home') }}"><img class="logo" src="{{ asset('images/logo.svg') }}" alt="{{ $setting->website_title }}"></a>
             </div>
         </div>
-        <div class="col text-right">
-            <div class="">
-                
-                @if (count($langs) > 0)
-                <li class="">
-                    <p class=""><i class="fas fa-globe"></i>{{ $currentLang->name }}</p>
-                    <div class="">
-                        @foreach ($langs as $lang)
-                        <a href="{{ route('changeLanguage', $lang->code) }}" class="{{ $lang->name == $currentLang->name ? 'active' : '' }}">{{ $lang->name }}</a>
+        <div class="flex-grow text-right">
+            <div class="right_header_languages">
+                <a href="#" class="languages">
+                    <img src="{{flagImageUrl(\Illuminate\Support\Facades\App::getLocale())}}">
+                    @if(count($langs) > 1)
+                        <x-heroicon-o-chevron-down class="flex-shrink-0 w-5 h-5 text-white" />
+                    @endif
+                </a>
+                @if(count($langs) > 1)
+                    <ul>
+                        @foreach($langs as $lang)
+                            @if(\Illuminate\Support\Facades\App::getLocale() !== $lang->code)
+                                <li><a href="{{route('changeLanguage', $lang->code)}}" title="{{$lang->name}}"><img src="{{flagImageUrl($lang->code)}}">{{$lang->name}}</a></li>
+                            @endif
                         @endforeach
-                    </div>
-                </li>
+                    </ul>
                 @endif
             </div>
         </div>

@@ -24,7 +24,7 @@ class Edit extends Component
         'service.language_id' => 'required',
         'service.status' => 'required',
         'service.icon' => 'nullable',
-        'service.title' => 'required|unique:services,title|max:191',
+        'service.title' => 'required|max:191',
         'service.content' => 'required',
     ]; 
 
@@ -51,7 +51,7 @@ class Edit extends Component
 
         $this->service->save();
 
-        // $this->alert('success', __('Service created successfully!') );
+        $this->alert('success', __('Service updated successfully!') );
 
         return redirect()->route('admin.services.index');
     }

@@ -69,7 +69,7 @@
                     <x-table.td>
                         <div class="inline-flex">
                             
-                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
                                     href="{{ route('admin.blogs.show', $blog) }}">
                                     <x-heroicon-o-eye class="h-4 w-4" />
                                 </a>
@@ -83,7 +83,13 @@
                                     wire:loading.attr="disabled">
                                     <x-heroicon-o-trash class="h-4 w-4" />
                                 </button>
-
+                                <button
+                                    class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300"
+                                    type="button" wire:click="confirm('clone', {{ $blog->id }})"
+                                    wire:loading.attr="disabled">
+                                    <x-heroicon-o-duplicate class="h-4 w-4" />
+                                </button>
+                              
                         </div>
                     </x-table.td>
                 </x-table.tr>

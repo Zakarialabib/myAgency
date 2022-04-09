@@ -38,7 +38,7 @@
                 {{ __('Title') }}
             </x-table.th>
             <x-table.th>
-                {{ __('Category') }}
+                {{ __('Service') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Status') }}
@@ -63,11 +63,11 @@
                         {{ $portfolio->service->title }}
                     </x-table.td>
                     <x-table.td>
-                        <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />
+                        <livewire:toggle-button :model="$portfolio" field="status" key="{{ $portfolio->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
-                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
                                 href="{{ route('admin.portfolios.show', $portfolio) }}">
                                 <x-heroicon-o-eye class="h-4 w-4" />
                             </a>

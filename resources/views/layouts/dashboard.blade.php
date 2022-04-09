@@ -46,6 +46,10 @@
             </div>
         </div>
     </div>
+    
+    <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
+    
+    <x-livewire-alert::flash />
 
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}

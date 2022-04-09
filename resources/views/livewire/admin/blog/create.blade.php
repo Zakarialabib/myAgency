@@ -18,11 +18,7 @@
         </div>
         <div class="w-full">
             <x-label for="image" :value="__('Image')" />
-            <img class="mw-400 mb-3 show-img img-demo" src="{{ asset('assets/admin/img/img-demo.jpg') }}" alt="">
-            <div class="custom-file">
-                <label class="custom-file-label" for="image">{{ __('Choose Image') }}</label>
-                <input type="file" class="custom-file-input up-img" name="image" wire:model="image">
-            </div>
+            <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
             <x-input-error for="image" />
             <p class="help-block text-info">
                 {{ __('Upload 730X455 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}

@@ -115,41 +115,12 @@ class HomeController extends Controller
             $currlang = Language::where('is_default', 1)->first();
         }
 
-        
-        $category = $request->category;
-        $catid = null;
-        if (!empty($category)) {
-            $data['category'] = Bcategory::where('slug', $category)->firstOrFail();
-            $catid = $data['category']->id;
-        }
-
-        $term = $request->term;
-        $month = $request->month;
-        $year = $request->year;
-
-        if (!empty($month) && !empty($year)) {
-            $archive = true;
-        } else {
-            $archive = false;
-        }
-
         $bcategories = Bcategory::where('status', 1)->where('language_id', $currlang->id)->orderBy('id', 'DESC')->get();
 
-        $latestblogs = Blog::where('status', 1)->where('language_id', $currlang->id)->orderBy('id', 'DESC')->limit(4)->get();
-
         $blogs = Blog::where('status', 1)->where('language_id', $currlang->id)
-                        ->when($catid, function ($query, $catid) {
-                            return $query->where('bcategory_id', $catid);
-                        })
-                        ->when($term, function ($query, $term) {
-                            return $query->where('title', 'like', '%'.$term.'%');
-                        })
-                        ->when($archive, function ($query) use ($month, $year) {
-                            return $query->whereMonth('created_at', $month)->whereYear('created_at', $year);
-                        })
                         ->paginate(5);
 
-        return view('frontend.blogs', compact('blogs', 'bcategories', 'latestblogs'));
+        return view('frontend.blogs', compact('blogs', 'bcategories'));
     }
 
     // Blog Details  Funtion

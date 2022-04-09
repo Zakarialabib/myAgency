@@ -51,7 +51,7 @@ class Create extends Component
 
         $this->service->save();
 
-        // $this->alert('success', __('Service created successfully!') );
+        $this->alert('success', __('Service created successfully!') );
 
         return redirect()->route('admin.services.index');
     }

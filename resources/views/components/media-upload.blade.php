@@ -53,13 +53,6 @@
                 </p>
 
             @endif
-
-
-
-
-
-
-
         </div>
 
         {{-- during upload --}}

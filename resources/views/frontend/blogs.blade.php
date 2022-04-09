@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col">
                 <div class="lg-text">
-                    <span>PRODUCT TIPS</span><br>
+                    <span>SPARK TIPS</span><br>
                     <span>DESIGN & BUSINESS</span><br>
-                    <span class="other-color">cre8 blog</span>
+                    <span class="other-color">SPARKBLOG</span>
                 </div>
                 <div class="normal-text">
                     <p>You can call it an extra arm that support you with insightful ideas,<br>about business, design,
@@ -32,7 +32,7 @@
                             </div>
                         @else
                             <div class="row">
-                                @foreach ($blogs->shuffle() as $item)
+                                @foreach ($blogs as $item)
                                     <div class="post-box">
 
                                         <div class="text-holder">

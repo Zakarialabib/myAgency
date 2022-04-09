@@ -76,6 +76,24 @@ $(window).on("load", function() {
         }
     });
 
+    // FOLLOW US
+    $('.follow-us').on('click', function (e) {
+        if ($(".social-media").hasClass("active")) {
+        $("body").toggleClass("overflow");
+        $(".social-media").removeClass("active");
+        $(".social-media").css("transition-delay", "0.5s");
+        $(".social-media .layer").css("transition-delay", "0.3s");
+        $(".social-media .inner").css("transition-delay", "0s");
+        } else {
+        $(".social-media").addClass('active');
+        $("body").toggleClass("overflow");
+        $(".social-media.active").css("transition-delay", "0s");
+        $(".social-media.active .layer").css("transition-delay", "0.2s");
+        $(".social-media.active .inner").css("transition-delay", "0.7s");
+        }
+
+    });
+
     // Animate the team photos using AnimeJS
     var photosList = $('.team-photos-holder .photo-holder', '.team-photos');
     photosList.clone().appendTo('.team-photos .team-photos-holder');
@@ -91,3 +109,5 @@ $(window).on("load", function() {
         loop: true
     });
 });
+
+

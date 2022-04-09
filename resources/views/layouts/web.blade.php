@@ -50,9 +50,6 @@
         crossorigin="anonymous"></script>
     <!-- Toastr -->
     <script type="text/javascript" src="{{ asset('assets/js/toastr.min.js') }}"></script>
-    <!-- Custom JS -->
-    <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
-
 </head>
 
 <body class="font-sans antialiased">

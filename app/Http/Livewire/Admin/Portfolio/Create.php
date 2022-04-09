@@ -8,11 +8,17 @@ use App\Models\Portfolio;
 use App\Models\Language;
 use App\Models\PortfolioImage;
 use App\Models\Service;
+use Livewire\WithFileUploads;
 
 class Create extends Component
 {
+    use WithFileUploads;
+
     public Portfolio $portfolio;
     
+    public $image = [];
+    public $featured_image;
+
     public array $listsForFields = [];
 
     protected $listeners = [
@@ -41,6 +47,10 @@ class Create extends Component
         
         $this->portfolio->save();
 
+        // $this->alert('success', __('Service created successfully!') );
+
+        return redirect()->route('admin.portfolios.index');
+
     }
     public function render()
     {
@@ -48,13 +58,15 @@ class Create extends Component
     }
 
     protected $rules = [    
-        'blog.title' => 'required|unique:portfolios,title|max:191',
-        'blog.status' => 'required',
-        'blog.content' => 'required',
-        'blog.service_id' => 'required',
-        'blog.meta_keywords' => 'required',
-        'blog.meta_description' => 'required',
-        'blog.language_id' => 'required',
+        'portfolio.title' => 'required|unique:portfolios,title|max:191',
+        'portfolio.status' => 'required',
+        'portfolio.content' => 'required',
+        'portfolio.client_name' => 'required',
+        'portfolio.link' => 'required',
+        'portfolio.service_id' => 'required',
+        'portfolio.meta_keywords' => 'required',
+        'portfolio.meta_description' => 'required',
+        'portfolio.language_id' => 'required',
     ]; 
 
 }

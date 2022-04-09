@@ -21,13 +21,13 @@
             <div class="contact-info-holder">
                 <div class="title">E-mail</div>
                 <div class="contact-info"><a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></div>
-                <div class="social-media">
+                {{-- <div class="social-media">
                     <div class="social-link-holder"><a href="#">Dribbble</a></div>
                     <div class="social-link-holder"><a href="#">Instagram</a></div>
                     <div class="social-link-holder"><a href="#">Twitter</a></div>
                     <div class="social-link-holder"><a href="#">Facebook</a></div>
                     <div class="social-link-holder"><a href="#">Whatsapp</a></div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

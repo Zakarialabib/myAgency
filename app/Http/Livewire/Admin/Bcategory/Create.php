@@ -42,7 +42,7 @@ class Create extends Component
 
         $this->bcategory->save();
 
-        // $this->alert('success', __('Bcategory created successfully!') );
+        $this->alert('success', __('Bcategory created successfully!') );
 
         return redirect()->route('admin.bcategories.index');
     }

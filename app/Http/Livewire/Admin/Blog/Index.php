@@ -16,7 +16,7 @@ class Index extends Component
     use WithPagination;
     use WithSorting;
     use WithConfirmation;
-
+    
     public int $perPage;
 
     public array $orderable;
@@ -98,5 +98,25 @@ class Index extends Component
     {
         // abort_if(Gate::denies('blog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $blog->delete();
+        $this->alert('warning', __('Blog Deleted successfully!') );
+    }
+    
+    // Blog  Clone
+    public function clone(blog $blog)
+    {
+        $blog_details = Blog::find($blog)->first();
+        // dd($blog_details);
+        Blog::create([
+            'bcategory_id' => $blog_details->bcategory_id,
+            'language_id' => $blog_details->language_id,
+            'slug' => !empty($blog_details->slug) ? \Str::slug($blog_details->slug) : \Str::slug($blog_details->title) ,
+            'status' => 0,
+            'content' => $blog_details->content,
+            'title' => $blog_details->title,
+            'meta_keywords' => $blog_details->meta_keywords,
+            'meta_description' => $blog_details->meta_description,
+            'image' => $blog_details->image,
+        ]);
+        $this->alert('success', __('Blog Cloned successfully!') );
     }
 }

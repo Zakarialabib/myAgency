@@ -61,7 +61,7 @@ class Edit extends Component
         }
         $this->blog->save();
             
-        // $this->alert('success', __('Blog created successfully!') );
+        $this->alert('success', __('Blog Updated successfully!') );
         
         return redirect()->route('admin.blogs.index');
 

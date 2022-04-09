@@ -15,13 +15,21 @@ class Index extends Component
     public Setting $setting;
 
     public $logoFile, $iconFile, $favicon, $siteImage;
-    
+    public $language_id;
+
+    public array $listsForFields = [];
+
     protected $listeners = ['save', 'uploadFavicon', 'uploadLogo'];
+
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+    }
 
     public function mount(Setting $setting)
     {
         $this->setting = $setting;
-        $this->lang = Language::where('is_default', 1)->first();
+        $this->initListsForFields();
     }
 
     public function languageChange() {
@@ -71,7 +79,7 @@ class Index extends Component
 
         
 
-        // $this->alert('success', __('Settings updated successfully!') );
+        $this->alert('success', __('Settings updated successfully!') );
     }
 
 
@@ -119,10 +127,11 @@ class Index extends Component
 
     public function render()
     {
-        $this->language = $this->lang;
-        // $settings = Setting::all();
+        $setting = Service::when($this->language_id, function ($query) {
+            return $query->where('language_id', $this->language_id);
+            })->get();
 
-        return view('livewire.admin.settings.index');
+        return view('livewire.admin.settings.index', compact('setting'));
     }
 
    

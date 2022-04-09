@@ -32,6 +32,7 @@ class Create extends Component
     public function mount(Blog $blog)
     {
         $this->blog = $blog;
+        $this->blog = $blog;
         $this->initListsForFields();
     }
 
@@ -61,7 +62,7 @@ class Create extends Component
         }
         $this->blog->save();
             
-        // $this->alert('success', __('Blog created successfully!') );
+        $this->alert('success', __('Blog created successfully!') );
         
         return redirect()->route('admin.blogs.index');
 
