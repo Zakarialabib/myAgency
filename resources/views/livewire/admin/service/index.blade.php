@@ -57,7 +57,11 @@
                         {{ $service->title }}
                     </x-table.td>
                     <x-table.td>
-                        {{ $service->image }}
+                        @if (empty($service->image))
+                            {{__('No images')}}
+                        @else
+                        <img class="w-80" src="{{ asset('uploads/'.$service->image) }}" alt="">
+                        @endif
                     </x-table.td>
                     <x-table.td>
                         {{ $service->language->name }}

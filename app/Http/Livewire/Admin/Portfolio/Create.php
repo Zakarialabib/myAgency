@@ -16,7 +16,8 @@ class Create extends Component
 
     public Portfolio $portfolio;
     
-    public $image = [];
+    public $images;
+    
     public $featured_image;
 
     public array $listsForFields = [];
@@ -41,10 +42,20 @@ class Create extends Component
         $this->portfolio->slug = Str::slug($this->portfolio->title);
         
         if($this->featured_image){
-            $file = $this->featured_image->store("/");
+            $file = $this->featured_image->store("portfolio",'public');
             $this->portfolio->featured_image = $file;
         }
         
+        // Multiple images within an array
+
+        foreach($this->images as $key=>$image){
+            $this->images[$key] = $image->store('portfolio','public');            
+        }      
+        
+        $this->images = json_encode($this->images);
+        
+        $this->portfolio->gallery = $this->images;
+
         $this->portfolio->save();
 
         // $this->alert('success', __('Service created successfully!') );

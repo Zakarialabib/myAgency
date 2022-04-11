@@ -21,7 +21,7 @@
     {{-- Services Block --}}
     <div class="container-fluid box-content">
         <div class="flex flex-wrap">
-            <div class="my-4 px-4 w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3">
+            <div class="my-4 px-4 w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
                 <div class="boxy c1-color">
                     <div class="row">
                         <div class="col">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="my-4 px-4 w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3">
+            <div class="my-4 px-4 w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
                 <div class="boxy primary-color">
                     <div class="row">
                         <div class="col">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="my-4 px-4 w-1/3 md:w-1/3 lg:w-1/3 xl:w-1/3">
+            <div class="my-4 px-4 w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
                 <div class="boxy default-color">
                     <div class="row">
                         <div class="col">
@@ -112,16 +112,24 @@
         <h2 class="lg-text">Portfolio</h2>
         <div class="flex flex-wrap">
             <ul>
-                <li>
-                    <figure class="reveal-effect masker wow" style="visibility: visible;"> <a href="case-single.html"
-                            class=""><img src="{{ asset('images/img3.png') }}" alt="Image" class=""></a>
-                    </figure>
-                    <div class="caption wow words chars splitting animated">
-                        <h3>CoinView App development</h3>
-                        <div class="link">VIEW THIS PROJECT</div>
-                    </div>
-                    <!-- end caption -->
-                </li>
+                @foreach ($portfolios as $portfolio)
+                    <li>
+                        <figure class="reveal-effect masker wow" style="visibility: visible;"> <a
+                                href="case-single.html" class=""><img
+                                    src="{{ asset('images/img3.png') }}" alt="Image" class=""></a>
+                        </figure>
+                        <div class="caption wow words chars splitting animated">
+                            <h3>{{ $portfolio->title }}</h3>
+                            <h5>{{ $portfolio->client_name }}</h5>
+                            <div class="link">
+                                <a href="{{ route('front.portfolioDetails', $portfolio->slug) }}">
+                                    VIEW THIS PROJECT
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end caption -->
+                    </li>
+                @endforeach
             </ul>
         </div>
     </div>

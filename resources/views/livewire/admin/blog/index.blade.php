@@ -55,7 +55,11 @@
                         <input type="checkbox" value="{{ $blog->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        {{ $blog->image }}
+                        @if (empty($blog->image))
+                            {{__('No images')}}
+                        @else
+                        <img class="w-80" src="{{ asset('uploads/'.$blog->image) }}" alt="">
+                        @endif
                     </x-table.td>
                     <x-table.td>
                         {{ $blog->title }}

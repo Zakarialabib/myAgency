@@ -18,8 +18,8 @@
 
         <div class="w-full">
             <x-label for="image" :value="__('Slider Image')" />
-            <x-fileupload wire:model="image" multiple :file="$image" accept="image/jpg,image/jpeg,image/png" />
-            <x-input-error for="portfolio.image" />
+            <x-fileupload wire:model="images" multiple :file="$images" accept="image/jpg,image/jpeg,image/png" />
+            <x-input-error for="images" />
             <p class="help-block text-info">
                 {{ __('Upload 710X400 (Pixel) Size image for best quality.                                                                                                                                                                                                           Only jpg, jpeg, png image is allowed.') }}
             </p>

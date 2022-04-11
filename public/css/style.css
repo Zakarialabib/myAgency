@@ -1672,7 +1672,7 @@ body.menu-open {
     }
 }
 
-@media (max-width: 992px) {
+@media only screen and (max-width: 991px), only screen and (max-device-width: 991px) {
     .extra-lg-text {
         font-size: 4.8rem;
         line-height: 3.4rem;
@@ -1994,7 +1994,7 @@ body.menu-open {
     }
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
     .menu-toggle {
         left: 2rem;
     }
@@ -2485,12 +2485,7 @@ body.menu-open {
   overflow: hidden;
 }
 
-@media only screen and (max-width: 992px){
-.right-header__languages ul {
-  right: 0;
-  left: auto;
-  width: 50px;
-}}
+
 .follow-us {
     color: #fff;
     transform: rotate(-90deg);
@@ -2674,4 +2669,18 @@ body.menu-open {
 .portfolio ul li small {
     display: block;
     opacity: 0.7;
+}
+@media only screen and (max-width: 991px), only screen and (max-device-width: 991px) {
+    .right-header__languages ul {
+      right: 0;
+      left: auto;
+      width: 50px;  
+    }
+    .portfolio{padding: 80px 0;}
+    .portfolio ul li{width: 50%;}
+}
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
+    .portfolio ul li{width: 100%;}
+	.portfolio ul li:nth-child(2n+2){margin-top: 0}
+	.portfolio ul li:nth-child(3n+3){margin-top: 0;}
 }

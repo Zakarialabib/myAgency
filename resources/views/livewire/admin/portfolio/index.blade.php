@@ -32,7 +32,7 @@
                 @include('components.table.sort', ['field' => 'title'])
             </x-table.th> --}}
             <x-table.th>
-                {{ __('Image') }}
+                {{ __('Gallery') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Title') }}
@@ -54,7 +54,16 @@
                         <input type="checkbox" value="{{ $portfolio->id }}" wire:model="selected">
                     </x-table.td>
                     <x-table.td>
-                        <img class="w-80" src="{{ asset('assets/front/img/portfolio/'.$portfolio->featured_image) }}" alt="">
+                        @if (empty($portfolio->gallery))
+                            {{__('No images')}}
+                        @else
+                        @php 
+                        $images=json_decode($portfolio->gallery, true);
+                        @endphp
+                        @foreach ($images as $photo)
+                        <img class="w-80" src="{{ asset('uploads/'.$photo) }}" alt="">
+                        @endforeach 
+                        @endif
                     </x-table.td>
                     <x-table.td>
                         {{ $portfolio->title }}

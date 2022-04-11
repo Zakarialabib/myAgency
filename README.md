@@ -36,11 +36,13 @@ Password : password
 
 - Services admin (Show - Clone)
 
-- Portfolio admin (Show - Clone - mutliple images array) 
+- Portfolio admin (Show - Clone) 
 
 - Fix Alerts
 
-- Insert Image with title name in livewire (create and update)
+- Insert Image with clientorginalname in livewire (create and update)
+
+- Team admin (CRUD) 
 
 ## Task : done 
 
@@ -50,7 +52,7 @@ Password : password
 
 - Services admin (Index - Create - Update - Delete) 
 
-- Portfolio admin (Index - Create - Update - Delete) 
+- Portfolio admin (Index - Create - Update - Delete - mutliple images array) 
 
 - Users admin (Show -   Index - Create - Update - Delete) 
 

@@ -16,7 +16,8 @@ class Edit extends Component
 
     public Portfolio $portfolio;
     
-    public $image = [];
+    public $images;
+
     public $featured_image;
 
     public array $listsForFields = [];
@@ -44,7 +45,16 @@ class Edit extends Component
             $file = $this->featured_image->store("/");
             $this->portfolio->featured_image = $file;
         }
+         // Multiple images within an array
+
+         foreach($this->images as $key=>$image){
+            $this->images[$key] = $image->store('/');            
+        }      
         
+        $this->images = json_encode($this->images);
+        
+        $this->portfolio->gallery = $this->images;
+
         $this->portfolio->save();
 
         // $this->alert('success', __('Service created successfully!') );

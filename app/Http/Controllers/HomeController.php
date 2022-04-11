@@ -9,7 +9,6 @@ use App\Models\Contact;
 use App\Models\Language; 
 use App\Models\Service; 
 use App\Models\Portfolio; 
-use App\Models\PortfolioImage; 
 use App\Models\Team; 
 use App\Models\Blog; 
 use App\Models\Bcategory; 
@@ -20,7 +19,19 @@ class HomeController extends Controller
    //Home page
     public function index()
     {
-        return view('frontend.home');
+        if (session()->has('lang')) {
+            $currlang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currlang = Language::where('is_default', 1)->first();
+        }
+
+        $services = Service::where('status', 1)->where('language_id', $currlang->id)
+                        ->paginate(5);
+
+        $portfolios = Portfolio::where('status', 1)->where('language_id', $currlang->id)
+                        ->paginate(5);
+
+        return view('frontend.home', compact('portfolios','services'));
     }
 
     //Terms page
@@ -47,33 +58,36 @@ class HomeController extends Controller
         return view('frontend.contact');
     }
 
-     //Portfolio page
-     public function portfolio(Request $request) {
+    //Portfolio page
+    public function portfolio(Request $request) 
+    {
         if (session()->has('lang')) {
-           $currlang = Language::where('code', session()->get('lang'))->first();
-       } else {
-           $currlang = Language::where('is_default', 1)->first();
-       }
+            $currlang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currlang = Language::where('is_default', 1)->first();
+        }
 
-       $category = $request->category;
-       $catid = null;
-       if (!empty($category)) {
-           $data['category'] = Service::where('slug', $category)->firstOrFail();
-           $catid = $data['category']->id;
-       }
-       $data['all_services'] = Service::where('status', 1)->where('language_id', $currlang->id)->get();
-       
+        $category = $request->category;
+        $catid = null;
+        if (!empty($category)) {
+            $data['category'] = Service::where('slug', $category)->firstOrFail();
+            $catid = $data['category']->id;
+        }
 
-       $data['portfolios'] = Portfolio::where('status',1)->where('language_id', $currlang->id)
-                           ->when($catid, function ($query, $catid) {
-                               return $query->where('service_id', $catid);
-                           })
-                           ->paginate(8);
+        $data['all_services'] = Service::where('status', 1)->where('language_id', $currlang->id)->get();
+        
+
+        $data['portfolios'] = Portfolio::where('status',1)->where('language_id', $currlang->id)
+                            ->when($catid, function ($query, $catid) {
+                                return $query->where('service_id', $catid);
+                            })
+                            ->paginate(8);
 
        return view('frontend.portfolio', $data);
    }
 
-   public function portfolioDetails($slug){
+   public function portfolioDetails($slug)
+   {    
        if (session()->has('lang')) {
            $currlang = Language::where('code', session()->get('lang'))->first();
        } else {
@@ -81,13 +95,13 @@ class HomeController extends Controller
        }
 
        $data['portfolio'] = Portfolio::where('slug', $slug)->where('language_id', $currlang->id)->firstOrFail();
-       $data['portfolio_images'] = PortfolioImage::where('portfolio_id', $data['portfolio']->id)->get();
 
        return view('frontend.portfolio-details', $data);
    }
 
     //team page
-    public function team() {
+    public function team() 
+    {
         if (session()->has('lang')) {
             $currlang = Language::where('code', session()->get('lang'))->first();
         } else {
@@ -99,16 +113,16 @@ class HomeController extends Controller
         return view('frontend.team', $data);
     }
 
-    public function team_details($id){
-
+    public function team_details($id)
+    {
         $team = Team::find($id);
 
         return view('frontend.team-details', compact('team'));
     }
 
     // Blog Page  Funtion
-    public function blogs(Request $request){
-
+    public function blogs(Request $request)
+    {
         if (session()->has('lang')) {
             $currlang = Language::where('code', session()->get('lang'))->first();
         } else {
@@ -124,8 +138,8 @@ class HomeController extends Controller
     }
 
     // Blog Details  Funtion
-    public function blogdetails($slug) {
-
+    public function blogdetails($slug) 
+    {
         if (session()->has('lang')) {
             $currlang = Language::where('code', session()->get('lang'))->first();
         } else {
@@ -142,7 +156,6 @@ class HomeController extends Controller
     // Change Language
     public function changeLanguage($lang)
     {
-
         session()->put('lang', $lang);
         app()->setLocale($lang);
 

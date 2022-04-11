@@ -15,19 +15,19 @@ class Portfolio extends Model
     public $orderable = [
         'id','title', 'status' , 'image','slug','client_name',
         'featured_image' ,'service_id' ,'content' , 'meta_keywords',
-        'meta_description'
+        'meta_description','gallery'
     ];
 
     public $filterable = [
         'id','title', 'status' , 'image','slug','client_name',
         'featured_image' ,'service_id' ,'content' , 'meta_keywords',
-        'meta_description'
+        'meta_description','gallery'
     ];
 
     protected $fillable = [
         'id','title', 'status' , 'image','slug','client_name',
         'featured_image' ,'service_id' ,'content' , 'meta_keywords',
-        'meta_description'
+        'meta_description','gallery'
     ];
 
     public function service() : BelongsTo

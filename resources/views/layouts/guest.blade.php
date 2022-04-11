@@ -85,7 +85,7 @@
     @include('partials.footer')
 
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer=""></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer></script>
     <script type="text/javascript" src="{{ asset('/js/anime.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/scrollreveal.min.js') }}"></script>
 

@@ -1,5 +1,5 @@
 <x-guest-layout>
-{{-- @section('meta-keywords', "$blog->meta_keywords")
+    {{-- @section('meta-keywords', "$blog->meta_keywords")
 @section('meta-description', "$blog->meta_description") --}}
 
     <header class="container-fluid header">
@@ -61,15 +61,7 @@
     </div>
     <div class="container-fluid project-imgs">
         <div class="row">
-            @if ($portfolio_images->count() > 0)
-                <div class="col">
-                    @foreach ($portfolio_images as $item)
-                        <div class="img-holder">
-                            <img src="{{ asset('assets/front/img/portfolio/' . $item->image) }}" alt="">
-                        </div>
-                    @endforeach
-                </div>
-            @else
+            @if (empty($portfolio->gallery))
                 <div class="col">
                     <div class="img-holder">
                         <img src="images/project1-img1.png" alt="">
@@ -80,7 +72,18 @@
                     <div class="img-holder">
                         <img src="images/project1-img3.png" alt="">
                     </div>
-				</div>
+                </div>
+            @else
+                <div class="col">
+                    @php
+                        $images = json_decode($portfolio->gallery, true);
+                    @endphp
+                    @foreach ($images as $photo)
+                        <div class="img-holder">
+                            <img src="{{ asset('uploads/' . $photo) }}" alt="">
+                        </div>
+                    @endforeach
+                </div>
             @endif
         </div>
     </div>

@@ -20,6 +20,7 @@ class CreatePortfoliosTable extends Migration
             $table->string('slug', 255)->nullable();
             $table->string('client_name', 255)->nullable();
             $table->string('link')->nullable();
+            $table->text('gallery')->nullable();
             $table->string('featured_image', 255)->nullable();
             $table->integer('service_id')->nullable();
             $table->text('content')->nullable();
