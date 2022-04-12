@@ -40,11 +40,15 @@ class Edit extends Component
     public function submit()
     {
         $this->portfolio->slug = Str::slug($this->portfolio->title);
+       
+        // Single image
         
         if($this->featured_image){
-            $file = $this->featured_image->store("/");
-            $this->portfolio->featured_image = $file;
+            $imageName = Str::slug($this->portfolio->title).'.'.$this->featured_image->extension();
+            $this->featured_image->storeAs('portfolios',$imageName);
+            $this->portfolio->featured_image = $imageName;
         }
+
          // Multiple images within an array
 
          foreach($this->images as $key=>$image){

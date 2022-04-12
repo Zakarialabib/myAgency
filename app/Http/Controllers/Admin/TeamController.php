@@ -17,7 +17,7 @@ class TeamController extends Controller
         $this->lang = Language::where('is_default',1)->first();
     }
 
-    public function team(Request $request){
+    public function index(Request $request){
         $lang = Language::where('code', $request->language)->first()->id;
 
         $data['teams'] = Team::where('language_id', $lang)->orderBy('id', 'DESC')->get();

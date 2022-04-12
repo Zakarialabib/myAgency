@@ -1,5 +1,5 @@
 <x-guest-layout>
-{{-- @section('meta-keywords', "$seo->blog_meta_key")
+    {{-- @section('meta-keywords', "$seo->blog_meta_key")
 @section('meta-description', "$seo->blog_meta_desc") --}}
 
     <header class="container-fluid header">
@@ -16,18 +16,20 @@
         </div>
     </header>
     <div class="container-fluid box-content">
-        <div class="row">
-            @foreach ($portfolios as $item)
-                <div class="col-md-6">
+        <div class="flex flex-wrap">
+            @foreach ($portfolios as $portfolio)
+                <div class="my-4 px-4 sm:w-full md:w-full lg:w-full xl:w-1/3">
                     <div class="boxy img-box">
-                        <div class="img"><img
-                                style="background-image: url({{ asset('assets/front/img/portfolio/' . $item->featured_image) }})"
-                                alt=""></div>
-                        <div class="bottom-text">
-                            {{-- <div class="link">VIEW THIS PROJECT</div> --}}
-                            <div class="text">{{ $item->service->title }}</div>
+                        <div class="img">
+                            <img style="background-image: url({{ asset('uploads/portfolios/' . $portfolio->featured_image) }})"
+                                alt="{{ $portfolio->title }}">
                         </div>
-                        <a href="{{ route('front.portfolioDetails', $item->slug) }}" class="project-link-full"></a>
+                        <div class="bottom-text">
+                            <a href="{{ route('front.portfolioDetails', $portfolio->slug) }}">
+                                <div class="link">{{ $portfolio->title }}</div>
+                                <div class="text">{{ $portfolio->service->title }}</div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @endforeach

@@ -16,17 +16,6 @@
             </select>
             <x-input-error for="service.language_id" />
         </div>
-
-        <div class="w-full">
-            <x-label for="image" :value="__('Feature Image')" />
-
-            <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
-
-            <p class="help-block text-info">
-                {{ __('Upload 670X418 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-            </p>
-            <x-input-error for="service.image" />
-        </div>
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
             <input type="text" name="title" wire:model="service.title"
@@ -36,25 +25,43 @@
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Description')" />
-            <textarea name="content" wire:model="service.content"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  summernote"
-                rows="3" placeholder="{{ __('Description') }}">{{ old('content') }}</textarea>
+            <x-input.rich-text wire:model.lazy="service.content" id="description" />
             <x-input-error for="service.content" />
         </div>
-        <div class="w-full">
-            <x-label for="status" :value="__('Status')" />
-            <select wire:model="service.status" name="status"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 ">
-                <option value="0">{{ __('Unpublish') }}</option>
-                <option value="1">{{ __('Publish') }}</option>
-            </select>
-            <x-input-error for="service.status" />
+        <div class="flex flex-wrap py-10">
+            <div class="w-2/5">
+                <img class="w-80" src="{{ asset('uploads/services/'.$service->image) }}" alt="">
+            </div>
+            <div class="w-3/5">
+                <x-label for="image" :value="__('Feature Image')" />
+                <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+                <p class="help-block text-info">
+                    {{ __('Upload 670X418 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+                </p>
+                <x-input-error for="service.image" />
+            </div>
+            <div class="container">
+                <label class="inline-flex items-center cursor-pointer">
+                    <x-checkbox name="status" id="status" wire:model="service.status"> {{ __('Active') }}</x-checkbox>
+                    <x-input-error for="service.status" />
+                    <span class="ml-2 text-sm font-semibold text-gray-700">{{ __('Publication Status') }}</span>
+                </label>
+            </div>
         </div>
-        <div class="w-full">
+        <div class="float-right p-2 mb-4">
             <button type="submit"
                 class="leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                 {{ __('Save') }}
             </button>
+            <a href="{{ route('admin.services.index') }}"
+                class="leading-4 md:text-sm sm:text-xs bg-gray-400 text-black hover:text-blue-800 hover:bg-gray-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                {{ __('Go back') }}
+            </a>
         </div>
     </form>
 </div>
+
+@push('scripts')
+     <!-- Image Upload -->
+     <script type="text/javascript"  src="{{ asset('js/image-upload.js') }}"></script>
+@endpush

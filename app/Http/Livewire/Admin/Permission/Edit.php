@@ -29,7 +29,7 @@ class Edit extends Component
 
         $this->permission->save();
 
-        $this->alert('success', __('Permission updated successfully!') );
+        // $this->alert('success', __('Permission updated successfully!') );
 
         return redirect()->route('admin.permissions.index');
     }

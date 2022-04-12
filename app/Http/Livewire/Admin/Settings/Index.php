@@ -79,7 +79,7 @@ class Index extends Component
 
         
 
-        $this->alert('success', __('Settings updated successfully!') );
+        // $this->alert('success', __('Settings updated successfully!') );
     }
 
 
@@ -88,7 +88,7 @@ class Index extends Component
         $favicon = $this->upload($this->iconFile, $this->favicon, 'iconFile');
         if($favicon){
             Setting::set('fav_icon', $favicon);
-            $this->alert('success', __('Favicon updated successfully!') );
+            // $this->alert('success', __('Favicon updated successfully!') );
             $this->iconFile = "";
             $this->favicon = $favicon;
         } else {
@@ -116,7 +116,7 @@ class Index extends Component
         $logo = $this->upload($this->logoFile, $this->siteImage, 'logoFile');
         if($logo){
             Setting::set('site_logo', $logo);
-            $this->alert('success', __('Logo updated successfully!') );
+            // $this->alert('success', __('Logo updated successfully!') );
             $this->logoFile = "";
             $this->siteImage = $logo;
         } else {

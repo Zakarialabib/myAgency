@@ -67,7 +67,7 @@ class Profile extends Component
                 $this->user->password = bcrypt($this->password);
             $this->user->update($validatedDate);
 
-            $this->alert('success', __('Profil updated successfully!') );
+            // $this->alert('success', __('Profil updated successfully!') );
 
         }catch(Exception $e){
             $this->alert('error', __('Unable to update informations!') );

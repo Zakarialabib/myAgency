@@ -40,9 +40,7 @@
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Content')" />
-            <textarea name="content" wire:model="blog.content"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 summernote"
-                placeholder="{{ __('Content') }}">{{ old('content') }}</textarea>
+            <x-input.rich-text wire:model.lazy="blog.content" id="description" />
             <x-input-error for="blog.content" />
         </div>
         <div class="w-full">
@@ -73,7 +71,13 @@
 
         <div class="float-right p-2 mb-4">
             <button type="submit"
-                class="leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">{{ __('Save') }}</button>
+                class="leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                {{ __('Save') }}
+            </button>
+            <a href="{{ route('admin.blogs.index') }}"
+                class="leading-4 md:text-sm sm:text-xs bg-gray-400 text-black hover:text-blue-800 hover:bg-gray-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                {{ __('Go back') }}
+            </a>
         </div>
     </form>
 </div>

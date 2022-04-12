@@ -37,7 +37,7 @@ class Edit extends Component
         $this->role->save();
         $this->role->permissions()->sync($this->permissions);
 
-        $this->alert('success', __('Role updated successfully!') );
+        // $this->alert('success', __('Role updated successfully!') );
 
         return redirect()->route('admin.roles.index');
     }

@@ -4,10 +4,13 @@ namespace App\Http\Livewire;
 
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+ 
 class ToggleButton extends Component
 {
     public Model $model;
+    
+    use LivewireAlert;
     
     public $field, $status, $uniqueId;
 

@@ -8,7 +8,7 @@
             <select wire:model="service.language_id"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
                 name="language_id">
-                <option value="" selected disabled>Select a Language</option>
+                <option value="" selected>{{ __('Select a Language') }}</option>
                 @foreach ($langs as $lang)
                     <option value="{{ $lang->id }}">
                         {{ $lang->name }}
@@ -35,9 +35,7 @@
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Description')" />
-            <textarea name="content" wire:model="service.content"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  summernote"
-                rows="3" placeholder="{{ __('Description') }}">{{ old('content') }}</textarea>
+            <x-input.rich-text wire:model.lazy="service.content" id="description" />
             <x-input-error for="service.content" />
         </div>
         <div class="w-full">

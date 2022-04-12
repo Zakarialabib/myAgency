@@ -36,7 +36,7 @@ class Create extends Component
         $this->role->save();
         $this->role->permissions()->sync($this->permissions);
 
-        $this->alert('success', __('Role created successfully!') );
+        // $this->alert('success', __('Role created successfully!') );
 
         return redirect()->route('admin.roles.index');
     }

@@ -60,7 +60,7 @@ class ContactForm extends Component
             'message' =>  $this->message,
         ]);
 
-        $this->alert('success', __('Your Message is sent succesfully.') );
+        // $this->alert('success', __('Your Message is sent succesfully.') );
 
         $this->resetInputFields();
 

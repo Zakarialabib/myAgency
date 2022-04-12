@@ -22,27 +22,27 @@ Password : password
 
 ## Task : In progress
 
-- Language translation 
-
-- Home Animation
-
-- Some Settings are statics like logo .... others needs to be dynamic depends on language
-
-- Menu ?? not ??
-
 - Blog category admin (Show - Clone)
 
 - Blog admin (Show) 
 
-- Services admin (Show - Clone)
+- Services admin (Show)
 
 - Portfolio admin (Show - Clone) 
 
 - Fix Alerts
 
-- Insert Image with clientorginalname in livewire (create and update)
-
 - Team admin (CRUD) 
+
+- About admin (CRUD) 
+
+- Pages (CRUD) contain title - breadcrumbs - content - image linked to Blog, Bcategory, Service,Portfolio,About,Team 
+
+- Language translation 
+
+- Home Animation
+
+- Some Settings are statics like logo .... others are dynamic depends on language preferences
 
 ## Task : done 
 
@@ -50,10 +50,12 @@ Password : password
 
 - Blog admin (Index - Create - Update - Delete - Clone) 
 
-- Services admin (Index - Create - Update - Delete) 
+- Services admin (Index - Create - Update - Delete - Clone) 
 
 - Portfolio admin (Index - Create - Update - Delete - mutliple images array) 
 
 - Users admin (Show -   Index - Create - Update - Delete) 
+
+- TRIX rich text editor (integrated)
 
 - Home flag and Language menu 

@@ -3,7 +3,8 @@
     @section('title', __('Home'))
 
     <div>
-        <header class="container-fluid header">
+        <header class="container-fluid header"
+            style="background-image: url({{ asset('images/home.jpeg') }});background-size: cover;">
             <div class="mouse-scroll"></div>
             <div class="row">
                 <div class="col">
@@ -19,104 +20,43 @@
         </header>
     </div>
     {{-- Services Block --}}
-    <div class="container-fluid box-content">
-        <div class="flex flex-wrap">
-            <div class="my-4 px-4 w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
-                <div class="boxy c1-color">
-                    <div class="row">
-                        <div class="col">
-                            <h1 class="title">LOGO MARKS &<br>
-                                BRANDING</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-5">
-                            <div class="text">
-                                <ul>
-                                    <li>logo marks</li>
-                                    <li>Brand strategy</li>
-                                    <li>design systems</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-7">
-                            <div class="text">
-                                <ul>
-                                    <li>Brand identity</li>
-                                    <li>Brand architecture</li>
-                                    <li>Naming & verbal identity</li>
-                                    <li>Launch & brand campaigns</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="my-4 px-4 w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
-                <div class="boxy primary-color">
-                    <div class="row">
-                        <div class="col">
-                            <h1 class="title">USER INTERFACES<br>
-                                & EXPERIENCES</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-5">
-                            <div class="text">
-                                <ul>
-                                    <li>Digital content</li>
-                                    <li>interfaces</li>
-                                    <li>product design</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-12 col-lg-7">
-                            <div class="text">
-                                <ul>
-                                    <li>USER EXPERIENCE</li>
-                                    <li>interactivity</li>
-                                    <li>CONTENT PRODUCTION</li>
-                                    <li>Checkout optimization</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="my-4 px-4 w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2">
-                <div class="boxy default-color">
-                    <div class="row">
-                        <div class="col">
-                            <h1 class="title">WEB<br>
-                                DEVELOPMENT</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="text">
-                                <ul>
-                                    <li>Platform migrations</li>
-                                    <li>HTML5 & CSS</li>
-                                    <li>LARAVEL / VUE.JS FRAMEWORKS</li>
-                                    <li>Speed and Ui Optimization</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="container-fluid portfolio ">
+        <div class="pb-24 flex flex-wrap">
 
-    <div class="container-fluid portfolio">
-        <h2 class="lg-text">Portfolio</h2>
+            @foreach ($services as $service)
+                <div class="my-4 px-4 sm:w-full md:w-full lg:w-full xl:w-1/3">
+                    <div class="boxy primary-color"
+                        style="background-image: url({{ asset('uploads/services/' . $service->image) }});background-blend-mode: multiply;">
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="title">{{ $service->title }}</h1>
+                            </div>
+                        </div>
+                        <div class="service-line"></div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-12 col-lg-5">
+                                <div class="text">
+                                    <ul>
+                                        {!! $service->content !!}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+
+        {{-- <h2 class="lg-text">Portfolio</h2> --}}
         <div class="flex flex-wrap">
             <ul>
                 @foreach ($portfolios as $portfolio)
                     <li>
                         <figure class="reveal-effect masker wow" style="visibility: visible;"> <a
-                                href="case-single.html" class=""><img
-                                    src="{{ asset('images/img3.png') }}" alt="Image" class=""></a>
+                                href="{{ route('front.portfolioDetails', $portfolio->slug) }}"
+                                class=""><img src="{{ asset('images/img3.png') }}" alt="Image"
+                                    class=""></a>
                         </figure>
                         <div class="caption wow words chars splitting animated">
                             <h3>{{ $portfolio->title }}</h3>
@@ -131,27 +71,6 @@
                     </li>
                 @endforeach
             </ul>
-        </div>
-    </div>
-
-
-    <div class="container-fluid default-content">
-        <div class="flex flex-wrap">
-            <div class="col">
-                <div class="lg-text">
-                    <span>Awwward winning</span><br>
-                    <span>london-based product</span><br>
-                    <span class="other-color">design studio.</span>
-                </div>
-                <div class="normal-text">
-                    <p>It's a community, an ecosystem of passionate professionals and consulting coming together to help
-                        you in the fields of marketing, media buying, design, product development, scalability, and
-                        leadership.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="{{ route('front.about') }}" class="cr-btn primary">more about us</a>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container-fluid clients-section">

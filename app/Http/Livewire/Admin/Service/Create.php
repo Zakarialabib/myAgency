@@ -45,13 +45,14 @@ class Create extends Component
         $this->service->slug = Str::slug($this->service->title);
         
         if($this->image){
-            $file = $this->image->store("/");
-            $this->service->image = $file;
+            $imageName = Str::slug($this->service->title).'.'.$this->image->extension();
+            $this->image->storeAs('services',$imageName);
+            $this->service->image = $imageName;
         }
 
         $this->service->save();
 
-        $this->alert('success', __('Service created successfully!') );
+        // $this->alert('success', __('Service created successfully!') );
 
         return redirect()->route('admin.services.index');
     }

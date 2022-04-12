@@ -58,7 +58,7 @@
                         @if (empty($blog->image))
                             {{__('No images')}}
                         @else
-                        <img class="w-80" src="{{ asset('uploads/'.$blog->image) }}" alt="">
+                        <img class="w-80" src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="">
                         @endif
                     </x-table.td>
                     <x-table.td>
@@ -93,7 +93,6 @@
                                     wire:loading.attr="disabled">
                                     <x-heroicon-o-duplicate class="h-4 w-4" />
                                 </button>
-                              
                         </div>
                     </x-table.td>
                 </x-table.tr>

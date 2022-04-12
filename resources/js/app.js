@@ -11,10 +11,6 @@ window.Alpine = Alpine;
 
 window.PerfectScrollbar = PerfectScrollbar;
 
-// import ApexCharts from 'apexcharts'
-
-// window.ApexCharts = ApexCharts;
-
 document.addEventListener("alpine:init", () => {
     Alpine.data("mainState", () => {
         let lastScrollTop = 0;

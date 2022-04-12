@@ -33,6 +33,7 @@ class Service extends Model
         'image',
         'content',
         'language_id',
+        'slug',
         'status'
     ];
 

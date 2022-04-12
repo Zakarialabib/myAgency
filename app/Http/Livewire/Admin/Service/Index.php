@@ -92,4 +92,29 @@ class Index extends Component
 
         return view('livewire.admin.service.index', compact('services'));
     }
+
+      // Service  Delete
+      public function delete(Service $service)
+      {
+          // abort_if(Gate::denies('service_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+          $service->delete();
+        //   $this->alert('warning', __('Service Deleted successfully!') );
+      }
+      
+
+     // Service  Clone
+     public function clone(Service $service)
+     {
+         $service_details = Service::find($service->id);
+         // dd($service_details);
+         Service::create([
+             'language_id' => $service_details->language_id,
+             'title' => $service_details->title,
+             'slug' => !empty($service_details->slug) ? \Str::slug($service_details->slug) : \Str::slug($service_details->title) ,
+             'image' => $service_details->image,
+             'content' => $service_details->content,
+             'status' => 0,
+         ]);
+         // $this->alert('success', __('Service Cloned successfully!') );
+     }
 }

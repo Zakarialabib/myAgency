@@ -104,7 +104,7 @@ class Index extends Component
     // Blog  Clone
     public function clone(blog $blog)
     {
-        $blog_details = Blog::find($blog)->first();
+        $blog_details = Blog::find($blog->id);
         // dd($blog_details);
         Blog::create([
             'bcategory_id' => $blog_details->bcategory_id,
@@ -117,6 +117,6 @@ class Index extends Component
             'meta_description' => $blog_details->meta_description,
             'image' => $blog_details->image,
         ]);
-        $this->alert('success', __('Blog Cloned successfully!') );
+        // $this->alert('success', __('Blog Cloned successfully!') );
     }
 }

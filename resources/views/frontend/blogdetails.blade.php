@@ -1,66 +1,50 @@
 <x-guest-layout>
-{{--
-@yield('meta-keywords', "$blog->meta_keywords")
-@yield('meta-description', "$blog->meta_description") 
---}}
+    {{-- @yield('meta-keywords', "$blog->meta_keywords")
+@yield('meta-description', "$blog->meta_description") --}}
 
-
-    <!--====== BLOG STANDARD PART START ======-->
-
-    <div class="blog-area section-gap">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="blog-dteails-content">
-                        <img class="main-image" src="{{ asset('assets/front/img/blog/' . $blog->image) }}" alt="blog">
-                        <div class="content">
-                            <h3 class="title">{{ $blog->title }}</h3>
-                            <ul class="post-meta">
-                                <li><i class="fal fa-user"></i> By, Admin</li>
-                                <li><i class="fal fa-calendar-alt"></i>
-                                    {{ date('d M, Y', strtotime($blog->created_at)) }}</li>
-                            </ul>
-                            <div>
-                                {!! $blog->content !!}
-                            </div>
-
-                        </div>
-                        <br>
-                    </div>
+    <!--====== BLOG Start ======-->
+    <header class="container-fluid header">
+        <div class="row">
+            <div class="col">
+                <div class="lg-text">
+                    <span>PRODUCT TIPS</span><br>
+                    <span>DESIGN & BUSINESS</span><br>
+                    <span class="other-color">cre8 blog</span>
                 </div>
-                <div class="col-lg-4  order-first order-lg-last">
-                    <div class="blog-sidebar">
-                        <div class="widget search-widget">
-                            <h4 class="widget-title">{{ __('Search Blog') }}</h4>
-                            <form
-                                action="{{ route('front.blogs', ['category' => request()->input('category'),'month' => request()->input('month'),'year' => request()->input('year')]) }}"
-                                method="GET">
-                                <div class="input-box">
-                                    <input name="category" type="hidden" value="{{ request()->input('category') }}">
-                                    <input name="month" type="hidden" value="{{ request()->input('month') }}">
-                                    <input name="year" type="hidden" value="{{ request()->input('year') }}">
-                                    <input name="term" type="text" placeholder="{{ __('Search Blog') }}..."
-                                        value="{{ request()->input('term') }}">
-                                    <button type="submit"><i class="fal fa-search"></i></button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="widget categories-widget">
-                            <h4 class="widget-title">{{ __('Categories') }}</h4>
-
-                            <ul>
-                                @foreach ($bcategories as $bcategory)
-                                    <li><a href="{{ route('front.blogs', ['term' => request()->input('term'),'category' => $bcategory->slug,'month' => request()->input('month'),'year' => request()->input('year')]) }}"
-                                            class="@if (request()->input('category') == $bcategory->slug) active @endif">{{ $bcategory->name }}<span>{{ $bcategory->blogs->count() }}</span></a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                <div class="normal-text">
+                    <p>You can call it an extra arm that support you with insightful ideas,<br>about business, design,
+                        productivity, design or even personal<br> development for business people.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </header>
+    <article itemscope itemtype="http://schema.org/Article" class="container-fluid post-section">
+        <div class="row">
+            <div class="col">
+                <div class="post-header">
+                    <div class="text-holder">
+                        <div class="post-info-holder">
+                            <div class="link-holder">
+                                <a href="{{ route('front.blogs') }}">&#x3C; {{ __('Back') }}</a>
+                            </div>
+                            <div class="post-info">
+                                <div class="date">{{ date('d M, Y', strtotime($blog->created_at)) }}</div>
+                                <div class="auther">By, Admin</div>
+                            </div>
+                        </div>
+                        <div class="title">{{ $blog->title }}</div>
+                    </div>
+                    <div class="img-holder">
+                        <img src="{{ asset('uploads/blogs/' . $blog->image) }}" alt="{{ $blog->title }}">
+                    </div>
+                </div>
+                <div class="post-content">
+                    {!! $blog->content !!}
+                </div>
+            </div>
+        </div>
+    </article>
 
-    <!--====== BLOG STANDARD PART End ======-->
+    <!--====== BLOG End ======-->
 
 </x-guest-layout>

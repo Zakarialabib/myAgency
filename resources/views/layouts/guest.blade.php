@@ -91,6 +91,10 @@
 
     @livewireScripts
 
+    <!-- Cursor -->
+    <div class="cursor1" id="cursor1"></div>
+    <div class="cursor" id="cursor"></div>
+
     <script>
         $(document).ready(function() {
             // Add smooth scrolling to all links

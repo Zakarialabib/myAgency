@@ -42,7 +42,7 @@ class Edit extends Component
 
         $this->bcategory->save();
 
-        $this->alert('success', __('Bcategory updated successfully!') );
+        // $this->alert('success', __('Bcategory updated successfully!') );
 
         return redirect()->route('admin.bcategories.index');
     }

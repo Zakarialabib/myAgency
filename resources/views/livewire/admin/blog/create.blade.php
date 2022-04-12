@@ -8,7 +8,7 @@
             <select
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
                 wire:model="blog.language_id" name="language_id">
-                <option value="" selected disabled>{{__('Select a Language')}}</option>
+                <option value="" selected disabled>{{ __('Select a Language') }}</option>
                 @foreach ($langs as $lang)
                     <option value="{{ $lang->id }}">
                         {{ $lang->name }}
@@ -35,15 +35,12 @@
             <x-label for="bcategory_id" :value="__('Category')" />
             <x-select-list
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                required id="bcategory_id" name="bcategory_id" wire:model="blog.bcategory_id"
-                :options="$this->listsForFields['bcategories']" />
+                required id="bcategory_id" name="bcategory_id" wire:model="blog.bcategory_id" :options="$this->listsForFields['bcategories']" />
             <x-input-error for="blog.bcategory_id" />
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Content')" />
-            <textarea name="content" wire:model="blog.content"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 summernote"
-                placeholder="{{ __('Content') }}">{{ old('content') }}</textarea>
+            <x-input.rich-text wire:model.lazy="blog.content" id="description" />
             <x-input-error for="blog.content" />
         </div>
         <div class="w-full">

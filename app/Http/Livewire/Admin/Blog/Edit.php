@@ -14,13 +14,7 @@ class Edit extends Component
     use WithFileUploads;
 
     public Blog $blog; 
-    // public $title;
-    // public $status;
-    // public $content;
-    // public $bcategory_id;
-    // public $meta_keywords;
-    // public $meta_description;
-    // public $language_id;
+   
     public $image;
     
     public array $listsForFields = [];
@@ -55,13 +49,16 @@ class Edit extends Component
     {
         $this->validate();
         $this->blog->slug = Str::slug($this->blog->title);
+        
         if($this->image){
-            $file = $this->image->store("/");
-            $this->blog->image = $file;
+            $imageName = Str::slug($this->blog->title).'.'.$this->image->extension();
+            $this->image->storeAs('blogs',$imageName);
+            $this->blog->image = $imageName;
         }
+
         $this->blog->save();
             
-        $this->alert('success', __('Blog Updated successfully!') );
+        // $this->alert('success', __('Blog Updated successfully!') );
         
         return redirect()->route('admin.blogs.index');
 

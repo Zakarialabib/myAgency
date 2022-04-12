@@ -29,7 +29,7 @@ class Create extends Component
 
         $this->permission->save();
 
-        $this->alert('success', __('Permission created successfully!') );
+        // $this->alert('success', __('Permission created successfully!') );
 
         return redirect()->route('admin.permissions.index');
     }

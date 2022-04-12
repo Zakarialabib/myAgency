@@ -42,8 +42,9 @@ class Create extends Component
         $this->portfolio->slug = Str::slug($this->portfolio->title);
         
         if($this->featured_image){
-            $file = $this->featured_image->store("portfolio",'public');
-            $this->portfolio->featured_image = $file;
+            $imageName = Str::slug($this->portfolio->title).'.'.$this->featured_image->extension();
+            $this->featured_image->storeAs('portfolios',$imageName);
+            $this->portfolio->featured_image = $imageName;
         }
         
         // Multiple images within an array

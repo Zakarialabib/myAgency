@@ -67,7 +67,7 @@ class Index extends Component
 
             Artisan::call('translatable:export', ['lang' => $languages->code]);
 
-            $this->alert('success', __('Translation updated successfully!') );
+            // $this->alert('success', __('Translation updated successfully!') );
         
         } catch (Exception $e) {
             

@@ -36,7 +36,7 @@ class Create extends Component
         $this->user->save();
         $this->user->roles()->sync($this->roles);
 
-        $this->alert('success', __('User created successfully!') );
+        // $this->alert('success', __('User created successfully!') );
 
         return redirect()->route('admin.users.index');
     }
