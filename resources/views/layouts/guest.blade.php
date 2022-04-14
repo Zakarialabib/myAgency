@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    @include('partials.header')
+    @include('partials.front.header')
 
     <main class="font-sans text-zinc900 antialiased">
         {{ $slot }}
@@ -82,7 +82,7 @@
     <a class="announcement-banner absulute" href="{{ asset('assets/front/img/' . $setting->announcement) }}"></a>
     <!--    announcement banner section end   -->
 
-    @include('partials.footer')
+    @include('partials.front.footer')
 
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer></script>

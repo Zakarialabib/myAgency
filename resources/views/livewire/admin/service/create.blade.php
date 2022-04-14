@@ -55,3 +55,8 @@
         </div>
     </form>
 </div>
+
+@push('scripts')
+     <!-- Image Upload -->
+     <script type="text/javascript"  src="{{ asset('js/image-upload.js') }}"></script>
+@endpush

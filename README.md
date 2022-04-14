@@ -22,6 +22,10 @@ Password : password
 
 ## Task : In progress
 
+- About admin (CRUD) <<<<<<  i'm Woking in this  >>>>>> 
+
+- Team admin (CRUD) 
+
 - Blog category admin (Show - Clone)
 
 - Blog admin (Show) 
@@ -30,11 +34,7 @@ Password : password
 
 - Portfolio admin (Show - Clone) 
 
-- Fix Alerts
-
-- Team admin (CRUD) 
-
-- About admin (CRUD) 
+- Fix Alerts in index pages ( implement delete confirmation with livewire-alert package )
 
 - Pages (CRUD) contain title - breadcrumbs - content - image linked to Blog, Bcategory, Service,Portfolio,About,Team 
 
@@ -42,7 +42,7 @@ Password : password
 
 - Home Animation
 
-- Some Settings are statics like logo .... others are dynamic depends on language preferences
+- Adjust Settings page : static and dynamic inputs
 
 ## Task : done 
 
@@ -53,6 +53,8 @@ Password : password
 - Services admin (Index - Create - Update - Delete - Clone) 
 
 - Portfolio admin (Index - Create - Update - Delete - mutliple images array) 
+
+- Fix Alerts in create and edit pages 
 
 - Users admin (Show -   Index - Create - Update - Delete) 
 

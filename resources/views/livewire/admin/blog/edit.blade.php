@@ -16,14 +16,6 @@
             </select>
         </div>
         <div class="w-full">
-            <x-label for="image" :value="__('Image')" />
-            <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
-            <x-input-error for="image" />
-            <p class="help-block text-info">
-                {{ __('Upload 730X455 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-            </p>
-        </div>
-        <div class="w-full">
             <x-label for="title" :value="__('Title')" />
             <input type="text" wire:model="blog.title"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
@@ -59,6 +51,14 @@
             <x-input-error for="blog.meta_description" />
         </div>
         <div class="w-full">
+            <x-label for="image" :value="__('Image')" />
+            <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+            <x-input-error for="image" />
+            <p class="help-block text-info">
+                {{ __('Upload 730X455 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+            </p>
+        </div>
+        <div class="w-full">
             <x-label for="status" :value="__('Status')" />
             <select wire:model="blog.status"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
@@ -81,3 +81,8 @@
         </div>
     </form>
 </div>
+
+@push('scripts')
+     <!-- Image Upload -->
+     <script type="text/javascript"  src="{{ asset('js/image-upload.js') }}"></script>
+@endpush

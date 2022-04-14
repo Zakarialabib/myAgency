@@ -4,9 +4,10 @@ namespace App\Http\Livewire\Admin\Permission;
 
 use Livewire\Component;
 use App\Models\Permission;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Edit extends Component
 {
+    use LivewireAlert;
     public Permission $permission;
     
     protected $listeners = [

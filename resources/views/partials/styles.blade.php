@@ -7,8 +7,8 @@
 
 @livewireStyles
 
-<!-- Toastr -->
-<link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet">
+{{-- <!-- Toastr -->
+<link href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet"> --}}
 
 <!-- Sweet Alert 2 -->
 <link href="{{ asset('assets/css/sweetalert2.min.css') }}" rel="stylesheet">

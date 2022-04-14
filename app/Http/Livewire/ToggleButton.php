@@ -26,9 +26,17 @@ class ToggleButton extends Component
     {
         $this->model->setAttribute($this->field, $value)->save();
 
-        $this->alert('success', __('Status Changed successfully!') );
+        $this->alert('success', __('Status Changed successfully!'), [
+            'position' => 'center',
+            'timer' => 3000,
+            'toast' => true,
+            'text' => '',
+            'showDenyButton' => false,
+            'onDenied' => '',
+        ]);
 
     }
+
 
     public function render()
     {

@@ -32,30 +32,32 @@
                 name="client_name" placeholder="{{ __('Client Name') }}">
             <x-input-error for="portfolio.client_name" />
         </div>
-        <div class="w-full">
-            <x-label for="service_id" :value="__('Category')" />
-            <x-select-list
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                required id="service_id" name="service_id" wire:model="portfolio.service_id" :options="$this->listsForFields['services']" />
-            </select>
-            <x-input-error for="portfolio.service_id" />
-        </div>
+        <div class="flex flex-wrap">
+            <div class="w-1/3 lg:w-1/3 sm:w-full">
+                <x-label for="service_id" :value="__('Category')" />
+                <x-select-list
+                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    required id="service_id" name="service_id" wire:model="portfolio.service_id" :options="$this->listsForFields['services']" />
+                </select>
+                <x-input-error for="portfolio.service_id" />
+            </div>
 
-        <div class="w-full">
-            <x-label for="link" :value="__('Link')" />
-            <input type="text" wire:model="portfolio.link" name="link" placeholder="{{ __('Live Link') }}"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-            <x-input-error for="portfolio.link" />
-        </div>
-        <div class="w-full">
-            <x-label for="status" :value="__('Status')" />
-            <select wire:model="portfolio.status"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="status">
-                <option value="0">{{ __('In Progress') }}</option>
-                <option value="1" selected>{{ __('Completed') }}</option>
-            </select>
-            <x-input-error for="portfolio.status" />
+            <div class="w-1/3 lg:w-1/3 sm:w-full">
+                <x-label for="link" :value="__('Link')" />
+                <input type="text" wire:model="portfolio.link" name="link" placeholder="{{ __('Live Link') }}"
+                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
+                <x-input-error for="portfolio.link" />
+            </div>
+            <div class="w-1/3 lg:w-1/3 sm:w-full">
+                <x-label for="status" :value="__('Status')" />
+                <select wire:model="portfolio.status"
+                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    name="status">
+                    <option value="0">{{ __('In Progress') }}</option>
+                    <option value="1" selected>{{ __('Completed') }}</option>
+                </select>
+                <x-input-error for="portfolio.status" />
+            </div>
         </div>
 
         <div class="w-full">
@@ -81,6 +83,7 @@
                 </p>
             </div>
         </div>
+
         <div class="w-full">
             <x-label for="meta_keywords" :value="__('Meta Keywords')" />
             <input type="text" wire:model="portfolio.meta_keywords"
@@ -95,6 +98,7 @@
                 placeholder="{{ __('Meta Description') }}" rows="4">{{ old('meta_description') }}</textarea>
             <x-input-error for="portfolio.meta_description" />
         </div>
+
         <div class="w-full">
             <div class="offset-sm-2 col-sm-10">
                 <button type="submit"
@@ -103,3 +107,9 @@
         </div>
     </form>
 </div>
+
+
+@push('scripts')
+    <!-- Image Upload -->
+    <script type="text/javascript" src="{{ asset('js/image-upload.js') }}"></script>
+@endpush

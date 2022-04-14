@@ -6,9 +6,11 @@ use Livewire\Component;
 use App\Models\Language;
 use App\Models\Bcategory;
 use Str;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
+    use LivewireAlert;
     public Bcategory $bcategory;
     
     public $name ,$language_id, $status, $slug;
@@ -42,7 +44,7 @@ class Edit extends Component
 
         $this->bcategory->save();
 
-        // $this->alert('success', __('Bcategory updated successfully!') );
+        $this->alert('success', __('Bcategory updated successfully!') );
 
         return redirect()->route('admin.bcategories.index');
     }

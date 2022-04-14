@@ -7,9 +7,11 @@ use App\Models\User;
 use App\Models\Subscription;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
+    use LivewireAlert;
     use WithPagination;
 
     public int $perPage;
@@ -64,7 +66,7 @@ class Edit extends Component
 
         $this->user->roles()->sync($this->roles);
 
-        // $this->alert('success', __('User updated successfully!') );
+        $this->alert('success', __('User updated successfully!') );
 
         return redirect()->route('admin.users.index');
     }

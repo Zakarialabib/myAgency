@@ -89,7 +89,7 @@
                                 </button>
                                 <button
                                     class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300"
-                                    type="button" wire:click="confirm('clone', {{ $blog->id }})"
+                                    type="button" wire:click='delete({{ $blog->id }})'
                                     wire:loading.attr="disabled">
                                     <x-heroicon-o-duplicate class="h-4 w-4" />
                                 </button>
@@ -121,7 +121,7 @@
     </div>
 </div>
 
-@push('scripts')
+{{-- @push('scripts')
     <script>
         Livewire.on('confirm', e => {
             if (!confirm("{{ __('Are you sure') }}")) {
@@ -130,4 +130,4 @@
             @this[e.callback](...e.argv)
         });
     </script>
-@endpush
+@endpush --}}

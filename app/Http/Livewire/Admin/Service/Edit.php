@@ -7,9 +7,11 @@ use App\Models\Service;
 use App\Models\Language;
 use Livewire\Component;
 use Str;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
     
     public Service $service;
@@ -52,7 +54,7 @@ class Edit extends Component
 
         $this->service->save();
 
-        // $this->alert('success', __('Service updated successfully!') );
+        $this->alert('success', __('Service updated successfully!') );
 
         return redirect()->route('admin.services.index');
     }

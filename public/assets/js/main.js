@@ -82,18 +82,7 @@ function copyCode(el) {
     };
   };
 
-  (function($) {
-    "use strict";
 
-    document.addEventListener('livewire:load', function() {
-
-        window.addEventListener('alert', event => {
-            toastr[event.detail.type](event.detail.message);
-        });
-
-    });
-
-  })(jQuery);
     
     window.livewire.on('notif_alert', param => {
       Swal.fire({

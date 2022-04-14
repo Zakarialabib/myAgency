@@ -8,9 +8,11 @@ use App\Models\Language;
 use Livewire\Component;
 use App\Models\Blog;
 use Str;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public Blog $blog; 
@@ -58,7 +60,7 @@ class Edit extends Component
 
         $this->blog->save();
             
-        // $this->alert('success', __('Blog Updated successfully!') );
+        $this->alert('success', __('Blog Updated successfully!') );
         
         return redirect()->route('admin.blogs.index');
 

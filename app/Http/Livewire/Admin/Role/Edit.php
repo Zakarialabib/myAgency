@@ -5,9 +5,10 @@ namespace App\Http\Livewire\Admin\Role;
 use App\Models\Permission;
 use App\Models\Role;
 use Livewire\Component;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Edit extends Component
 {
+    use LivewireAlert;
     public Role $role;
 
     public array $permissions = [];

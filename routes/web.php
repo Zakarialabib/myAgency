@@ -15,14 +15,14 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('front.home');
-
+Route::get('/greeting' , [HomeController::class, 'index'])->name('front.home');
 Route::get('/about', [HomeController::class, 'about'])->name('front.about');
 
 Route::get('/blog', [HomeController::class, 'blogs'])->name('front.blogs');
 Route::get('/blog-details/{slug}', [HomeController::class, 'blogdetails'])->name('front.blogdetails');
 
 Route::get('/work', [HomeController::class, 'portfolio'])->name('front.portfolio');
-
+Route::get('/team', [HomeController::class, 'team'])->name('front.team');
 Route::get('/work/{slug}', [HomeController::class, 'portfolioDetails'])->name('front.portfolioDetails');
 
 Route::get('/contact', [HomeController::class, 'contact'])->name('front.contact');

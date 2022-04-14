@@ -7,9 +7,11 @@ use App\Models\Service;
 use App\Models\Language;
 use Livewire\Component;
 use Str;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Create extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
     
     public Service $service;
@@ -52,7 +54,7 @@ class Create extends Component
 
         $this->service->save();
 
-        // $this->alert('success', __('Service created successfully!') );
+        $this->alert('success', __('Service created successfully!') );
 
         return redirect()->route('admin.services.index');
     }

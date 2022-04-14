@@ -9,9 +9,10 @@ use App\Models\Language;
 use App\Models\PortfolioImage;
 use App\Models\Service;
 use Livewire\WithFileUploads;
-
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Create extends Component
 {
+    use LivewireAlert;
     use WithFileUploads;
 
     public Portfolio $portfolio;
@@ -59,7 +60,7 @@ class Create extends Component
 
         $this->portfolio->save();
 
-        // $this->alert('success', __('Service created successfully!') );
+        $this->alert('success', __('Service created successfully!') );
 
         return redirect()->route('admin.portfolios.index');
 

@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Create extends Component
 {
+    use LivewireAlert;
     public User $user;
     public array $roles = [];
     public string $password = '';
@@ -36,7 +38,7 @@ class Create extends Component
         $this->user->save();
         $this->user->roles()->sync($this->roles);
 
-        // $this->alert('success', __('User created successfully!') );
+        $this->alert('success', __('User created successfully!') );
 
         return redirect()->route('admin.users.index');
     }

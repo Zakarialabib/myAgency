@@ -32,21 +32,24 @@
                 </div>
             @else
                 <div class="row">
-                    @foreach ($blogs as $item)
+                    @forelse ($blogs as $blog)
                         <div class="post-box">
                             <div class="text-holder">
-                                <a href="{{ route('front.blogdetails', $item->slug) }}"
-                                    class="title">{{ Str::title($item->title) }}</a>
+                                <a href="{{ route('front.blogdetails', $blog->slug) }}"
+                                    class="title">{{ Str::title($blog->title) }}</a>
                                 <div class="text">{{ __('Read More') }}</div>
-                                <time datetime="{{ $item->created_at->format('y-m-d') }}">
-                                    {{ $item->created_at->diffForHumans() }}
+                                <time datetime="{{ $blog->created_at->format('y-m-d') }}">
+                                    {{ $blog->created_at->diffForHumans() }}
                                 </time>
                             </div>
 
                             <div class="img-holder">
-                                <img src="{{ asset('uploads/' . $item->image) }}" alt="">
+                                <img src="{{ asset('uploads/' . $blog->image) }}" alt="">
                             </div>
                         </div>
+                    @else
+                    no blog
+                    
                     @endforeach
                 </div>
             @endif
