@@ -61,3 +61,14 @@ Password : password
 - TRIX rich text editor (integrated)
 
 - Home flag and Language menu 
+
+## Changelog :
+
+Alerts Fixed with Jantinnerezo\LivewireAlert package in create and edit pages 
+TRIX rich text editor (integrated)
+Blog category admin (Index - Create - Update - Delete) 
+Blog admin (Index - Create - Update - Delete - Clone) 
+Services admin (Index - Create - Update - Delete - Clone) 
+Portfolio admin (Index - Create - Update - Delete - mutliple images array) 
+Users admin (Show -   Index - Create - Update - Delete) 
+Home flag and Language menu 
