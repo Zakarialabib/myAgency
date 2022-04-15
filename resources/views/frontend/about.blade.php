@@ -1,6 +1,6 @@
 <x-guest-layout>
-    
-{{-- @section('meta-keywords', "$blog->meta_keywords")
+
+    {{-- @section('meta-keywords', "$blog->meta_keywords")
 @section('meta-description', "$blog->meta_description") --}}
 
     <header class="container-fluid header">
@@ -12,22 +12,26 @@
                     <span class="other-color">design studio.</span>
                 </div>
                 <div class="normal-text">
-                    <p>But I must explain to you how all this mistaken idea of denouncing<br> pleasure and praising pain was
+                    <p>But I must explain to you how all this mistaken idea of denouncing<br> pleasure and praising pain
+                        was
                         born and I will give you a complete<br> account of the system.</p>
                 </div>
             </div>
         </div>
     </header>
     <div class="container-fluid process-section">
-        <div>
-            <div class="flex-grow">
-                <div class="lg-text"><span class="other-color">our process</span></div>
-                <div class="normal-text">
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising<br> pain was
-                        born and I will give you a complete account of the system.</p>
+        @foreach ($abouts as $about)
+            <div>
+                <div class="flex-grow">
+                    <div class="lg-text"><span class="other-color">{{ $about->title }}</span></div>
+                    <div class="normal-text">
+                        <p>
+                            {!! $about->content !!}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
         <div class="flex flex-wrap">
             <div class="md:w-1/3 px-2">
                 <div class="text-box">
@@ -189,7 +193,8 @@
                     <span>MISSION.</span>
                 </div>
                 <div class="normal-text">
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising<br> pain was
+                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising<br> pain
+                        was
                         born and I will give you a complete account of the system.</p>
                 </div>
                 <div class="clients-logos">

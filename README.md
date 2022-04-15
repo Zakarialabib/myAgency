@@ -8,8 +8,11 @@ this project is a content management system using laravel and livewire, which it
 in odrer to install the project locally, run the commands below :
 
 Run 'composer install' to install the PHP dependencies
-Run 'npm install to install Node dependecies
+
+Run 'npm install' to install Node dependecies
+
 cp .env.example .env
+
 php artisan migrate --seed
 
 
@@ -22,9 +25,11 @@ Password : password
 
 ## Task : In progress
 
-- About admin (CRUD) <<<<<<  i'm Woking in this  >>>>>> 
+- Sectiontitles CRUD 
 
-- Team admin (CRUD) 
+- About admin : Create and Edit array problem 
+
+- Team admin (Show - Clone)
 
 - Blog category admin (Show - Clone)
 
@@ -36,8 +41,6 @@ Password : password
 
 - Fix Alerts in index pages ( implement delete confirmation with livewire-alert package )
 
-- Pages (CRUD) contain title - breadcrumbs - content - image linked to Blog, Bcategory, Service,Portfolio,About,Team 
-
 - Language translation 
 
 - Home Animation
@@ -45,6 +48,12 @@ Password : password
 - Adjust Settings page : static and dynamic inputs
 
 ## Task : done 
+
+- Sectiontitles ( Migration, Model)
+
+- Team admin (Index - Create - Update - Delete)
+
+- About admin (Index - Create - Update - Delete) 
 
 - Blog category admin (Index - Create - Update - Delete) 
 
@@ -63,7 +72,8 @@ Password : password
 - Home flag and Language menu 
 
 ## Changelog :
-
+Sectiontitle (Migration - Model)
+Team admin (Index - Create - Update - Delete- Migration - Model)
 Alerts Fixed with Jantinnerezo\LivewireAlert package in create and edit pages 
 TRIX rich text editor (integrated)
 Blog category admin (Index - Create - Update - Delete) 

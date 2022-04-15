@@ -6,6 +6,18 @@
         </x-slot>
     </x-sidebar.link>
     
+    <x-sidebar.link title="{{ __('About') }}" href="{{ route('admin.about.index') }}" :isActive="request()->routeIs('admin.about.index')">
+        <x-slot name="icon">
+            <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+        </x-slot>
+    </x-sidebar.link>
+    
+    <x-sidebar.link title="{{ __('Team') }}" href="{{ route('admin.teams.index') }}" :isActive="request()->routeIs('admin.teams.index')">
+        <x-slot name="icon">
+            <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+        </x-slot>
+    </x-sidebar.link>
+
     <x-sidebar.link title="{{ __('Blogs') }}" href="{{ route('admin.blogs.index') }}" :isActive="request()->routeIs('admin.blogs.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />

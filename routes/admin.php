@@ -9,9 +9,11 @@ use App\Http\Controllers\Admin\BcategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
 
     // Service
     Route::resource('services', ServiceController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Team
+    Route::resource('teams', TeamController::class, ['except' => ['store', 'update', 'destroy']]);
+    
+    // About
+    Route::resource('about', AboutController::class, ['except' => ['store', 'update', 'destroy']]);
     
     // Setting
     Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);

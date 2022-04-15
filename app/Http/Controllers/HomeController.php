@@ -12,6 +12,7 @@ use App\Models\Portfolio;
 use App\Models\Team; 
 use App\Models\Blog; 
 use App\Models\Bcategory; 
+use App\Models\About; 
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -49,7 +50,16 @@ class HomeController extends Controller
     //About page
     public function about()
     {
-        return view('frontend.about');
+        if (session()->has('lang')) {
+            $currlang = Language::where('code', session()->get('lang'))->first();
+        } else {
+            $currlang = Language::where('is_default', 1)->first();
+        }
+
+        $abouts = About::where('status', 1)->where('language_id', $currlang->id)
+        ->paginate(1);
+
+        return view('frontend.about',compact('abouts'));
     }
 
     //Contact page

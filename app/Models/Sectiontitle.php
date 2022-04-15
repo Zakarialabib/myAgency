@@ -12,15 +12,40 @@ class Sectiontitle extends Model
     public $table = 'sectiontitles';
 
     public $orderable = [
+        'language_id',
+        'page',
+        'subtitle',
+        'text',
+        'button',
+        'link',
+        'content',
+        'video',
+        'image',
     ];
 
     public $filterable = [
+        'language_id',
+        'page',
+        'subtitle',
+        'text',
+        'button',
+        'link',
+        'content',
+        'video',
+        'image',
     ];
 
     protected $fillable = [
+        'language_id',
+        'page',
+        'subtitle',
+        'text',
+        'button',
+        'link',
+        'content',
+        'video',
+        'image',
     ];
-
-    protected $guarded = [];
     
     public function language() {
         return $this->belongsTo('App\Models\Language');

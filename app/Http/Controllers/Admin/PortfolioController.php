@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\Helper;
-use App\Models\Service;
-use App\Models\Language;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
-use App\Models\PortfolioImage;
 use App\Http\Controllers\Controller;
 
 class PortfolioController extends Controller
 {
     // Index Portfolio 
-    public function index(){
-
+    public function index()
+    {
         return view('admin.portfolio.index');
     }
 
@@ -29,5 +25,10 @@ class PortfolioController extends Controller
     {
         return view('admin.portfolio.edit', compact('portfolio'));
     }
-
+    
+    // Portfolio  Show
+    public function show(Portfolio $portfolio)
+    {
+        return view('admin.portfolio.show', compact('portfolio'));
+    }
 }
