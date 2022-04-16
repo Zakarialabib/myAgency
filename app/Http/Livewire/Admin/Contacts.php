@@ -83,7 +83,9 @@ class Contacts extends Component
 
         $contacts = $query->paginate($this->perPage);
 
-        return view('livewire.admin.contacts', compact('contacts'));
+        return view('livewire.admin.contacts', compact('contacts'))
+        ->extends('layouts.dashboard')
+        ->section('content');
     }
 
 

@@ -52,6 +52,10 @@ class Language extends Model
         return $this->hasMany('App\Models\Blog');
     }
     
+    public function abouts() {
+        return $this->hasMany('App\Models\About');
+    }
+    
     public function menus() {
         return $this->hasMany('App\Models\Menu');
     }

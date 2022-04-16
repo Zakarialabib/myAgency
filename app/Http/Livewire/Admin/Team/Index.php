@@ -80,6 +80,8 @@ class Index extends Component
     
     public function render()
     {
+        $static = Sectiontitle::where('page', 2)->where('language_id', $this->language_id)->first();
+
         $query = Team::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
             })->advancedFilter([
@@ -90,7 +92,7 @@ class Index extends Component
 
         $teams = $query->paginate($this->perPage);
 
-        return view('livewire.admin.team.index', compact('teams'));
+        return view('livewire.admin.team.index', compact('teams','static'));
     }
 
       // Team  Delete

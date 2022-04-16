@@ -1,4 +1,4 @@
-<thead class="bg-zinc50 text-zinc700 dark:bg-zinc600 dark:text-zinc300">
+<thead class="bg-zinc-50 text-zinc-700 dark:bg-zinc-600 dark:text-zinc-300">
     <tr>
         {{ $slot }}
     </tr>

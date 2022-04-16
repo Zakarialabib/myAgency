@@ -22,14 +22,14 @@
         <div class="flex flex-wrap">
             <div class="w-1/2 sm:w-full">
                 <x-label for="name" :value="__('Name')" />
-                <input type="text" name="name" wire:model="team.name"
+                <input type="text" name="name" wire:model.lazy="team.name"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
                 placeholder="{{ __('Name') }}" value="{{ old('name') }}">
                 <x-input-error for="team.name" />
             </div>
             <div class="w-1/2 sm:w-full">
                 <x-label for="role" :value="__('Role')" />
-                <input type="text" name="role" wire:model="team.role"
+                <input type="text" name="role" wire:model.lazy="team.role"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
                 placeholder="{{ __('Role') }}" value="{{ old('role') }}">
                 <x-input-error for="team.role" />

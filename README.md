@@ -25,11 +25,9 @@ Password : password
 
 ## Task : In progress
 
-- Sectiontitles CRUD 
+- Team front : Adjust front blade views  // Team admin (Show - Clone)
 
 - About admin : Create and Edit array problem 
-
-- Team admin (Show - Clone)
 
 - Blog category admin (Show - Clone)
 
@@ -47,38 +45,39 @@ Password : password
 
 - Adjust Settings page : static and dynamic inputs
 
-## Task : done 
+## Task : done // CRUD MEANS CREATE READ UPDATE DESTROY
 
-- Sectiontitles ( Migration, Model)
+- Sectiontitles admin (CRUD - Clone - Migration - Model - Views - Routes)
 
-- Team admin (Index - Create - Update - Delete)
+- Team admin  (CRUD - Clone - Migration - Model - Views - Routes)
 
-- About admin (Index - Create - Update - Delete) 
+- About admin  (CRUD - Clone - Migration - Model - Views - Routes)
 
-- Blog category admin (Index - Create - Update - Delete) 
+- Blog category admin  (CRUD - Clone - Migration - Model - Views - Routes) 
 
-- Blog admin (Index - Create - Update - Delete - Clone) 
+- Blog admin (CRUD - Clone) 
 
-- Services admin (Index - Create - Update - Delete - Clone) 
+- Services admin (CRUD - Clone) 
 
-- Portfolio admin (Index - Create - Update - Delete - mutliple images array) 
+- Portfolio admin (CRUD - mutliple images array) 
 
 - Fix Alerts in create and edit pages 
 
-- Users admin (Show -   Index - Create - Update - Delete) 
+- Users admin (CRUD) 
 
 - TRIX rich text editor (integrated)
 
 - Home flag and Language menu 
 
 ## Changelog :
-Sectiontitle (Migration - Model)
-Team admin (Index - Create - Update - Delete- Migration - Model)
+Sectiontitles Adjust front blade views  
+Sectiontitle admin 
+Team admin
 Alerts Fixed with Jantinnerezo\LivewireAlert package in create and edit pages 
 TRIX rich text editor (integrated)
-Blog category admin (Index - Create - Update - Delete) 
-Blog admin (Index - Create - Update - Delete - Clone) 
-Services admin (Index - Create - Update - Delete - Clone) 
-Portfolio admin (Index - Create - Update - Delete - mutliple images array) 
-Users admin (Show -   Index - Create - Update - Delete) 
+Blog category admin  
+Blog admin 
+Services admin 
+Portfolio admin 
+Users admin 
 Home flag and Language menu 

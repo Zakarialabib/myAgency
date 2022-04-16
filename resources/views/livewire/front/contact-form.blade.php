@@ -1,4 +1,4 @@
-<section class="text-zinc900 body-font relative px-4 py-10 mx-auto bg-white" id="contact">
+<section class="text-zinc-900 body-font relative px-4 py-10 mx-auto bg-white" id="contact">
     <div class="flex flex-col text-center w-full mb-4">
         <h1
             class="text-3xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl tracking-tighter font-extrabold text-center text-blue-900">
@@ -15,33 +15,33 @@
                     <div class="w-full sm:w-full md:w-1/2 ">
                         <div class="p-2 w-full">
                             <div class="relative">
-                                <input type="text" wire:model="name" id="name" name="name"
+                                <input type="text" wire:model.lazy="name" id="name" name="name"
                                     placeholder="{{ __('Full Name') }}" value="{{ old('name') }}"
-                                    class="@error('name') is-invalid @enderror w-full bg-zinc100 bg-opacity-50 rounded border border-zinc300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    class="@error('name') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <x-input-error for="name" />
                             </div>
                         </div>
                         <div class="p-2 w-full">
                             <div class="relative">
-                                <input type="email" wire:model="email" id="email" name="email"
+                                <input type="email" wire:model.lazy="email" id="email" name="email"
                                     placeholder="{{ __('Enter valid Email') }}" value="{{ old('email') }}"
-                                    class="@error('email') is-invalid @enderror w-full bg-zinc100 bg-opacity-50 rounded border border-zinc300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    class="@error('email') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <x-input-error for="email" />
                             </div>
                         </div>
                         <div class="p-2 w-full">
                             <div class="relative">
-                                <input type="text" wire:model="phone_number" id="phone_number" name="phone_number"
+                                <input type="text" wire:model.lazy="phone_number" id="phone_number" name="phone_number"
                                     placeholder="{{ __('Enter your Phone Number') }}"
                                     value="{{ old('phone_number') }}"
-                                    class="@error('phone_number') is-invalid @enderror w-full bg-zinc100 bg-opacity-50 rounded border border-zinc300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    class="@error('phone_number') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <x-input-error for="phone_number" />
                             </div>
                         </div>
                         <div class="p-2 w-full">
                             <div class="relative">
                                 <select id="subject" wire:model="subject" name="subject"
-                                    class="@error('subject') is-invalid @enderror w-full bg-zinc100 bg-opacity-50 rounded border border-zinc300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    class="@error('subject') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <option>{{ __('Select Subject Options') }}</option>
                                     <option value="Information">{{ __('Information') }}</option>
                                     <option value="Registration">{{ __('Registration') }}</option>
@@ -54,9 +54,9 @@
                     <div class="w-full sm:w-full md:w-1/2 ">
                         <div class="p-2 w-full">
                             <div class="relative">
-                                <textarea id="message" wire:model="message" name="message" placeholder="Message"
+                                <textarea id="message" wire:model.lazy="message" name="message" placeholder="Message"
                                     value="{{ old('message') }}"
-                                    class="w-full h-56 bg-zinc100 bg-opacity-50 rounded border border-zinc300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                                    class="w-full h-56 bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-6 transition-colors duration-200 ease-in-out"></textarea>
                                 <x-input-error for="subject" />
                             </div>
                         </div>
@@ -84,17 +84,17 @@
                     <div class="my-4 w-full py-2">
                         <div class="flex flex-col">
                             <h2 class="text-2xl">{{ __('Main Office') }}</h2>
-                            <p class="text-zinc400">{{ config('settings.company_address') }}</p>
+                            <p class="text-zinc-400">{{ config('settings.company_address') }}</p>
                         </div>
                     </div>
 
                     <div class="my-4 w-full py-2">
                         <div class="flex flex-col">
                             <h2 class="text-2xl">{{ __('Call Us') }}</h2>
-                            <p class="text-zinc400">
+                            <p class="text-zinc-400">
                                 @if (config('settings.company_phone') != null)
                                     <a href="tel:{{ config('settings.company_phone') }}" target="_blank"
-                                        class="text-zinc400">
+                                        class="text-zinc-400">
                                         {{ __('Phone Number') }} : {{ config('settings.company_phone') }}
                                     </a>
                                 @else

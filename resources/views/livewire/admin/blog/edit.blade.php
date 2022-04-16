@@ -6,7 +6,7 @@
         <div class="w-full">
             <x-label for="language_id" :value="__('Language')" />
             <select
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 lang"
                 wire:model="blog.language_id" name="language_id">
                 @foreach ($langs as $lang)
                     <option value="{{ $lang->id }}">
@@ -17,15 +17,15 @@
         </div>
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
-            <input type="text" wire:model="blog.title"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+            <input type="text" wire:model.lazy="blog.title"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">
             <x-input-error for="blog.title" />
         </div>
         <div class="w-full">
             <x-label for="bcategory_id" :value="__('Category')" />
             <x-select-list
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 required id="bcategory_id" name="bcategory_id" wire:model="blog.bcategory_id"
                 :options="$this->listsForFields['bcategories']" />
             <x-input-error for="blog.bcategory_id" />
@@ -38,15 +38,15 @@
         <div class="w-full">
             <x-label for="meta_keywords" :value="__('Meta Keywords')" />
             <input type="text"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                data-role="tagsinput" name="meta_keywords" wire:model="blog.meta_keywords"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                data-role="tagsinput" name="meta_keywords" wire:model.lazy="blog.meta_keywords"
                 placeholder="{{ __('Meta Keywords') }}" value="{{ old('meta_keywords') }}">
             <x-input-error for="blog.meta_keywords" />
         </div>
         <div class="w-full">
             <x-label for="meta_description" :value="__('Meta Description')" />
-            <textarea class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="meta_description" wire:model="blog.meta_description" placeholder="{{ __('Meta Description') }}"
+            <textarea class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                name="meta_description" wire:model.lazy="blog.meta_description" placeholder="{{ __('Meta Description') }}"
                 rows="4">{{ old('meta_description') }}</textarea>
             <x-input-error for="blog.meta_description" />
         </div>
@@ -61,7 +61,7 @@
         <div class="w-full">
             <x-label for="status" :value="__('Status')" />
             <select wire:model="blog.status"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="status">
                 <option value="0" selected>{{ __('Unpublish') }}</option>
                 <option value="1">{{ __('Publish') }}</option>

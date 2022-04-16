@@ -2,9 +2,6 @@
     @livewireScripts
     
     <script async type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-    
-    {{-- <!-- Alpinejs -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
 
     <!-- Jquery -->
     <script type="text/javascript"  src="{{ asset('assets/js/jquery.min.js') }}"></script>

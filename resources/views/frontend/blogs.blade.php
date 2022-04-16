@@ -3,19 +3,30 @@
 @section('meta-description', "$seo->blog_meta_desc") --}}
 
     <header class="container-fluid header">
+        @if (empty($sectiontitle))
         <div class="row">
             <div class="col">
-                <div class="lg-text">
-                    <span>SPARK TIPS</span><br>
-                    <span>DESIGN & BUSINESS</span><br>
-                    <span class="other-color">SPARKBLOG</span>
-                </div>
-                <div class="normal-text">
-                    <p>You can call it an extra arm that support you with insightful ideas,<br>about business, design,
-                        productivity, design or even personal<br> development for business people.</p>
+                <div class="extra-lg-text">
+                    <span>perfection is</span><br>
+                    <span>not a myth</span><br>
+                    <span class="other-color">check our</span><br>
+                    <span class="other-color">work.</span>
                 </div>
             </div>
         </div>
+        @else
+        <div>
+            <div class="flex-grow">
+                <div class="lg-text">
+                    <span>{{ $sectiontitle->title }}</span>
+                    <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                </div>
+                <div class="normal-text">
+                    <p>{!! $sectiontitle->content !!}</p>
+                </div>
+            </div>
+        </div>
+        @endif
     </header>
 
     <!--====== BLOG STANDARD PART START ======-->
@@ -46,10 +57,7 @@
                             <div class="img-holder">
                                 <img src="{{ asset('uploads/' . $blog->image) }}" alt="">
                             </div>
-                        </div>
-                    @else
-                    no blog
-                    
+                        </div>                    
                     @endforeach
                 </div>
             @endif

@@ -1,5 +1,5 @@
 <nav
-    class="flex items-center justify-between p-2 border-b dark:border-blue-800 bg-zinc100 md:flex-row md:flex-nowrap md:justify-start">
+    class="flex items-center justify-between p-2 border-b dark:border-blue-800 bg-zinc-100 md:flex-row md:flex-nowrap md:justify-start">
     <div class="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap px-2">
        
         <button @click="sidebarOpen = true" class="text-zinc500 focus:outline-none lg:hidden">

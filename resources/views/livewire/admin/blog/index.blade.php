@@ -58,7 +58,7 @@
                         @if (empty($blog->image))
                             {{__('No images')}}
                         @else
-                        <img class="w-80" src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="">
+                        <img class="w-52 rounded-full" src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="">
                         @endif
                     </x-table.td>
                     <x-table.td>

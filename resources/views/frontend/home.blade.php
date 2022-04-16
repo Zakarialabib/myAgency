@@ -6,17 +6,30 @@
         <header class="container-fluid header"
             style="background-image: url({{ asset('images/home.jpeg') }});background-size: cover;">
             <div class="mouse-scroll"></div>
-            <div class="row">
-                <div class="col">
-                    <div class="extra-lg-text">
-                        <span>user-centric</span><br>
+            @if (empty($sectiontitle))
+                <div class="row">
+                    <div class="col">
+                        <div class="extra-lg-text">
+                            <span>user-centric</span><br>
                         <span>experiences</span><br>
                         <span>that actually</span><br>
                         <span class="other-color">work</span>
-
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div>
+                    <div class="flex-grow">
+                        <div class="lg-text">
+                            <span>{{ $sectiontitle->title }}</span>
+                            <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                        </div>
+                        <div class="normal-text">
+                            <p>{!! $sectiontitle->content !!}</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </header>
     </div>
     {{-- Services Block --}}
@@ -26,7 +39,7 @@
             @foreach ($services as $service)
                 <div class="my-4 px-4 sm:w-full md:w-full lg:w-full xl:w-1/3">
                     <div class="boxy primary-color"
-                        style="background-image: url({{ asset('uploads/services/' . $service->image) }});background-blend-mode: multiply;">
+                        style="background-image: url({{ asset('uploads/services/' . $service->image) }});">
                         <div class="row">
                             <div class="col">
                                 <h1 class="title">{{ $service->title }}</h1>

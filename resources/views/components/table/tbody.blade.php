@@ -1,3 +1,3 @@
-<tbody class="divide-y divide-zinc200">
+<tbody class="divide-y divide-zinc-200">
     {{ $slot }}
 </tbody>

@@ -11,7 +11,7 @@
 
     <div x-show="open && (isSidebarOpen || isSidebarHovered)" x-collapse>
         <ul
-            class="relative px-0 pt-2 pb-0 ml-5 before:w-0 before:block before:absolute before:inset-y-0 before:left-0 before:border-l-2 before:border-l-zinc200 dark:before:border-l-zinc600">
+            class="relative px-0 pt-2 pb-0 ml-5 before:w-0 before:block before:absolute before:inset-y-0 before:left-0 before:border-l-2 before:border-l-zinc-200 dark:before:border-l-zinc-600">
 
             {{ $slot }}
         </ul>

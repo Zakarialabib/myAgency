@@ -16,8 +16,8 @@ class CreateSectionTitleTable extends Migration
         Schema::create('sectiontitles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('language_id')->nullable();
-
             $table->string('page')->nullable();
+            $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
             $table->text('text')->nullable();
             $table->text('button')->nullable();
@@ -25,7 +25,7 @@ class CreateSectionTitleTable extends Migration
             $table->string('content')->nullable();
             $table->string('video')->nullable();
             $table->text('image')->nullable();
-
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

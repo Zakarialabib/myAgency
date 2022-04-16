@@ -4,16 +4,30 @@
 
     <header class="container-fluid header">
         <div class="mouse-scroll"></div>
-        <div class="row">
-            <div class="col">
-                <div class="extra-lg-text">
-                    <span>perfection is</span><br>
-                    <span>not a myth</span><br>
-                    <span class="other-color">check our</span><br>
-                    <span class="other-color">work.</span>
+        @if (empty($sectiontitle))
+            <div class="row">
+                <div class="col">
+                    <div class="extra-lg-text">
+                        <span>perfection is</span><br>
+                        <span>not a myth</span><br>
+                        <span class="other-color">check our</span><br>
+                        <span class="other-color">work.</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div>
+                <div class="flex-grow">
+                    <div class="lg-text">
+                        <span>{{ $sectiontitle->title }}</span>
+                        <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                    </div>
+                    <div class="normal-text">
+                        <p>{!! $sectiontitle->content !!}</p>
+                    </div>
+                </div>
+            </div>
+        @endif
     </header>
     <div class="container-fluid box-content">
         <div class="flex flex-wrap">

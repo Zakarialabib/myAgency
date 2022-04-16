@@ -80,6 +80,8 @@ class Index extends Component
     
     public function render()
     {
+        $static = Sectiontitle::where('page', 1)->where('language_id', $this->language_id)->first();
+
         $query = About::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
             })->advancedFilter([
@@ -90,7 +92,9 @@ class Index extends Component
 
         $abouts = $query->paginate($this->perPage);
 
-        return view('livewire.admin.about.index', compact('abouts'));
+        return view('livewire.admin.about.index', compact('abouts','static'))
+        ->extends('layouts.dashboard')
+        ->section('content');
     }
 
       // About  Delete

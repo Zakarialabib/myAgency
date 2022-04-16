@@ -79,6 +79,8 @@ class Index extends Component
     }
     public function render()
     {
+        $static = Sectiontitle::where('page', 5)->where('language_id', $this->language_id)->first();
+
         $query = Portfolio::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
             })->advancedFilter([
@@ -89,7 +91,7 @@ class Index extends Component
 
         $portfolios = $query->paginate($this->perPage);
 
-        return view('livewire.admin.portfolio.index', compact('portfolios'));
+        return view('livewire.admin.portfolio.index', compact('portfolios', 'static'));
     }
 
      // Blog Category  Delete

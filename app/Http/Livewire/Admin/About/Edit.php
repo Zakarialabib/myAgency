@@ -86,7 +86,7 @@ class Edit extends Component
         }
 
         foreach($this->inputs as $key => $input){
-            dd($this->about->block_title);
+            // dd($this->about->block_title);
             $this->about->block_title = $input['block_title'];
             $this->about->block_content = $input['block_content'];
         }
@@ -94,7 +94,7 @@ class Edit extends Component
 
         $this->alert('success', __('About updated successfully!') );
 
-        // return redirect()->route('admin.about.index');
+        return redirect()->route('admin.about.index');
     }
   
     public function addInput()

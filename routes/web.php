@@ -15,7 +15,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('front.home');
-Route::get('/greeting' , [HomeController::class, 'index'])->name('front.home');
+
 Route::get('/about', [HomeController::class, 'about'])->name('front.about');
 
 Route::get('/blog', [HomeController::class, 'blogs'])->name('front.blogs');

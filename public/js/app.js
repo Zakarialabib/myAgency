@@ -5738,11 +5738,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
-
-
-
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_0___default());
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
+
+
+
 window.PerfectScrollbar = perfect_scrollbar__WEBPACK_IMPORTED_MODULE_3__["default"];
 document.addEventListener("alpine:init", function () {
   alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].data("mainState", function () {
@@ -5815,6 +5814,7 @@ document.addEventListener("alpine:init", function () {
   });
 });
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].plugin(_alpinejs_collapse__WEBPACK_IMPORTED_MODULE_2__["default"]);
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"];
 alpinejs__WEBPACK_IMPORTED_MODULE_1__["default"].start();
 /* Function for dropdowns */
 

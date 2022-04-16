@@ -1,6 +1,6 @@
 <label class="block mt-4 text-sm">
     <div
-        class="w-full p-2 bg-zinc100 border border-zinc300 border-dashed rounded"
+        class="w-full p-2 bg-zinc-100 border border-zinc-300 border-dashed rounded"
         x-data="{ isUploading: false, progress: 0 }"
                 x-on:livewire-upload-start="isUploading = true"
                 x-on:livewire-upload-finish="isUploading = false"
@@ -47,7 +47,7 @@
             @else
 
                 {{-- empty state --}}
-                <p class="flex items-center text-sm font-light text-zinc400">
+                <p class="flex items-center text-sm font-light text-zinc-400">
                     <x-heroicon-o-plus class="w-6 h-6 p-1 mr-3 text-zinc500 border rounded-full shadow" />
                     {{__('Click/Tap to select media')}} | {{ $types ?? 'Any File' }}
                 </p>

@@ -21,14 +21,14 @@
         <div class="w-full flex flex-wrap">
             <div class="w-1/2 lg:w-1/2 sm:w-full">
                 <x-label for="title" :value="__('Title')" />
-                <input type="text" wire:model="portfolio.title"
+                <input type="text" wire:model.lazy="portfolio.title"
                     class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                     name="title" placeholder="{{ __('Title') }}">
                 <x-input-error for="portfolio.title" />
             </div>
             <div class="w-1/2 lg:w-1/2 sm:w-full">
                 <x-label for="client_name" :value="__('Client Name')" />
-                <input type="text" wire:model="portfolio.client_name"
+                <input type="text" wire:model.lazy="portfolio.client_name"
                     class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                     name="client_name" placeholder="{{ __('Client Name') }}">
                 <x-input-error for="portfolio.client_name" />
@@ -39,14 +39,14 @@
                 <x-label for="service_id" :value="__('Service Category')" />
                 <x-select-list
                     class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    required id="service_id" name="service_id" wire:model="portfolio.service_id" :options="$this->listsForFields['services']" />
+                    required id="service_id" name="service_id" wire:model.lazy="portfolio.service_id" :options="$this->listsForFields['services']" />
                 </select>
                 <x-input-error for="portfolio.service_id" />
             </div>
 
             <div class="w-1/3 lg:w-1/3 sm:w-full">
                 <x-label for="link" :value="__('Link')" />
-                <input type="text" wire:model="portfolio.link" name="link" placeholder="{{ __('Live Link') }}"
+                <input type="text" wire:model.lazy="portfolio.link" name="link" placeholder="{{ __('Live Link') }}"
                     class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                 <x-input-error for="portfolio.link" />
             </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="w-full flex flex-wrap">
             <div class="w-1/2 lg:w-1/2 sm:w-full">
-                <img class="w-80" src="{{ asset('uploads/portfolios/' . $portfolio->featured_image) }}"
+                <img class="w-52 rounded-full" src="{{ asset('uploads/portfolios/' . $portfolio->featured_image) }}"
                     alt="">
             </div>
             <div class="w-1/2 lg:w-1/2 sm:w-full">
@@ -95,7 +95,7 @@
 
         <div class="w-full">
             <x-label for="meta_keywords" :value="__('Meta Keywords')" />
-            <input type="text" wire:model="portfolio.meta_keywords"
+            <input type="text" wire:model.lazy="portfolio.meta_keywords"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 data-role="tagsinput" name="meta_keywords" placeholder="{{ __('Meta Keywords') }}">
             <x-input-error for="portfolio.meta_keywords" />

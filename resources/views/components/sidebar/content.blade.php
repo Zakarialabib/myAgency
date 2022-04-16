@@ -12,6 +12,12 @@
         </x-slot>
     </x-sidebar.link>
     
+    <x-sidebar.link title="{{ __('Section titles') }}" href="{{ route('admin.sectiontitles.index') }}" :isActive="request()->routeIs('admin.sectiontitles.index')">
+        <x-slot name="icon">
+            <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
+        </x-slot>
+    </x-sidebar.link>
+    
     <x-sidebar.link title="{{ __('Team') }}" href="{{ route('admin.teams.index') }}" :isActive="request()->routeIs('admin.teams.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />

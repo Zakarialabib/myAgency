@@ -25,7 +25,7 @@
     class="fixed top-0 inset-x-0 px-6 pt-28 z-50 sm:px-0 sm:flex sm:items-center sm:justify-center"
     style="display: none;">
     <div class="fixed inset-0 transform" x-on:click="show = false">
-        <div x-show="show" class="absolute inset-0 bg-zinc500 opacity-75"></div>
+        <div x-show="show" class="absolute inset-0 bg-zinc-500 opacity-75"></div>
     </div>
     <div x-show="show" class="bg-white dark:bg-dark-eval-2 bg-white rounded-lg overflow-hidden transform sm:max-w-lg transition-all sm:mx-auto"
         x-transition:enter="ease-out duration-300"

@@ -18,7 +18,7 @@
         </div>
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
-            <input type="text" wire:model="blog.title"
+            <input type="text" wire:model.lazy="blog.title"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">
             <x-input-error for="blog.title" />
@@ -39,14 +39,14 @@
             <x-label for="meta_keywords" :value="__('Meta Keywords')" />
             <input type="text"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                data-role="tagsinput" name="meta_keywords" wire:model="blog.meta_keywords"
+                data-role="tagsinput" name="meta_keywords" wire:model.lazy="blog.meta_keywords"
                 placeholder="{{ __('Meta Keywords') }}" value="{{ old('meta_keywords') }}">
             <x-input-error for="blog.meta_keywords" />
         </div>
         <div class="w-full">
             <x-label for="meta_description" :value="__('Meta Description')" />
             <textarea class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                name="meta_description" wire:model="blog.meta_description" placeholder="{{ __('Meta Description') }}"
+                name="meta_description" wire:model.lazy="blog.meta_description" placeholder="{{ __('Meta Description') }}"
                 rows="4">{{ old('meta_description') }}</textarea>
             <x-input-error for="blog.meta_description" />
         </div>

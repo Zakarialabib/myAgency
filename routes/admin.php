@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Livewire\Admin\Contacts;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BcategoryController;
@@ -10,10 +11,12 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\AboutController;
+use App\Http\Livewire\Admin\About\Index as AboutIndex;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\SectiontitleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +31,12 @@ use App\Http\Controllers\Admin\TeamController;
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:ADMIN']], function () {
 
     Route::get('/', [AdminHomeController::class, 'index'])->name('dashboard');
-    Route::get('/contact', [AdminHomeController::class, 'contacts'])->name('contact');
+    
+    Route::get('/contact', Contacts::class)->name('contact');
+    
+    // About
+    Route::get('/about', AboutIndex::class)->name('about.index');
+    Route::resource('about', AboutController::class, ['except' => ['index']]);
 
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -60,8 +68,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     // Team
     Route::resource('teams', TeamController::class, ['except' => ['store', 'update', 'destroy']]);
     
-    // About
-    Route::resource('about', AboutController::class, ['except' => ['store', 'update', 'destroy']]);
+    // Sectiontitles
+    Route::resource('sectiontitles', SectiontitleController::class, ['except' => ['store', 'update', 'destroy']]);
     
     // Setting
     Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);

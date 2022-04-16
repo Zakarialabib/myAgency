@@ -2,14 +2,14 @@
     <div class="flex flex-wrap justify-center">
         <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap my-md-0 my-2">
             <select wire:model="perPage"
-                class="w-20 block p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-300 mr-3">
+                class="w-20 block p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-300 mr-3">
                 @foreach ($paginationOptions as $value)
                     <option value="
                 {{ $value }}">{{ $value }}</option>
                 @endforeach
             </select>
             <button
-                class="text-blue-500 dark:text-zinc300 bg-transparent dark:bg-dark-eval-2 border border-blue-500 dark:border-zinc300 hover:text-blue-700  active:bg-blue-600 font-bold uppercase text-xs p-3 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
+                class="text-blue-500 dark:text-zinc-300 bg-transparent dark:bg-dark-eval-2 border border-blue-500 dark:border-zinc-300 hover:text-blue-700  active:bg-blue-600 font-bold uppercase text-xs p-3 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                 type="button" wire:click="$toggle('showDeleteModal')" wire:loading.attr="disabled"
                 {{ $this->selectedCount ? '' : 'disabled' }}>
                 <x-heroicon-o-trash class="h-4 w-4" />
@@ -17,7 +17,7 @@
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <input type="text" wire:model.debounce.300ms="search"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc300 rounded border border-zinc300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
                 placeholder="{{ __('Search') }}" />
         </div>
     </div>
@@ -133,12 +133,12 @@
             <x-slot name="title">{{ __('Delete Selected Users') }}</x-slot>
 
             <x-slot name="content">
-                <div class="py-8 text-cool-zinc700">{{ __('Are you sure you? This action is irreversible.') }}</div>
+                <div class="py-8 text-cool-zinc-700">{{ __('Are you sure you? This action is irreversible.') }}</div>
             </x-slot>
 
             <x-slot name="footer">
                 <button type="button"
-                    class="btn border-zinc300 text-zinc700 dark:text-zinc300 active:bg-zinc50 dark:active:text-zinc800 hover:text-zinc500 dark:active:bg-dark-eval-1 active:text-zinc300 dark:hover:text-zinc700"
+                    class="btn border-zinc-300 text-zinc-700 dark:text-zinc-300 active:bg-zinc-50 dark:active:text-zinc-800 hover:text-zinc500 dark:active:bg-dark-eval-1 active:text-zinc-300 dark:hover:text-zinc-700"
                     wire:click="$set('showDeleteModal', false)">{{ __('Go back') }}</button>
 
                 <button class="btn text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 border-indigo-600"

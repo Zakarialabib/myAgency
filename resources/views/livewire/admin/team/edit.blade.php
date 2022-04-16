@@ -19,14 +19,14 @@
         <div class="flex flex-wrap">
             <div class="lg:w-1/2 sm:w-full pr-2">
                 <x-label for="name" :value="__('Name')" />
-                <input type="text" name="name" wire:model="team.name"
+                <input type="text" name="name" wire:model.lazy="team.name"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
                 placeholder="{{ __('Name') }}" value="{{ old('name') }}">
                 <x-input-error for="team.name" />
             </div>
             <div class="lg:w-1/2 sm:w-full pl-2">
                 <x-label for="role" :value="__('Role')" />
-                <input type="text" name="role" wire:model="team.role"
+                <input type="text" name="role" wire:model.lazy="team.role"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
                 placeholder="{{ __('Role') }}" value="{{ old('role') }}">
                 <x-input-error for="team.role" />
@@ -42,7 +42,7 @@
                 @if (empty($team->image))
                             {{ __('No images') }}
                 @else
-                    <img class="w-80" src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
+                    <img class="w-52 rounded-full" src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
                 @endif
             </div>
             <div class="lg:w-3/5 sm:w-full">
@@ -55,7 +55,7 @@
             </div>
             <div class="container">
                 <label class="inline-flex items-center cursor-pointer">
-                    <x-checkbox name="status" id="status" wire:model="team.status"> {{ __('Active') }}</x-checkbox>
+                    <x-checkbox name="status" id="status" wire:model.lazy="team.status"> {{ __('Active') }}</x-checkbox>
                     <x-input-error for="team.status" />
                     <span class="ml-2 text-sm font-semibold text-gray-700">{{ __('Publication Status') }}</span>
                 </label>

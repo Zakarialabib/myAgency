@@ -74,7 +74,7 @@
 
     @include('partials.front.header')
 
-    <main class="font-sans text-zinc900 antialiased">
+    <main class="font-sans text-zinc-900 antialiased">
         {{ $slot }}
     </main>
 

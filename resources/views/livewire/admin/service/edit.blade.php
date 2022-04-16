@@ -18,7 +18,7 @@
         </div>
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
-            <input type="text" name="title" wire:model="service.title"
+            <input type="text" name="title" wire:model.lazy="service.title"
                 class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
                 placeholder="{{ __('Title') }}" value="{{ old('title') }}">
             <x-input-error for="service.title" />
@@ -30,7 +30,7 @@
         </div>
         <div class="flex flex-wrap py-10">
             <div class="w-2/5">
-                <img class="w-80" src="{{ asset('uploads/services/'.$service->image) }}" alt="">
+                <img class="w-52 rounded-full" src="{{ asset('uploads/services/'.$service->image) }}" alt="">
             </div>
             <div class="w-3/5">
                 <x-label for="image" :value="__('Feature Image')" />

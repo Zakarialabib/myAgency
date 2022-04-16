@@ -21,7 +21,7 @@
 
 <body class="font-sans antialiased">
     <div x-data="mainState" :class="{ dark: isDarkMode }" @resize.window="handleWindowResize" x-cloak>
-        <div class="min-h-screen text-zinc500 bg-slate-200 dark:bg-dark-bg dark:text-zinc200">
+        <div class="min-h-screen text-zinc500 bg-slate-200 dark:bg-dark-bg dark:text-zinc-200">
             <!-- Sidebar -->
             <x-sidebar.sidebar />
             <!-- Page Wrapper -->

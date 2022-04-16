@@ -27,27 +27,27 @@
             <x-heroicon-o-sun x-show="isDarkMode" aria-hidden="true" class="w-6 h-6" />
         </x-button>
         <button onClick="window.location.reload();"
-            class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 p-2 bg-white text-zinc500 hover:bg-zinc100 focus:ring-blue-500 dark:text-zinc400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-zinc200 rounded-md md:inline-flex">
+            class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 p-2 bg-white text-zinc500 hover:bg-zinc-100 focus:ring-blue-500 dark:text-zinc-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-zinc-200 rounded-md md:inline-flex">
             <x-heroicon-o-refresh class="flex-shrink-0 w-5 h-5 mr-2" aria-hidden="true" />
         </button>
 
         <ul class="flex-col md:flex-row list-none items-center md:flex">
-            <a class="inline-flex items-center p-2 transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 text-zinc500 hover:bg-zinc100 focus:ring-blue-500 dark:text-zinc400 dark:hover:bg-dark-eval-2 dark:hover:text-zinc200 rounded-md"
+            <a class="inline-flex items-center p-2 transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 text-zinc500 hover:bg-zinc-100 focus:ring-blue-500 dark:text-zinc-400 dark:hover:bg-dark-eval-2 dark:hover:text-zinc-200 rounded-md"
                 onclick="openDropdown(event,'user-dropdown')" aria-haspopup="true"
                 :aria-expanded="open ? 'true' : 'false'">
                 {{ Auth::user()->name }}
                 <x-heroicon-o-chevron-down class="flex-shrink-0 w-4 h-4" aria-hidden="true" />
             </a>
             <div data-popper-placement="bottom-start" id="user-dropdown"
-                class="bg-white text-zinc500 focus:ring focus:ring-offset-2 focus:ring-blue-500 dark:text-zinc400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 transition-colors z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48 hidden"
+                class="bg-white text-zinc500 focus:ring focus:ring-offset-2 focus:ring-blue-500 dark:text-zinc-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 transition-colors z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48 hidden"
                 style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(617px, 58px);">
                 @if (auth()->user()->isAdmin())
                     <a href="{{ url('admin/settings') }}"
-                        class="block py-2 px-4 text-sm dark:hover:bg-zinc600 dark:hover:text-zinc200 w-full whitespace-nowrap">
+                        class="block py-2 px-4 text-sm dark:hover:bg-zinc-600 dark:hover:text-zinc-200 w-full whitespace-nowrap">
                         {{ __('Settings') }}
                     </a>
                 @endif
-                <a class="block py-2 px-4 text-sm dark:hover:bg-zinc600 dark:hover:text-zinc200 w-full whitespace-nowrap"
+                <a class="block py-2 px-4 text-sm dark:hover:bg-zinc-600 dark:hover:text-zinc-200 w-full whitespace-nowrap"
                     href="{{ url('/logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}
