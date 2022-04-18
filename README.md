@@ -25,27 +25,21 @@ Password : password
 
 ## Task : In progress
 
-- Team front : Adjust front blade views  // Team admin (Show - Clone)
+- Language translation (convert controller class to livewire - modal to alpinejs x-modal...)
 
 - About admin : Create and Edit array problem 
 
-- Blog category admin (Show - Clone)
-
-- Blog admin (Show) 
-
-- Services admin (Show)
-
-- Portfolio admin (Show - Clone) 
+- Blog , Blog category, Team, Services, About, Portfolio admin (Show page) 
 
 - Fix Alerts in index pages ( implement delete confirmation with livewire-alert package )
-
-- Language translation 
 
 - Home Animation
 
 - Adjust Settings page : static and dynamic inputs
 
 ## Task : done // CRUD MEANS CREATE READ UPDATE DESTROY
+
+- Team Adjust front blade views 
 
 - Sectiontitles admin (CRUD - Clone - Migration - Model - Views - Routes)
 
@@ -59,7 +53,7 @@ Password : password
 
 - Services admin (CRUD - Clone) 
 
-- Portfolio admin (CRUD - mutliple images array) 
+- Portfolio admin (CRUD - Clone - mutliple images array) 
 
 - Fix Alerts in create and edit pages 
 
@@ -70,6 +64,9 @@ Password : password
 - Home flag and Language menu 
 
 ## Changelog :
+language edit json page
+Language create modal 
+Clone (bcategory, team)
 Sectiontitles Adjust front blade views  
 Sectiontitle admin 
 Team admin

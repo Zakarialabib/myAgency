@@ -138,8 +138,7 @@
                                         <label class="custom-file-label" for="fav_icon">{{ __('Choose New Image') }}</label>
                                         <input type="file" class="custom-file-input up-img" name="fav_icon" id="fav_icon">
                                     </div>
-                                    <p class="help-block text-info">{{ __('Upload 40X40 (Pixel) Size image or Squre size image for best quality. 
-                                        Only jpg, jpeg, png image is allowed.') }}
+                                    <p class="help-block text-info">{{ __('Upload 40X40 (Pixel) Size image or Squre size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                                     </p>
                                     @if ($errors->has('fav_icon'))
                                         <p class="text-danger"> {{ $errors->first('fav_icon') }} </p>
@@ -160,8 +159,7 @@
                                         <label class="custom-file-label" for="header_logo">Choose New Image</label>
                                         <input type="file" class="custom-file-input up-img" name="header_logo" id="header_logo">
                                     </div>
-                                    <p class="help-block text-info">{{ __('Upload 150X40 (Pixel) Size image for best quality.
-                                        Only jpg, jpeg, png image is allowed.') }}
+                                    <p class="help-block text-info">{{ __('Upload 150X40 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                                     </p>
                                     @if ($errors->has('header_logo'))
                                         <p class="text-danger"> {{ $errors->first('header_logo') }} </p>
@@ -183,8 +181,7 @@
                                         <label class="custom-file-label" for="breadcrumb_image">{{ __('Choose New Image') }}</label>
                                         <input type="file" class="custom-file-input up-img" name="breadcrumb_image" id="breadcrumb_image">
                                     </div>
-                                    <p class="help-block text-info">{{ __('Upload 1920X390 (Pixel) Size image for best quality.
-                                        Only jpg, jpeg, png image is allowed.') }}
+                                    <p class="help-block text-info">{{ __('Upload 1920X390 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                                     </p>
                                     @if ($errors->has('breadcrumb_image'))
                                         <p class="text-danger"> {{ $errors->first('breadcrumb_image') }} </p>

@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use App\Enums\Selectedpage;
 
 class Sectiontitle extends Model
 {
     use HasAdvancedFilter;
 
     public $table = 'sectiontitles';
-    
+ 
     const HOME_PAGE    = 1;
     const ABOUT_PAGE    = 2;
     const TEAM_PAGE = 3;
@@ -60,6 +61,15 @@ class Sectiontitle extends Model
         'video',
         'image',
         'status',
+    ];
+
+        /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'page' => Selectedpage::class,
     ];
     
     public function language() {

@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Livewire\WithPagination;
 use App\Http\Livewire\WithConfirmation;
 use App\Http\Livewire\WithSorting;
+use Str;
 
 class Index extends Component
 {
@@ -99,5 +100,17 @@ class Index extends Component
  
          $bcategory->delete();
      }
-     
+     // Blog  Clone
+    public function clone(Bcategory $bcategory)
+    {
+        $bcategory_details = Bcategory::find($bcategory->id);
+        // dd($bcategory_details);
+        Bcategory::create([
+            'language_id' => $bcategory_details->language_id,
+            'name' => $bcategory_details->name,
+            'slug' => Str::slug($bcategory_details->name),
+            'status' => 0
+        ]);
+        // $this->alert('success', __('Bcategory Cloned successfully!') );
+    }
 }

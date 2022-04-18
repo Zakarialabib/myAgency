@@ -123,6 +123,6 @@ class Index extends Component
             'meta_description' => $blog_details->meta_description,
             'image' => $blog_details->image,
         ]);
-        $this->alert('success', __('Blog Cloned successfully!') );
+        // $this->alert('success', __('Blog Cloned successfully!') );
     }
 }

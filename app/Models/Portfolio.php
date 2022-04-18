@@ -13,21 +13,21 @@ class Portfolio extends Model
     public $table = 'portfolios';
     
     public $orderable = [
-        'id','title', 'status' , 'image','slug','client_name',
+        'id','title', 'status' ,'slug','client_name',
         'featured_image' ,'service_id' ,'content' , 'meta_keywords',
         'meta_description','gallery'
     ];
 
     public $filterable = [
-        'id','title', 'status' , 'image','slug','client_name',
+        'id','title', 'status' ,'slug','client_name',
         'featured_image' ,'service_id' ,'content' , 'meta_keywords',
         'meta_description','gallery'
     ];
 
     protected $fillable = [
-        'id','title', 'status' , 'image','slug','client_name',
+        'id','title', 'status' ,'slug','client_name',
         'featured_image' ,'service_id' ,'content' , 'meta_keywords',
-        'meta_description','gallery'
+        'meta_description','gallery','link','language_id'
     ];
 
     public function service() : BelongsTo

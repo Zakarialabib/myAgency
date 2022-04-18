@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Language;
 use DB;
 use File;
 
@@ -50,6 +51,70 @@ class LanguageController extends Controller
      * Remove the specified resource from storage.
      * @return Response
     */
+
+    public function langEdit($id)
+    {
+      $la = Language::find($id);
+      $json = file_get_contents(base_path('lang/') . $la->code . '.json');
+      $list_lang = Language::all();
+  
+  
+      if (empty($json)) {
+        $notify[] = ['error', 'File Not Found.'];
+        return back()->with($notify);
+      }
+      $json = json_decode($json);
+  
+      return view('admin.language.edit_lang', compact( 'json', 'la', 'list_lang'));
+    }
+    public function updateLanguageJson(Request $request, $id)
+    {
+      $this->validate($request, [
+        'key' => 'required',
+        'value' => 'required'
+      ]);
+  
+      $reqkey = trim($request->key);
+      $reqValue = $request->value;
+      $lang = Language::find($id);
+  
+      $data = file_get_contents(resource_path('lang/') . $lang->code . '.json');
+  
+      $json_arr = json_decode($data, true);
+  
+      $json_arr[$reqkey] = $reqValue;
+  
+      file_put_contents(resource_path('lang/') . $lang->code . '.json', json_encode($json_arr));
+  
+      
+      return redirect()->back();
+    }
+    public function storeLanguageJson(Request $request, $id)
+  {
+    $la = Language::find($id);
+    $this->validate($request, [
+      'key' => 'required',
+      'value' => 'required'
+    ]);
+
+    $items = file_get_contents(base_path('lang/') . $la->code . '.json');
+
+    $reqKey = trim($request->key);
+
+    if (array_key_exists($reqKey, json_decode($items, true))) {
+      $notify[] = ['error', "`$reqKey` Already Exist"];
+      return back()->withNotify($notify);
+    } else {
+      $newArr[$reqKey] = trim($request->value);
+      $itemsss = json_decode($items, true);
+      $result = array_merge($itemsss, $newArr);
+      file_put_contents(base_path('lang/') . $la->code . '.json', json_encode($result));
+
+
+      
+      return redirect()->back();
+    }
+  }
 
     public function destroy($key)
     {

@@ -31,6 +31,7 @@ class Bcategory extends Model
        protected $fillable = [
            'name',
            'status',
+           'slug',
            'language_id'
     ];
 

@@ -14,9 +14,12 @@ class Index extends Component
 {
     use WithConfirmation;
 
-    public $languages      = [];
+    public $languages = [];
 
-    protected $listeners = ['sendUpdateLanguageStatus' => 'onUpdateLanguageStatus', 'sync'];
+    protected $listeners = [ 
+    'sendUpdateLanguageStatus' => 'onUpdateLanguageStatus',
+     'sync'
+    ];
 
     public function mount()
     {
@@ -95,4 +98,6 @@ class Index extends Component
 
         $this->reRenderParent();
     }   
+
+
 }

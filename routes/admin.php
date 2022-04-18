@@ -75,6 +75,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);
 
     Route::get('languages', [LanguageController::class, 'index'])->name('language.index');
+    Route::get('language/edit/{id}', [LanguageController::class, 'langEdit'])->name('language-key');
+    Route::post('store-lang-key/{id}',[LanguageController::class, 'storeLanguageJson'])->name('store-lang-key');
+    Route::post('update-lang-key/{id}', [LanguageController::class, 'updateLanguageJson'])->name('update-lang-key');
+    Route::post('delete-lang-key/{id}', [LanguageController::class, 'deleteLanguageJson'])->name('delete-lang-key');
+    Route::post('settings/language/import',[LanguageController::class, 'langImport'])->name('language.import_lang');
     Route::post('translations/update', [LanguageController::class , 'transUpdate'])->name('translation.update.json');
     Route::post('translations/updateKey', [LanguageController::class, 'transUpdateKey'])->name('translation.update.json.key');
     Route::delete('translations/destroy/{key}', [LanguageController::class, 'destroy'])->name('translations.destroy'); 

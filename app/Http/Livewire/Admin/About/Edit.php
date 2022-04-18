@@ -17,8 +17,8 @@ class Edit extends Component
     public About $about;
     
     public $image, $icon,$inputs;
-    public $block_title = [];
-    public $block_content = [];
+    public $block_titles = [];
+    public $block_contents = [];
     
     protected $listeners = [
         'submit',
@@ -42,12 +42,6 @@ class Edit extends Component
                 'max:191'
             ],
             'about.content' => [
-                'required',
-            ],
-            'inputs.0.block_title' => [
-                'required',
-            ],
-            'inputs.0.block_content' => [
                 'required',
             ],
             'inputs.*.block_title' => [
@@ -86,11 +80,14 @@ class Edit extends Component
         }
 
         foreach($this->inputs as $key => $input){
-            // dd($this->about->block_title);
-            $this->about->block_title = $input['block_title'];
-            $this->about->block_content = $input['block_content'];
+                // $this->about->block_title = json_encode($this->block_titles);
+            // $this->about->block_content = json_encode($this->block_contents);
+            $this->inputs['block_title'] = json_encode($this->block_titles);
+            $this->inputs['block_content'] = json_encode($this->block_contents);
         }
+ 
         $this->about->save();   
+        
 
         $this->alert('success', __('About updated successfully!') );
 

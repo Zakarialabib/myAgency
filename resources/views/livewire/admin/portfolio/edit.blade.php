@@ -74,9 +74,8 @@
                 accept="image/jpg,image/jpeg,image/png" />
             <x-input-error for="images" />
             <p class="help-block text-info">
-                {{ __('Upload 710X400 (Pixel) Size image for best quality.                                                                                                                                                                                                           Only jpg, jpeg, png image is allowed.') }}
+                {{ __('Upload 670X418 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
             </p>
-
         </div>
         <div class="w-full flex flex-wrap">
             <div class="w-1/2 lg:w-1/2 sm:w-full">
@@ -88,7 +87,7 @@
                 <x-fileupload wire:model="featured_image" :file="$featured_image" accept="image/jpg,image/jpeg,image/png" />
                 <x-input-error for="featured_image" />
                 <p class="help-block text-info">
-                    {{ __('Upload 710X400 (Pixel) Size image for best quality.                                                                                                                                                                                                  Only jpg, jpeg, png image is allowed.') }}
+                    {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                 </p>
             </div>
         </div>

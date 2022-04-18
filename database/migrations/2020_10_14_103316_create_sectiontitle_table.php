@@ -17,6 +17,7 @@ class CreateSectionTitleTable extends Migration
             $table->bigIncrements('id');
             $table->string('language_id')->nullable();
             $table->string('page')->nullable();
+            $table->enum('page', ['home', 'about','blog','team','service','portfolio']);
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
             $table->text('text')->nullable();

@@ -58,10 +58,12 @@ class Create extends Component
             $this->about->image = $imageName;
         }
         foreach($this->inputs as $key => $input){
-            dd($this->input['block_title']);
-            $this->about->block_title = $input['block_title'] + $input['block_title'][$key];
-            $this->about->block_content = $input['block_content'] + $input['block_content'][$key];
+            dd($input[$key]['block_title']);
+            $input[$key]['block_title'] = $this->about->block_title;
+            $input[$key]['block_content'] = $this->about->block_content;
         }
+        $this->block_title = json_encode($this->block_title);
+        $this->block_content = json_encode($this->block_content);
 
         $this->about->save();
 
