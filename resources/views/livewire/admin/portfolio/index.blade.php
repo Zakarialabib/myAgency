@@ -49,9 +49,23 @@
         </x-slot>
         <x-table.tbody>
             @forelse($portfolios as $portfolio)
-                <x-table.tr>
-                    <x-table.td>
-                        <input type="checkbox" value="{{ $portfolio->id }}" wire:model="selected">
+            <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <x-table.td id="accordion-collapse" data-accordion="collapse">
+                    <div id="accordion-collapse-heading-{{ $portfolio->id }}">
+                        <button type="button"
+                            class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                            data-accordion-target="#accordion-collapse-body-{{ $portfolio->id }}"
+                            aria-expanded="false"
+                            aria-controls="accordion-collapse-body-{{ $portfolio->id }}">
+                            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                        {{-- <input type="checkbox" value="{{ $portfolio->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
                         @if (empty($portfolio->gallery))
@@ -69,17 +83,17 @@
                         {{ $portfolio->title }}
                     </x-table.td>
                     <x-table.td>
+                        @if(empty($portfolio->service_id))
+                        {{__('No relation')}}
+                        @else
                         {{ $portfolio->service->title }}
+                        @endif
                     </x-table.td>
                     <x-table.td>
                         <livewire:toggle-button :model="$portfolio" field="status" key="{{ $portfolio->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
-                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                href="{{ route('admin.portfolios.show', $portfolio) }}">
-                                <x-heroicon-o-eye class="h-4 w-4" />
-                            </a>
                             <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
                                 href="{{ route('admin.portfolios.edit', $portfolio) }}">
                                 <x-heroicon-o-pencil-alt class="h-4 w-4" />
@@ -91,7 +105,7 @@
                                 <x-heroicon-o-trash class="h-4 w-4" />
                             </button>
                             <button
-                            class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300"
+                            class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
                             type="button" wire:click='clone({{ $portfolio->id }})'
                             wire:loading.attr="disabled">
                             <x-heroicon-o-duplicate class="h-4 w-4" />
@@ -99,6 +113,18 @@
                         </div>
                     </x-table.td>
                 </x-table.tr>
+                <tr id="accordion-collapse-body-{{ $portfolio->id }}" class="hidden"
+                    aria-labelledby="accordion-collapse-heading-{{ $portfolio->id }}">
+                    <td colspan="12">
+                        <div class="panel-body text-center p-5">
+                            <h1>{{ $portfolio->title }}</h1>
+                            <p>{!! $portfolio->content !!}</p>
+                            <p>{{ $portfolio->link }}</p>
+                            <p>{{ $portfolio->meta_keywords }}</p>
+                            <p>{{ $portfolio->meta_description }}</p>
+                        </div>
+                    </td>
+                </tr>
             @empty
                 <x-table.tr>
                     <x-table.td colspan="10" class="text-center">

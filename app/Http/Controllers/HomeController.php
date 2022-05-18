@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Models\Contact; 
@@ -14,7 +15,7 @@ use App\Models\Blog;
 use App\Models\Bcategory; 
 use App\Models\About; 
 use App\Models\Sectiontitle; 
-use Illuminate\Support\Facades\Http;
+use Artisan;
 
 class HomeController extends Controller
 {
@@ -43,6 +44,16 @@ class HomeController extends Controller
     public function terms()
     {
         return view('auth.terms');
+    }
+
+    //Optimization page
+    public function optimize()
+    {
+        Artisan::call('cache:clear');
+        Artisan::call('config:clear');
+        Artisan::call('route:clear');
+        Artisan::call('view:clear');
+        return back();
     }
     
     //Approval page
@@ -184,7 +195,9 @@ class HomeController extends Controller
     {
         session()->put('lang', $lang);
         app()->setLocale($lang);
-
+        // Session::put('language_code', $lang);
+        // $lang = Session::get('language_code');
+        
         return redirect()->route('front.home');
     }
 

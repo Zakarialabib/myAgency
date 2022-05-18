@@ -6,6 +6,11 @@
     }">
 
     <div class="flex items-center gap-3">
+        <x-button type="button" iconOnly variant="secondary" srText="Open main menu"
+            @click="isSidebarOpen = !isSidebarOpen">
+            <x-heroicon-o-menu x-show="!isSidebarOpen" aria-hidden="true" class="w-6 h-6" />
+            <x-heroicon-o-x x-show="isSidebarOpen" aria-hidden="true" class="w-6 h-6" />
+        </x-button>
         <x-button type="button" class="md:hidden" iconOnly variant="secondary" srText="Toggle dark mode"
             @click="toggleTheme">
             <x-heroicon-o-moon x-show="!isDarkMode" aria-hidden="true" class="w-6 h-6" />
@@ -26,10 +31,9 @@
             <x-heroicon-o-moon x-show="!isDarkMode" aria-hidden="true" class="w-6 h-6" />
             <x-heroicon-o-sun x-show="isDarkMode" aria-hidden="true" class="w-6 h-6" />
         </x-button>
-        <button onClick="window.location.reload();"
-            class="inline-flex items-center transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 p-2 bg-white text-zinc500 hover:bg-zinc-100 focus:ring-blue-500 dark:text-zinc-400 dark:bg-dark-eval-1 dark:hover:bg-dark-eval-2 dark:hover:text-zinc-200 rounded-md md:inline-flex">
+        <x-button class="hidden md:inline-flex" onClick="window.location.reload();">
             <x-heroicon-o-refresh class="flex-shrink-0 w-5 h-5 mr-2" aria-hidden="true" />
-        </button>
+        </x-button>
 
         <ul class="flex-col md:flex-row list-none items-center md:flex">
             <a class="inline-flex items-center p-2 transition-colors font-medium select-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2 text-zinc500 hover:bg-zinc-100 focus:ring-blue-500 dark:text-zinc-400 dark:hover:bg-dark-eval-2 dark:hover:text-zinc-200 rounded-md"
@@ -60,7 +64,7 @@
     </div>
 </nav>
 
-<!-- Mobile bottom bar -->
+{{-- <!-- Mobile bottom bar -->
 <div class="fixed inset-x-0 bottom-0 z-10 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white lg:hidden dark:bg-dark-eval-1"
     :class="{
         'translate-y-full': scrollingDown,
@@ -71,10 +75,4 @@
         <x-application-logo aria-hidden="true" class="w-10 h-10" />
         <span class="sr-only">{{ config('settings.site_title') }}</span>
     </a>
-
-    <x-button type="button" iconOnly variant="secondary" srText="Open main menu"
-        @click="isSidebarOpen = !isSidebarOpen">
-        <x-heroicon-o-menu x-show="!isSidebarOpen" aria-hidden="true" class="w-6 h-6" />
-        <x-heroicon-o-x x-show="isSidebarOpen" aria-hidden="true" class="w-6 h-6" />
-    </x-button>
-</div>
+</div> --}}

@@ -5,6 +5,8 @@ namespace App\Helpers;
 use App\Models\Language;
 use App\Models\Daynamicpage;
 use Illuminate\Support\Facades\Session;
+use Storage;
+use Carbon;
 
 class Helper
 {
@@ -99,4 +101,33 @@ class Helper
         echo '</ul>';
     }
 
+
+  
+
+    public static function upload(string $dir, string $format, $image = null)
+    {
+        if ($image != null) {
+            $imageName = \Carbon\Carbon::now()->toDateString() . "-" . uniqid() . "." . $format;
+            if (!Storage::disk('local')->exists($dir)) {
+                Storage::disk('local')->makeDirectory($dir);
+            }
+            Storage::disk('local')->put($dir . $imageName, file_get_contents($image));
+        } else {
+            $imageName = 'def.png';
+        }
+
+        return $imageName;
+    }
+    public static function update(string $dir, $old_image, string $format, $image = null)
+    {
+        if($image == null)
+        {
+            return $old_image;
+        }
+        if (Storage::disk('local')->exists($dir . $old_image)) {
+            Storage::disk('local')->delete($dir . $old_image);
+        }
+        $imageName = Helper::upload($dir, $format, $image);
+        return $imageName;
+    }
 }

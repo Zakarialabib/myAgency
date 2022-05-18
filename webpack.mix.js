@@ -11,8 +11,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
+    mix.js('resources/js/app.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
-]);
+    ]);
+
+    mix.styles([  
+        'public/css/style.css', 
+        'public/css/animate.min.css',
+    ], 'public/assets/css/vendors.css');    
+
+    mix.scripts([  
+    'public/js/main.js',
+    'public/assets/js/popper.min.js', 
+    'public/js/anime.min.js',
+    'public/js/scrollreveal.min.js', 
+    ], 'public/assets/js/vendors.js');    

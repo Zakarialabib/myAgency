@@ -14,6 +14,13 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+Route::get('/clear', function () {
+    exec('composer dump-autoload');
+    echo 'composer dump-autoload complete';
+});
+
+Route::get('/optimize', [HomeController::class, 'optimize']);
+
 Route::get('/', [HomeController::class, 'index'])->name('front.home');
 
 Route::get('/about', [HomeController::class, 'about'])->name('front.about');

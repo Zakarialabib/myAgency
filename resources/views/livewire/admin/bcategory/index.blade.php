@@ -46,9 +46,22 @@
         </x-slot>
         <x-table.tbody>
             @forelse($bcategories as $bcategory)
-                <x-table.tr>
-                    <x-table.td>
-                        <input type="checkbox" value="{{ $bcategory->id }}" wire:model="selected">
+                <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <x-table.td id="accordion-collapse" data-accordion="collapse">
+                        <div id="accordion-collapse-heading-{{ $bcategory->id }}">
+                            <button type="button"
+                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                                data-accordion-target="#accordion-collapse-body-{{ $bcategory->id }}"
+                                aria-expanded="false" aria-controls="accordion-collapse-body-{{ $bcategory->id }}">
+                                <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        {{-- <input type="checkbox" value="{{ $bcategory->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
                         {{ $bcategory->name }}
@@ -61,10 +74,6 @@
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
-                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                href="{{ route('admin.bcategories.show', $bcategory) }}">
-                                <x-heroicon-o-eye class="h-4 w-4" />
-                            </a>
                             <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
                                 href="{{ route('admin.bcategories.edit', $bcategory) }}">
                                 <x-heroicon-o-pencil-alt class="h-4 w-4" />
@@ -76,14 +85,22 @@
                                 <x-heroicon-o-trash class="h-4 w-4" />
                             </button>
                             <button
-                            class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300"
-                            type="button" wire:click='clone({{ $bcategory->id }})'
-                            wire:loading.attr="disabled">
-                            <x-heroicon-o-duplicate class="h-4 w-4" />
-                        </button>
+                                class="font-bold  bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300 uppercase justify-center text-xs py-2 px-3 rounded bg-orange-500 border-orange-800 focus:ring-orange-300 shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
+                                type="button" wire:click='clone({{ $bcategory->id }})' wire:loading.attr="disabled">
+                                <x-heroicon-o-duplicate class="h-4 w-4" />
+                            </button>
                         </div>
                     </x-table.td>
                 </x-table.tr>
+                <tr id="accordion-collapse-body-{{ $bcategory->id }}" class="hidden"
+                    aria-labelledby="accordion-collapse-heading-{{ $bcategory->id }}">
+                    <td colspan="12">
+                        <div class="panel-body">
+                            <h1>{{ $bcategory->name }}</h1>
+                            <p>{!! $bcategory->content !!}</p>
+                        </div>
+                    </td>
+                </tr>
             @empty
                 <x-table.tr>
                     <x-table.td colspan="10" class="text-center">

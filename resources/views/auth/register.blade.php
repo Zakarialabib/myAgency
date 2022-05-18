@@ -1,4 +1,5 @@
-<x-guest-layout>
+<x-app-layout>
+    @section('title', __('Registration'))
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">

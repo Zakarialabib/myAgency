@@ -8,9 +8,8 @@
                 @endforeach
             </select>
             <x-select-list
-            class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-            required id="language_id" name="language_id" wire:model="language_id"
-            :options="$this->listsForFields['languages']" />
+                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                required id="language_id" name="language_id" wire:model="language_id" :options="$this->listsForFields['languages']" />
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
@@ -46,19 +45,32 @@
             <x-table.th>
                 {{ __('Actions') }}
             </x-table.th>
-            
+
         </x-slot>
         <x-table.tbody>
             @forelse($blogs as $blog)
-                <x-table.tr>
-                    <x-table.td>
-                        <input type="checkbox" value="{{ $blog->id }}" wire:model="selected">
+                <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <x-table.td id="accordion-collapse" data-accordion="collapse">
+                        <div id="accordion-collapse-heading-{{ $blog->id }}">
+                            <button type="button"
+                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                                data-accordion-target="#accordion-collapse-body-{{ $blog->id }}"
+                                aria-expanded="false" aria-controls="accordion-collapse-body-{{ $blog->id }}">
+                                <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        {{-- <input type="checkbox" value="{{ $blog->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
                         @if (empty($blog->image))
-                            {{__('No images')}}
+                            {{ __('No images') }}
                         @else
-                        <img class="w-52 rounded-full" src="{{ asset('uploads/blogs/'.$blog->image) }}" alt="">
+                            <img class="w-52 rounded-full" src="{{ asset('uploads/blogs/' . $blog->image) }}" alt="">
                         @endif
                     </x-table.td>
                     <x-table.td>
@@ -72,30 +84,35 @@
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
-                            
-                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                    href="{{ route('admin.blogs.show', $blog) }}">
-                                    <x-heroicon-o-eye class="h-4 w-4" />
-                                </a>
-                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
-                                    href="{{ route('admin.blogs.edit', $blog) }}">
-                                    <x-heroicon-o-pencil-alt class="h-4 w-4" />
-                                </a>
-                                <button
-                                    class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
-                                    type="button" wire:click="confirm('delete', {{ $blog->id }})"
-                                    wire:loading.attr="disabled">
-                                    <x-heroicon-o-trash class="h-4 w-4" />
-                                </button>
-                                <button
-                                    class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300"
-                                    type="button" wire:click='clone({{ $blog->id }})'
-                                    wire:loading.attr="disabled">
-                                    <x-heroicon-o-duplicate class="h-4 w-4" />
-                                </button>
+                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
+                                href="{{ route('admin.blogs.edit', $blog) }}">
+                                <x-heroicon-o-pencil-alt class="h-4 w-4" />
+                            </a>
+                            <button
+                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
+                                type="button" wire:click="confirm('delete', {{ $blog->id }})"
+                                wire:loading.attr="disabled">
+                                <x-heroicon-o-trash class="h-4 w-4" />
+                            </button>
+                            <button
+                                class="font-bold  bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300 uppercase justify-center text-xs py-2 px-3 rounded bg-orange-500 border-orange-800 focus:ring-orange-300 shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
+                                type="button" wire:click='clone({{ $blog->id }})' wire:loading.attr="disabled">
+                                <x-heroicon-o-duplicate class="h-4 w-4" />
+                            </button>
                         </div>
                     </x-table.td>
                 </x-table.tr>
+                <tr id="accordion-collapse-body-{{ $blog->id }}" class="hidden"
+                    aria-labelledby="accordion-collapse-heading-{{ $blog->id }}">
+                    <td colspan="12">
+                        <div class="panel-body text-center p-5">
+                            <h1>{{ $blog->title }}</h1>
+                            <p>{!! $blog->content !!}</p>
+                            <p>{{ $blog->meta_keywords }}</p>
+                            <p>{{ $blog->meta_description }}</p>
+                        </div>
+                    </td>
+                </tr>
             @empty
                 <x-table.tr>
                     <x-table.td colspan="10" class="text-center">

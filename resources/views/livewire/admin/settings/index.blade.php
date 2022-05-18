@@ -10,10 +10,11 @@
 
         <div class="w-full flex flex-wrap">
             <div class="lg:w-1/2 sm:w-full px-2 @error('website_title') has-error @enderror">
+                @php($admin_commission=\App\Models\BusinessSetting::where('key','website_title')->first())
                 <x-label for="website_title" :value="__('Website title')" />
                 <input type="text" wire:model="website_title" id="website_title"
                     class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-gray-700 dark:text-gray-300 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    value="{{ $setting->website_title }}" placeholder="{{ __('Enter website title') }}">
+                    value="{{$website_title?$website_title->value:0}}" placeholder="{{ __('Enter website title') }}">
                 <x-input-error for="website_title" />
             </div>
             <div class="lg:w-1/2 sm:w-full px-2">

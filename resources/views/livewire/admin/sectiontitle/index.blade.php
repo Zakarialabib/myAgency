@@ -49,9 +49,23 @@
         </x-slot>
         <x-table.tbody>
             @forelse($sectiontitles as $sectiontitle)
-                <x-table.tr>
-                    <x-table.td>
-                        <input type="checkbox" value="{{ $sectiontitle->id }}" wire:model="selected">
+                <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <x-table.td id="accordion-collapse" data-accordion="collapse">
+                        <div id="accordion-collapse-heading-{{ $sectiontitle->id }}">
+                            <button type="button"
+                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                                data-accordion-target="#accordion-collapse-body-{{ $sectiontitle->id }}"
+                                aria-expanded="false"
+                                aria-controls="accordion-collapse-body-{{ $sectiontitle->id }}">
+                                <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        {{-- <input type="checkbox" value="{{ $sectiontitle->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
                         {{ $sectiontitle->title }}
@@ -61,15 +75,23 @@
                     </x-table.td>
                     <x-table.td>
                         @if ($sectiontitle->page == \App\Models\Sectiontitle::ABOUT_PAGE)
-                            <span class="text-green-500">{{ __('About') }}</span>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('About') }}</span>
+                        @elseif($sectiontitle->page == \App\Models\Sectiontitle::HOME_PAGE)
+                        <span
+                            class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Home') }}</span>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::TEAM_PAGE)
-                            <span class="text-green-500">{{ __('Team') }}</span>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Team') }}</span>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::BLOG_PAGE)
-                            <span class="text-green-500">{{ __('Blog') }}</span>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Blog') }}</span>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::SERVICE_PAGE)
-                            <span class="text-green-500">{{ __('Service') }}</span>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Service') }}</span>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::PORTFOLIO_PAGE)
-                            <span class="text-green-500">{{ __('Portfolio') }}</span>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Portfolio') }}</span>
                         @endif
                     </x-table.td>
                     <x-table.td>
@@ -77,23 +99,18 @@
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
-
-                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                href="{{ route('admin.sectiontitles.show', $sectiontitle) }}">
-                                <x-heroicon-o-eye class="h-4 w-4" />
-                            </a>
-                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
+                            <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
                                 href="{{ route('admin.sectiontitles.edit', $sectiontitle) }}">
                                 <x-heroicon-o-pencil-alt class="h-4 w-4" />
                             </a>
                             <button
-                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
+                                class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
                                 type="button" wire:click="confirm('delete', {{ $sectiontitle->id }})"
                                 wire:loading.attr="disabled">
                                 <x-heroicon-o-trash class="h-4 w-4" />
                             </button>
                             <button
-                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300"
+                                class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
                                 type="button" wire:click="confirm('clone', {{ $sectiontitle->id }})"
                                 wire:loading.attr="disabled">
                                 <x-heroicon-o-duplicate class="h-4 w-4" />
@@ -102,6 +119,28 @@
                         </div>
                     </x-table.td>
                 </x-table.tr>
+                <tr id="accordion-collapse-body-{{ $sectiontitle->id }}" class="hidden"
+                    aria-labelledby="accordion-collapse-heading-{{ $sectiontitle->id }}">
+                    <td colspan="12">
+                        <div class="panel-body text-center p-5 flex flex-wrap">
+                            <div class="w-1/2">
+
+                                <h1>{{ __('Title') }} : {{ $sectiontitle->title }}</h1>
+                                <p>{{ __('Subtitle') }} : {{ $sectiontitle->subtitle }}</p>
+                                <p>{{ __('Content') }} : {!! $sectiontitle->content !!}</p>
+                                <p>{{ __('Text') }} : {{ $sectiontitle->text }}</p>
+                            </div>
+                                <div class="w-1/2">
+                                <p class="py-4">{{ __('Custom button') }} : </p>
+                                    <a class="bg-green-500 py-4 my-4 px-6" href="{{ $sectiontitle->link }}">
+                                        {{ $sectiontitle->button }}
+                                    </a>
+                                
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
             @empty
                 <x-table.tr>
                     <x-table.td colspan="10" class="text-center">
