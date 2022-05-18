@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between flex-shrink-0 px-3">
+<div class="flex items-center justify-between flex-shrink-0 px-3 -m-2">
     <!-- Logo -->
     <a href="{{ route('admin.dashboard') }}" class="inline-flex items-center gap-2">
         <x-application-logo aria-hidden="true" class="w-12 h-auto" />

@@ -6,7 +6,7 @@
                 <span>let’s create</span>
             </div>
             <div class="normal-text">
-                <p>{{ $setting->footer_text }}</p>
+                <p>{{ $footer_text }}</p>
             </div>
         </div>
     </div>
@@ -14,13 +14,13 @@
         <div class="col">
             <div class="contact-info-holder">
                 <div class="title">Call us</div>
-                <div class="contact-info">{{ $setting->phone_number }}</div>
+                <div class="contact-info">{{ $phone_number }}</div>
             </div>
         </div>
         <div class="col">
             <div class="contact-info-holder">
                 <div class="title">E-mail</div>
-                <div class="contact-info"><a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a></div>
+                <div class="contact-info"><a href="mailto:{{ $email }}">{{ $email }}</a></div>
                 {{-- <div class="social-media">
                     <div class="social-link-holder"><a href="#">Dribbble</a></div>
                     <div class="social-link-holder"><a href="#">Instagram</a></div>
@@ -33,29 +33,36 @@
     </div>
 </footer>
 
-<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer></script>
-<script type="text/javascript" src="{{ asset('/js/anime.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/js/scrollreveal.min.js') }}"></script>
+<!-- Scripts -->
+<script type="text/javascript" src="{{ asset('/js/app.js') }}" defer></script>
+<!-- Jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ asset('assets/js/vendors.js') }}"></script>
 
-@livewireScripts
+<!-- Toastr -->
+{{-- <script type="text/javascript" src="{{ asset('assets/js/toastr.min.js') }}"></script> --}}
+<!-- Custom JS -->
+{{-- <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>--}}
+{{-- <script src="{{ asset('assets/js/popper.min.js') }}"></script> --}}
+{{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer></script> --}}
+{{-- <script type="text/javascript" src="{{ asset('/js/anime.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/scrollreveal.min.js') }}"></script> --}}
 
-<!-- Cursor -->
-<div class="cursor1" id="cursor1"></div>
-<div class="cursor" id="cursor"></div>
+
 <input type="hidden" id="main_url" value="{{ route('front.home') }}">
 
 @php
 $mainbs = [];
-$mainbs['is_announcement'] = $setting->is_announcement;
-$mainbs['announcement_delay'] = $setting->announcement_delay;
+$mainbs['is_announcement'] = $is_announcement;
+$mainbs['announcement_delay'] = $announcement_delay;
 $mainbs = json_encode($mainbs);
 @endphp
 
 <script>
     var mainbs = {!! $mainbs !!};
-</script>
-<script>
+
     $(document).ready(function() {
         // Add smooth scrolling to all links
         $("a").on('click', function(event) {
@@ -118,7 +125,7 @@ $mainbs = json_encode($mainbs);
 </script>
 
 {{-- Cookie alert dialog start --}}
-{{-- @if ($setting->is_cooki_alert == 1)
+{{-- @if ($is_cooki_alert == 1)
 		@include('cookieConsent::index')
 	@endif --}}
 {{-- Cookie alert dialog end --}}

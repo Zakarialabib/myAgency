@@ -28,8 +28,6 @@ class Create extends Component
         'about.image' => 'nullable',
         'about.title' => 'required|unique:abouts,title|max:191',
         'about.content' => 'required',
-        'inputs.*.block_title' => 'required',
-        'inputs.*.block_content' => 'required',
     ]; 
 
     public function mount(About $about)
@@ -58,12 +56,11 @@ class Create extends Component
             $this->about->image = $imageName;
         }
         foreach($this->inputs as $key => $input){
-            dd($input[$key]['block_title']);
-            $input[$key]['block_title'] = $this->about->block_title;
-            $input[$key]['block_content'] = $this->about->block_content;
+            $this->block_title =  $input['block_title'];
+            $this->block_content = $input['block_content']; 
         }
-        $this->block_title = json_encode($this->block_title);
-        $this->block_content = json_encode($this->block_content);
+        $this->about->block_title = json_encode($this->block_title);
+        $this->about->block_content = json_encode($this->block_content);
 
         $this->about->save();
 

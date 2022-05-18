@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
 @section('title', __('Approval'))
 
     <div class="bg-indigo-400 h-screen">

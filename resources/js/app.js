@@ -1,13 +1,8 @@
 require('./bootstrap');
 
 import swal from 'sweetalert2';
-window.Swal = swal;
-
 import Alpine from 'alpinejs'
-
-
 import collapse from "@alpinejs/collapse";
-
 import PerfectScrollbar from "perfect-scrollbar";
 
 window.PerfectScrollbar = PerfectScrollbar;
@@ -78,7 +73,11 @@ document.addEventListener("alpine:init", () => {
 });
 
 Alpine.plugin(collapse);
+
+window.Swal = swal;
+
 window.Alpine = Alpine;
+
 Alpine.start();
 
 /* Function for dropdowns */

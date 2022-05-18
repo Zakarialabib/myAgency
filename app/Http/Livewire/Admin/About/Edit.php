@@ -17,8 +17,8 @@ class Edit extends Component
     public About $about;
     
     public $image, $icon,$inputs;
-    public $block_titles = [];
-    public $block_contents = [];
+    public $block_title  = [];
+    public $block_content = [] ;
     
     protected $listeners = [
         'submit',
@@ -45,10 +45,10 @@ class Edit extends Component
                 'required',
             ],
             'inputs.*.block_title' => [
-                'required',
+                'max:191',
             ],
-            'inputs.*.block_content' => [
-                'required',
+            'inputs.*.block_title' => [
+                'max:255',
             ],
         ];
     }
@@ -56,6 +56,8 @@ class Edit extends Component
     public function mount(About $about)
     {
         $this->about = $about;
+        $this->block_title = $about->block_title;
+        $this->block_content = $about->block_content;
         
         $this->fill([
             'inputs' => collect([['block_title' => '','block_content' => '']]),
@@ -80,15 +82,16 @@ class Edit extends Component
         }
 
         foreach($this->inputs as $key => $input){
-                // $this->about->block_title = json_encode($this->block_titles);
-            // $this->about->block_content = json_encode($this->block_contents);
-            $this->inputs['block_title'] = json_encode($this->block_titles);
-            $this->inputs['block_content'] = json_encode($this->block_contents);
+            $this->block_title =  $input['block_title'];
+            $this->block_content = $input['block_content']; 
         }
- 
+        
+        $this->about->block_title = json_encode($this->block_title);
+        $this->about->block_content = json_encode($this->block_content);
+        dd($this->about);
+        
         $this->about->save();   
         
-
         $this->alert('success', __('About updated successfully!') );
 
         return redirect()->route('admin.about.index');

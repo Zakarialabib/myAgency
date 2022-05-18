@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Request;
 use Carbon\Carbon;
 
+
 function flagImageUrl($language_code)
 {
     return asset("images/flags/{$language_code}.png");
@@ -19,3 +20,5 @@ function getSlug($request, $key)
     $slug = \Illuminate\Support\Str::slug($value);
     return $slug;
 }
+
+

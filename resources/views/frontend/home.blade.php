@@ -4,7 +4,7 @@
 
     <div>
         <header class="container-fluid header"
-            style="background-image: url({{ asset('images/home.jpeg') }});background-size: cover;">
+        style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
             <div class="mouse-scroll"></div>
             @if (empty($sectiontitle))
                 <div class="row">
@@ -76,7 +76,7 @@
                             <h5>{{ $portfolio->client_name }}</h5>
                             <div class="link">
                                 <a href="{{ route('front.portfolioDetails', $portfolio->slug) }}">
-                                    VIEW THIS PROJECT
+                                    {{__('VIEW THIS PROJECT')}}
                                 </a>
                             </div>
                         </div>
@@ -128,41 +128,5 @@
 
 
     {{-- <livewire:front.contact-form /> --}}
-
-    <script>
-        var random, Y, X, Z, RY, RX, RZ, S, pos;
-        var concentration = 2000;
-
-        function newX() {
-            return Math.floor((Math.random() * concentration) + 1);
-        }
-
-        function newY() {
-            return Math.floor((Math.random() * concentration) + 1);
-        }
-
-        function newZ() {
-            return Math.floor((Math.random() * concentration) + 1);
-        }
-
-        function newAngle() {
-            return Math.floor((Math.random() * 360) + 1);
-        }
-
-        $(".light").each(function() {
-            Y = 'translateY(' + newY() + 'px) ';
-            X = 'translateX(' + newX() + 'px) ';
-            Z = 'translateZ(' + newZ() + 'px) ';
-            RY = 'rotateY(' + newAngle() + 'deg)';
-            RX = 'rotateX(' + newAngle() + 'deg)';
-            RZ = 'rotateZ(' + newAngle() + 'deg)';
-            S = 'scale(' + Math.floor((Math.random() * 20) + 1) + ')';
-            $(this).css('transform', Y + X + Z + RY + RX + RZ);
-        });
-
-        $('#scale').click(function(event) {
-            $('#space').css('transfom', 'scale(5)');
-        });
-    </script>
 
 </x-guest-layout>

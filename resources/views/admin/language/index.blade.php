@@ -9,7 +9,7 @@
                         <div class="card-header">
                             <h3 class="card-title mt-1">{{ __('Languages List') }}</h3>
                             <div class="card-tools">
-                                <a class="btn bg-pink-500 text-white active:bg-pink-600 focus:ring-pink-500 btn-sm box--shadow1 text-white text--small" data-toggle="modal"
+                                <a class="btn bg-pink-500 active:bg-pink-600 focus:ring-pink-500 btn-sm box--shadow1 text-white text--small" data-toggle="modal"
                                     data-target="#myModal"><i class="la la-plus"></i>@lang('Add New
                                     Language')</a>
 
@@ -40,9 +40,9 @@
                                             <td><strong class="text-uppercase">{{ __($item->direction) }}</strong></td>
                                             <td data-label="@lang('Status')">
                                                 @if ($item->is_default == 1)
-                                                    <span class=" badge  badge-success">@lang('Default')</span>
+                                                    <span class=" bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-red-900">@lang('Default')</span>
                                                 @else
-                                                    <span class="badge  badge-warning">@lang('Selectable')</span>
+                                                    <span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">@lang('Selectable')</span>
                                                 @endif
                                             </td>
                                             <td data-label="@lang('Action')">

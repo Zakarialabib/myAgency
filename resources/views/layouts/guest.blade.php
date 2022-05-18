@@ -9,31 +9,40 @@
     {{-- <meta name="title" content="{{ config('settings.seo_meta_title') }}">
     <meta name="description" content="{{ config('settings.seo_meta_description') }}">
     <meta property="og:description" content="{{ config('settings.seo_meta_description') }}"> --}}
+    @php($website_title = \App\Models\Setting::where(['key' => 'website_title'])->first()->value ?? '')
+    @php($fav_icon = \App\Models\Setting::where(['key' => 'fav_icon'])->first()->value ?? '')
+    @php($announcement = \App\Models\Setting::where(['key' => 'announcement'])->first()->value ?? '')
+    @php($email = \App\Models\Setting::where(['key' => 'email'])->first()->value ?? '')
+    @php($phone_number = \App\Models\Setting::where(['key' => 'phone_number'])->first()->value ?? '')
+    @php($footer_text = \App\Models\Setting::where(['key' => 'footer_text'])->first()->value ?? '')
+    @php($is_announcement = \App\Models\Setting::where(['key' => 'is_announcement'])->first()->value ?? '')
+    @php($announcement_delay = \App\Models\Setting::where(['key' => 'announcement_delay'])->first()->value ?? '')
+
 
     <!--====== Title ======-->
-    <title>{{ $setting->website_title }}</title>
+    <title>{{ $website_title }}</title>
 
     <!--====== Meta ======-->
     <meta property="og:locale" content="{{ app()->getLocale() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ route('front.home') }}" />
-    <meta property="og:site_name" content="{{ $setting->website_title }}" />
-    <meta name="author" content="{{ $setting->website_title }}">
+    <meta property="og:site_name" content="{{ $website_title }}" />
+    <meta name="author" content="{{ $website_title }}">
     <meta name="robots" content="all,follow">
 
     <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="{{ asset('assets/front/img/' . $setting->fav_icon) }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('assets/front/img/' . $fav_icon) }}" type="image/png">
 
     <!-- Fonts -->
 
     <!-- Styles -->
     <link type="text/css" rel="stylesheet" href="{{ asset('/css/app.css') }}" media="all">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/style.css') }}" media="all">
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/animate.min.css') }}" media="all">
-    <!-- Toastr -->
-    <link type="text/css" href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet" media="all">
+    <link type="text/css" rel="stylesheet" href="{{ asset('/assets/css/vendors.css') }}" media="all">
+    {{-- <link type="text/css" rel="stylesheet" href="{{ asset('/css/animate.min.css') }}" media="all"> --}}
 
-    @livewireStyles
+    <!-- Toastr -->
+    {{-- <link type="text/css" href="{{ asset('assets/css/toastr.min.css') }}" rel="stylesheet" media="all"> --}}
+
     <style>
         html {
             scroll-behavior: smooth;
@@ -41,36 +50,9 @@
 
     </style>
 
-    <!-- Scripts -->
-    <script type="text/javascript" src="{{ asset('/js/app.js') }}" async></script>
-    <!-- Jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous"></script>
-    <!-- Toastr -->
-    <script type="text/javascript" src="{{ asset('assets/js/toastr.min.js') }}"></script>
-    <!-- Custom JS -->
-    <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
-
 </head>
 
 <body class="font-sans antialiased">
-
-    <div class="social-media" style="transition-delay: 0.5s;">
-        <div class="layer" style="transition-delay: 0.3s;"> </div>
-        <!-- end layer -->
-        <div class="inner" style="transition-delay: 0s;">
-            <h5>Social Share </h5>
-            <ul>
-                <li><a href="#">Facebook</i></a></li>
-                <li><a href="#">Twitter</i></a></li>
-                <li><a href="#">Linkedin</i></a></li>
-                <li><a href="#">Dribble</i></a></li>
-                <li><a href="#">Youtube</i></a></li>
-            </ul>
-        </div>
-    </div>
 
     @include('partials.front.header')
 
@@ -79,11 +61,11 @@
     </main>
 
     <!--    announcement banner section start   -->
-    <a class="announcement-banner absulute" href="{{ asset('assets/front/img/' . $setting->announcement) }}"></a>
+    <a class="announcement-banner absulute" href="{{ asset('assets/front/img/' . $announcement) }}"></a>
     <!--    announcement banner section end   -->
 
     @include('partials.front.footer')
-    
+
 </body>
 
 </html>

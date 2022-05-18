@@ -31,7 +31,7 @@
                         </x-table.td>
                         <x-table.td>
                             <a href="{{ route('admin.language-key', $language['id']) }}"
-                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300">
+                                class="font-bold  bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300 uppercase justify-center text-xs py-2 px-3 rounded bg-orange-500 border-orange-800 focus:ring-orange-300 shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white">
                                 {{__('Translate')}}
                             </a>
                             @if ($language['is_default'] == false)

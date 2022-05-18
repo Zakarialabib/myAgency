@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
-use App\Enums\Selectedpage;
 
 class Sectiontitle extends Model
 {
@@ -63,14 +62,6 @@ class Sectiontitle extends Model
         'status',
     ];
 
-        /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'page' => Selectedpage::class,
-    ];
     
     public function language() {
         return $this->belongsTo('App\Models\Language');
