@@ -41,7 +41,7 @@
                 Loading...
             </div>
 
-            <x-table >
+            <x-table>
                 <x-slot name="thead">
                     <x-table.th>#</x-table.th>
                     {{-- <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
@@ -49,13 +49,13 @@
                 @include('components.table.sort', ['field' => 'title'])
             </x-table.th> --}}
                     <x-table.th>
+                        {{ __('Language') }}
+                    </x-table.th>
+                    <x-table.th>
                         {{ __('Title') }}
                     </x-table.th>
                     <x-table.th>
                         {{ __('Image') }}
-                    </x-table.th>
-                    <x-table.th>
-                        {{ __('Language') }}
                     </x-table.th>
                     <x-table.th>
                         {{ __('Status') }}
@@ -69,27 +69,30 @@
                     @forelse($abouts as $about)
                         <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                             <x-table.td id="accordion-collapse" data-accordion="collapse">
-                                <div id="accordion-collapse-heading-{{$about->id}}">
-                                      <button type="button" class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2" data-accordion-target="#accordion-collapse-body-{{$about->id}}" aria-expanded="false" aria-controls="accordion-collapse-body-{{$about->id}}">
-                                        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                      </button>
+                                <div id="accordion-collapse-heading-{{ $about->id }}">
+                                    <button type="button"
+                                        class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
+                                        data-accordion-target="#accordion-collapse-body-{{ $about->id }}"
+                                        aria-expanded="false"
+                                        aria-controls="accordion-collapse-body-{{ $about->id }}">
+                                        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
                                 </div>
                                 {{-- <input type="checkbox" value="{{ $about->id }}" wire:model="selected"> --}}
                             </x-table.td>
                             <x-table.td>
+                                {{ $about->language->name }} // <img
+                                    src="{{ flagImageUrl($about->language->code) }}">
+                            </x-table.td>
+                            <x-table.td>
                                 {{ $about->title }}
                             </x-table.td>
-                            <x-table.td>
-                                @if (empty($about->image))
-                                    {{ __('No images') }}
-                                @else
-                                    <img class="w-52 rounded-full"
-                                        src="{{ asset('uploads/abouts/' . $about->image) }}" alt="">
-                                @endif
-                            </x-table.td>
-                            <x-table.td>
-                                {{ $about->language->name }}
-                            </x-table.td>
+
                             <x-table.td>
                                 <livewire:toggle-button :model="$about" field="status" key="{{ $about->id }}" />
                             </x-table.td>
@@ -115,11 +118,21 @@
                                 </div>
                             </x-table.td>
                         </x-table.tr>
-                        <tr id="accordion-collapse-body-{{$about->id}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{$about->id}}">
+                        <tr id="accordion-collapse-body-{{ $about->id }}" class="hidden"
+                            aria-labelledby="accordion-collapse-heading-{{ $about->id }}">
                             <td colspan="12">
                                 <div class="panel-body">
                                     <h1>{{ $about->title }}</h1>
                                     <p>{!! $about->content !!}</p>
+                                    <div class="container">
+                                        @if (empty($about->image))
+                                            {{ __('No images') }}
+                                        @else
+                                            <img class="w-52 rounded-full"
+                                                src="{{ asset('uploads/abouts/' . $about->image) }}" alt="">
+                                        @endif
+                                    </div>
+
                                 </div>
                             </td>
                         </tr>
