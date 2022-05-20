@@ -31,13 +31,13 @@
                 @include('components.table.sort', ['field' => 'title'])
             </x-table.th> --}}
             <x-table.th>
+                {{ __('Language') }}
+            </x-table.th>
+            <x-table.th>
                 {{ __('Name') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Status') }}
-            </x-table.th>
-            <x-table.th>
-                {{ __('Language') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Actions') }}
@@ -64,14 +64,15 @@
                         {{-- <input type="checkbox" value="{{ $bcategory->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
+                        {{ $bcategory->language->name }}  // <img src="{{flagImageUrl($about->language->code)}}">
+                    </x-table.td>
+                    <x-table.td>
                         {{ $bcategory->name }}
                     </x-table.td>
                     <x-table.td>
                         <livewire:toggle-button :model="$bcategory" field="status" key="{{ $bcategory->id }}" />
                     </x-table.td>
-                    <x-table.td>
-                        {{ $bcategory->language->name }}
-                    </x-table.td>
+                   
                     <x-table.td>
                         <div class="inline-flex">
                             <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"

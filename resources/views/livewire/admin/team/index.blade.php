@@ -31,13 +31,13 @@
                 @include('components.table.sort', ['field' => 'title'])
             </x-table.th> --}}
             <x-table.th>
+                {{ __('Language') }}
+            </x-table.th>
+            <x-table.th>
                 {{ __('Title') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Image') }}
-            </x-table.th>
-            <x-table.th>
-                {{ __('Language') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Status') }}
@@ -55,8 +55,7 @@
                             <button type="button"
                                 class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
                                 data-accordion-target="#accordion-collapse-body-{{ $team->id }}"
-                                aria-expanded="false"
-                                aria-controls="accordion-collapse-body-{{ $team->id }}">
+                                aria-expanded="false" aria-controls="accordion-collapse-body-{{ $team->id }}">
                                 <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -71,14 +70,7 @@
                         {{ $team->name }}
                     </x-table.td>
                     <x-table.td>
-                        @if (empty($team->image))
-                            {{ __('No images') }}
-                        @else
-                            <img class="w-52 rounded-full" src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
-                        @endif
-                    </x-table.td>
-                    <x-table.td>
-                        {{ $team->language->name }}
+                        {{ $team->language->name }} // <img src="{{ flagImageUrl($about->language->code) }}">
                     </x-table.td>
                     <x-table.td>
                         <livewire:toggle-button :model="$team" field="status" key="{{ $team->id }}" />
@@ -105,12 +97,22 @@
                         </div>
                     </x-table.td>
                 </x-table.tr>
-                <tr id="accordion-collapse-body-{{$team->id}}" class="hidden" aria-labelledby="accordion-collapse-heading-{{$team->id}}">
+                <tr id="accordion-collapse-body-{{ $team->id }}" class="hidden"
+                    aria-labelledby="accordion-collapse-heading-{{ $team->id }}">
                     <td colspan="12">
                         <div class="panel-body text-center p-5">
                             <h1>{{ $team->name }}</h1>
                             <h4>{{ $team->role }}</h4>
                             <p>{!! $team->content !!}</p>
+                            <div class="container">
+
+                                @if (empty($team->image))
+                                    {{ __('No images') }}
+                                @else
+                                    <img class="w-52 rounded-full" src="{{ asset('uploads/teams/' . $team->image) }}"
+                                        alt="">
+                                @endif
+                            </div>
                         </div>
                     </td>
                 </tr>

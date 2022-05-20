@@ -31,10 +31,10 @@
                 @include('components.table.sort', ['field' => 'title'])
             </x-table.th> --}}
             <x-table.th>
-                {{ __('Title') }}
+                {{ __('Language') }}
             </x-table.th>
             <x-table.th>
-                {{ __('Language') }}
+                {{ __('Title') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Page') }}
@@ -68,32 +68,46 @@
                         {{-- <input type="checkbox" value="{{ $sectiontitle->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
-                        {{ $sectiontitle->title }}
-                    </x-table.td>
-                    <x-table.td>
-                        {{ $sectiontitle->language->name }}
+                        {{ $sectiontitle->language->name }} // <img
+                            src="{{ flagImageUrl($about->language->code) }}">
                     </x-table.td>
                     <x-table.td>
                         @if ($sectiontitle->page == \App\Models\Sectiontitle::ABOUT_PAGE)
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('About') }}</span>
+                            <a href="{{ route('front.about') }}"
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
+                                {{ __('About') }}
+                            </a>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::HOME_PAGE)
-                        <span
-                            class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Home') }}</span>
+                            <a href="{{ route('front.about') }}"
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
+                                {{ __('Home') }}
+                            </a>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::TEAM_PAGE)
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Team') }}</span>
+                            <a href=""
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
+                                {{ __('Team') }}
+                            </a>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::BLOG_PAGE)
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Blog') }}</span>
+                            <a href="{{ route('front.blogs') }}"
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
+                                {{ __('Blog') }}
+                            </a>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::SERVICE_PAGE)
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Service') }}</span>
+                            <a href=""
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
+                                {{ __('Service') }}
+                            </a>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::PORTFOLIO_PAGE)
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">{{ __('Portfolio') }}</span>
+                            <a href="{{ route('front.portfolio') }}"
+                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
+                                {{ __('Portfolio') }}
+                            </a>
                         @endif
                     </x-table.td>
+                    <x-table.td>
+                        {{ $sectiontitle->title }}
+                    </x-table.td>
+
                     <x-table.td>
                         <livewire:toggle-button :model="$sectiontitle" field="status" key="{{ $sectiontitle->id }}" />
                     </x-table.td>
@@ -130,12 +144,12 @@
                                 <p>{{ __('Content') }} : {!! $sectiontitle->content !!}</p>
                                 <p>{{ __('Text') }} : {{ $sectiontitle->text }}</p>
                             </div>
-                                <div class="w-1/2">
+                            <div class="w-1/2">
                                 <p class="py-4">{{ __('Custom button') }} : </p>
-                                    <a class="bg-green-500 py-4 my-4 px-6" href="{{ $sectiontitle->link }}">
-                                        {{ $sectiontitle->button }}
-                                    </a>
-                                
+                                <a class="bg-green-500 py-4 my-4 px-6" href="{{ $sectiontitle->link }}">
+                                    {{ $sectiontitle->button }}
+                                </a>
+
                             </div>
 
                         </div>
