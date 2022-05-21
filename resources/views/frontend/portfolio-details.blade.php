@@ -1,15 +1,13 @@
 <x-guest-layout>
-    {{-- @section('meta-keywords', "$blog->meta_keywords")
-@section('meta-description', "$blog->meta_description") --}}
+    @section('title', {{$portfolio->title}} )
+    @section('meta-keywords', "$portfolio->meta_keywords")
+@section('meta-description', "$portfolio->meta_description")
 
     <header class="container-fluid header">
         <div class="row">
             <div class="col">
                 <div class="extra-lg-text">
-                    <span>perfection is</span><br>
-                    <span>not a myth</span><br>
-                    <span class="other-color">check our</span><br>
-                    <span class="other-color">work.</span>
+                    <span>{{ $portfolio->title }}</span>
                 </div>
             </div>
         </div>
@@ -18,10 +16,6 @@
     <div class="container-fluid project-info">
         <div class="row">
             <div class="col">
-                <h2></h2>
-                <div class="lg-text">
-                    <span>{{ $portfolio->title }}</span>
-                </div>
                 <div class="normal-text">
                     <p>{!! $portfolio->content !!}</p>
                 </div>
@@ -85,20 +79,6 @@
                     @endforeach
                 </div>
             @endif
-        </div>
-    </div>
-    <div class="container-fluid other-content">
-        <div class="row">
-            <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
-                <div class="normal-text">
-                    <p>Contact us and we’ll send you the brief form to fill.<br>
-                        Then we’ll contact you within 24 hours.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
-                </div>
-            </div>
         </div>
     </div>
 

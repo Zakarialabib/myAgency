@@ -1,6 +1,7 @@
 <x-guest-layout>
-    {{-- @yield('meta-keywords', "$blog->meta_keywords")
-@yield('meta-description', "$blog->meta_description") --}}
+    @section('title', {{$blog->title}} )
+    @yield('meta-keywords', "$blog->meta_keywords")
+    @yield('meta-description', "$blog->meta_description")
 
     <!--====== BLOG Start ======-->
     <header class="container-fluid header">

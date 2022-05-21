@@ -1,9 +1,10 @@
 <x-guest-layout>
-    {{-- @section('meta-keywords', "$seo->blog_meta_key")
-@section('meta-description', "$seo->blog_meta_desc") --}}
+    @section('title', {{$sectiontitle->title}} )
+    @section('meta-keywords', {{$sectiontitle->title}} )
+@section('meta-description', {{ Str::limit($sectiontitle->content, 20, '...') }})
 
-    <header class="container-fluid header">
-        <div class="mouse-scroll"></div>
+    <header class="container-fluid header"
+    style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
         @if (empty($sectiontitle))
             <div class="row">
                 <div class="col">
@@ -75,20 +76,6 @@
                     <div class="logo-holder"><img src="images/client6.png" alt=""></div>
                     <div class="logo-holder"><img src="images/client7.png" alt=""></div>
                     <div class="logo-holder"><img src="images/client8.png" alt=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid other-content">
-        <div class="row">
-            <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
-                <div class="normal-text">
-                    <p>Contact us and we’ll send you the brief form to fill.<br>
-                        Then we’ll contact you within 24 hours.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
                 </div>
             </div>
         </div>

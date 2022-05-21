@@ -1,10 +1,11 @@
 <x-guest-layout>
 
-    {{-- @section('meta-keywords', "$blog->meta_keywords")
-@section('meta-description', "$blog->meta_description") --}}
+    @section('title', {{$sectiontitle->title}} )
+    @section('meta-keywords', {{$sectiontitle->title}} )
+    @section('meta-description', {{ Str::limit($sectiontitle->content, 50, '...') }})
 
-    <header class="container-fluid header">
-        <div class="mouse-scroll"></div>
+    <header class="container-fluid header"
+    style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
         @if (empty($sectiontitle))
             <div class="row">
                 <div class="col">
