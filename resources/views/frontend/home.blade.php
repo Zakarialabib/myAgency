@@ -1,10 +1,10 @@
 <x-guest-layout>
-
+    
     @section('title', __('Home'))
 
     <div>
-        <header class="container-fluid header"
-        style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
+        <header class="container-fluid header" 
+        style="background-color:{{ $theme_color }};background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
             <div class="mouse-scroll"></div>
             @if (empty($sectiontitle))
                 <div class="row">
@@ -19,10 +19,10 @@
                 </div>
             @else
                 <div>
-                    <div class="flex-grow">
-                        <div class="lg-text">
+                    <div class="flex-grow px-24">
+                        <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                             <span>{{ $sectiontitle->title }}</span>
-                            <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                            <span class="other-color xl:text-7xl lg:text-5xl md:text-5xl sm:text-4xl lg-text" >{{ $sectiontitle->subtitle }}</span>
                         </div>
                         <div class="normal-text">
                             <p>{!! $sectiontitle->content !!}</p>
@@ -37,7 +37,7 @@
         <div class="pb-24 flex flex-wrap">
 
             @foreach ($services as $service)
-                <div class="my-4 px-4 sm:w-full md:w-full lg:w-full xl:w-1/3">
+                <div class="my-4 px-8 sm:w-full md:w-full lg:w-full xl:w-1/3">
                     <div class="boxy primary-color"
                         style="background-image: url({{ asset('uploads/services/' . $service->image) }});">
                         <div class="row">
@@ -61,7 +61,7 @@
         </div>
 
 
-        {{-- <h2 class="lg-text">Portfolio</h2> --}}
+        {{-- <h2 class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">Portfolio</h2> --}}
         <div class="flex flex-wrap">
             <ul>
                 @foreach ($portfolios as $portfolio)
@@ -89,7 +89,7 @@
     <div class="container-fluid clients-section">
         <div class="flex flex-wrap">
             <div class="col">
-                <div class="lg-text">
+                <div class="xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl lg-text">
                     <span>Trusted by top-tier</span><br>
                     <span>Companies, Agencies,</span><br>
                     <span>National Institutions, and more...</span>
@@ -111,21 +111,6 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid other-content">
-        <div class="flex flex-wrap">
-            <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
-                <div class="normal-text">
-                    <p>Contact us and we’ll send you the brief form to fill.<br>
-                        Then we’ll contact you within 24 hours.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     {{-- <livewire:front.contact-form /> --}}
 

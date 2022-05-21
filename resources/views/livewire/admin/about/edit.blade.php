@@ -6,7 +6,7 @@
         <div class="w-full">
             <x-label for="language_id" :value="__('Language')" />
             <select wire:model="about.language_id"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  lang"
                 name="language_id">
                 @foreach ($langs as $lang)
                     <option value="{{ $lang->id }}">
@@ -19,7 +19,7 @@
         <div class="w-full">
             <x-label for="title" :value="__('Title')" />
             <input type="text" name="title" wire:model.lazy="about.title"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 placeholder="{{ __('Title') }}" value="{{ old('title') }}">
             <x-input-error for="about.title" />
         </div>
@@ -34,13 +34,13 @@
             <div class="w-full">
                 <x-label for="inputs_{{$key}}_block_title" :value="__('Block title')" />
                 <input  wire:model="inputs.{{ $key }}.block_title" type="text" 
-                        class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "/>               
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "/>               
                 @error('inputs.'.$key.'.block_title') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
             </div>
             <div class="w-full">
                 <x-label for="inputs_{{$key}}_block_content" :value="__('Block content')" />
                 <input  wire:model="inputs.{{ $key }}.block_content" type="text" 
-                        class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "/>               
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "/>               
                 @error('inputs.'.$key.'.block_content') <span class="text-xs text-red-600">{{ $message }}</span> @enderror
             </div>
             @if($key > 0)

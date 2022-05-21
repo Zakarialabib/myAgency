@@ -3,17 +3,12 @@
 @yield('meta-description', "$blog->meta_description") --}}
 
     <!--====== BLOG Start ======-->
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+    style="background-color:{{ $theme_color }};">
         <div class="row">
             <div class="col">
-                <div class="lg-text">
-                    <span>PRODUCT TIPS</span><br>
-                    <span>DESIGN & BUSINESS</span><br>
-                    <span class="other-color">cre8 blog</span>
-                </div>
-                <div class="normal-text">
-                    <p>You can call it an extra arm that support you with insightful ideas,<br>about business, design,
-                        productivity, design or even personal<br> development for business people.</p>
+                <div class="xl:text-5xl lg:text-4xl md:text-4xl sm:text-3xl lg-text">
+                    <span>{{ $blog->title }}</span>
                 </div>
             </div>
         </div>
@@ -32,7 +27,6 @@
                                 <div class="auther">By, Admin</div>
                             </div>
                         </div>
-                        <div class="title">{{ $blog->title }}</div>
                     </div>
                     <div class="img-holder">
                         <img src="{{ asset('uploads/blogs/' . $blog->image) }}" alt="{{ $blog->title }}">

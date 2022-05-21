@@ -8,13 +8,13 @@
                 @endforeach
             </select>
             <x-select-list
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required id="language_id" name="language_id" wire:model="language_id" :options="$this->listsForFields['languages']" />
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
                 <input type="text" wire:model.debounce.300ms="search"
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="{{ __('Search') }}" />
             </div>
         </div>
@@ -26,18 +26,15 @@
     <x-table>
         <x-slot name="thead">
             <x-table.th>#</x-table.th>
-            {{-- <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
-                {{ __('Title') }}
-                @include('components.table.sort', ['field' => 'title'])
-            </x-table.th> --}}
             <x-table.th>
                 {{ __('Language') }}
             </x-table.th>
             <x-table.th>
-                {{ __('Title') }}
-            </x-table.th>
-            <x-table.th>
                 {{ __('Page') }}
+            </x-table.th>
+            <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
+                {{ __('Title') }}
+                @include('components.table.sort', ['field' => 'title'])
             </x-table.th>
             <x-table.th>
                 {{ __('Status') }}
@@ -49,7 +46,7 @@
         </x-slot>
         <x-table.tbody>
             @forelse($sectiontitles as $sectiontitle)
-                <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <x-table.tr class="panel-group" id="accordion-{{ $sectiontitle->id }}" role="tablist" aria-multiselectable="true">
                     <x-table.td id="accordion-collapse" data-accordion="collapse">
                         <div id="accordion-collapse-heading-{{ $sectiontitle->id }}">
                             <button type="button"
@@ -68,8 +65,7 @@
                         {{-- <input type="checkbox" value="{{ $sectiontitle->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
-                        {{ $sectiontitle->language->name }} // <img
-                            src="{{ flagImageUrl($about->language->code) }}">
+                        <img src="{{ flagImageUrl($sectiontitle->language->code) }}">
                     </x-table.td>
                     <x-table.td>
                         @if ($sectiontitle->page == \App\Models\Sectiontitle::ABOUT_PAGE)
@@ -78,7 +74,7 @@
                                 {{ __('About') }}
                             </a>
                         @elseif($sectiontitle->page == \App\Models\Sectiontitle::HOME_PAGE)
-                            <a href="{{ route('front.about') }}"
+                            <a href="{{ route('front.home') }}"
                                 class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
                                 {{ __('Home') }}
                             </a>
@@ -109,7 +105,7 @@
                     </x-table.td>
 
                     <x-table.td>
-                        <livewire:toggle-button :model="$sectiontitle" field="status" key="{{ $sectiontitle->id }}" />
+                        <livewire:toggle-button :model="$sectiontitle" field="status" id="{{ $sectiontitle->id }}" key="{{ $sectiontitle->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
@@ -136,22 +132,21 @@
                 <tr id="accordion-collapse-body-{{ $sectiontitle->id }}" class="hidden"
                     aria-labelledby="accordion-collapse-heading-{{ $sectiontitle->id }}">
                     <td colspan="12">
-                        <div class="panel-body text-center p-5 flex flex-wrap">
-                            <div class="w-1/2">
-
-                                <h1>{{ __('Title') }} : {{ $sectiontitle->title }}</h1>
-                                <p>{{ __('Subtitle') }} : {{ $sectiontitle->subtitle }}</p>
-                                <p>{{ __('Content') }} : {!! $sectiontitle->content !!}</p>
-                                <p>{{ __('Text') }} : {{ $sectiontitle->text }}</p>
+                        <div class="panel-body text-center p-5 ">
+                            <div class="">
+                                <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
+                                    <span>{{ $sectiontitle->title }}</span>
+                                    <p>{{ $sectiontitle->subtitle }}</p>
+                                    <span class="other-color xl:text-7xl lg:text-5xl md:text-5xl sm:text-4xl lg-text" >{{ $sectiontitle->subtitle }}</span>
+                                </div>
+                                <div class="normal-text">
+                                    <p>{!! $sectiontitle->content !!}</p>
+                                    <p>{{ __('Text') }} : {{ $sectiontitle->text }}</p>
+                                </div>
                             </div>
-                            <div class="w-1/2">
-                                <p class="py-4">{{ __('Custom button') }} : </p>
-                                <a class="bg-green-500 py-4 my-4 px-6" href="{{ $sectiontitle->link }}">
-                                    {{ $sectiontitle->button }}
-                                </a>
-
-                            </div>
-
+                            <a class="bg-green-500 py-4 my-4 px-6" href="{{ $sectiontitle->link }}">
+                                {{ $sectiontitle->button }}
+                            </a>
                         </div>
                     </td>
                 </tr>

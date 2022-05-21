@@ -3,8 +3,8 @@
     {{-- @section('meta-keywords', "$blog->meta_keywords")
 @section('meta-description', "$blog->meta_description") --}}
 
-    <header class="container-fluid header">
-        <div class="mouse-scroll"></div>
+    <header class="container-fluid header"
+    style="background-color:{{ $theme_color }};">
         @if (empty($sectiontitle))
             <div class="row">
                 <div class="col">
@@ -18,10 +18,10 @@
             </div>
         @else
             <div>
-                <div class="flex-grow">
-                    <div class="lg-text">
+                <div class="flex-grow px-24">
+                    <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                         <span>{{ $sectiontitle->title }}</span>
-                        <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                        <span class="other-color xl:text-7xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">{{ $sectiontitle->subtitle }}</span>
                     </div>
                     <div class="normal-text">
                         <p>{!! $sectiontitle->content !!}</p>
@@ -34,7 +34,8 @@
         @foreach ($abouts as $about)
             <div>
                 <div class="flex-grow">
-                    <div class="lg-text"><span class="other-color">{{ $about->title }}</span></div>
+                    <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span
+                            class="other-color">{{ $about->title }}</span></div>
                     <div class="normal-text">
                         <p>
                             {!! $about->content !!}
@@ -91,22 +92,22 @@
         </div>
     </div>
     <div class="container-fluid team-section">
-        @if(empty($sectiontitle_1))
-        <div>
-            <div class="flex-grow">
-                <div class="extra-lg-text">
-                    <span>behind every</span><br>
-                    <span>great project,</span><br>
-                    <span>cre8 team!</span>
+        @if (empty($sectiontitle_1))
+            <div>
+                <div class="flex-grow">
+                    <div class="extra-lg-text">
+                        <span>behind every</span><br>
+                        <span>great project,</span><br>
+                        <span>cre8 team!</span>
+                    </div>
                 </div>
             </div>
-        </div>
         @else
             <div>
                 <div class="flex-grow">
-                    <div class="lg-text">
+                    <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">
                         <span>{{ $sectiontitle_1->title }}</span>
-                        <span class="other-color">{{ $sectiontitle_1->subtitle }}</span>
+                        <span class="other-color xl:text-7xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">{{ $sectiontitle_1->subtitle }}</span>
                     </div>
                     <div class="normal-text">
                         <p>{!! $sectiontitle_1->content !!}</p>
@@ -117,44 +118,44 @@
         <div class="team-photos">
             <div class="team-photos-holder">
                 @forelse ($teams as $team)
-                <div class="photo-holder">
-                    <img src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
-                    <div class="bg-indigo-500 mx-6 py-3 -mt-10 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">{{$team->name}}</h3>
+                    <div class="photo-holder">
+                        <img src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
+                        <div class="bg-indigo-500 mx-6 py-3 -mt-10 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">{{ $team->name }}</h3>
+                        </div>
                     </div>
-                </div>
                 @empty
-                <div class="photo-holder">
-                    <img src="images/team1.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder">
+                        <img src="images/team1.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team2.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team2.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team3.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team3.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team4.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team4.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team5.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team5.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team6.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team6.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
                 @endforelse
             </div>
         </div>
@@ -162,7 +163,8 @@
     <div class="container-fluid jobs-section padding-for-team no-padding-bottom">
         <div class="flex flex-wrap">
             <div class="flex-grow">
-                <div class="lg-text"><span class="other-color">job openings</span></div>
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span class="other-color">job
+                        openings</span></div>
             </div>
         </div>
         <div class="flex flex-wrap job-box-row">
@@ -221,7 +223,7 @@
     <div class="container-fluid clients-section">
         <div class="flex flex-wrap">
             <div class="flex-grow">
-                <div class="lg-text">
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">
                     <span>DELIGHTING OUR</span><br>
                     <span>CLIENTS IS OUR</span><br>
                     <span>MISSION.</span>

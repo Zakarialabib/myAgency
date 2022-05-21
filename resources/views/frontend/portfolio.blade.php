@@ -2,7 +2,8 @@
     {{-- @section('meta-keywords', "$seo->blog_meta_key")
 @section('meta-description', "$seo->blog_meta_desc") --}}
 
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+    style="background-color:{{ $theme_color }};">
         <div class="mouse-scroll"></div>
         @if (empty($sectiontitle))
             <div class="row">
@@ -17,10 +18,10 @@
             </div>
         @else
             <div>
-                <div class="flex-grow">
-                    <div class="lg-text">
+                <div class="flex-grow px-24">
+                    <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                         <span>{{ $sectiontitle->title }}</span>
-                        <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                        <span class="other-color xl:text-7xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">{{ $sectiontitle->subtitle }}</span>
                     </div>
                     <div class="normal-text">
                         <p>{!! $sectiontitle->content !!}</p>
@@ -57,7 +58,7 @@
     <div class="container-fluid clients-section">
         <div class="row">
             <div class="col">
-                <div class="lg-text">
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">
                     <span>DELIGHTING OUR</span><br>
                     <span>CLIENTS IS OUR</span><br>
                     <span>MISSION.</span>
@@ -75,20 +76,6 @@
                     <div class="logo-holder"><img src="images/client6.png" alt=""></div>
                     <div class="logo-holder"><img src="images/client7.png" alt=""></div>
                     <div class="logo-holder"><img src="images/client8.png" alt=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid other-content">
-        <div class="row">
-            <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
-                <div class="normal-text">
-                    <p>Contact us and we’ll send you the brief form to fill.<br>
-                        Then we’ll contact you within 24 hours.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
                 </div>
             </div>
         </div>

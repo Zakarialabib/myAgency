@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     
     // Setting
     Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('email-settings', [SettingController::class, 'emailSettings'])->name('email-settings');
 
     Route::get('languages', [LanguageController::class, 'index'])->name('language.index');
     Route::get('language/edit/{id}', [LanguageController::class, 'langEdit'])->name('language-key');

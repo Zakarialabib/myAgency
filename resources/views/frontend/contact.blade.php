@@ -5,7 +5,7 @@
     <header class="container-fluid header">
         <div class="row">
             <div class="col">
-                <div class="lg-text">
+                <div class="xl:text-5xl lg:text-4xl md:text-4xl sm:text-3xl lg-text">
                     <span>let’s create</span><br>
                     <span>amazing things</span><br>
                     <span>together</span>
@@ -92,7 +92,7 @@
                     <span>great project,</span><br>
                     <span>cre8 team!</span>
                 </div>
-                <div class="lg-text"><span class="other-color">our people </span></div>
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span class="other-color">our people </span></div>
                 <div class="normal-text">
                     <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising<br> pain was
                         born and I will give you a complete account of the system.</p>

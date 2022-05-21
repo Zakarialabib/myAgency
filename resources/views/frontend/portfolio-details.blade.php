@@ -2,24 +2,11 @@
     {{-- @section('meta-keywords', "$blog->meta_keywords")
 @section('meta-description', "$blog->meta_description") --}}
 
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+    style="background-color:{{ $theme_color }};">
         <div class="row">
             <div class="col">
-                <div class="extra-lg-text">
-                    <span>perfection is</span><br>
-                    <span>not a myth</span><br>
-                    <span class="other-color">check our</span><br>
-                    <span class="other-color">work.</span>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="container-fluid project-info">
-        <div class="row">
-            <div class="col">
-                <h2></h2>
-                <div class="lg-text">
+                <div class="xl:text-5xl lg:text-4xl md:text-4xl sm:text-3xl lg-text">
                     <span>{{ $portfolio->title }}</span>
                 </div>
                 <div class="normal-text">
@@ -27,6 +14,9 @@
                 </div>
             </div>
         </div>
+    </header>
+
+    <div class="container-fluid project-info">
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="text-box">
@@ -90,7 +80,7 @@
     <div class="container-fluid other-content">
         <div class="row">
             <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">have a project<br>for us?</div>
                 <div class="normal-text">
                     <p>Contact us and we’ll send you the brief form to fill.<br>
                         Then we’ll contact you within 24 hours.</p>

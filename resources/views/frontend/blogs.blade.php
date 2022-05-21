@@ -2,38 +2,36 @@
     {{-- @section('meta-keywords', "$seo->blog_meta_key")
 @section('meta-description', "$seo->blog_meta_desc") --}}
 
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+    style="background-color:{{ $theme_color }};">
         @if (empty($sectiontitle))
-        <div class="row">
-            <div class="col">
-                <div class="extra-lg-text">
-                    <span>perfection is</span><br>
-                    <span>not a myth</span><br>
-                    <span class="other-color">check our</span><br>
-                    <span class="other-color">work.</span>
+            <div class="row">
+                <div class="col">
+                    <div class="extra-lg-text">
+                        <span>perfection is</span><br>
+                        <span>not a myth</span><br>
+                        <span class="other-color">check our</span><br>
+                        <span class="other-color">work.</span>
+                    </div>
                 </div>
             </div>
-        </div>
         @else
-        <div>
-            <div class="flex-grow">
-                <div class="lg-text">
-                    <span>{{ $sectiontitle->title }}</span>
-                    <span class="other-color">{{ $sectiontitle->subtitle }}</span>
-                </div>
-                <div class="normal-text">
-                    <p>{!! $sectiontitle->content !!}</p>
+            <div>
+                <div class="flex-grow px-24">
+                    <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
+                        <span>{{ $sectiontitle->title }}</span>
+                        <span class="other-color xl:text-7xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">{{ $sectiontitle->subtitle }}</span>
+                    </div>
+                    <div class="normal-text">
+                        <p>{!! $sectiontitle->content !!}</p>
+                    </div>
                 </div>
             </div>
-        </div>
         @endif
     </header>
 
     <!--====== BLOG STANDARD PART START ======-->
     <div class="container-fluid blog-section">
-        {{-- <div class="row">
-            <div class="col">
-                <div class="col-lg-8"> --}}
         <div class="blog-standard">
             @if (count($blogs) == 0)
                 <div class="col-md-12">
@@ -57,7 +55,7 @@
                             <div class="img-holder">
                                 <img src="{{ asset('uploads/' . $blog->image) }}" alt="">
                             </div>
-                        </div>                    
+                        </div>
                     @endforeach
                 </div>
             @endif
