@@ -52,10 +52,11 @@ class Edit extends Component
         }
 
          // Multiple images within an array
-
-         foreach($this->images as $key=>$image){
-            $this->images[$key] = $image->store('/');            
-        }      
+         if($this->images){
+            foreach($this->images as $key=>$image){
+                $this->images[$key] = $image->store('/');            
+            }     
+        } 
         
         $this->images = json_encode($this->images);
         
