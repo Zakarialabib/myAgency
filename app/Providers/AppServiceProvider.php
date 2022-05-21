@@ -8,7 +8,6 @@ use App\Models\Setting;
 use App\Models\Language;
 use App\Models\SectionTitle;
 use Illuminate\Support\Facades\Artisan;
-use Spatie\Ignition\Ignition;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,8 +18,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        
-    Ignition::make()->register();
 
     }
 
@@ -46,9 +43,12 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('currentLang', $currentLang);
             }
             
+            $theme_color = Setting::where(['key' => 'base_color'])->first()->value ?? '';
+
             $langs = Language::all();
             $view->with('langs', $langs );
             $view->with('lang', $lang );
+            $view->with('theme_color', $theme_color );
             // dd($lang);
             
         });

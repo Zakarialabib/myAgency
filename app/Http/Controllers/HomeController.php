@@ -74,10 +74,7 @@ class HomeController extends Controller
         $teams = Team::where('status', 1)->where('language_id', $currlang->id)
         ->get();
 
-        $sectiontitle = Sectiontitle::where('page', 1)->where('language_id', $currlang->id)
-        ->first();
-
-        $sectiontitle_1 =  Sectiontitle::where('page', 3)->where('language_id', $currlang->id)
+        $sectiontitle = Sectiontitle::where('page', 2)->where('language_id', $currlang->id)
         ->first();
 
         $abouts = About::where('status', 1)->where('language_id', $currlang->id)

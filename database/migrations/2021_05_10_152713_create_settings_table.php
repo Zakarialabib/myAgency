@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBusinessSettingsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateBusinessSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('business_settings', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('key');
+            $table->string('lang')->nullable();
             $table->text('value')->nullable();
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ class CreateBusinessSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('business_settings');
+        Schema::dropIfExists('settings');
     }
 }

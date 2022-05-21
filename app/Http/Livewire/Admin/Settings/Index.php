@@ -127,7 +127,7 @@ class Index extends Component
 
     public function render()
     {
-        $setting = Service::when($this->language_id, function ($query) {
+        $setting = Setting::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
             })->get();
 

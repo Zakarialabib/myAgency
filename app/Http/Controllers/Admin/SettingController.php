@@ -179,6 +179,12 @@ class SettingController extends Controller
            return back();
     }
 
+   // Email Settings
+   public function emailSettings(Request $request)
+   {
+	return view('admin.settings.email-settings');
+   }
+
    // Announcement Popup
    public function announcement(Request $request)
    {
@@ -222,7 +228,7 @@ class SettingController extends Controller
 
 	$st->save();
 
-	   return redirect(route('admin.announcement.index').'?language='.$this->lang->code)->with('notification', $notification);
+	   return redirect(route('admin.announcement.index').'?language='.$this->lang->code);
    }
 
 }

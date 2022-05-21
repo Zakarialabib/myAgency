@@ -1,6 +1,8 @@
 <x-guest-layout>
 
-    @section('title', __('Home'))
+    @section('title', {{$sectiontitle->title}} )
+    @section('meta-keywords', {{$sectiontitle->title}} )
+    @section('meta-description', {{ Str::limit($sectiontitle->content, 50, '...') }})
 
     <div>
         <header class="container-fluid header"
