@@ -1,12 +1,13 @@
 <x-guest-layout>
-    @section('title', {{$portfolio->title}} )
+    @section('title', $portfolio->title )
     @section('meta-keywords', "$portfolio->meta_keywords")
 @section('meta-description', "$portfolio->meta_description")
 
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+            style="background-color:{{ $base_color }};">
         <div class="row">
             <div class="col">
-                <div class="extra-lg-text">
+                <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                     <span>{{ $portfolio->title }}</span>
                 </div>
             </div>

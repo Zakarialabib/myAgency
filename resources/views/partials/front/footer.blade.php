@@ -1,25 +1,25 @@
 <footer class="container-fluid footer">
     <div class="row">
-        <div class="col">
-            <div class="lg-text">
-                <span>100% satisfication.</span><br>
-                <span>let’s create</span>
+        <div class="w-full">
+            <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
+                have a project<br>for us?
             </div>
             <div class="normal-text">
-                <p>{{ $footer_text }}</p>
+                <p>Contact us and we’ll send you the brief form to fill.<br>
+                    Then we’ll contact you within 24 hours.</p>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
+    <div class="flex flex-col text-center pt-4">
+        <div class="md:w-1/2 sm:w-full py-4">
             <div class="contact-info-holder">
-                <div class="title">Call us</div>
+                <div class="title">{{ __('Call us') }}</div>
                 <div class="contact-info">{{ $phone_number }}</div>
             </div>
         </div>
-        <div class="col">
+        <div class="md:w-1/2 sm:w-full py-4">
             <div class="contact-info-holder">
-                <div class="title">E-mail</div>
+                <div class="title">{{ __('E-mail') }}</div>
                 <div class="contact-info"><a href="mailto:{{ $email }}">{{ $email }}</a></div>
                 {{-- <div class="social-media">
                     <div class="social-link-holder"><a href="#">Dribbble</a></div>
@@ -44,7 +44,7 @@ crossorigin="anonymous"></script>
 <!-- Toastr -->
 {{-- <script type="text/javascript" src="{{ asset('assets/js/toastr.min.js') }}"></script> --}}
 <!-- Custom JS -->
-{{-- <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>--}}
+{{-- <script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script> --}}
 {{-- <script src="{{ asset('assets/js/popper.min.js') }}"></script> --}}
 {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.js" defer></script> --}}
 {{-- <script type="text/javascript" src="{{ asset('/js/anime.min.js') }}"></script>

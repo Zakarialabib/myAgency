@@ -1,14 +1,16 @@
 <x-guest-layout>
-    @section('title', {{$sectiontitle->title}} )
-    @section('meta-keywords', {{$sectiontitle->title}} )
-@section('meta-description', {{ Str::limit($sectiontitle->content, 20, '...') }})
+    @section('title', $sectiontitle->title)
+    @section('meta-keywords', $sectiontitle->title)
+@section('meta-description',  Str::limit($sectiontitle->content, 20, '...'))
 
     <header class="container-fluid header"
-    style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
+            style="background-color:{{ $base_color }};
+                   background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});
+                   background-size: cover;">
         @if (empty($sectiontitle))
             <div class="row">
                 <div class="col">
-                    <div class="extra-lg-text">
+                    <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                         <span>perfection is</span><br>
                         <span>not a myth</span><br>
                         <span class="other-color">check our</span><br>
@@ -19,7 +21,7 @@
         @else
             <div>
                 <div class="flex-grow">
-                    <div class="lg-text">
+                    <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                         <span>{{ $sectiontitle->title }}</span>
                         <span class="other-color">{{ $sectiontitle->subtitle }}</span>
                     </div>

@@ -1,16 +1,17 @@
 <x-guest-layout>
-    @section('title', {{$blog->title}} )
+    @section('title', $blog->title )
     @yield('meta-keywords', "$blog->meta_keywords")
     @yield('meta-description', "$blog->meta_description")
 
     <!--====== BLOG Start ======-->
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+            style="background-color:{{ $base_color }};">
         <div class="row">
             <div class="col">
-                <div class="lg-text">
+                <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                     <span>PRODUCT TIPS</span><br>
                     <span>DESIGN & BUSINESS</span><br>
-                    <span class="other-color">cre8 blog</span>
+                    <span class="other-color">Spark blog</span>
                 </div>
                 <div class="normal-text">
                     <p>You can call it an extra arm that support you with insightful ideas,<br>about business, design,

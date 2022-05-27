@@ -33,7 +33,6 @@ html {
     font-family: 'Lalezar';
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
 }
 
@@ -1602,7 +1601,7 @@ body.menu-open {
 /* -----------------------------------
     17 - Responsive Styles
 ------------------------------------*/
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
     body.menu-open {
         padding-left: 0;
     }
@@ -2620,13 +2619,12 @@ body.menu-open {
 
 .follow-us {
     color: #fff;
-    transform: rotate(-90deg);
     margin: auto;
     position: absolute;
     z-index: 99999;
-    height: 2.2rem;
+   height: 2.2rem;
     cursor: pointer;
-    left: 1.5rem;
+    left: 3.5rem;
     top: 85%;
   }
 /* SOCIAL MEDIA */

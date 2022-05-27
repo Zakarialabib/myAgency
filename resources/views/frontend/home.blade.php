@@ -1,8 +1,8 @@
 <x-guest-layout>
 
-    @section('title', {{$sectiontitle->title}} )
-    @section('meta-keywords', {{$sectiontitle->title}} )
-    @section('meta-description', {{ Str::limit($sectiontitle->content, 50, '...') }})
+    @section('title', $sectiontitle->title)
+    @section('meta-keywords', $sectiontitle->title)
+    @section('meta-description',  Str::limit($sectiontitle->content, 50, '...'))
 
     <div>
         <header class="container-fluid header"
@@ -22,7 +22,7 @@
             @else
                 <div>
                     <div class="flex-grow">
-                        <div class="lg-text">
+                        <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                             <span>{{ $sectiontitle->title }}</span>
                             <span class="other-color">{{ $sectiontitle->subtitle }}</span>
                         </div>
@@ -109,20 +109,6 @@
                     <div class="logo-holder"><img src="{{ asset('images/client6.png') }}" alt=""></div>
                     <div class="logo-holder"><img src="{{ asset('images/client7.png') }}" alt=""></div>
                     <div class="logo-holder"><img src="{{ asset('images/client8.png') }}" alt=""></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid other-content">
-        <div class="flex flex-wrap">
-            <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
-                <div class="normal-text">
-                    <p>Contact us and we’ll send you the brief form to fill.<br>
-                        Then we’ll contact you within 24 hours.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
                 </div>
             </div>
         </div>

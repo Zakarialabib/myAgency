@@ -19,6 +19,8 @@ class Edit extends Component
     public $image, $icon,$inputs;
     public $block_title  = [];
     public $block_content = [] ;
+    public $block_title_1  = [];
+    public $block_content_1 = [] ;
     
     protected $listeners = [
         'submit',
@@ -82,13 +84,15 @@ class Edit extends Component
         }
 
         foreach($this->inputs as $key => $input){
-            $this->block_title =  $input['block_title'];
-            $this->block_content = $input['block_content']; 
-        }
+           
+            $block_title_1 =  $input['block_title'];
+            $block_content_1 = $input['block_content'];             
         
-        $this->about->block_title = json_encode($this->block_title);
-        $this->about->block_content = json_encode($this->block_content);
+        $this->about->block_title = json_encode($block_title_1);
+        $this->about->block_content = json_encode($block_content_1);
+        }
         dd($this->about);
+        
         
         $this->about->save();   
         

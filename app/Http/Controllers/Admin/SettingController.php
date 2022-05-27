@@ -12,6 +12,12 @@ use DB;
 
 class SettingController extends Controller
 {
+    public $lang;
+    public function __construct()
+    {
+        $this->lang = Language::where('is_default',1)->first();
+    }
+
 	public function index(Setting $setting)
     {
         // abort_if(Gate::denies('admin_settings_management'), Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -51,6 +57,7 @@ class SettingController extends Controller
         $lang = Language::where('code', session()->get('lang'))->first();
 
         $curr_logo = Setting::where(['key' => 'site_logo'])->first();
+
         if ($request->has('site_logo')) {
             $image_name = Helper::update('business/', $curr_logo->value, 'png', $request->file('site_logo'));
         } else {
@@ -73,11 +80,11 @@ class SettingController extends Controller
         ]);
 
          DB::table('settings')->updateOrInsert(['key' => 'website_title'], 
-         ['value' => $request['website_title'], 'lang'=> $lang ]
+         ['value' => $request['website_title']]
         );
 
         DB::table('settings')->updateOrInsert(['key' => 'base_color'], [
-            'value' => $request['base_color'] , 'lang'=> $lang]
+            'value' => $request['base_color'] ]
         );
         
        

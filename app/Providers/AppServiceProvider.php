@@ -43,12 +43,12 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('currentLang', $currentLang);
             }
             
-            $theme_color = Setting::where(['key' => 'base_color'])->first()->value ?? '';
+            $base_color = Setting::where(['key' => 'base_color'])->first()->value ?? '';
 
             $langs = Language::all();
             $view->with('langs', $langs );
             $view->with('lang', $lang );
-            $view->with('theme_color', $theme_color );
+            $view->with('base_color', $base_color );
             // dd($lang);
             
         });
