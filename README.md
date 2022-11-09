@@ -1,4 +1,4 @@
-# Sparksalze Agency Laravel CMS
+# Laravel Livewire Agency CMS
 
 this project is a content management system using laravel and livewire, which it's display agency portfolio, services...
 
