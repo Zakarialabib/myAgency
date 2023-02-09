@@ -35,7 +35,8 @@
         @foreach ($abouts as $about)
             <div>
                 <div class="flex-grow">
-                    <div class="lg-text"><span class="other-color">{{ $about->title }}</span></div>
+                    <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span
+                            class="other-color">{{ $about->title }}</span></div>
                     <div class="normal-text">
                         <p>
                             {!! $about->content !!}
@@ -101,7 +102,6 @@
                     <span>cre8 team!</span>
                 </div>
             </div>
-        </div>
         @else
             <div>
                 <div class="flex-grow">
@@ -118,44 +118,44 @@
         <div class="team-photos">
             <div class="team-photos-holder">
                 @forelse ($teams as $team)
-                <div class="photo-holder">
-                    <img src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
-                    <div class="bg-indigo-500 mx-6 py-3 -mt-10 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">{{$team->name}}</h3>
+                    <div class="photo-holder">
+                        <img src="{{ asset('uploads/teams/' . $team->image) }}" alt="">
+                        <div class="bg-indigo-500 mx-6 py-3 -mt-10 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">{{ $team->name }}</h3>
+                        </div>
                     </div>
-                </div>
                 @empty
-                <div class="photo-holder">
-                    <img src="images/team1.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder">
+                        <img src="images/team1.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team2.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team2.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team3.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team3.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team4.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team4.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team5.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team5.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="photo-holder"><img src="images/team6.png" alt="">
-                    <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
-                        <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                    <div class="photo-holder"><img src="images/team6.png" alt="">
+                        <div class="bg-indigo-500 mx-6 py-7 -mt-12 relative z-10 rounded-xl">
+                            <h3 class="text-center text-white text-xl">Cole Erickson</h3>
+                        </div>
                     </div>
-                </div>
                 @endforelse
             </div>
         </div>
@@ -163,7 +163,8 @@
     <div class="container-fluid jobs-section padding-for-team no-padding-bottom">
         <div class="flex flex-wrap">
             <div class="flex-grow">
-                <div class="lg-text"><span class="other-color">job openings</span></div>
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span class="other-color">job
+                        openings</span></div>
             </div>
         </div>
         <div class="flex flex-wrap job-box-row">
@@ -222,7 +223,7 @@
     <div class="container-fluid clients-section">
         <div class="flex flex-wrap">
             <div class="flex-grow">
-                <div class="lg-text">
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">
                     <span>DELIGHTING OUR</span><br>
                     <span>CLIENTS IS OUR</span><br>
                     <span>MISSION.</span>

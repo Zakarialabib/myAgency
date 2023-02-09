@@ -6,7 +6,7 @@
         <div class="w-full">
             <x-label for="language_id" :value="__('Language')" />
             <select wire:model="team.language_id"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500  lang"
                 name="language_id">
                 <option value="" selected>{{ __('Select a Language') }}</option>
                 @foreach ($langs as $lang)
@@ -23,14 +23,14 @@
             <div class="w-1/2 sm:w-full">
                 <x-label for="name" :value="__('Name')" />
                 <input type="text" name="name" wire:model.lazy="team.name"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 placeholder="{{ __('Name') }}" value="{{ old('name') }}">
                 <x-input-error for="team.name" />
             </div>
             <div class="w-1/2 sm:w-full">
                 <x-label for="role" :value="__('Role')" />
                 <input type="text" name="role" wire:model.lazy="team.role"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 "
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 placeholder="{{ __('Role') }}" value="{{ old('role') }}">
                 <x-input-error for="team.role" />
             </div>
@@ -51,7 +51,7 @@
         <div class="w-full">
             <x-label for="status" :value="__('Status')" />
             <select wire:model="team.status" name="status"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500 ">
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
                 <option value="0">{{ __('Unpublish') }}</option>
                 <option value="1">{{ __('Publish') }}</option>
             </select>

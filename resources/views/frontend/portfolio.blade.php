@@ -4,8 +4,10 @@
 @section('meta-description', {{ Str::limit($section->content, 20, '...') }})
 
     <header class="container-fluid header"
-    style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover;">
+    style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover; background-color:{{ $theme_color }};"> 
         @if (empty($section))
+        <div class="mouse-scroll"></div>
+        @if (empty($sectiontitle))
             <div class="row">
                 <div class="col">
                     <div class="extra-lg-text">
@@ -58,7 +60,7 @@
     <div class="container-fluid clients-section">
         <div class="row">
             <div class="col">
-                <div class="lg-text">
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">
                     <span>DELIGHTING OUR</span><br>
                     <span>CLIENTS IS OUR</span><br>
                     <span>MISSION.</span>

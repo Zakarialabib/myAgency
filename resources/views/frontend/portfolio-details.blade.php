@@ -3,7 +3,8 @@
     @section('meta-keywords', "$portfolio->meta_keywords")
 @section('meta-description', "$portfolio->meta_description")
 
-    <header class="container-fluid header">
+    <header class="container-fluid header"
+    style="background-color:{{ $theme_color }};">
         <div class="row">
             <div class="col">
                 <div class="extra-lg-text">
@@ -21,6 +22,9 @@
                 </div>
             </div>
         </div>
+    </header>
+
+    <div class="container-fluid project-info">
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="text-box">
@@ -79,6 +83,20 @@
                     @endforeach
                 </div>
             @endif
+        </div>
+    </div>
+    <div class="container-fluid other-content">
+        <div class="row">
+            <div class="col">
+                <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">have a project<br>for us?</div>
+                <div class="normal-text">
+                    <p>Contact us and we’ll send you the brief form to fill.<br>
+                        Then we’ll contact you within 24 hours.</p>
+                </div>
+                <div class="btn-holder">
+                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -3,7 +3,7 @@
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
     
     <x-select-list
-        class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         required id="language_id" name="language_id" wire:model="language_id" :options="$this->listsForFields['languages']" />
 
     <form wire:submit.prevent="save" enctype="multipart/form-data">
@@ -203,24 +203,6 @@
             <div class="sm:w-1/2 mb-4 px-2">
                 <x-label for="is_whatsapp" :value="__('Enable Whatsapp')" />
                 <x-checkbox name="is_whatsapp" id="is_whatsapp" wire:model="is_whatsapp" />
-            </div>
-        </div>
-        <div class="flex flex-wrap mb-4">
-            <div class="lg:w-1/2 sm:w-full px-2">
-                <x-label for="currency_code" :value="__('Currency code')" />
-                <input
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-gray-700 dark:text-gray-300 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    wire:model="currency_code" type="text" value="{{ config('settings.currency_code') }}"
-                    id="currency_code" name="currency_code" />
-                <x-input-error for="currency_code" />
-            </div>
-            <div class="lg:w-1/2 sm:w-full px-2">
-                <x-label for="currency_symbol" :value="__('Currency symbol')" />
-                <input
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-gray-700 dark:text-gray-300 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    wire:model="currency_symbol" type="text" value="{{ config('settings.currency_symbol') }}"
-                    id="currency_symbol" name="currency_symbol" />
-                <x-input-error for="currency_symbol" />
             </div>
         </div>
         <div class="w-full">

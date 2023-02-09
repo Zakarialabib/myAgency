@@ -8,13 +8,13 @@
                 @endforeach
             </select>
             <x-select-list
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required id="language_id" name="language_id" wire:model="language_id" :options="$this->listsForFields['languages']" />
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
             <div class="my-2 my-md-0">
                 <input type="text" wire:model.debounce.300ms="search"
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="{{ __('Search') }}" />
             </div>
         </div>
@@ -33,8 +33,9 @@
             <x-table.th>
                 {{ __('Language') }}
             </x-table.th>
-            <x-table.th>
+            <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
                 {{ __('Title') }}
+                @include('components.table.sort', ['field' => 'title'])
             </x-table.th>
             <x-table.th>
                 {{ __('Image') }}
@@ -49,8 +50,8 @@
         </x-slot>
         <x-table.tbody>
             @forelse($services as $service)
-                <x-table.tr class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    <x-table.td id="accordion-collapse" data-accordion="collapse">
+                <x-table.tr class="panel-group" id="accordion-{{ $service->id }}" role="tablist" aria-multiselectable="true">
+                    <x-table.td id="accordion-collapse-{{ $service->id }}" data-accordion="collapse">
                         <div id="accordion-collapse-heading-{{ $service->id }}">
                             <button type="button"
                                 class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"

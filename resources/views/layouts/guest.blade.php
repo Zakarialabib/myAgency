@@ -19,9 +19,8 @@
     @php($meta_keywords = \App\Models\Setting::where(['key' => 'meta_keywords'])->first()->value ?? '')
     @php($meta_description = \App\Models\Setting::where(['key' => 'meta_description'])->first()->value ?? '')
 
-
     <!--====== Title ======-->
-    <title>{{ $website_title }}</title>
+    <title>{{ $website_title }} - @yield('title')</title>
 
     <!--====== Meta ======-->
     <meta name="title" content="{{ $meta_keywords }}">
@@ -45,11 +44,41 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans text-zinc-900 antialiased">
+
+    <div class="social-media" style="transition-delay: 0.5s;">
+        <div class="layer" style="transition-delay: 0.3s;"> </div>
+        <!-- end layer -->
+        <div class="inner" style="transition-delay: 0s;">
+            <h5 class="text-center">{{__('Social Share')}} </h5>
+            <ul>
+                <li><a href="#">Facebook</i></a></li>
+                <li><a href="#">Twitter</i></a></li>
+                <li><a href="#">Linkedin</i></a></li>
+                <li><a href="#">Dribble</i></a></li>
+                <li><a href="#">Youtube</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="language_trans" style="transition-delay: 0.5s;">
+        <div class="layer" style="transition-delay: 0.3s;"> </div>
+        <!-- end layer -->
+        <div class="inner" style="transition-delay: 0s;">
+            <h5 class="text-center">{{__('Languages')}} </h5>
+            <ul>
+                @foreach ($langs as $lang)
+                    @if (\Illuminate\Support\Facades\App::getLocale() !== $lang->code)
+                        <li><a class="block" href="{{ route('changeLanguage', $lang->code) }}" title="{{ $lang->name }}">
+                            <img src="{{ flagImageUrl($lang->code) }}">{{ $lang->name }}</a></li>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    </div>
 
     @include('partials.front.header')
 
-    <main class="font-sans text-zinc-900 antialiased">
+    <main>
         {{ $slot }}
     </main>
 

@@ -14,7 +14,7 @@
             @endif
             <x-label for="banner_image" :value="__('Banner Image')" />
             <input type="file"
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 id="banner_image" wire:model="banner_image">
                 <x-input-error for="banner_image" />
         </div>
@@ -22,14 +22,14 @@
             <div class="lg:w-1/3 sm:w-1/2 px-2 mt-5 {{ $errors->has('name') ? 'is-invalid' : '' }}">
                 <label class="form-label" for="name">{{ __('Full Name') }}</label>
                 <input
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text" name="name" id="name" wire:model.lazy="name">
                 <x-input-error for="name" />
             </div>
             <div class="lg:w-1/3 sm:w-1/2 px-2 mt-5 {{ $errors->has('email') ? 'is-invalid' : '' }}">
                 <label class="form-label" for="email">{{ __('Email') }}</label>
                 <input
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="email" name="email" id="email" disabled wire:model="email">
                 <x-input-error for="email" />
             </div>        
@@ -38,7 +38,7 @@
         <div class="w-full mt-5 px-2 {{ $errors->has('password') ? 'is-invalid' : '' }}">
             <label class="form-label" for="password">{{ __('Password') }}</label>
             <input
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 type="password" name="password" id="password" wire:model.lazy="password">
             <x-input-error for="password" />
         </div>

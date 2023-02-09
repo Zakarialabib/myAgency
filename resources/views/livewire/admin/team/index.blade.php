@@ -8,7 +8,7 @@
                 @endforeach
             </select>
             <x-select-list
-                class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc-700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required id="language_id" name="language_id" wire:model="language_id" :options="$this->listsForFields['languages']" />
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
@@ -33,11 +33,9 @@
             <x-table.th>
                 {{ __('Language') }}
             </x-table.th>
-            <x-table.th>
+            <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
                 {{ __('Title') }}
-            </x-table.th>
-            <x-table.th>
-                {{ __('Image') }}
+                @include('components.table.sort', ['field' => 'title'])
             </x-table.th>
             <x-table.th>
                 {{ __('Status') }}
@@ -67,10 +65,10 @@
                         {{-- <input type="checkbox" value="{{ $team->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
-                        {{ $team->name }}
+                        <img src="{{ flagImageUrl($team->language->code) }}">
                     </x-table.td>
                     <x-table.td>
-                        {{ $team->language->name }} // <img src="{{ flagImageUrl($about->language->code) }}">
+                        {{ $team->name }}
                     </x-table.td>
                     <x-table.td>
                         <livewire:toggle-button :model="$team" field="status" key="{{ $team->id }}" />
@@ -88,7 +86,7 @@
                                 <x-heroicon-o-trash class="h-4 w-4" />
                             </button>
                             <button
-                                class="font-bold  bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300 uppercase justify-center text-xs py-2 px-3 rounded bg-orange-500 border-orange-800 focus:ring-orange-300 shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
+                                class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
                                 type="button" wire:click="confirm('clone', {{ $team->id }})"
                                 wire:loading.attr="disabled">
                                 <x-heroicon-o-duplicate class="h-4 w-4" />

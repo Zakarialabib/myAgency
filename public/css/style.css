@@ -588,7 +588,7 @@ body.menu-open {
 }
 
 .boxy h1.title {
-    font-size: 40px;
+    font-size: 2.5rem;
     line-height: 40px;
     margin: 0;
     margin-bottom: 10px;
@@ -1366,13 +1366,13 @@ body.menu-open {
 .few-contact .contact-info-holder .contact-info {
     font-family: "Lalezar";
     color: #232931;
-    font-size: 4.8rem;
+    font-size: 4rem;
 }
 
 .few-contact .contact-info-holder .contact-info a {
     font-family: "Lalezar";
     color: #97268B;
-    font-size: 4.8rem;
+    font-size: 4rem;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
@@ -1528,7 +1528,7 @@ body.menu-open {
 }
 
 .footer .normal-text {
-    margin-bottom: 6rem;
+    margin-bottom: 1rem;
 }
 
 .footer .contact-info-holder {
@@ -1544,13 +1544,11 @@ body.menu-open {
 .footer .contact-info-holder .contact-info {
     font-family: "Lalezar";
     color: #fff;
-    font-size: 4.8rem;
 }
 
 .footer .contact-info-holder .contact-info a {
     font-family: "Lalezar";
     color: #fff;
-    font-size: 4.8rem;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
@@ -1808,11 +1806,6 @@ body.menu-open {
     .extra-lg-text {
         font-size: 4.8rem;
         line-height: 3.4rem;
-    }
-
-    .lg-text {
-        font-size: 4rem;
-        line-height: 2.8rem;
     }
 
     .normal-text p {
@@ -2146,7 +2139,7 @@ body.menu-open {
     }
 
     .cnav .logo-holder img {
-        width: 2.2em;
+        width: 6em;
     }
 
     .cr-btn {
@@ -2160,11 +2153,6 @@ body.menu-open {
     .extra-lg-text {
         font-size: 3.8rem;
         line-height: 2.6rem;
-    }
-
-    .lg-text {
-        font-size: 2.6rem;
-        line-height: 1.9rem;
     }
 
     .normal-text p {
@@ -2205,12 +2193,7 @@ body.menu-open {
     }
 
     .footer .contact-info-holder .contact-info {
-        font-size: 2.2rem;
         margin-bottom: 3rem;
-    }
-
-    .footer .contact-info-holder .contact-info a {
-        font-size: 2.2rem;
     }
 
     .footer .contact-info-holder .social-media .social-link-holder a {
@@ -2418,6 +2401,18 @@ body.menu-open {
         top: 3.1rem;
     }
 
+    .translate {
+        left: inherit;
+        right: 0.8rem;
+        top: 6rem;
+        position: fixed;
+    }
+
+    .follow-us{
+        top: 77%;
+        font-size: 15px;
+    }
+
     .main-menu {
         width: 100%;
         padding: 2rem;
@@ -2447,7 +2442,7 @@ body.menu-open {
     }
 
     .cnav .logo-holder img {
-        width: 2rem;
+        width: 6rem;
     }
 
     .cnav .social-media {

@@ -79,6 +79,9 @@
          <x-sidebar.sublink title="{{ __('General Settings') }}" href="{{ route('admin.settings.index') }}"
         :active="request()->routeIs('admin.settings.index')" /> 
 
+        <x-sidebar.sublink title="{{ __('Email Settings') }}" href="{{ route('admin.settings.index') }}"
+        :active="request()->routeIs('admin.email-settings')" /> 
+
         <x-sidebar.sublink title="{{ __('Languages') }}" href="{{ route('admin.language.index') }}"
         :active="request()->routeIs('admin.language.index')" />
     </x-sidebar.dropdown>

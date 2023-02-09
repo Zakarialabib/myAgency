@@ -1,21 +1,21 @@
 <x-guest-layout>
 
-    @section('title', $section->title )
-    @section('meta-keywords', $section->title )
-    @section('meta-description',  Str::limit($section->content, 50, '...') )
+    @section('title', $section->title)
+    @section('meta-keywords', $section->title)
+    @section('meta-description', Str::limit($section->content, 50, '...'))
 
     <div>
         <header class="container-fluid header"
-        style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover;">
+            style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover;">
             <div class="mouse-scroll"></div>
             @if (empty($section))
                 <div class="row">
                     <div class="col">
                         <div class="extra-lg-text">
                             <span>user-centric</span><br>
-                        <span>experiences</span><br>
-                        <span>that actually</span><br>
-                        <span class="other-color">work</span>
+                            <span>experiences</span><br>
+                            <span>that actually</span><br>
+                            <span class="other-color">work</span>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
         <div class="pb-24 flex flex-wrap">
 
             @foreach ($services as $service)
-                <div class="my-4 px-4 sm:w-full md:w-full lg:w-full xl:w-1/3">
+                <div class="my-4 px-8 sm:w-full md:w-full lg:w-full xl:w-1/3">
                     <div class="boxy primary-color"
                         style="background-image: url({{ asset('uploads/services/' . $service->image) }});">
                         <div class="row">
@@ -63,22 +63,21 @@
         </div>
 
 
-        {{-- <h2 class="lg-text">Portfolio</h2> --}}
+        {{-- <h2 class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">Portfolio</h2> --}}
         <div class="flex flex-wrap">
             <ul>
                 @foreach ($portfolios as $portfolio)
                     <li>
                         <figure class="reveal-effect masker wow" style="visibility: visible;"> <a
-                                href="{{ route('front.portfolioDetails', $portfolio->slug) }}"
-                                class=""><img src="{{ asset('images/img3.png') }}" alt="Image"
-                                    class=""></a>
+                                href="{{ route('front.portfolioDetails', $portfolio->slug) }}" class=""><img
+                                    src="{{ asset('images/img3.png') }}" alt="Image" class=""></a>
                         </figure>
                         <div class="caption wow words chars splitting animated">
                             <h3>{{ $portfolio->title }}</h3>
                             <h5>{{ $portfolio->client_name }}</h5>
                             <div class="link">
                                 <a href="{{ route('front.portfolioDetails', $portfolio->slug) }}">
-                                    {{__('VIEW THIS PROJECT')}}
+                                    {{ __('VIEW THIS PROJECT') }}
                                 </a>
                             </div>
                         </div>
@@ -91,7 +90,7 @@
     <div class="container-fluid clients-section">
         <div class="flex flex-wrap">
             <div class="col">
-                <div class="lg-text">
+                <div class="xl:text-3xl lg:text-2xl md:text-2xl sm:text-xl lg-text">
                     <span>Trusted by top-tier</span><br>
                     <span>Companies, Agencies,</span><br>
                     <span>National Institutions, and more...</span>
@@ -113,21 +112,6 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid other-content">
-        <div class="flex flex-wrap">
-            <div class="col">
-                <div class="lg-text">have a project<br>for us?</div>
-                <div class="normal-text">
-                    <p>Contact us and we’ll send you the brief form to fill.<br>
-                        Then we’ll contact you within 24 hours.</p>
-                </div>
-                <div class="btn-holder">
-                    <a href="#" class="cr-btn ex-padding">let’s cre8</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     {{-- <livewire:front.contact-form /> --}}
 
