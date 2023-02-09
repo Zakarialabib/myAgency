@@ -41,7 +41,7 @@ Password : password
 
 - Team Adjust front blade views 
 
-- Sectiontitles admin (CRUD - Clone - Migration - Model - Views - Routes)
+- Sections admin (CRUD - Clone - Migration - Model - Views - Routes)
 
 - Team admin  (CRUD - Clone - Migration - Model - Views - Routes)
 
@@ -67,8 +67,8 @@ Password : password
 language edit json page
 Language create modal 
 Clone (bcategory, team)
-Sectiontitles Adjust front blade views  
-Sectiontitle admin 
+Sections Adjust front blade views  
+Section admin 
 Team admin
 Alerts Fixed with Jantinnerezo\LivewireAlert package in create and edit pages 
 TRIX rich text editor (integrated)

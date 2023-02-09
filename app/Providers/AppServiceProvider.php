@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use App\Models\Setting;
 use App\Models\Language;
-use App\Models\SectionTitle;
-use Illuminate\Support\Facades\Artisan;
+use App\Models\Settings;
+use App\Observers\SettingsObserver;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 
     /**
@@ -28,30 +32,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*', function ($view) {
+        if (env('APP_ENV') === 'production') {
+            URL::forceScheme('https');
+        }
 
-            $lang = Language::where('is_default', '1')->first();
-            
-            if (session()->has('lang')) {
-                $currentLang = Language::where('code', session()->get('lang'))->first();
+        View::share('languages', $this->getLanguages());
 
-                $view->with('currentLang', $currentLang);
+        Settings::observe(SettingsObserver::class);
 
-            } else {
-                $currentLang = Language::where('is_default', 1)->first();
+        // Model::shouldBeStrict(! $this->app->isProduction());
+    }
 
-                $view->with('currentLang', $currentLang);
-            }
-            
-            $theme_color = Setting::where(['key' => 'base_color'])->first()->value ?? '';
+    /** @return \App\Models\Language|\Illuminate\Database\Eloquent\Model|array|null */
+    private function getLanguages()
+    {
+        if ( ! Schema::hasTable('languages')) {
+            return;
+        }
 
-            $langs = Language::all();
-            $view->with('langs', $langs );
-            $view->with('lang', $lang );
-            $view->with('theme_color', $theme_color );
-            // dd($lang);
-            
+        return cache()->rememberForever('languages', function () {
+            return Session::has('language')
+                ? Language::pluck('name', 'code')->toArray()
+                : Language::where('is_default', 1)->first();
         });
     }
-    
 }
