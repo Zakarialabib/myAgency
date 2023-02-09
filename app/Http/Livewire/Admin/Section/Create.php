@@ -1,25 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Section;
 
-use Livewire\WithFileUploads;
 use App\Models\Section;
-use App\Models\Language;
-use Livewire\Component;
-use Str;
+use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use App\Models\Language;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class Create extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
-    
-    public Section $section;
-    
+
+    public $section;
+
     public $image;
 
-    protected $listeners = [
-        'submit',
+    public $createSection = false;
+
+    public $listeners = [
+        'createSection',
     ];
     
     protected $rules = [    
@@ -38,31 +45,46 @@ class Create extends Component
         'section.embeded_video' => 'nullable',
     ]; 
 
+    public function createSection()
+    {
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->createSection = true;
+    }
+
     public function mount(Section $section)
     {
         $this->section = $section;
     }
 
-    public function render()
+    public function render(): View|Factory
     {
         return view('livewire.admin.section.create');
     }
 
-    public function submit()
+    public function getLanguagesProperty(): Collection
+    {
+        return Language::select('name', 'id')->get();
+    }
+
+    public function save()
     {
         $this->validate();
-        
-        if($this->image){
-            $imageName = Str::slug($this->section->title).'.'.$this->image->extension();
-            $this->image->storeAs('sections',$imageName);
+
+        if ($this->image) {
+            $imageName = Str::slug($this->section->title).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
+            $this->image->storeAs('sections', $imageName);
             $this->section->image = $imageName;
         }
 
         $this->section->save();
 
-        $this->alert('success', __('Section created successfully!') );
+        $this->emit('refreshIndex');
 
-        return redirect()->route('admin.sections.index');
+        $this->alert('success', __('Section created successfully!'));
+
+        $this->createSection = false;
     }
-  
 }

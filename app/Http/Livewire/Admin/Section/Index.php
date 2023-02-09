@@ -1,20 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Section;
 
-use Livewire\Component;
 use App\Models\Language;
 use App\Models\Section;
 use Illuminate\Http\Response;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use App\Http\Livewire\WithConfirmation;
 use App\Http\Livewire\WithSorting;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Support\Collection;
+use Throwable;
+
 
 class Index extends Component
 {
     use WithPagination;
+    use LivewireAlert;
     use WithSorting;
-    use WithConfirmation;
+    use WithFileUploads;
+
+    public $image;
+
+    public $section;
+
+    public $listeners = [
+        'refreshIndex' => '$refresh',
+        'showModal',  'delete',
+    ];
+
+    public $refreshIndex;
+
+    public $showModal = false;
 
     public int $perPage;
 
@@ -28,13 +52,11 @@ class Index extends Component
 
     public $language_id;
 
-    public array $listsForFields = [];
-
     protected $queryString = [
-        'search' => [
+        'search'        => [
             'except' => '',
         ],
-        'sortBy' => [
+        'sortBy'        => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -62,21 +84,20 @@ class Index extends Component
         $this->selected = [];
     }
 
-    protected function initListsForFields(): void
+    public function getLanguagesProperty(): Collection
     {
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+        return Language::select('name', 'id')->get();
     }
 
     public function mount()
     {
-        $this->sortBy            = 'id';
-        $this->sortDirection     = 'desc';
-        $this->perPage           = 100;
-        $this->paginationOptions = config('project.pagination.options');
-        $this->orderable         = (new Section())->orderable;
-        $this->initListsForFields();
+        $this->sortBy = 'id';
+        $this->sortDirection = 'desc';
+        $this->perPage = 100;
+        $this->paginationOptions = [25, 50, 100];
+        $this->orderable = (new Section())->orderable;
     }
-    
+
     public function render()
     {
         $query = Section::when($this->language_id, function ($query) {
@@ -92,20 +113,21 @@ class Index extends Component
         return view('livewire.admin.section.index', compact('sections'));
     }
 
-      // Section  Delete
+     // Section  Delete
       public function delete(Section $section)
       {
-          // abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+          abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
           $section->delete();
-        //   $this->alert('warning', __('Section Deleted successfully!') );
+
+          $this->alert('warning', __('Section Deleted successfully!'));
       }
-      
 
      // Section  Clone
      public function clone(Section $section)
      {
          $section_details = Section::find($section->id);
-         // dd($section_details);
+
          Section::create([
              'language_id' => $section_details->language_id,
              'page' => $section_details->page,
@@ -119,6 +141,6 @@ class Index extends Component
              'content' => $section_details->content,
              'status' => 0,
          ]);
-         // $this->alert('success', __('Section Cloned successfully!') );
+         $this->alert('success', __('Section Cloned successfully!') );
      }
 }

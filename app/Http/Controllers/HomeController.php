@@ -62,32 +62,16 @@ class HomeController extends Controller
         return view('auth.approval');
     }
     
-    //About page
-    public function about()
-    {
-        if (session()->has('lang')) {
-            $currlang = Language::where('code', session()->get('lang'))->first();
-        } else {
-            $currlang = Language::where('is_default', 1)->first();
-        }
-
-        $teams = Team::where('status', 1)->where('language_id', $currlang->id)
-        ->get();
-
-        $section = Section::where('page', 2)->where('language_id', $currlang->id)
-        ->first();
-
-        $abouts = About::where('status', 1)->where('language_id', $currlang->id)
-        ->paginate(1);
-
-        return view('frontend.about',compact('abouts','section','teams'));
-    }
-
-    //Contact page
     public function contact()
     {
-        return view('frontend.contact');
+        return view('front.contact');
     }
+
+    public function about()
+    {
+        return view('front.about');
+    }
+
 
     //Portfolio page
     public function portfolio(Request $request) 
@@ -151,40 +135,26 @@ class HomeController extends Controller
         return view('frontend.team-details', compact('team'));
     }
 
-    // Blog Page  Funtion
-    public function blogs(Request $request)
+    public function blog()
     {
-        if (session()->has('lang')) {
-            $currlang = Language::where('code', session()->get('lang'))->first();
-        } else {
-            $currlang = Language::where('is_default', 1)->first();
-        }
+        // check if active
+        $blogs = Blog::with('category')->get();
 
-        $section = Section::where('page', 4)->where('language_id', $currlang->id)
-        ->first();
-
-        $bcategories = Bcategory::where('status', 1)->where('language_id', $currlang->id)->orderBy('id', 'DESC')->get();
-
-        $blogs = Blog::where('status', 1)->where('language_id', $currlang->id)
-                        ->paginate(5);
-
-        return view('frontend.blogs', compact('blogs', 'bcategories','section'));
+        return view('front.blog', compact('blogs'));
     }
 
-    // Blog Details  Funtion
-    public function blogdetails($slug) 
+    public function blogPage($slug)
     {
-        if (session()->has('lang')) {
-            $currlang = Language::where('code', session()->get('lang'))->first();
-        } else {
-            $currlang = Language::where('is_default', 1)->first();
-        }
+        // check if active
+        $blog = Blog::where('slug', $slug)->firstOrFail();
 
-        $blog = Blog::where('slug', $slug)->where('language_id', $currlang->id)->firstOrFail();
-        
-        $bcategories = Bcategory::where('status', 1)->where('language_id', $currlang->id)->orderBy('id', 'DESC')->get();
-       
-        return view('frontend.blogdetails', compact('blog', 'bcategories'));
+        return view('front.blog-page', compact('blog'));
+    }
+
+    public function dynamicPage($slug)
+    {
+        $page = Page::where('slug',$slug)->firstOrFail();
+        return view('front.dynamic-page', compact('page'));
     }
 
     // Change Language

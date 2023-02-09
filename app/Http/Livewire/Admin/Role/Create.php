@@ -1,20 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Role;
 
 use App\Models\Permission;
 use App\Models\Role;
-use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+
 class Create extends Component
 {
     use LivewireAlert;
+
     public Role $role;
 
     public array $permissions = [];
 
     public array $listsForFields = [];
-    
+
     protected $listeners = [
         'submit',
     ];
@@ -25,7 +31,7 @@ class Create extends Component
         $this->initListsForFields();
     }
 
-    public function render()
+    public function render(): View|Factory
     {
         return view('livewire.admin.role.create');
     }
@@ -45,11 +51,11 @@ class Create extends Component
     protected function rules(): array
     {
         return [
-            'role.title' => [
+            'role.title'       => [
                 'string',
                 'required',
             ],
-            'permissions' => [
+            'permissions'      => [
                 'required',
                 'array',
             ],

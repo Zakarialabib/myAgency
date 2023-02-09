@@ -1,32 +1,38 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Role;
 
 use App\Models\Permission;
 use App\Models\Role;
-use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+
 class Edit extends Component
 {
     use LivewireAlert;
+
     public Role $role;
 
     public array $permissions = [];
 
     public array $listsForFields = [];
-   
+
     protected $listeners = [
         'submit',
     ];
 
     public function mount(Role $role)
     {
-        $this->role        = $role;
+        $this->role = $role;
         $this->permissions = $this->role->permissions->pluck('id')->toArray();
         $this->initListsForFields();
     }
 
-    public function render()
+    public function render(): View|Factory
     {
         return view('livewire.admin.role.edit');
     }
@@ -46,11 +52,11 @@ class Edit extends Component
     protected function rules(): array
     {
         return [
-            'role.title' => [
+            'role.title'       => [
                 'string',
                 'required',
             ],
-            'permissions' => [
+            'permissions'      => [
                 'required',
                 'array',
             ],

@@ -7,10 +7,13 @@ use App\Models\Contact;
 use App\Mail\ContactForm as MailContactForm;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class ContactForm extends Component
 {
-    public Contact $contact;
+    use LivewireAlert;
+
+    public $contact;
     
     public $name, $email, $phone_number, $message;
     
@@ -54,13 +57,13 @@ class ContactForm extends Component
 
         $this->contact->save();
 
-        // $this->alert('success', __('Your Message is sent succesfully.') );
+        $this->alert('success', __('Your Message is sent succesfully.') );
 
         $this->resetInputFields();
 
-        // $user = User::find(1);
-        // $user_email = $user->email;
-        // Mail::to($user_email)->send(new MailContactForm($contact));
+        $user = User::find(1);
+        $user_email = $user->email;
+        Mail::to($user_email)->send(new MailContactForm($contact));
 
     }
 }

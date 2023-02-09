@@ -1,20 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Role;
 
+use App\Http\Livewire\WithSorting;
 use App\Models\Role;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Http\Livewire\WithConfirmation;
-use App\Http\Livewire\WithSorting;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class Index extends Component
 {
     use WithPagination;
     use WithSorting;
-    use WithConfirmation;
 
     public int $perPage;
 
@@ -27,10 +29,10 @@ class Index extends Component
     public array $paginationOptions;
 
     protected $queryString = [
-        'search' => [
+        'search'        => [
             'except' => '',
         ],
-        'sortBy' => [
+        'sortBy'        => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -60,16 +62,16 @@ class Index extends Component
 
     public function mount()
     {
-        $this->sortBy            = 'id';
-        $this->sortDirection     = 'desc';
-        $this->perPage           = 100;
-        $this->paginationOptions = config('project.pagination.options');
-        $this->orderable         = (new Role())->orderable;
+        $this->sortBy = 'id';
+        $this->sortDirection = 'desc';
+        $this->perPage = 100;
+        $this->paginationOptions = [25, 50, 100];
+        $this->orderable = (new Role())->orderable;
     }
 
-    public function render()
+    public function render(): View|Factory
     {
-        $query = Role::with(['permissions'])->advancedFilter([
+        $query = Role::advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,

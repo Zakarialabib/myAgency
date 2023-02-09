@@ -4,10 +4,14 @@ namespace App\Http\Livewire\Front;
 
 use Livewire\Component;
 use App\Models\Newsletter;
+use App\Mail\SubscribedMail;
+use Illuminate\Support\Facades\Mail;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class NewslettersForm extends Component
 {
-    public Newsletter $newsletter;
+    
+    public $newsletter;
     
     public $email;
     
@@ -45,13 +49,14 @@ class NewslettersForm extends Component
 
         $this->newsletter->save();
 
-        // $this->alert('success', __('Your Message is sent succesfully.') );
+        $this->alert('success', __('Your are subscribed to our newsletters.') );
 
         $this->resetInputFields();
 
-        // $user = User::find(1);
-        // $user_email = $user->email;
-        // Mail::to($user_email)->send(new MailNewsletterForm($newsletter));
+        $user = User::find(1);
+        $user_email = $user->email;
+        Mail::to($user_email)->send(new SubscribedMail());
+
 
     }
     

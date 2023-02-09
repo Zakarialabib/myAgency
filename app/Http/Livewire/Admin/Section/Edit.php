@@ -1,25 +1,26 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Section;
-
-use Livewire\WithFileUploads;
 use App\Models\Section;
-use App\Models\Language;
-use Livewire\Component;
-use Str;
+use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use App\Models\Language;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class Edit extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
     
-    public Section $section;
+    public $section;
     
-    public $image;
+    public $editModal = false;
 
     protected $listeners = [
-        'submit',
+        'editModal',
     ];
     
     protected $rules = [    
@@ -49,21 +50,35 @@ class Edit extends Component
         return view('livewire.admin.section.edit');
     }
 
-    public function submit()
-    {
-        $this->validate();
-        
-        if($this->image){
-            $imageName = Str::slug($this->section->title).'.'.$this->image->extension();
-            $this->image->storeAs('sections',$imageName);
-            $this->section->image = $imageName;
-        }
+    public function editModal(Section $section)
+     {
+         $this->resetErrorBag();
 
-        $this->section->save();
+         $this->resetValidation();
 
-        $this->alert('success', __('Section updated successfully!') );
+         $this->section = $section;
 
-        return redirect()->route('admin.sections.index');
-    }
-  
+         $this->editModal = true;
+     }
+
+     public function update()
+     {
+         try {
+             $this->validate();
+
+             if ($this->image) {
+                 $imageName = Str::slug($this->section->title).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
+                 $this->image->storeAs('sections', $imageName);
+                 $this->section->image = $imageName;
+             }
+
+             $this->section->save();
+
+             $this->alert('success', __('Section updated successfully!'));
+
+             $this->editModal = false;
+         } catch (Throwable $th) {
+             $this->alert('warning', __('Section was not updated!'));
+         }
+     }
 }
