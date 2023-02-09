@@ -6,14 +6,19 @@
                 <p>Contact us and we’ll send you the brief form to fill.<br>
                     Then we’ll contact you within 24 hours.</p>
             </div>
-            <div class="contact-info-holder text-center">
-                <div class="title text-center">{{ __('Call us') }}</div>
-                <div class="xl:text-5xl lg:text-3xl sm:text-xl pt-4 text-center contact-info">{{ $phone_number }}</div>
+        </div>
+    </div>
+    <div class="flex flex-col text-center pt-4">
+        <div class="md:w-1/2 sm:w-full py-4">
+            <div class="contact-info-holder">
+                <div class="title">{{ __('Call us') }}</div>
+                <div class="contact-info">{{ $phone_number }}</div>
             </div>
-            <div class="contact-info-holder text-center">
-                <div class="title text-center">{{ __('E-mail') }}</div>
-                <div class="xl:text-5xl lg:text-3xl sm:text-xl py-4 text-center contact-info"><a
-                        href="mailto:{{ $email }}">{{ $email }}</a></div>
+        </div>
+        <div class="md:w-1/2 sm:w-full py-4">
+            <div class="contact-info-holder">
+                <div class="title">{{ __('E-mail') }}</div>
+                <div class="contact-info"><a href="mailto:{{ $email }}">{{ $email }}</a></div>
                 {{-- <div class="social-media">
                     <div class="social-link-holder"><a href="#">Dribbble</a></div>
                     <div class="social-link-holder"><a href="#">Instagram</a></div>

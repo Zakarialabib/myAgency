@@ -28,7 +28,7 @@
             <div class="w-1/2 lg:w-1/2 md:w-full sm:w-full">
                 <div class="contact-info-holder">
                     <div class="title">E-mail</div>
-                    <div class="contact-info"><a href="mailto:hello@cre8.com">hello@cre8.com</a></div>
+                    <div class="contact-info"><a href="mailto:hello@Spark.com">hello@Spark.com</a></div>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                         <span>Email us</span>
                     </div>
                     <div class="normal-lg-text">
-                        <p>Tell us about your awesome<br>project, or just say hi at<br> hello@cre8.com</p>
+                        <p>Tell us about your awesome<br>project, or just say hi at<br> hello@Spark.com</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                 <div class="extra-lg-text">
                     <span>behind every</span><br>
                     <span>great project,</span><br>
-                    <span>cre8 team!</span>
+                    <span>Spark team!</span>
                 </div>
                 <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span class="other-color">our people </span></div>
                 <div class="normal-text">
@@ -108,7 +108,7 @@
             </div>
             <div class="col-sm-5">
                 <div class="btn-holder">
-                    <a href="#" class="cr-btn black ex-padding">julia@cre8.com</a>
+                    <a href="#" class="cr-btn black ex-padding">julia@Spark.com</a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
             </div>
             <div class="col-sm-5">
                 <div class="btn-holder">
-                    <a href="#" class="cr-btn black ex-padding">laila@cre8.com</a>
+                    <a href="#" class="cr-btn black ex-padding">laila@Spark.com</a>
                 </div>
             </div>
         </div>
@@ -134,7 +134,7 @@
             </div>
             <div class="col-sm-5">
                 <div class="btn-holder">
-                    <a href="#" class="cr-btn black ex-padding">faisal@cre8.com</a>
+                    <a href="#" class="cr-btn black ex-padding">faisal@Spark.com</a>
                 </div>
             </div>
         </div>

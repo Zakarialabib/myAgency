@@ -1,4 +1,7 @@
 <x-guest-layout>
+    @section('title', $sectiontitle->title )
+    @section('meta-keywords', $sectiontitle->title)
+    @section('meta-description',  Str::limit($sectiontitle->content, 50, '...'))
 
     @section('title', $section->title )
     @section('meta-keywords', $section->title )
@@ -46,48 +49,32 @@
             </div>
         @endforeach
         <div class="flex flex-wrap">
-            <div class="md:w-1/3 px-2">
+            <div class="md:w-1/2 sm-w-full px-2">
                 <div class="text-box">
-                    <div class="title">Discovery</div>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-                        born and I will give you a complete account of the</p>
+                    <div class="title">{{ __('Passion') }}</div>
+                    <p>{{ __('Nous sommes tous des passionnés par l’univers digital et c’est ce qui nous réunit au sein de Spark Salze. L’effet WOW de nos clients est signe de ce que nous proposons comme valeur ajoutée.') }}
+                    </p>
                 </div>
             </div>
-            <div class="md:w-1/3 px-2">
+            <div class="md:w-1/2 sm-w-full px-2">
                 <div class="text-box">
-                    <div class="title">Planning</div>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-                        born and I will give you a complete account of the</p>
+                    <div class="title">{{ __('Sens') }}</div>
+                    <p>{{ __('Nous agissons par Sens et nous ne nous concentrons pas seulement sur l’amélioration de votre Chiffres d’affaires mais sur toute l’image de votre marque. Nous croyons que la collaboration avec vous est une création de sens') }}
+                    </p>
                 </div>
             </div>
-            <div class="md:w-1/3 px-2">
+            <div class="md:w-1/2 sm-w-full px-2">
                 <div class="text-box">
-                    <div class="title">Prototype</div>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-                        born and I will give you a complete account of the</p>
+                    <div class="title">{{ __('Agilité') }}</div>
+                    <p>{{ __('Notre promesse est d’assurer un parcours agile et d’intégrer le client au cœur de notre processus de production, nous connaissons le marché et c’est difficile de trouver un partenaire comme Spark Salze.') }}
+                    </p>
                 </div>
             </div>
-        </div>
-        <div class="flex flex-wrap">
-            <div class="md:w-1/3 px-2">
+            <div class="md:w-1/2 sm-w-full px-2">
                 <div class="text-box">
-                    <div class="title">Design</div>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-                        born and I will give you a complete account of the</p>
-                </div>
-            </div>
-            <div class="md:w-1/3 px-2">
-                <div class="text-box">
-                    <div class="title">Development</div>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-                        born and I will give you a complete account of the</p>
-                </div>
-            </div>
-            <div class="md:w-1/3 px-2">
-                <div class="text-box">
-                    <div class="title">Delivery</div>
-                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was
-                        born and I will give you a complete account of the</p>
+                    <div class="title">{{ __('Engagement') }}</div>
+                    <p>{{ __('Notre sens d’engagement nous permet de réaliser nos services avec la meilleure qualité possible. Chacun de nous a un défi quotidien : Comment améliorer la qualité de mon travail pour générer les meilleurs résultats pour mon client ?') }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -160,7 +147,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid jobs-section padding-for-team no-padding-bottom">
+    {{-- <div class="container-fluid jobs-section padding-for-team no-padding-bottom">
         <div class="flex flex-wrap">
             <div class="flex-grow">
                 <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text"><span class="other-color">job
@@ -219,8 +206,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid clients-section">
+    </div> --}}
+    <div class="container-fluid clients-section pt-28">
         <div class="flex flex-wrap">
             <div class="flex-grow">
                 <div class="xl:text-5xl lg:text-xl md:text-lg sm:text-lg lg-text">
@@ -245,5 +232,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 </x-guest-layout>

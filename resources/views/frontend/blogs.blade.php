@@ -8,7 +8,7 @@
         @if (empty($section))
         <div class="row">
             <div class="col">
-                <div class="extra-lg-text">
+                <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
                     <span>perfection is</span><br>
                     <span>not a myth</span><br>
                     <span class="other-color">check our</span><br>

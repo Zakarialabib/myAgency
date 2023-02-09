@@ -1,5 +1,5 @@
 <x-guest-layout>
-    @section('title', {{$blog->title}} )
+    @section('title', $blog->title )
     @yield('meta-keywords', "$blog->meta_keywords")
     @yield('meta-description', "$blog->meta_description")
 
