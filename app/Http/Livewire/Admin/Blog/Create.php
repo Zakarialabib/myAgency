@@ -1,75 +1,94 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Blog;
 
-use Livewire\WithFileUploads;
-use App\Models\Bcategory;
-use App\Models\Language;
-use Livewire\Component;
 use App\Models\Blog;
-use Str;
+use App\Models\BlogCategory;
+use App\Models\Language;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class Create extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
 
-    public Blog $blog; 
-   
+    public $createBlog;
+
     public $image;
-    
+
+    public $blog;
+
+    public $blogcategory;
+
+    public $listeners = ['createBlog'];
+
     public array $listsForFields = [];
-    
-    protected $listeners = [
-        'submit',
-    ];
 
     public function mount(Blog $blog)
     {
         $this->blog = $blog;
+
         $this->initListsForFields();
     }
 
-    protected function initListsForFields(): void
+    public array $rules = [
+        'blog.title'            => ['required', 'string', 'max:255'],
+        'blog.category_id'      => ['required', 'integer'],
+        'blog.details'          => ['required'],
+        'blog.meta_tag'         => ['nullable'],
+        'blog.meta_description' => ['nullable'],
+        'blog.featured'         => ['nullable'],
+        'blog.language_id'      => ['nullable', 'integer'],
+    ];
+
+    public function render(): View|Factory
     {
-        $this->listsForFields['bcategories'] = Bcategory::pluck('name', 'id')->toArray();
+        // abort_if(Gate::denies('blog_create'), 403);
+
+        return view('livewire.admin.blog.create');
     }
 
-    protected $rules = [    
-        'blog.title' => 'required|unique:blogs,title|max:191',
-        'blog.status' => 'required',
-        'blog.content' => 'required',
-        'blog.bcategory_id' => 'required',
-        'blog.meta_keywords' => 'required',
-        'blog.meta_description' => 'required',
-        'blog.language_id' => 'required',
-    ]; 
+    public function createBlog()
+    {
+        $this->resetErrorBag();
 
-    // Store Blog 
-    public function submit()
+        $this->resetValidation();
+
+        $this->createBlog = true;
+    }
+
+    public function create()
     {
         $this->validate();
+
         $this->blog->slug = Str::slug($this->blog->title);
-        // Store image
-        if($this->image){
+
+        if ($this->image) {
             $imageName = Str::slug($this->blog->title).'.'.$this->image->extension();
-            $this->image->storeAs('blogs',$imageName);
+            $this->image->storeAs('blogs', $imageName);
             $this->blog->image = $imageName;
         }
 
         $this->blog->save();
-            
-        $this->alert('success', __('Blog created successfully!') );
-        
-        return redirect()->route('admin.blogs.index');
 
+        $this->emit('refreshIndex');
+
+        $this->alert('success', __('Blog created successfully.'));
+
+        $this->createBlog = false;
     }
 
-    public function render()
+    protected function initListsForFields(): void
     {
-        return view('livewire.admin.blog.create');
+        $this->listsForFields['categories'] = BlogCategory::pluck('title', 'id')->toArray();
+        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
     }
-
-
 }

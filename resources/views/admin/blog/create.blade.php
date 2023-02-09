@@ -1,20 +1,212 @@
 @extends('layouts.dashboard')
-@section('title', __('Create Blog'))
+
 @section('content')
-    <div class="card bg-white dark:bg-dark-eval-1">
-        <div class="p-6 rounded-t rounded-r mb-0 border-b border-slate-200">
-            <div class="card-header-container flex flex-wrap">
-                <h6 class="text-xl font-bold text-zinc-700 dark:text-zinc-30000000000">
-                    {{ __('Add Blog') }}
-                </h6>
-                <a href="{{ route('admin.blogs.index')  }}"
-                    class=" leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-center btn-sm">
-                    <i class="fas fa-angle-double-left"></i> {{ __('Back') }}
-                </a>
+
+            <div class="content-area">
+              <div class="mr-breadcrumb">
+                <div class="row">
+                  <div class="col-lg-12">
+                      <h4 class="heading">{{ __('Add New Post') }} <a class="add-btn" href="{{route('admin.blogs')}}"><i class="fas fa-arrow-left"></i> {{ __('Back') }}</a></h4>
+                      <ul class="links">
+                        <li>
+                          <a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }} </a>
+                        </li>
+                        <li><a href="javascript:;">{{ __('Blog') }}</a></li>
+                        <li>
+                          <a href="{{ route('admin.blogs') }}">{{ __('Posts') }}</a>
+                        </li>
+                        <li>
+                          <a href="{{ route('admin-blog-create') }}">{{ __('Add New Post') }}</a>
+                        </li>
+                      </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="add-product-content1 add-product-content2">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="product-description">
+                      <div class="body-area">
+                        <div class="gocover" style="background: url({{asset('assets/images/'.$gs->admin_loader)}}) no-repeat scroll center center rgba(45, 45, 45, 0.5);"></div>
+                        <x-form-alert />  
+                      <form id="geniusform" action="{{route('admin-blog-create')}}" method="POST" enctype="multipart/form-data">
+                        {{csrf_field()}}
+
+
+												<div class="row">
+													<div class="col-lg-4">
+													<div class="left-area">
+														<h4 class="heading">{{ __('Select Language') }}*</h4>
+													</div>
+													</div>
+													<div class="col-lg-7">
+														<select name="language_id" required="">
+															@foreach(DB::table('languages')->get() as $ldata)
+																<option value="{{ $ldata->id }}">{{ $ldata->language }}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Category') }}*</h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                              <select  name="category_id" required="">
+                                  <option value="">{{ __('Select Category') }}</option>
+                                    @foreach($cats as $cat)
+                                      <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @endforeach
+                                </select>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Title') }} *</h4>
+                                <p class="sub-heading">{{ __('(In Any Language)') }}</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <input type="text" class="input-field" name="title" placeholder="{{ __('Title') }}" required="" value="">
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Current Featured Image') }} *</h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <div class="img-upload">
+                                <div id="image-preview" class="img-preview" style="background: url({{ asset('assets/admin/images/upload.png') }});">
+                                    <label for="image-upload" class="img-label" id="image-label"><i class="icofont-upload-alt"></i>{{ __('Upload Image') }}</label>
+                                    <input type="file" name="photo" class="img-upload" id="image-upload">
+                                  </div>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                              <h4 class="heading">
+                                  {{ __('Description') }} *
+                              </h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                              <textarea  class="nic-edit-p" name="details"></textarea> 
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Source') }} *</h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <input type="text" class="input-field" name="source" placeholder="{{ __('Source') }}" required="" value="{{ Request::old('source') }}">
+
+                            <div class="checkbox-wrapper">
+                              <input type="checkbox" name="secheck" class="checkclick" id="allowProductSEO">
+                              <label for="allowProductSEO">{{ __('Allow Blog SEO') }}</label>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <div class="showbox">
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <div class="left-area">
+                                  <h4 class="heading">{{ __('Meta Tags') }} *</h4>
+                              </div>
+                            </div>
+                            <div class="col-lg-7">
+                              <ul id="metatags" class="myTags">
+                              </ul>
+                            </div>
+                          </div>  
+
+                          <div class="row">
+                            <div class="col-lg-4">
+                              <div class="left-area">
+                                <h4 class="heading">
+                                    {{ __('Meta Description') }} *
+                                </h4>
+                              </div>
+                            </div>
+                            <div class="col-lg-7">
+                              <div class="text-editor">
+                                <textarea class="input-field" name="meta_description" placeholder="{{ __('Meta Description') }}"></textarea> 
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Tags') }} *</h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <ul id="tags" class="myTags">
+                            </ul>
+                          </div>
+                        </div>
+
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                              
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <button class="addProductSubmit-btn" type="submit">{{ __('Create Post') }}</button>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
-        <div class="p-4">
-            @livewire('admin.blog.create')
-        </div>
-    </div>
+
 @endsection
+
+@section('scripts')
+<script type="text/javascript">
+
+
+(function($) {
+		"use strict";
+
+          $("#metatags").tagit({
+          fieldName: "meta_tag[]",
+          allowSpaces: true 
+          });
+
+          $("#tags").tagit({
+          fieldName: "tags[]",
+          allowSpaces: true 
+        });
+        
+})(jQuery);
+
+</script>
+@endsection
+

@@ -1,9 +1,9 @@
 .select2 {
-  @apply w-full border-0 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring !important;
+  @apply w-full border-0 placeholder-gay-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring !important;
 }
 
 .select2-dropdown {
-  @apply absolute block w-auto box-border bg-white shadow-lg border-blueGray-200 z-50 float-left;
+  @apply absolute block w-auto box-border bg-white shadow-lg border-gray-200 z-50 float-left;
 }
 
 .select2-container--default .select2-selection--single {
@@ -25,11 +25,11 @@
 }
 
 .select2-container .select2-selection--single .select2-selection__rendered {
-  @apply px-3 py-3 text-blueGray-600
+  @apply px-3 py-3 text-gray-600
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
-  @apply px-3 py-2 text-blueGray-600
+  @apply px-3 py-2 text-gray-600
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {

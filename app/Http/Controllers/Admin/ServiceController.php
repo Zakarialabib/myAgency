@@ -7,7 +7,7 @@ use App\Helpers\Helper;
 use App\Models\Service;
 use App\Models\Language;
 use App\Models\Portfolio;
-use App\Models\Sectiontitle;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Admin\SectiontitleController;
+use App\Http\Controllers\Admin\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,8 +68,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     // Team
     Route::resource('teams', TeamController::class, ['except' => ['store', 'update', 'destroy']]);
     
-    // Sectiontitles
-    Route::resource('sectiontitles', SectiontitleController::class, ['except' => ['store', 'update', 'destroy']]);
+    // Sections
+    Route::resource('sections', SectionController::class, ['except' => ['store', 'update', 'destroy']]);
     
     // Setting
     Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);

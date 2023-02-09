@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +16,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(SettingsTableSeeder::class);
+        \App\Models\User::factory(10)->create();
+
+        $this->call([
+
+            CurrenciesSeeder::class,
+            LanguagesSeeder::class,
+            BrandSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            SettingSeeder::class,
+            FeaturedBannerSeeder::class,
+            BlogSeeder::class,
+            SliderSeeder::class,
+            RolesSeeder::class,
+            PermissionsSeeder::class,
+            PermissionRoleSeeder::class,
+            SuperUserSeeder::class,
+            RoleUserSeeder::class,
+            ShippingSeeder::class,
+
+        ]);
     }
 }

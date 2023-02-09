@@ -39,7 +39,8 @@
     <link rel="shortcut icon" href="{{ asset('assets/front/img/' . $fav_icon) }}" type="image/png">
 
     <!-- Styles -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('/css/app.css') }}" media="all">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <link type="text/css" rel="stylesheet" href="{{ asset('/assets/css/vendors.css') }}" media="all">
 
 </head>

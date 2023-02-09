@@ -8,54 +8,56 @@ use App\Support\HasAdvancedFilter;
 class Blog extends Model
 {
     use HasAdvancedFilter;
-    
-    public $table = 'blogs';
+
+    protected $filterable = [
+        'id',
+        'title',
+        'details',
+        'image',
+        'slug',
+        'status',
+        'featured',
+        'meta_title',
+        'meta_desc',
+        'language_id',
+    ];
 
     public $orderable = [
         'id',
-        'language_id',
-        'bcategory_id',
         'title',
-        'slug',
+        'details',
         'image',
-        'content',
+        'slug',
         'status',
-        'meta_keywords',
-        'meta_description',
-    ];
-
-    public $filterable = [
-        'id',
+        'featured',
+        'meta_title',
+        'meta_desc',
         'language_id',
-        'bcategory_id',
-        'title',
-        'slug',
-        'image',
-        'content',
-        'status',
-        'meta_keywords',
-        'meta_description',
     ];
 
     protected $fillable = [
-        'id',
-        'language_id',
-        'bcategory_id',
         'title',
-        'slug',
+        'details',
         'image',
-        'content',
+        'slug',
         'status',
-        'meta_keywords',
-        'meta_description',
+        'featured',
+        'meta_title',
+        'meta_desc',
+        'language_id',
     ];
 
-    public function bcategory()
+    protected $dates = ['created_at'];
+
+    public $timestamps = false;
+
+    public function category()
     {
-        return $this->belongsTo('App\Models\Bcategory');
+        return $this->belongsTo('App\Models\BlogCategory', 'category_id')->withDefault();
     }
 
-    public function language() {
-        return $this->belongsTo('App\Models\Language');
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Language', 'language_id')->withDefault();
     }
 }

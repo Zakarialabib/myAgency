@@ -12,7 +12,7 @@
         </x-slot>
     </x-sidebar.link>
     
-    <x-sidebar.link title="{{ __('Section titles') }}" href="{{ route('admin.sectiontitles.index') }}" :isActive="request()->routeIs('admin.sectiontitles.index')">
+    <x-sidebar.link title="{{ __('Section titles') }}" href="{{ route('admin.sections.index') }}" :isActive="request()->routeIs('admin.sections.index')">
         <x-slot name="icon">
             <x-heroicon-o-users class="flex-shrink-0 w-6 h-6" aria-hidden="true" />
         </x-slot>

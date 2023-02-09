@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
@@ -11,25 +13,26 @@ class Role extends Model
     use HasFactory;
     use HasAdvancedFilter;
 
-    public const ROLE_ADMIN     = 'ADMIN';
-    public const ROLE_VENDOR    = 'VENDOR';
-    public const ROLE_CLIENT   = 'CLIENT';
+    public const ROLE_ADMIN = 'ADMIN';
+
+    public const ROLE_CLIENT = 'CLIENT';
 
     public $table = 'roles';
 
     public $orderable = [
         'id',
-        'title',
+        'name',
     ];
 
     public $filterable = [
         'id',
-        'title',
+        'name',
         'permissions.title',
     ];
 
     protected $fillable = [
-        'title',
+        'name',
+        'guard_name',
     ];
 
     protected $dates = [
@@ -45,5 +48,11 @@ class Role extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'role_user', 'role_id', 'user_id');
+    }
+
+    // syncPermissions
+    public function syncPermissions($permissions)
+    {
+        $this->permissions()->sync($permissions);
     }
 }

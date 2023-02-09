@@ -1,45 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Blog;
 
-use Livewire\Component;
-use App\Models\Language;
-use App\Models\Blog;
-use App\Models\Sectiontitle;
-use Illuminate\Http\Response;
-use Livewire\WithPagination;
-use App\Http\Livewire\WithConfirmation;
 use App\Http\Livewire\WithSorting;
+use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\Language;
+use Illuminate\Support\Facades\Gate;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class Index extends Component
 {
     use WithPagination;
     use WithSorting;
-    use WithConfirmation;
-    
-    public int $perPage;
+    use LivewireAlert;
 
-    public array $orderable;
-    
-    public string $search = '';
-    
-    public array $selected = [];
-    
-    public array $paginationOptions;
-    
-    public $language_id;
-
-    public array $listsForFields = [];
-    
-    protected $listeners = [
-        'confirmed'
+    public $listeners = [
+        'editModal', 'refreshIndex' => '$refresh',
     ];
 
+    public int $perPage;
+
+    public $editModal = false;
+
+    public $blog;
+
+    public $confirmDelete;
+
+    public $refreshIndex;
+
+    public array $orderable;
+
+    public string $search = '';
+
+    public array $selected = [];
+
+    public array $paginationOptions;
+
+    public array $listsForFields = [];
+
     protected $queryString = [
-        'search' => [
+        'search'        => [
             'except' => '',
         ],
-        'sortBy' => [
+        'sortBy'        => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -66,29 +76,30 @@ class Index extends Component
     {
         $this->selected = [];
     }
-    
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
-    }
+
+    public array $rules = [
+        'blog.title'            => ['required', 'string', 'max:255'],
+        'blog.category_id'      => ['required', 'integer'],
+        'blog.details'          => ['required'],
+        'blog.meta_tag'         => ['nullable'],
+        'blog.meta_description' => ['nullable'],
+        'blog.featured'         => ['nullable'],
+        'blog.language_id'      => ['nullable', 'integer'],
+    ];
 
     public function mount()
     {
-        $this->sortBy            = 'id';
-        $this->sortDirection     = 'desc';
-        $this->perPage           = 100;
-        $this->paginationOptions = config('project.pagination.options');
-        $this->orderable         = (new Blog())->orderable;
+        $this->sortBy = 'id';
+        $this->sortDirection = 'desc';
+        $this->perPage = 25;
+        $this->paginationOptions = [25, 50, 100];
+        $this->orderable = (new Blog())->orderable;
         $this->initListsForFields();
     }
 
-    public function render()
-    { 
-        $static = Sectiontitle::where('page', 3)->where('language_id', $this->language_id)->first();
-
-        $query = Blog::when($this->language_id, function ($query) {
-            return $query->where('language_id', $this->language_id);
-        })->advancedFilter([
+    public function render(): View|Factory
+    {
+        $query = Blog::advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
@@ -96,33 +107,48 @@ class Index extends Component
 
         $blogs = $query->paginate($this->perPage);
 
-        return view('livewire.admin.blog.index', compact('blogs','static'));
+        return view('livewire.admin.blog.index', compact('blogs'));
     }
 
-    // Blog  Delete
-    public function delete(blog $blog)
+    public function editModal(Blog $blog)
     {
-        // abort_if(Gate::denies('blog_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $blog->delete();
-        $this->alert('warning', __('Blog Deleted successfully!') );
+        // abort_if(Gate::denies('blog_edit'), 403);
+
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->blog = $blog;
+
+        $this->editModal = true;
     }
-    
-    // Blog  Clone
-    public function clone(blog $blog)
+
+    public function update()
     {
-        $blog_details = Blog::find($blog->id);
-        // dd($blog_details);
-        Blog::create([
-            'bcategory_id' => $blog_details->bcategory_id,
-            'language_id' => $blog_details->language_id,
-            'slug' => !empty($blog_details->slug) ? \Str::slug($blog_details->slug) : \Str::slug($blog_details->title) ,
-            'status' => 0,
-            'content' => $blog_details->content,
-            'title' => $blog_details->title,
-            'meta_keywords' => $blog_details->meta_keywords,
-            'meta_description' => $blog_details->meta_description,
-            'image' => $blog_details->image,
-        ]);
-        // $this->alert('success', __('Blog Cloned successfully!') );
+        // abort_if(Gate::denies('blog_edit'), 403);
+
+        $this->validate();
+
+        if ($this->blog->save()) {
+            $this->editModal = false;
+            $this->alert('success', __('Blog updated successfully'));
+        } else {
+            $this->alert('error', __('Blog not updated'));
+        }
+    }
+
+    public function delete(Blog $blog)
+    {
+        abort_if(Gate::denies('blog_delete'), 403);
+
+        $blog->delete();
+
+        $this->alert('success', __('Blog deleted successfully.'));
+    }
+
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['categories'] = BlogCategory::pluck('title', 'id')->toArray();
+        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
     }
 }

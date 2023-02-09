@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin\Team;
 use Livewire\Component;
 use App\Models\Language;
 use App\Models\Team;
-use App\Models\Sectiontitle;
+use App\Models\Section;
 use Illuminate\Http\Response;
 use Livewire\WithPagination;
 use App\Http\Livewire\WithConfirmation;
@@ -80,7 +80,7 @@ class Index extends Component
     
     public function render()
     {
-        $static = Sectiontitle::where('page', 2)->where('language_id', $this->language_id)->first();
+        $static = Section::where('page', 2)->where('language_id', $this->language_id)->first();
 
         $query = Team::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);

@@ -1,14 +1,14 @@
 <x-guest-layout>
 
-    @section('title', {{$sectiontitle->title}} )
-    @section('meta-keywords', {{$sectiontitle->title}} )
-    @section('meta-description', {{ Str::limit($sectiontitle->content, 50, '...') }})
+    @section('title', $section->title )
+    @section('meta-keywords', $section->title )
+    @section('meta-description',  Str::limit($section->content, 50, '...') )
 
     <div>
         <header class="container-fluid header"
-        style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
+        style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover;">
             <div class="mouse-scroll"></div>
-            @if (empty($sectiontitle))
+            @if (empty($section))
                 <div class="row">
                     <div class="col">
                         <div class="extra-lg-text">
@@ -23,11 +23,11 @@
                 <div>
                     <div class="flex-grow">
                         <div class="lg-text">
-                            <span>{{ $sectiontitle->title }}</span>
-                            <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                            <span>{{ $section->title }}</span>
+                            <span class="other-color">{{ $section->subtitle }}</span>
                         </div>
                         <div class="normal-text">
-                            <p>{!! $sectiontitle->content !!}</p>
+                            <p>{!! $section->content !!}</p>
                         </div>
                     </div>
                 </div>

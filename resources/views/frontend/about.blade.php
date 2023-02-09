@@ -1,12 +1,12 @@
 <x-guest-layout>
 
-    @section('title', {{$sectiontitle->title}} )
-    @section('meta-keywords', {{$sectiontitle->title}} )
-    @section('meta-description', {{ Str::limit($sectiontitle->content, 50, '...') }})
+    @section('title', $section->title )
+    @section('meta-keywords', $section->title )
+    @section('meta-description',  Str::limit($section->content, 50, '...') )
 
     <header class="container-fluid header"
-    style="background-image: url({{ asset('/uploads/sectiontitles/' . $sectiontitle->image) }});background-size: cover;">
-        @if (empty($sectiontitle))
+    style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover;">
+        @if (empty($section))
             <div class="row">
                 <div class="col">
                     <div class="extra-lg-text">
@@ -21,11 +21,11 @@
             <div>
                 <div class="flex-grow">
                     <div class="lg-text">
-                        <span>{{ $sectiontitle->title }}</span>
-                        <span class="other-color">{{ $sectiontitle->subtitle }}</span>
+                        <span>{{ $section->title }}</span>
+                        <span class="other-color">{{ $section->subtitle }}</span>
                     </div>
                     <div class="normal-text">
-                        <p>{!! $sectiontitle->content !!}</p>
+                        <p>{!! $section->content !!}</p>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
         </div>
     </div>
     <div class="container-fluid team-section">
-        @if(empty($sectiontitle_1))
+        @if(empty($section_1))
         <div>
             <div class="flex-grow">
                 <div class="extra-lg-text">
@@ -106,11 +106,11 @@
             <div>
                 <div class="flex-grow">
                     <div class="lg-text">
-                        <span>{{ $sectiontitle_1->title }}</span>
-                        <span class="other-color">{{ $sectiontitle_1->subtitle }}</span>
+                        <span>{{ $section_1->title }}</span>
+                        <span class="other-color">{{ $section_1->subtitle }}</span>
                     </div>
                     <div class="normal-text">
-                        <p>{!! $sectiontitle_1->content !!}</p>
+                        <p>{!! $section_1->content !!}</p>
                     </div>
                 </div>
             </div>

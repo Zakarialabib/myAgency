@@ -1,13 +1,15 @@
-<div class="w-full mb-5 overflow-hidden rounded">
-    <div class="w-full overflow-x-auto">
-        <table class="table w-full bg-white dark:bg-dark-eval-1 dark:text-zinc-300 pt-5">
-            <x-table.thead>
-                {{ $thead }}
-            </x-table.thead>
+@php
+    $tableClasses = ' table-auto w-full ';
+@endphp
 
-            {{ $slot }}
+<div class="my-4 bg-white align-middle shadow rounded overflow-x-auto scrollbar__inverted">
 
-        </table>
-    </div>
+    <table {{ $attributes->merge(['class' => $tableClasses]) }}>
+        <x-table.thead>
+            {{ $thead }}
+        </x-table.thead>
+
+        {{ $slot }}
+
+    </table>
 </div>
-

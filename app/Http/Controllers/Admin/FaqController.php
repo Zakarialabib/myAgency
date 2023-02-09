@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Faq;
 use App\Models\Language;
-use App\Models\Sectiontitle;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,7 +21,7 @@ class FaqController extends Controller
      
         $faqs = Faq::where('language_id', $lang)->orderBy('id', 'DESC')->get();
         
-        $static = Sectiontitle::where('language_id', $lang)->orderBy('id', 'DESC')->first();
+        $static = Section::where('language_id', $lang)->orderBy('id', 'DESC')->first();
         
         return view('admin.home.faq.index', compact('faqs', 'static'));
     }

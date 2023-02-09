@@ -24,8 +24,8 @@ class Language extends Model
         return $this->hasOne('App\Models\Setting');
     }
 
-    public function sectiontitle() {
-        return $this->hasOne('App\Models\Sectiontitle');
+    public function section() {
+        return $this->hasOne('App\Models\Section');
     }
 
     public function teams() {

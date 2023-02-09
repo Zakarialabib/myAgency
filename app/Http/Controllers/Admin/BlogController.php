@@ -1,34 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Blog;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
 
 class BlogController extends Controller
 {
-    // Blog Index
-    public function index(){
-             
+    public function index(): View|Factory
+    {
         return view('admin.blog.index');
     }
 
-    // Add Blog 
-    public function create(){
-        return view('admin.blog.create');
-    }
-   
-    // Blog  Edit
-    public function edit(Blog $blog)
+    public function blogcategories(): View|Factory
     {
-        return view('admin.blog.edit', compact('blog'));
+        return view('admin.blog.category.index');
     }
-
-    // Blog Show
-    public function show(Blog $blog)
-    {
-        return view('admin.blog.show', compact('blog'));
-    }
-
 }

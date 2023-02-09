@@ -14,7 +14,7 @@ use App\Models\Team;
 use App\Models\Blog; 
 use App\Models\Bcategory; 
 use App\Models\About; 
-use App\Models\Sectiontitle; 
+use App\Models\Section; 
 use Artisan;
 
 class HomeController extends Controller
@@ -28,7 +28,7 @@ class HomeController extends Controller
             $currlang = Language::where('is_default', 1)->first();
         }
 
-        $sectiontitle = Sectiontitle::where('page', 1)->where('language_id', $currlang->id)
+        $section = Section::where('page', 1)->where('language_id', $currlang->id)
         ->first();
 
         $services = Service::where('status', 1)->where('language_id', $currlang->id)
@@ -37,7 +37,7 @@ class HomeController extends Controller
         $portfolios = Portfolio::where('status', 1)->where('language_id', $currlang->id)
                         ->paginate(5);
 
-        return view('frontend.home', compact('portfolios','services','sectiontitle'));
+        return view('frontend.home', compact('portfolios','services','section'));
     }
 
     //Terms page
@@ -74,13 +74,13 @@ class HomeController extends Controller
         $teams = Team::where('status', 1)->where('language_id', $currlang->id)
         ->get();
 
-        $sectiontitle = Sectiontitle::where('page', 2)->where('language_id', $currlang->id)
+        $section = Section::where('page', 2)->where('language_id', $currlang->id)
         ->first();
 
         $abouts = About::where('status', 1)->where('language_id', $currlang->id)
         ->paginate(1);
 
-        return view('frontend.about',compact('abouts','sectiontitle','teams'));
+        return view('frontend.about',compact('abouts','section','teams'));
     }
 
     //Contact page
@@ -98,7 +98,7 @@ class HomeController extends Controller
             $currlang = Language::where('is_default', 1)->first();
         }
         
-        $data['sectiontitle'] = Sectiontitle::where('page', 6)->where('language_id', $currlang->id)
+        $data['section'] = Section::where('page', 6)->where('language_id', $currlang->id)
         ->first();
 
         $category = $request->category;
@@ -160,7 +160,7 @@ class HomeController extends Controller
             $currlang = Language::where('is_default', 1)->first();
         }
 
-        $sectiontitle = Sectiontitle::where('page', 4)->where('language_id', $currlang->id)
+        $section = Section::where('page', 4)->where('language_id', $currlang->id)
         ->first();
 
         $bcategories = Bcategory::where('status', 1)->where('language_id', $currlang->id)->orderBy('id', 'DESC')->get();
@@ -168,7 +168,7 @@ class HomeController extends Controller
         $blogs = Blog::where('status', 1)->where('language_id', $currlang->id)
                         ->paginate(5);
 
-        return view('frontend.blogs', compact('blogs', 'bcategories','sectiontitle'));
+        return view('frontend.blogs', compact('blogs', 'bcategories','section'));
     }
 
     // Blog Details  Funtion

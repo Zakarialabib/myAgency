@@ -15,7 +15,7 @@
 }
 
 .card .card-title {
-  @apply text-slate-700 text-xl font-bold
+  @apply text-gray-700 text-xl font-bold
 }
 
 .card .card-body {
@@ -47,7 +47,7 @@
 }
 
 .btn.btn-secondary {
-  @apply text-slate-500 bg-white hover:bg-slate-50 active:bg-slate-100 focus:ring-indigo-500
+  @apply text-gray-500 bg-white hover:bg-gray-50 active:bg-gray-100 focus:ring-indigo-500
 }
 
 .btn.btn-success {
@@ -66,10 +66,6 @@
   @apply bg-blue-500 text-white active:bg-blue-600 focus:ring-blue-500
 }
 
-.btn.btn-rose {
-  @apply bg-rose-500 text-white active:bg-rose-600 focus:ring-rose-500
-}
-
 
 .sidebar-nav-active {
   @apply text-xs uppercase py-3 font-bold block text-pink-500
@@ -84,15 +80,15 @@
 }
 
 .sidebar-nav {
-  @apply text-xs uppercase py-3 font-bold block text-slate-800
+  @apply text-xs uppercase py-3 font-bold block text-gray-800
 }
 
 .sidebar-nav > i {
-  @apply mr-2 text-sm text-slate-400
+  @apply mr-2 text-sm text-gray-400
 }
 
 .sidebar-nav:hover {
-  @apply text-slate-600
+  @apply text-gray-600
 }
 
 .form-group {
@@ -119,7 +115,7 @@
 }
 
 .form-label {
-  @apply block uppercase text-slate-600 text-xs font-bold mb-2
+  @apply block uppercase text-gray-600 text-xs font-bold mb-2
 }
 
 .form-control {
@@ -131,15 +127,15 @@ input[type=email].form-control,
 input[type=number].form-control,
 input[type=password].form-control,
 textarea.form-control {
-  @apply border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
+  @apply border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
 }
 
 .flatpickr input[type=text].form-control {
-  @apply border-0 px-3 py-3 pl-10 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
+  @apply border-0 px-3 py-3 pl-10 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
 }
 
 .flatpickr input[type=text].form-control:required {
-  @apply border-0 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
+  @apply border-0 px-3 py-3 placeholder-gray-300 text-gray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring;
 }
 
 .table {
@@ -147,15 +143,15 @@ textarea.form-control {
 }
 
 .table th {
-  @apply align-middle border border-solid text-xs uppercase whitespace-nowrap font-semibold text-left text-slate-500
+  @apply align-middle border border-solid text-xs uppercase whitespace-nowrap font-semibold text-left text-gray-500
 }
 
 .table td {
-  @apply border-slate-200
+  @apply border-gray-200
 }
 
 .table.table-index th {
-  @apply px-6 py-3 border-l-0 border-r-0 border-slate-100
+  @apply px-6 py-3 border-l-0 border-r-0 border-gray-100
 }
 
 .table.table-index td {
@@ -168,12 +164,12 @@ textarea.form-control {
 }
 
 .table.table-index > tbody > tr:hover {
-  @apply bg-slate-50
+  @apply bg-gray-50
 }
 
 .form-group .required::after {
   content: " *";
-  @apply text-rose-500
+  @apply text-pink-500
 }
 
 .dropzone .dz-preview .dz-image img {
@@ -183,7 +179,7 @@ textarea.form-control {
 }
 
 .help-block {
-  @apply text-slate-600 pt-2 text-sm
+  @apply text-gray-600 pt-2 text-sm
 }
 
 .badge {
@@ -195,7 +191,7 @@ textarea.form-control {
 }
 
 .link-light-blue {
-  @apply text-lightBlue-500 flex items-center hover:underline last:mb-0 mb-1;
+  @apply text-blue-200 flex items-center hover:underline last:mb-0 mb-1;
 }
 
 .link-light-blue i {
