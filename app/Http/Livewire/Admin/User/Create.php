@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\User;
 
-use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Models\User;
-use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 class Create extends Component
 {
@@ -15,7 +16,7 @@ class Create extends Component
     public array $roles = [];
     public string $password = '';
     public array $listsForFields = [];
-   
+
     protected $listeners = [
         'submit',
     ];
@@ -38,7 +39,7 @@ class Create extends Component
         $this->user->save();
         $this->user->roles()->sync($this->roles);
 
-        $this->alert('success', __('User created successfully!') );
+        $this->alert('success', __('User created successfully!'));
 
         return redirect()->route('admin.users.index');
     }
@@ -53,7 +54,7 @@ class Create extends Component
             'user.email' => [
                 'email:rfc',
                 'required',
-                'unique:users,email,' . $this->user->id,
+                'unique:users,email,'.$this->user->id,
             ],
             'user.phone' => [
                 'numeric',

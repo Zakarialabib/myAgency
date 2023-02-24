@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Permission;
 
-use Livewire\Component;
 use App\Models\Permission;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+
 class Edit extends Component
 {
     use LivewireAlert;
     public Permission $permission;
-    
+
     protected $listeners = [
         'submit',
     ];

@@ -19,29 +19,26 @@ class FeaturedBannerSeeder extends Seeder
         FeaturedBanner::insert([
             [
                 'title'       => 'Best Offer For You',
-                'description'     => 'Offer this week',
+                'description' => 'Offer this week',
                 'image'       => 'featured_banner.jpg',
                 'status'      => 1,
                 'featured'    => 1,
-                'product_id'  => 1,
                 'language_id' => 1,
             ],
             [
                 'title'       => 'Featured Banner Title',
-                'description'     => 'Featured Banner Details',
+                'description' => 'Featured Banner Details',
                 'image'       => 'featured_banner.jpg',
                 'status'      => 1,
                 'featured'    => 1,
-                'product_id'  => 1,
                 'language_id' => 1,
             ],
             [
                 'title'       => 'Featured Banner Title',
-                'description'     => 'Featured Banner Details',
+                'description' => 'Featured Banner Details',
                 'image'       => 'featured_banner.jpg',
                 'status'      => 1,
                 'featured'    => 1,
-                'product_id'  => 1,
                 'language_id' => 1,
             ],
         ]);

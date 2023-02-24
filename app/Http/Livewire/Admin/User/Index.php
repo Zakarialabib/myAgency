@@ -1,25 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\User;
 
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Http\Livewire\WithConfirmation;
-use App\Http\Livewire\WithSorting;
 
 class Index extends Component
 {
-    use WithPagination, WithSorting, WithConfirmation;
+    use WithPagination;
+    use WithSorting;
 
     public int $perPage;
 
     public array $orderable;
 
     public string $search = '';
-    
+
     public $showDeleteModal = false;
 
     public array $selected = [];
@@ -62,18 +64,18 @@ class Index extends Component
 
     public function mount()
     {
-        $this->sortBy            = 'id';
-        $this->sortDirection     = 'desc';
-        $this->perPage           = 100;
+        $this->sortBy = 'id';
+        $this->sortDirection = 'desc';
+        $this->perPage = 100;
         $this->paginationOptions = config('project.pagination.options');
-        $this->orderable         = (new User())->orderable;
+        $this->orderable = (new User())->orderable;
     }
 
     public function render()
     {
         $query = User::with(['roles'])->advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -84,7 +86,7 @@ class Index extends Component
 
     public function deleteSelected()
     {
-        abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         User::whereIn('id', $this->selected)->delete();
 
@@ -95,11 +97,11 @@ class Index extends Component
 
     public function delete(User $user)
     {
-        abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $user->delete();
 
-        $this->alert('warning', __('User deleted successfully!') );
+        $this->alert('warning', __('User deleted successfully!'));
 
         $this->reRenderParent();
     }

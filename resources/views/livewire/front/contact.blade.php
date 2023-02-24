@@ -27,7 +27,7 @@
                         <h4 class="font-bold text-black text-xl mb-1">
                             {{ __('Our Location') }}</h4>
                         <p class="text-base text-body-color ">
-                            {{ Helpers::settings('address') }}
+                            {{ settings()->address }}
                         </p>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <h4 class="font-bold text-black text-xl mb-1">
                             {{ __('Phone Number') }}</h4>
                         <p class="text-base text-body-color ">
-                            <a href="tel:{{ Helpers::settings('company_phone') }}">{{ Helpers::settings('company_phone') }}
+                            <a href="tel:{{ settings()->company_phone }}">{{ settings()->company_phone }}
                             </a>
                         </p>
                     </div>
@@ -65,7 +65,7 @@
                             {{ __('Email Address') }}
                         </h4>
                         <p class="text-bas  text-body-color"><a
-                                href="mailto:{{ Helpers::settings('company_email_address') }}">{{ Helpers::settings('company_email_address') }}</a>
+                                href="mailto:{{ settings()->company_email_address }}">{{ settings()->company_email_address }}</a>
                         </p>
                     </div>
                 </div>

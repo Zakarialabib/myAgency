@@ -7,7 +7,7 @@
         </x-slot>
         <x-slot name="content">
             @foreach (\App\Models\Language::all() as $language)
-                <x-dropdown-link href="{{ route('admin.changelanguage', $language->code) }}">
+                <x-dropdown-link href="{{ route('changeLanguage', $language->code) }}">
                     {{ $language->name }}
                 </x-dropdown-link>
             @endforeach

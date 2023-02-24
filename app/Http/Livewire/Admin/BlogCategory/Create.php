@@ -6,12 +6,12 @@ namespace App\Http\Livewire\Admin\BlogCategory;
 
 use App\Models\BlogCategory;
 use App\Models\Language;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Create extends Component
 {
@@ -26,6 +26,15 @@ class Create extends Component
 
     public $blogcategory;
 
+    public array $rules = [
+        'blogcategory.title' => ['required', 'string', 'max:255'],
+        'blogcategory.description' => ['nullable'],
+        'blogcategory.meta_title' => ['nullable'],
+        'blogcategory.meta_description' => ['nullable'],
+        'blogcategory.featured' => ['nullable'],
+        'blogcategory.language_id' => ['required', 'integer'],
+    ];
+
     public function mount(BlogCategory $blogcategory)
     {
         $this->blogcategory = $blogcategory;
@@ -34,18 +43,9 @@ class Create extends Component
         $this->initListsForFields();
     }
 
-    public array $rules = [
-        'blogcategory.title'            => ['required', 'string', 'max:255'],
-        'blogcategory.description'      => ['nullable'],
-        'blogcategory.meta_title'       => ['nullable'],
-        'blogcategory.meta_desc' => ['nullable'],
-        'blogcategory.featured'         => ['nullable'],
-        'blogcategory.language_id'      => ['required', 'integer'],
-    ];
-
     public function render(): View|Factory
     {
-        abort_if(Gate::denies('blogcategory_create'), 403);
+        // abort_if(Gate::denies('blogcategory_create'), 403);
 
         return view('livewire.admin.blog-category.create');
     }

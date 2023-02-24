@@ -1,22 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\Admin\RoleController;
-use App\Http\Livewire\Admin\Contacts;
-use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\BcategoryController;
+declare(strict_types=1);
+
+use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FeaturedBannerController;
 use App\Http\Controllers\Admin\LanguageController;
-use App\Http\Controllers\Admin\ServiceController;
-use App\Http\Controllers\Admin\AboutController;
-use App\Http\Livewire\Admin\About\Index as AboutIndex;
-use App\Http\Controllers\Admin\PortfolioController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\TeamController;
+use App\Http\Livewire\Admin\Contacts;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +32,43 @@ use App\Http\Controllers\Admin\SectionController;
 |
 */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:ADMIN']], function () {
+    // Dashboard
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/', [AdminHomeController::class, 'index'])->name('dashboard');
-    
+    Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
+    // Contact
     Route::get('/contact', Contacts::class)->name('contact');
+
+    // Categories
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+
+    // FeaturedBanners
+    Route::get('/featuredBanners', [FeaturedBannerController::class, 'index'])->name('featuredBanners');
+
+    // Sliders
     
-    // About
-    Route::get('/about', AboutIndex::class)->name('about.index');
-    Route::resource('about', AboutController::class, ['except' => ['index']]);
+    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders');
+
+    // Pages
+    Route::get('/pages', [PageController::class, 'index'])->name('pages');
+
+    // Blogs
+    Route::resource('blogs', BlogController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Bcategories
+    Route::get('blog-categories', [BlogCategoryController::class,'index'])->name('blog-categories.index');
+
+    // Languages
+    Route::get('language', [LanguageController::class, 'index'])->name('language.index');
+
+    // Project
+    Route::resource('projects', ProjectController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Service
+    Route::resource('services', ServiceController::class, ['except' => ['store', 'update', 'destroy']]);
+
+    // Sections
+    Route::resource('sections', SectionController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -47,43 +79,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     // Users
     Route::resource('users', UserController::class, ['except' => ['store', 'update', 'destroy']]);
 
-    // Blogs
-    Route::resource('blogs', BlogController::class, ['except' => ['store', 'update', 'destroy']]);
+    // Notification
+    Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
 
-    // Bcategories
-    Route::resource('bcategories', BcategoryController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Languages
-    Route::resource('languages', LanguageController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Menu
-    Route::resource('menu', MenuController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Portfolio
-    Route::resource('portfolios', PortfolioController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Service
-    Route::resource('services', ServiceController::class, ['except' => ['store', 'update', 'destroy']]);
-
-    // Team
-    Route::resource('teams', TeamController::class, ['except' => ['store', 'update', 'destroy']]);
-    
-    // Sections
-    Route::resource('sections', SectionController::class, ['except' => ['store', 'update', 'destroy']]);
-    
     // Setting
-    Route::resource('settings', SettingController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('/popupsettings', [SettingController::class, 'popupsettings'])->name('setting.popupsettings');
+    Route::get('/redirects', [SettingController::class, 'redirects'])->name('setting.redirects');
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('email-settings', [SettingController::class, 'emailSettings'])->name('email-settings');
-
-    Route::get('languages', [LanguageController::class, 'index'])->name('language.index');
-    Route::get('language/edit/{id}', [LanguageController::class, 'langEdit'])->name('language-key');
-    Route::post('store-lang-key/{id}',[LanguageController::class, 'storeLanguageJson'])->name('store-lang-key');
-    Route::post('update-lang-key/{id}', [LanguageController::class, 'updateLanguageJson'])->name('update-lang-key');
-    Route::post('delete-lang-key/{id}', [LanguageController::class, 'deleteLanguageJson'])->name('delete-lang-key');
-    Route::post('settings/language/import',[LanguageController::class, 'langImport'])->name('language.import_lang');
-    Route::post('translations/update', [LanguageController::class , 'transUpdate'])->name('translation.update.json');
-    Route::post('translations/updateKey', [LanguageController::class, 'transUpdateKey'])->name('translation.update.json.key');
-    Route::delete('translations/destroy/{key}', [LanguageController::class, 'destroy'])->name('translations.destroy'); 
-    Route::post('translations/create', [LanguageController::class ,'store'])->name('translations.create');
-
 });

@@ -6,16 +6,16 @@ namespace App\Http\Livewire\Admin\Slider;
 
 use App\Models\Language;
 use App\Models\Slider;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Collection;
 use Throwable;
 
 class Create extends Component
@@ -27,10 +27,21 @@ class Create extends Component
 
     public $slider;
 
-    public $photo;
+    public $image;
 
     public $listeners = [
         'createSlider',
+    ];
+
+    public array $rules = [
+        'slider.title' => ['required', 'string', 'max:255'],
+        'slider.subtitle' => ['nullable', 'string'],
+        'slider.details' => ['nullable', 'string'],
+        'slider.link' => ['nullable', 'string'],
+        'slider.language_id' => ['nullable'],
+        'slider.bg_color' => ['nullable'],
+        'slider.embeded_video' => ['nullable'],
+        'image' => ['required'],
     ];
 
     public function mount(Slider $slider)
@@ -38,20 +49,9 @@ class Create extends Component
         $this->slider = $slider;
     }
 
-    public array $rules = [
-        'slider.title'         => ['required', 'string', 'max:255'],
-        'slider.subtitle'      => ['nullable', 'string'],
-        'slider.details'       => ['nullable', 'string'],
-        'slider.link'          => ['nullable', 'string'],
-        'slider.language_id'   => ['nullable'],
-        'slider.bg_color'      => ['nullable'],
-        'slider.embeded_video' => ['nullable'],
-        'photo'                => ['required'],
-    ];
-
     public function render(): View|Factory
     {
-        abort_if(Gate::denies('slider_create'), 403);
+        // abort_if(Gate::denies('slider_create'), 403);
 
         return view('livewire.admin.slider.create');
     }
@@ -68,16 +68,16 @@ class Create extends Component
         try {
             $this->validate();
 
-            if ($this->photo) {
-                $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
+            if ($this->image) {
+                $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
 
-                $img = Image::make($this->photo->getRealPath())->encode('webp', 85);
+                $img = Image::make($this->image->getRealPath())->encode('webp', 85);
 
                 $img->stream();
 
                 Storage::disk('local_files')->put('sliders/'.$imageName, $img, 'public');
 
-                $this->slider->photo = $imageName;
+                $this->slider->image = $imageName;
             }
 
             $this->slider->save();

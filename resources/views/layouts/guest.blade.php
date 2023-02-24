@@ -2,92 +2,93 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="dns-prefetch" href="{{ request()->getSchemeAndHttpHost() }}">
+    <link rel="preconnect" href="{{ request()->getSchemeAndHttpHost() }}">
+    <link rel="prefetch" href="{{ request()->getSchemeAndHttpHost() }}">
+    <link rel="prerender" href="{{ request()->getSchemeAndHttpHost() }}">
+    <link rel="preload" href="{{ request()->getSchemeAndHttpHost() }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Head Tags -->
+    @if (settings()->head_tags)
+        {!! settings()->head_tags !!}
+    @endif
 
-    @php($website_title = \App\Models\Setting::where(['key' => 'website_title'])->first()->value ?? '')
-    @php($fav_icon = \App\Models\Setting::where(['key' => 'fav_icon'])->first()->value ?? '')
-    @php($announcement = \App\Models\Setting::where(['key' => 'announcement'])->first()->value ?? '')
-    @php($email = \App\Models\Setting::where(['key' => 'email'])->first()->value ?? '')
-    @php($phone_number = \App\Models\Setting::where(['key' => 'phone_number'])->first()->value ?? '')
-    @php($footer_text = \App\Models\Setting::where(['key' => 'footer_text'])->first()->value ?? '')
-    @php($is_announcement = \App\Models\Setting::where(['key' => 'is_announcement'])->first()->value ?? '')
-    @php($announcement_delay = \App\Models\Setting::where(['key' => 'announcement_delay'])->first()->value ?? '')
-    @php($meta_keywords = \App\Models\Setting::where(['key' => 'meta_keywords'])->first()->value ?? '')
-    @php($meta_description = \App\Models\Setting::where(['key' => 'meta_description'])->first()->value ?? '')
+    <title>
+        @yield('title') || {{ settings()->site_title }}
+    </title>
 
-    <!--====== Title ======-->
-    <title>{{ $website_title }} - @yield('title')</title>
 
-    <!--====== Meta ======-->
-    <meta name="title" content="{{ $meta_keywords }}">
-    <meta name="description" content="@yield('meta-description')">
-	<meta name="keywords" content="@yield('meta-keywords')">
-    <meta property="og:description" content="{{ $meta_description }}">
+    @hasSection('meta')
+        @yield('meta')
+    @else
+        <meta name="title" content="{{ settings()->seo_meta_title }}">
+        <meta name="description" content="{{ settings()->seo_meta_description }}">
+        <meta property="og:title" content="{{ settings()->site_title }}">
+        <meta property="og:description" content="{{ settings()->seo_meta_description }}">
+        <meta property="og:url" content="{{ route('front.index')}}" />
+    @endif
+
     <meta property="og:locale" content="{{ app()->getLocale() }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ route('front.home') }}" />
-    <meta property="og:site_name" content="{{ $website_title }}" />
-    <meta name="author" content="{{ $website_title }}">
+    <meta property="og:site_name" content="{{ settings()->company_name }}" />
+    <meta name="author" content="{{ settings()->company_name }}">
+    {{-- <link rel="canonical" href="{{ URL::current() }}"> --}}
     <meta name="robots" content="all,follow">
 
-    <!--====== Favicon Icon ======-->
-    <link rel="shortcut icon" href="{{ asset('assets/front/img/' . $fav_icon) }}" type="image/png">
+    <link rel="icon" href="{{ asset('images/' . settings()->site_favicon)}}" type="image/x-icon">
 
-    <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-    <link type="text/css" rel="stylesheet" href="{{ asset('/assets/css/vendors.css') }}" media="all">
+    {{-- Styles --}}
+    @vite('resources/css/app.css')
+
+    @livewireStyles
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @stack('styles')
 
 </head>
 
-<body class="font-sans text-zinc-900 antialiased">
+<body class="antialiased bg-body text-body font-body" x-data="{ showCart: false }">
+    <!-- Body Tags -->
 
-    <div class="social-media" style="transition-delay: 0.5s;">
-        <div class="layer" style="transition-delay: 0.3s;"> </div>
-        <!-- end layer -->
-        <div class="inner" style="transition-delay: 0s;">
-            <h5 class="text-center">{{__('Social Share')}} </h5>
-            <ul>
-                <li><a href="#">Facebook</i></a></li>
-                <li><a href="#">Twitter</i></a></li>
-                <li><a href="#">Linkedin</i></a></li>
-                <li><a href="#">Dribble</i></a></li>
-                <li><a href="#">Youtube</i></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="language_trans" style="transition-delay: 0.5s;">
-        <div class="layer" style="transition-delay: 0.3s;"> </div>
-        <!-- end layer -->
-        <div class="inner" style="transition-delay: 0s;">
-            <h5 class="text-center">{{__('Languages')}} </h5>
-            <ul>
-                @foreach ($langs as $lang)
-                    @if (\Illuminate\Support\Facades\App::getLocale() !== $lang->code)
-                        <li><a class="block" href="{{ route('changeLanguage', $lang->code) }}" title="{{ $lang->name }}">
-                            <img src="{{ flagImageUrl($lang->code) }}">{{ $lang->name }}</a></li>
-                    @endif
-                @endforeach
-            </ul>
-        </div>
-    </div>
+    @if (settings()->body_tags)
+        {!! settings()->body_tags !!}
+    @endif
+    
+    {{-- <x-loading-mask /> --}}
 
-    @include('partials.front.header')
+    <section class="relative">
 
-    <main>
-        {{ $slot }}
-    </main>
+        <x-topheader />
 
-    <!--    announcement banner section start   -->
-    <a class="announcement-banner absulute" href="{{ asset('assets/front/img/' . $announcement) }}"></a>
-    <!--    announcement banner section end   -->
+        <x-header />
 
-    @include('partials.front.footer')
+        <x-bottomheader />
 
+        @yield('content')
+
+        @isset($slot)
+            {{ $slot }}
+        @endisset
+
+        <x-footer />
+
+        <x-whatsapp />
+
+    </section>
+
+    @vite('resources/js/app.js')
+    @livewireScripts
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::scripts />
+    @stack('scripts')
 </body>
 
 </html>

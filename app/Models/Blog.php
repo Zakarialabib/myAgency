@@ -1,37 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
     use HasAdvancedFilter;
 
-    protected $filterable = [
-        'id',
-        'title',
-        'details',
-        'image',
-        'slug',
-        'status',
-        'featured',
-        'meta_title',
-        'meta_desc',
-        'language_id',
-    ];
-
     public $orderable = [
         'id',
         'title',
-        'details',
-        'image',
         'slug',
         'status',
         'featured',
-        'meta_title',
-        'meta_desc',
+        'language_id',
+    ];
+
+    public $timestamps = false;
+
+    protected $filterable = [
+        'id',
+        'title',
+        'slug',
+        'status',
+        'featured',
         'language_id',
     ];
 
@@ -43,13 +39,11 @@ class Blog extends Model
         'status',
         'featured',
         'meta_title',
-        'meta_desc',
+        'meta_description',
         'language_id',
     ];
 
     protected $dates = ['created_at'];
-
-    public $timestamps = false;
 
     public function category()
     {

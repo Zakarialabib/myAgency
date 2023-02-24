@@ -24,12 +24,14 @@ return new class () extends Migration {
             $table->string('link')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(true);
-            $table->string('main_color')->nullable();
+            $table->string('bg_color')->nullable();
+            $table->string('text_color')->nullable();
             $table->string('position')->nullable();
             $table->text('embeded_video')->nullable();
             $table->foreignId('page_id')->nullable()->constrained('pages')->nullOnDelete();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

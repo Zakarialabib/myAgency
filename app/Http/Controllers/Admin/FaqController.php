@@ -1,39 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use App\Models\Language;
 use App\Models\Section;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class FaqController extends Controller
 {
     public $lang;
+
     public function __construct()
     {
-        $this->lang = Language::where('is_default',1)->first();
+        $this->lang = Language::where('is_default', 1)->first();
     }
 
-    public function faq(Request $request){
+    public function faq(Request $request)
+    {
         $lang = Language::where('code', $request->language)->first()->id;
-     
+
         $faqs = Faq::where('language_id', $lang)->orderBy('id', 'DESC')->get();
-        
+
         $static = Section::where('language_id', $lang)->orderBy('id', 'DESC')->first();
-        
+
         return view('admin.home.faq.index', compact('faqs', 'static'));
     }
 
     // Add Faq
-    public function add(){
+    public function add()
+    {
         return view('admin.home.faq.add');
     }
 
     // Store Faq
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         $request->validate([
             'title' => 'required|max:150',
             'content' => 'required',
@@ -49,40 +54,42 @@ class FaqController extends Controller
         $faq->serial_number = $request->serial_number;
         $faq->content = $request->content;
         $faq->save();
-       
-        $notification = array(
+
+        $notification = [
             'messege' => 'Faq Added successfully!',
-            'alert' => 'success'
-        );
+            'alert' => 'success',
+        ];
+
         return redirect()->back()->with('notification', $notification);
     }
 
     // Faq Delete
-    public function delete($id){
-
+    public function delete($id)
+    {
         $faq = Faq::find($id);
         $faq->delete();
 
-        $notification = array(
+        $notification = [
             'messege' => 'FAQ Deleted successfully!',
-            'alert' => 'success'
-        );
+            'alert' => 'success',
+        ];
+
         return redirect()->back()->with('notification', $notification);
     }
 
     // Faq Edit
-    public function edit($id){
-
+    public function edit($id)
+    {
         $faq = Faq::find($id);
-        return view('admin.home.faq.edit', compact('faq'));
 
+        return view('admin.home.faq.edit', compact('faq'));
     }
 
     // Update Faq
-    public function update(Request $request, $id){
-
+    public function update(Request $request, $id)
+    {
         $id = $request->id;
-         $request->validate([
+        $request->validate([
             'title' => 'required|max:150',
             'content' => 'required',
             'serial_number' => 'required|numeric',
@@ -98,13 +105,11 @@ class FaqController extends Controller
         $faq->content = $request->content;
         $faq->save();
 
-        $notification = array(
+        $notification = [
             'messege' => 'Faq Updated successfully!',
-            'alert' => 'success'
-        );
+            'alert' => 'success',
+        ];
+
         return redirect(route('admin.faq').'?language='.$this->lang->code)->with('notification', $notification);
     }
-
-
-
 }

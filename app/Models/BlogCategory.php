@@ -11,6 +11,25 @@ class BlogCategory extends Model
 {
     use HasAdvancedFilter;
 
+    public const BCATEGORY_ACITVE = 1;
+    public const BCATEGORY_INACTIVE = 0;
+
+    public $orderable = [
+        'id',
+        'name',
+        'status',
+        'language_id',
+    ];
+
+    public $filterable = [
+        'id',
+        'name',
+        'status',
+        'language_id',
+    ];
+
+    public $timestamps = false;
+
     protected $fillable = [
         'title',
         'description',
@@ -20,36 +39,14 @@ class BlogCategory extends Model
         'language_id',
     ];
 
-    protected $filterable = [
-        'id',
-        'title',
-        'description',
-        'meta_tag',
-        'meta_description',
-        'featured',
-        'language_id',
-    ];
-
-    public $orderable = [
-        'id',
-        'title',
-        'description',
-        'meta_tag',
-        'meta_description',
-        'featured',
-        'language_id',
-    ];
-
-    public $timestamps = false;
-
     public function blogs()
     {
-        return $this->hasMany('App\Models\Blog', 'category_id');
+        return $this->hasMany(Blog::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Models\Language', 'language_id')->withDefault();
+        return $this->belongsTo(Language::class);
     }
 
     public function setSlugAttribute($value)

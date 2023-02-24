@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Settings;
 
-use Livewire\Component;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Redirect;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 use Livewire\WithPagination;
-use App\Http\Livewire\WithSorting;
+
 class Redirects extends Component
 {
     use LivewireAlert;
@@ -16,9 +19,9 @@ class Redirects extends Component
     use WithSorting;
 
     public $listeners = ['delete', 'refreshIndex' => '$refresh'];
-    
-    public $editModal = false; 
-    
+
+    public $editModal = false;
+
     public $redirect;
 
     public $refreshIndex;
@@ -34,10 +37,10 @@ class Redirects extends Component
     public array $paginationOptions;
 
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -47,7 +50,7 @@ class Redirects extends Component
 
     protected $rules = [
         'redirect.old_url' => 'required',
-        'redirect.new_url'        => 'nullable',
+        'redirect.new_url' => 'nullable',
     ];
 
     public function getSelectedCountProperty()
@@ -79,13 +82,10 @@ class Redirects extends Component
         $this->orderable = (new Redirect())->orderable;
     }
 
-  
-
     public function editModal($id)
     {
         $this->redirect = Redirect::find($id);
         $this->editModal = true;
-        
     }
 
     public function update()
@@ -111,8 +111,8 @@ class Redirects extends Component
     public function render(): View|Factory
     {
         $query = Redirect::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 

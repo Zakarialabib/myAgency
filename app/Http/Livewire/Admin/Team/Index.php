@@ -1,21 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Team;
 
-use Livewire\Component;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Language;
-use App\Models\Team;
 use App\Models\Section;
-use Illuminate\Http\Response;
+use App\Models\Team;
+use Livewire\Component;
 use Livewire\WithPagination;
-use App\Http\Livewire\WithConfirmation;
-use App\Http\Livewire\WithSorting;
 
 class Index extends Component
 {
     use WithPagination;
     use WithSorting;
-    use WithConfirmation;
 
     public int $perPage;
 
@@ -63,36 +62,31 @@ class Index extends Component
         $this->selected = [];
     }
 
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
-    }
-
     public function mount()
     {
-        $this->sortBy            = 'id';
-        $this->sortDirection     = 'desc';
-        $this->perPage           = 100;
+        $this->sortBy = 'id';
+        $this->sortDirection = 'desc';
+        $this->perPage = 100;
         $this->paginationOptions = config('project.pagination.options');
-        $this->orderable         = (new Team())->orderable;
+        $this->orderable = (new Team())->orderable;
         $this->initListsForFields();
     }
-    
+
     public function render()
     {
-        $static = Section::where('page', 2)->where('language_id', $this->language_id)->first();
+        // $static = Section::where('page', 2)->where('language_id', $this->language_id)->first();
 
         $query = Team::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
-            })->advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+        })->advancedFilter([
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
         $teams = $query->paginate($this->perPage);
 
-        return view('livewire.admin.team.index', compact('teams','static'));
+        return view('livewire.admin.team.index', compact('teams'));
     }
 
       // Team  Delete
@@ -100,9 +94,8 @@ class Index extends Component
       {
           // abort_if(Gate::denies('team_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
           $team->delete();
-        //   $this->alert('warning', __('Team Deleted successfully!') );
+          //   $this->alert('warning', __('Team Deleted successfully!') );
       }
-      
 
      // Team  Clone
      public function clone(Team $team)
@@ -119,4 +112,9 @@ class Index extends Component
          ]);
          // $this->alert('success', __('Team Cloned successfully!') );
      }
+
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+    }
 }

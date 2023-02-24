@@ -51,7 +51,7 @@ crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('/js/scrollreveal.min.js') }}"></script> --}}
 
 
-<input type="hidden" id="main_url" value="{{ route('front.home') }}">
+<input type="hidden" id="main_url" value="{{ route('front.inde') }}">
 
 @php
 $mainbs = [];

@@ -25,17 +25,17 @@
             <x-dropdown align="right" width="60">
                 <x-slot name="trigger">
                     <x-button type="button" primary>
-                        {{ Auth::user()->first_name }}
+                        {{ Auth::user()->name }}
                     </x-button>
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-dropdown-link :href="route('admin.settings')">
+                    <x-dropdown-link :href="route('admin.settings.index')">
                         {{ __('Settings') }}
                     </x-dropdown-link>
 
                     <x-dropdown-link>
-                        @livewire('admin.cache')
+                        {{-- @livewire('admin.cache') --}}
                     </x-dropdown-link>
 
                     <div class="border-t border-gray-100"></div>

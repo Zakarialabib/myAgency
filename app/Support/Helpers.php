@@ -1,7 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Request;
-use Carbon\Carbon;
+declare(strict_types=1);
+
+if (! function_exists('settings')) {
+    function settings()
+    {
+        return cache()->rememberForever('settings', function () {
+            return \App\Models\Settings::firstOrFail();
+        });
+    }
+}
 
 
 function flagImageUrl($language_code)
@@ -17,8 +25,6 @@ function getSlug($request, $key)
         ->first();
     $language_code = $language_default->code;
     $value = $request[$language_code][$key];
-    $slug = \Illuminate\Support\Str::slug($value);
-    return $slug;
+
+    return \Illuminate\Support\Str::slug($value);
 }
-
-

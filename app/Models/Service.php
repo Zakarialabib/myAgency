@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
@@ -16,7 +17,8 @@ class Service extends Model
         'image',
         'content',
         'language_id',
-        'status'
+        'page_id',
+        'status',
     ];
 
     public $filterable = [
@@ -25,7 +27,8 @@ class Service extends Model
         'image',
         'content',
         'language_id',
-        'status'
+        'page_id',
+        'status',
     ];
 
     protected $fillable = [
@@ -34,14 +37,17 @@ class Service extends Model
         'content',
         'language_id',
         'slug',
-        'status'
+        'status',
+        'page_id',
     ];
 
-    public function portfolios() : HasMany
+    public function page()
     {
-        return $this->hasMany('App\Models\Portfolio');
+        return $this->belongsTo(Page::class);
     }
-    public function language() {
+
+    public function language()
+    {
         return $this->belongsTo('App\Models\Language');
     }
 }

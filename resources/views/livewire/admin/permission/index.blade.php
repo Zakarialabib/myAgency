@@ -98,13 +98,4 @@
     </div>
 </div>
 
-@push('scripts')
-    <script>
-        Livewire.on('confirm', e => {
-            if (!confirm("{{ __('Are you sure') }}")) {
-                return
-            }
-            @this[e.callback](...e.argv)
-        });
-    </script>
-@endpush
+

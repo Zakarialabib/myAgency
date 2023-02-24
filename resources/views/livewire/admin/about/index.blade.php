@@ -90,7 +90,7 @@
                             </x-table.td>
 
                             <x-table.td>
-                                <livewire:toggle-button :model="$about" field="status" key="{{ $about->id }}" />
+                                <livewire:utils.toggle-button :model="$about" field="status" key="{{ $about->id }}" />
                             </x-table.td>
                             <x-table.td>
                                 <div class="inline-flex">
@@ -160,13 +160,4 @@
 </div>
 
 
-@push('scripts')
-    <script>
-        Livewire.on('confirm', e => {
-            if (!confirm("{{ __('Are you sure') }}")) {
-                return
-            }
-            @this[e.callback](...e.argv)
-        });
-    </script>
-@endpush
+

@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Mail\ContactForm as MailContactForm;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
-use Livewire\Component;
-use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class Contact extends Component
 {
-
     public $name;
 
     public $email;
@@ -26,13 +22,12 @@ class Contact extends Component
         'submit',
     ];
 
-    private function resetInputFields()
-    {
-        $this->name = '';
-        $this->email = '';
-        $this->phone_number = '';
-        $this->message = '';
-    }
+    protected $rules = [
+        'conversation.name' => 'required',
+        'conversation.email' => 'required|email',
+        'conversation.phone_number' => 'required',
+        'conversation.message' => 'required',
+    ];
 
     public function mount()
     {
@@ -43,13 +38,6 @@ class Contact extends Component
     {
         return view('livewire.front.contact');
     }
-
-    protected $rules = [
-        'conversation.name'         => 'required',
-        'conversation.email'        => 'required|email',
-        'conversation.phone_number' => 'required',
-        'conversation.message'      => 'required',
-    ];
 
     public function submit()
     {
@@ -64,5 +52,13 @@ class Contact extends Component
         // $user = User::find(1);
         // $user_email = $user->email;
         // Mail::to($user_email)->send(new MailContactForm($contact));
+    }
+
+    private function resetInputFields()
+    {
+        $this->name = '';
+        $this->email = '';
+        $this->phone_number = '';
+        $this->message = '';
     }
 }

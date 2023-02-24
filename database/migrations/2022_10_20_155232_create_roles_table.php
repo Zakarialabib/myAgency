@@ -20,6 +20,7 @@ class CreateRolesTable extends Migration
             $table->string('name')->nullable();
             $table->string('guard_name')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

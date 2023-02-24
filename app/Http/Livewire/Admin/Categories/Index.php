@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Categories;
 
-use App\Http\Livewire\WithSorting;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Imports\CategoriesImport;
 use App\Models\Category;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Index extends Component
 {
@@ -53,20 +53,20 @@ class Index extends Component
 
     public array $paginationOptions;
 
+    public array $rules = [
+        'category.name' => 'required',
+    ];
+
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
             'except' => 'desc',
         ],
-    ];
-
-    public array $rules = [
-        'category.name' => 'required',
     ];
 
     public function getSelectedCountProperty()
@@ -101,8 +101,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = Category::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -145,7 +145,7 @@ class Index extends Component
 
     public function deleteSelected()
     {
-        abort_if(Gate::denies('category_delete'), 403);
+        // abort_if(Gate::denies('category_delete'), 403);
 
         Category::whereIn('id', $this->selected)->delete();
 
@@ -156,27 +156,26 @@ class Index extends Component
 
     public function delete(Category $category)
     {
-        abort_if(Gate::denies('category_delete'), 403);
+        // abort_if(Gate::denies('category_delete'), 403);
 
         if ($category->products()->isNotEmpty()) {
             return back()->withErrors('Can\'t delete beacuse there are products associated with this category.');
-        } else {
-            $category->delete();
-
-            $this->alert('success', __('Category deleted successfully.'));
         }
+        $category->delete();
+
+        $this->alert('success', __('Category deleted successfully.'));
     }
 
     public function importExcel()
     {
-        abort_if(Gate::denies('category_access'), 403);
+        // abort_if(Gate::denies('category_access'), 403);
 
         $this->importModal = true;
     }
 
     public function import()
     {
-        abort_if(Gate::denies('category_access'), 403);
+        // abort_if(Gate::denies('category_access'), 403);
 
         $this->validate([
             'file' => 'required|mimes:xlsx,xls,csv,txt',

@@ -1,16 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Team;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
+use App\Models\Team;
 
 class TeamController extends Controller
 {
-
-    // Index Team 
+    // Index Team
     public function index()
     {
         return view('admin.team.index');
@@ -27,11 +26,10 @@ class TeamController extends Controller
     {
         return view('admin.team.edit', compact('team'));
     }
-    
+
     // Team  Show
     public function show(Team $team)
     {
         return view('admin.team.show', compact('team'));
     }
-   
 }

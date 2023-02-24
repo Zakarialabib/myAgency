@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Section;
 
+use App\Models\Language;
 use App\Models\Section;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use App\Models\Language;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Create extends Component
 {
@@ -28,8 +28,8 @@ class Create extends Component
     public $listeners = [
         'createSection',
     ];
-    
-    protected $rules = [    
+
+    protected $rules = [
         'section.language_id' => 'required',
         'section.page_id' => 'required',
         'section.title' => 'nullable',
@@ -43,7 +43,7 @@ class Create extends Component
         'section.link' => 'nullable',
         'section.description' => 'nullable',
         'section.embeded_video' => 'nullable',
-    ]; 
+    ];
 
     public function createSection()
     {

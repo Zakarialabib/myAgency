@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -8,7 +10,8 @@ use Illuminate\Queue\SerializesModels;
 
 class CustomerRegistration extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -30,6 +33,6 @@ class CustomerRegistration extends Mailable
      */
     public function build()
     {
-        return $this->view('email-templates.customer-registration')->with(['name'=>$this->name]);
+        return $this->view('email-templates.customer-registration')->with(['name' => $this->name]);
     }
 }

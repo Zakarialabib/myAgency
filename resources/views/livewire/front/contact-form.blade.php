@@ -18,7 +18,7 @@
                                 <input type="text" wire:model.lazy="name" id="name" name="name"
                                     placeholder="{{ __('Full Name') }}" value="{{ old('name') }}"
                                     class="@error('name') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                <x-input-error for="name" />
+                                <x-input-error :messages="$errors->get('name')" for="name" class="mt-2" />
                             </div>
                         </div>
                         <div class="p-2 w-full">
@@ -26,7 +26,7 @@
                                 <input type="email" wire:model.lazy="email" id="email" name="email"
                                     placeholder="{{ __('Enter valid Email') }}" value="{{ old('email') }}"
                                     class="@error('email') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                <x-input-error for="email" />
+                                <x-input-error :messages="$errors->get('email')" for="email" class="mt-2" />
                             </div>
                         </div>
                         <div class="p-2 w-full">
@@ -36,6 +36,7 @@
                                     value="{{ old('phone_number') }}"
                                     class="@error('phone_number') is-invalid @enderror w-full bg-zinc-100 bg-opacity-50 rounded border border-zinc-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 text-base outline-none text-zinc-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 <x-input-error for="phone_number" />
+                                <x-input-error :messages="$errors->get('phone_number')" for="phone_number" class="mt-2" />
                             </div>
                         </div>
                         <div class="p-2 w-full">
@@ -47,7 +48,7 @@
                                     <option value="Registration">{{ __('Registration') }}</option>
                                     <option value="Problem">{{ __('Problem') }}</option>
                                 </select>
-                                <x-input-error for="subject" />
+                                <x-input-error :messages="$errors->get('subject')" for="subject" class="mt-2" />
                             </div>
                         </div>
                     </div>

@@ -19,13 +19,13 @@
                 class="absolute top-0 left-0 w-full mt-12 bg-white rounded-md shadow-xl overflow-y-auto max-h-52 z-50"
                 wire:click="hideSearchResults">
                 <ul>
-                    @forelse ($results as $product)
+                    @forelse ($results as $blog)
                         <li class="flex items-center px-4 py-3 border-b border-gray-100">
-                            <a href="{{ route('front.product', $product->slug) }}" class="flex">
-                                <img src="{{ asset('images/products/' . $product->image) }}" alt=""
+                            <a href="{{ route('front.blogPage', $blog->slug) }}" class="flex">
+                                <img src="{{ asset('images/blogs/' . $blog->image) }}" alt=""
                                     loading="lazy" class="w-10 h-10 object-cover">
                                 <div class="mx-4">
-                                    <p class="font-semibold text-gray-700">{{ $product->name }}</p>
+                                    <p class="font-semibold text-gray-700">{{ $blog->name }}</p>
                                 </div>
                             </a>
                         </li>

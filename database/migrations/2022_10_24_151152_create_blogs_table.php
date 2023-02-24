@@ -23,9 +23,10 @@ return new class () extends Migration {
             $table->boolean('status')->default(true);
             $table->boolean('featured')->default(false);
             $table->text('meta_title')->nullable();
-            $table->text('meta_desc')->nullable();
+            $table->text('meta_description')->nullable();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

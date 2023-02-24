@@ -11,28 +11,23 @@ class FeaturedBanner extends Model
 {
     use HasAdvancedFilter;
 
-    public const StatusInactive = 0;
+    public const STATUSINACTIVE = 0;
 
-    public const StatusActive = 1;
+    public const STATUSACTIVE = 1;
 
     public $orderable = [
         'id', 'title', 'details', 'image', 'status', 'featured', 'language_id',
     ];
+
+    public $timestamps = false;
 
     protected $filterable = [
         'id', 'title', 'details', 'image', 'status', 'featured', 'language_id',
     ];
 
     protected $fillable = [
-        'title', 'details', 'image', 'embeded_video', 'status', 'featured', 'link', 'language_id', 'product_id',
+        'title', 'details', 'image', 'embeded_video', 'status', 'featured', 'link', 'language_id',
     ];
-
-    public $timestamps = false;
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class, 'product_id');
-    }
 
     public function language()
     {

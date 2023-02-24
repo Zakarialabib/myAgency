@@ -118,8 +118,6 @@ window.Alpine = Alpine;
 
 window.Swal = swal;
 
-window.FilePond = FilePond
-
 Alpine.start();
 
 /* Function for dropdowns */

@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\FeaturedBanner;
 
-use App\Http\Livewire\WithSorting;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\FeaturedBanner;
 use App\Models\Language;
-use App\Models\Product;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Index extends Component
 {
@@ -51,15 +50,23 @@ class Index extends Component
     public array $listsForFields = [];
 
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
             'except' => 'desc',
         ],
+    ];
+
+    protected $rules = [
+        'featuredbanner.title' => ['required', 'string', 'max:255'],
+        'featuredbanner.details' => ['nullable', 'string'],
+        'featuredbanner.link' => ['nullable', 'string'],
+        'featuredbanner.language_id' => ['nullable', 'integer'],
+        'featuredbanner.embeded_video' => ['nullable'],
     ];
 
     public function getSelectedCountProperty()
@@ -82,15 +89,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-    protected $rules = [
-        'featuredbanner.title'         => ['required', 'string', 'max:255'],
-        'featuredbanner.details'       => ['nullable', 'string'],
-        'featuredbanner.link'          => ['nullable', 'string'],
-        'featuredbanner.product_id'    => ['nullable', 'integer'],
-        'featuredbanner.language_id'   => ['nullable', 'integer'],
-        'featuredbanner.embeded_video' => ['nullable'],
-    ];
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -104,8 +102,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = FeaturedBanner::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -138,7 +136,6 @@ class Index extends Component
     public function update()
     {
         $this->validate();
-        // if product selected Helpers::productLink($product)
 
         if ($this->image) {
             $imageName = Str::slug($this->featuredbanner->title).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
@@ -174,6 +171,5 @@ class Index extends Component
     protected function initListsForFields(): void
     {
         $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
-        $this->listsForFields['products'] = Product::pluck('name', 'id')->toArray();
     }
 }

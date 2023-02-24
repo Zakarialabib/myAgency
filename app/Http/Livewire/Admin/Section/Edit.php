@@ -1,29 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
+namespace App\Http\Livewire\Admin\Section;
+
 use App\Models\Section;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
-use App\Models\Language;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Edit extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
-    
+
     public $section;
-    
+
     public $editModal = false;
 
     protected $listeners = [
         'editModal',
     ];
-    
-    protected $rules = [    
+
+    protected $rules = [
         'section.language_id' => 'required',
         'section.page_id' => 'required',
         'section.title' => 'nullable',
@@ -37,8 +37,7 @@ class Edit extends Component
         'section.link' => 'nullable',
         'section.description' => 'nullable',
         'section.embeded_video' => 'nullable',
-    ]; 
-
+    ];
 
     public function mount(Section $section)
     {
@@ -51,15 +50,15 @@ class Edit extends Component
     }
 
     public function editModal(Section $section)
-     {
-         $this->resetErrorBag();
+    {
+        $this->resetErrorBag();
 
-         $this->resetValidation();
+        $this->resetValidation();
 
-         $this->section = $section;
+        $this->section = $section;
 
-         $this->editModal = true;
-     }
+        $this->editModal = true;
+    }
 
      public function update()
      {

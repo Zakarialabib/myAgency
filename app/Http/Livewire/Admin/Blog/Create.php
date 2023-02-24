@@ -7,13 +7,12 @@ namespace App\Http\Livewire\Admin\Blog;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Language;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Create extends Component
 {
@@ -32,22 +31,22 @@ class Create extends Component
 
     public array $listsForFields = [];
 
+    public array $rules = [
+        'blog.title' => ['required', 'string', 'max:255'],
+        'blog.category_id' => ['required', 'integer'],
+        'blog.details' => ['required'],
+        'blog.meta_tag' => ['nullable'],
+        'blog.meta_description' => ['nullable'],
+        'blog.featured' => ['nullable'],
+        'blog.language_id' => ['nullable', 'integer'],
+    ];
+
     public function mount(Blog $blog)
     {
         $this->blog = $blog;
 
         $this->initListsForFields();
     }
-
-    public array $rules = [
-        'blog.title'            => ['required', 'string', 'max:255'],
-        'blog.category_id'      => ['required', 'integer'],
-        'blog.details'          => ['required'],
-        'blog.meta_tag'         => ['nullable'],
-        'blog.meta_description' => ['nullable'],
-        'blog.featured'         => ['nullable'],
-        'blog.language_id'      => ['nullable', 'integer'],
-    ];
 
     public function render(): View|Factory
     {

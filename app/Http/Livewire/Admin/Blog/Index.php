@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Blog;
 
-use App\Http\Livewire\WithSorting;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Language;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Index extends Component
 {
@@ -45,11 +45,21 @@ class Index extends Component
 
     public array $listsForFields = [];
 
+    public array $rules = [
+        'blog.title' => ['required', 'string', 'max:255'],
+        'blog.category_id' => ['required', 'integer'],
+        'blog.details' => ['required'],
+        'blog.meta_tag' => ['nullable'],
+        'blog.meta_description' => ['nullable'],
+        'blog.featured' => ['nullable'],
+        'blog.language_id' => ['nullable', 'integer'],
+    ];
+
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -77,16 +87,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-    public array $rules = [
-        'blog.title'            => ['required', 'string', 'max:255'],
-        'blog.category_id'      => ['required', 'integer'],
-        'blog.details'          => ['required'],
-        'blog.meta_tag'         => ['nullable'],
-        'blog.meta_description' => ['nullable'],
-        'blog.featured'         => ['nullable'],
-        'blog.language_id'      => ['nullable', 'integer'],
-    ];
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -100,8 +100,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = Blog::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 

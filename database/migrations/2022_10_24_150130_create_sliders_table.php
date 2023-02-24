@@ -19,14 +19,17 @@ return new class () extends Migration {
             $table->string('subtitle')->nullable();
             $table->string('title');
             $table->string('description')->nullable();
-            $table->string('photo');
+            $table->string('image')->nullable();
             $table->string('bg_color')->nullable();
+            $table->string('text_color')->nullable();
             $table->boolean('featured')->default(false);
             $table->string('link')->nullable();
             $table->string('status')->default(true);
             $table->text('embeded_video')->nullable();
+            $table->foreignId('page_id')->nullable()->constrained('pages')->nullOnDelete();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

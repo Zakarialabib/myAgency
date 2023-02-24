@@ -1,68 +1,66 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html x-data="mainState" :class="{ dark: isDarkMode, rtl: isRtl }" class="scroll-smooth"
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config('settings.site_title') }} - @yield('title')</title>
-    
-    <!-- Styles -->
-    <style>
-        [x-cloak] {
-            display: none;
-        }
-    </style>
-    
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="robots" content="nofollow">
 
-    @include('partials.styles')
+    <title>@yield('title') || {{ settings()->company_name }}</title>
+    <!-- Styles -->
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/favicon.png') }}">
+    <meta name="theme-color" content="#000000">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{ settings()->company_name }}">
+
+    @vite('resources/css/app.css')
+
+    @include('includes.main-css')
 
 </head>
 
-<body class="font-sans antialiased">
-    <div x-data="mainState" :class="{ dark: isDarkMode }" @resize.window="handleWindowResize" x-cloak>
-        <div class="min-h-screen text-zinc500 bg-slate-200 dark:bg-dark-bg dark:text-zinc-200">
+<body class="antialiased bg-body text-body font-body" dir="ltr">
+    {{-- <x-loading-mask /> --}}
+    <div @resize.window="handleWindowResize">
+        <div class="min-h-screen">
             <!-- Sidebar -->
             <x-sidebar.sidebar />
             <!-- Page Wrapper -->
             <div class="flex flex-col min-h-screen"
-                :class="{ 
+                :class="{
                     'lg:ml-64': isSidebarOpen,
-                    // 'md:ml-16': !isSidebarOpen,
+                    'lg:ml-16': !isSidebarOpen,
                 }"
                 style="transition-property: margin; transition-duration: 150ms;">
-                
+
                 <!-- Navigation Bar-->
                 <x-navbar />
 
-                <main class="pt-5 px-4 sm:px-6 flex-1">
-                    @yield('content')
-                </main>
+                <main class="flex-1">
 
-                <!-- Page Footer -->
-                <x-footer />
+                    @yield('breadcrumb')
+
+                    @yield('content')
+
+                    @isset($slot)
+                        {{ $slot }}
+                    @endisset
+                </main>
             </div>
         </div>
     </div>
-    
-    
-    <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
-        {{ csrf_field() }}
-    </form>
-    
-    @include('partials.scripts')
 
-    <script>
-        function closeAlert(event) {
-            let element = event.target;
-            while (element.nodeName !== "BUTTON") {
-                element = element.parentNode;
-            }
-            element.parentNode.parentNode.removeChild(element.parentNode);
-        }
-    </script>
+    <!-- Scripts -->
+    @include('includes.main-js')
+    @vite('resources/js/app.js')
+
 </body>
-
 </html>

@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\BlogCategory;
 
-use App\Http\Livewire\WithSorting;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\BlogCategory;
 use App\Models\Language;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
 
 class Index extends Component
 {
@@ -44,11 +44,20 @@ class Index extends Component
 
     public array $listsForFields = [];
 
+    public array $rules = [
+        'blogcategory.title' => ['required', 'string', 'max:255'],
+        'blogcategory.description' => ['nullable'],
+        'blogcategory.meta_title' => ['nullable'],
+        'blogcategory.meta_description' => ['nullable'],
+        'blogcategory.featured' => ['nullable'],
+        'blogcategory.language_id' => ['required', 'integer'],
+    ];
+
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -76,15 +85,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-    public array $rules = [
-        'blogcategory.title'            => ['required', 'string', 'max:255'],
-        'blogcategory.description'      => ['nullable'],
-        'blogcategory.meta_title'       => ['nullable'],
-        'blogcategory.meta_desc' => ['nullable'],
-        'blogcategory.featured'         => ['nullable'],
-        'blogcategory.language_id'      => ['required', 'integer'],
-    ];
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -98,8 +98,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = BlogCategory::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -110,7 +110,7 @@ class Index extends Component
 
     public function editModal(BlogCategory $blogcategory)
     {
-        abort_if(Gate::denies('blogcategory_edit'), 403);
+        // abort_if(Gate::denies('blogcategory_edit'), 403);
 
         $this->resetErrorBag();
 
@@ -123,7 +123,7 @@ class Index extends Component
 
     public function update()
     {
-        abort_if(Gate::denies('blogcategory_edit'), 403);
+        // abort_if(Gate::denies('blogcategory_edit'), 403);
 
         $this->validate();
         // condition if save close modal if not stay
@@ -137,7 +137,7 @@ class Index extends Component
 
     public function delete(BlogCategory $blogcategory)
     {
-        abort_if(Gate::denies('blogcategory_delete'), 403);
+        // abort_if(Gate::denies('blogcategory_delete'), 403);
 
         $blogcategory->delete();
 

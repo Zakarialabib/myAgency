@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Product;
-use Livewire\Component;
-use Illuminate\Contracts\View\View;
+use App\Models\Blog;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Livewire\Component;
 
 class SearchBox extends Component
 {
@@ -22,7 +22,7 @@ class SearchBox extends Component
     protected $queryString = [
         'search' => [
             'except' => '',
-            'as'     => 'q',
+            'as' => 'q',
         ],
     ];
 
@@ -34,7 +34,7 @@ class SearchBox extends Component
     public function updatedSearch()
     {
         if (strlen($this->search) > 3) {
-            $this->results = Product::active()
+            $this->results = Blog::active()
                 ->where('name', 'like', '%'.$this->search.'%')
                 ->orWhere('description', 'like', '%'.$this->search.'%')
                 ->limit(5)

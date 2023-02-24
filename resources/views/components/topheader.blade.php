@@ -1,13 +1,13 @@
-<div class="px-6 py-2 bg-red-600 text-white">
+<div class="px-6 py-2 bg-orange-600 text-white">
     <div class="flex items-center justify-center md:justify-between">
         <p class="text-xs text-center font-semibold font-heading hover:text-gray-400 hover:underline">
-            BADR LUXURY - SINCE 1983 - THE BEST OF EVERYTHING
+            APPAGENCY
         </p>
         @if (Auth::check())
             <x-dropdown align="right" width="56">
                 <x-slot name="trigger">
                     <div class="flex items-center text-white px-4">
-                        <i class="fa fa-caret-down ml-2"></i> {{ Auth::user()->first_name }}
+                        <i class="fa fa-caret-down ml-2"></i> {{ Auth::user()->name }}
                     </div>
                 </x-slot>
 
@@ -18,7 +18,7 @@
                             {{ __('Dashboard') }}
                         </x-dropdown-link>
 
-                        <x-dropdown-link :href="route('admin.settings')">
+                        <x-dropdown-link :href="route('admin.settings.index')">
                             {{ __('Settings') }}
                         </x-dropdown-link>
                     @else

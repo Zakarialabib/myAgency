@@ -11,15 +11,15 @@ class Page extends Model
 {
     use HasAdvancedFilter;
 
-    protected $filterable = [
-        'id', 'title', 'slug', 'details', 'meta_title', 'meta_description', 'language_id', 'photo',
+    public $orderable = [
+        'id', 'title', 'slug', 'details', 'meta_title', 'meta_description', 'language_id', 'image',
     ];
 
-    public $orderable = [
-        'id', 'title', 'slug', 'details', 'meta_title', 'meta_description', 'language_id', 'photo',
+    protected $filterable = [
+        'id', 'title', 'slug', 'details', 'meta_title', 'meta_description', 'language_id', 'image',
     ];
 
     protected $fillable = [
-        'title', 'slug', 'details', 'meta_title', 'meta_description', 'language_id', 'photo',
+        'title', 'slug', 'details', 'meta_title', 'meta_description', 'language_id', 'image',
     ];
 }

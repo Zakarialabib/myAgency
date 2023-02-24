@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\User;
 
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Subscription;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Edit extends Component
 {
@@ -24,25 +25,20 @@ class Edit extends Component
 
     public array $subscriptions = [];
 
-    public $price = "10";
+    public $price = '10';
 
     public string $password = '';
 
     public array $listsForFields = [];
-   
+
     protected $listeners = [
         'submit',
     ];
 
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['roles'] = Role::pluck('title', 'id')->toArray();
-    }
-
     public function mount(User $user)
     {
-        $this->user  = $user;
-        $this->perPage           = 5;
+        $this->user = $user;
+        $this->perPage = 5;
         $this->paginationOptions = config('project.pagination.options');
 
         $this->roles = $this->user->roles->pluck('id')->toArray();
@@ -58,17 +54,23 @@ class Edit extends Component
     public function submit()
     {
         $this->validate();
-        
-        if($this->password !== '')
-        $this->user->password = bcrypt($this->password);
-    
+
+        if ($this->password !== '') {
+            $this->user->password = bcrypt($this->password);
+        }
+
         $this->user->update();
 
         $this->user->roles()->sync($this->roles);
 
-        $this->alert('success', __('User updated successfully!') );
+        $this->alert('success', __('User updated successfully!'));
 
         return redirect()->route('admin.users.index');
+    }
+
+    protected function initListsForFields(): void
+    {
+        $this->listsForFields['roles'] = Role::pluck('title', 'id')->toArray();
     }
 
     protected function rules(): array
@@ -81,7 +83,7 @@ class Edit extends Component
             'user.email' => [
                 'email:rfc',
                 'required',
-                'unique:users,email,' . $this->user->id,
+                'unique:users,email,'.$this->user->id,
             ],
             'password' => [
                 'string',
@@ -96,6 +98,4 @@ class Edit extends Component
             ],
         ];
     }
-
-   
 }

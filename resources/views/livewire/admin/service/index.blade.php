@@ -68,14 +68,14 @@
                         {{-- <input type="checkbox" value="{{ $service->id }}" wire:model="selected"> --}}
                     </x-table.td>
                     <x-table.td>
-                        {{ $service->language->name }} // <img src="{{ flagImageUrl($about->language->code) }}">
+                        {{ $service->language->name }} 
                     </x-table.td>
                     <x-table.td>
                         {{ $service->title }}
                     </x-table.td>
 
                     <x-table.td>
-                        <livewire:toggle-button :model="$service" field="status" key="{{ $service->id }}" />
+                        <livewire:utils.toggle-button :model="$service" field="status" key="{{ $service->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
@@ -142,13 +142,4 @@
     </div>
 </div>
 
-@push('scripts')
-    <script>
-        Livewire.on('confirm', e => {
-            if (!confirm("{{ __('Are you sure') }}")) {
-                return
-            }
-            @this[e.callback](...e.argv)
-        });
-    </script>
-@endpush
+

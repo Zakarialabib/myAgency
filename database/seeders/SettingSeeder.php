@@ -13,11 +13,11 @@ class SettingSeeder extends Seeder
     protected $settings = [
         [
             'key'   => 'company_name',
-            'value' => 'APPECOM',
+            'value' => 'HOTECH&SOFT',
         ],
         [
             'key'   => 'site_title',
-            'value' => 'APPECOM',
+            'value' => 'HOTECH&SOFT',
         ],
         [
             'key'   => 'company_email_address',
@@ -61,11 +61,11 @@ class SettingSeeder extends Seeder
         ],
         [
             'key'   => 'seo_meta_title',
-            'value' => 'APPECOM',
+            'value' => 'HOTECH&SOFT',
         ],
         [
             'key'   => 'seo_meta_description',
-            'value' => 'APPECOM',
+            'value' => 'HOTECH&SOFT',
         ],
         [
             'key'   => 'social_facebook',
@@ -104,27 +104,11 @@ class SettingSeeder extends Seeder
             'value' => 'Site is under maintenance',
         ],
         [
-            'key'   => 'site_return',
+            'key'   => 'is_ecommerce',
             'value' => '0',
         ],
         [
-            'key'   => 'site_refund',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_terms',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_privacy',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_about',
-            'value' => '0',
-        ],
-        [
-            'key'   => 'site_contact',
+            'key'   => 'is_onepage',
             'value' => '0',
         ],
     ];

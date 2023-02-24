@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Section;
 
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Language;
 use App\Models\Section;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use App\Http\Livewire\WithSorting;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Support\Collection;
-use Throwable;
-
 
 class Index extends Component
 {
@@ -53,10 +48,10 @@ class Index extends Component
     public $language_id;
 
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
@@ -102,9 +97,9 @@ class Index extends Component
     {
         $query = Section::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
-            })->advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+        })->advancedFilter([
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -116,7 +111,7 @@ class Index extends Component
      // Section  Delete
       public function delete(Section $section)
       {
-          abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        //   abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
           $section->delete();
 
@@ -141,6 +136,6 @@ class Index extends Component
              'content' => $section_details->content,
              'status' => 0,
          ]);
-         $this->alert('success', __('Section Cloned successfully!') );
+         $this->alert('success', __('Section Cloned successfully!'));
      }
 }

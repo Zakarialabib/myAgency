@@ -127,7 +127,7 @@
                                          
         
                                             <li class="list-group-item">{{__('Portfolios')}}
-                                                <a data-text="{{__('Portfolios')}}" data-type="portfolios" class="addToMenus btn btn-info btn-sm float-right" href=""><i class="fas fa-plus"></i></a>
+                                                <a data-text="{{__('Portfolios')}}" data-type="projects" class="addToMenus btn btn-info btn-sm float-right" href=""><i class="fas fa-plus"></i></a>
                                             </li>
                                             <li class="list-group-item">{{__('Pages')}}
                                                 <a data-text="{{__('Pages')}}" data-type="pages" class="addToMenus btn btn-info btn-sm float-right" href=""><i class="fas fa-plus"></i></a>

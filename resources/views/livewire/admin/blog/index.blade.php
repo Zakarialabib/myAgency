@@ -74,10 +74,10 @@
                         {{ $blog->title }}
                     </x-table.td>
                     <x-table.td>
-                        {{ $blog->bcategory->name }}
+                        {{ $blog->category->name }}
                     </x-table.td>
                     <x-table.td>
-                        <livewire:toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />
+                        <livewire:utils.toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
@@ -143,13 +143,4 @@
     </div>
 </div>
 
-{{-- @push('scripts')
-    <script>
-        Livewire.on('confirm', e => {
-            if (!confirm("{{ __('Are you sure') }}")) {
-                return
-            }
-            @this[e.callback](...e.argv)
-        });
-    </script>
-@endpush --}}
+{{--  --}}

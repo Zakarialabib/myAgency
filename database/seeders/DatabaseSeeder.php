@@ -20,11 +20,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
 
-            CurrenciesSeeder::class,
             LanguagesSeeder::class,
-            BrandSeeder::class,
             CategorySeeder::class,
-            ProductSeeder::class,
+            SectionSeeder::class,
             SettingSeeder::class,
             FeaturedBannerSeeder::class,
             BlogSeeder::class,
@@ -34,8 +32,6 @@ class DatabaseSeeder extends Seeder
             PermissionRoleSeeder::class,
             SuperUserSeeder::class,
             RoleUserSeeder::class,
-            ShippingSeeder::class,
-
         ]);
     }
 }

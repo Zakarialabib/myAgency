@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Slider;
 
-use App\Http\Livewire\WithSorting;
+use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Language;
 use App\Models\Slider;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\View\View;
-use Illuminate\Contracts\View\Factory;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Collection;
 
 class Index extends Component
 {
@@ -27,7 +27,7 @@ class Index extends Component
 
     public $slider;
 
-    public $photo;
+    public $image;
 
     public $listeners = [
         'refreshIndex' => '$refresh',
@@ -51,15 +51,25 @@ class Index extends Component
     public array $paginationOptions;
 
     protected $queryString = [
-        'search'        => [
+        'search' => [
             'except' => '',
         ],
-        'sortBy'        => [
+        'sortBy' => [
             'except' => 'id',
         ],
         'sortDirection' => [
             'except' => 'desc',
         ],
+    ];
+
+    protected $rules = [
+        'slider.title' => ['required', 'string', 'max:255'],
+        'slider.subtitle' => ['nullable', 'string'],
+        'slider.details' => ['nullable'],
+        'slider.link' => ['nullable', 'string'],
+        'slider.language_id' => ['nullable', 'integer'],
+        'slider.bg_color' => ['nullable', 'string'],
+        'slider.embeded_video' => ['nullable'],
     ];
 
     public function getSelectedCountProperty()
@@ -82,16 +92,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-    protected $rules = [
-        'slider.title'         => ['required', 'string', 'max:255'],
-        'slider.subtitle'      => ['nullable', 'string'],
-        'slider.details'       => ['nullable'],
-        'slider.link'          => ['nullable', 'string'],
-        'slider.language_id'   => ['nullable', 'integer'],
-        'slider.bg_color'      => ['nullable', 'string'],
-        'slider.embeded_video' => ['nullable'],
-    ];
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -104,8 +104,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = Slider::advancedFilter([
-            's'               => $this->search ?: null,
-            'order_column'    => $this->sortBy,
+            's' => $this->search ?: null,
+            'order_column' => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -114,9 +114,9 @@ class Index extends Component
         return view('livewire.admin.slider.index', compact('sliders'));
     }
 
-    // public function getPhotoPreviewProperty()
+    // public function getimagePreviewProperty()
     // {
-    //     return $this->slider->photo;
+    //     return $this->slider->image;
     // }
 
     public function setFeatured($id)
@@ -144,16 +144,16 @@ class Index extends Component
     {
         $this->validate();
 
-        if ($this->photo) {
-            $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->photo->extension();
+        if ($this->image) {
+            $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
 
-            $img = Image::make($this->photo->getRealPath())->encode('webp', 85);
+            $img = Image::make($this->image->getRealPath())->encode('webp', 85);
 
             $img->stream();
 
             Storage::disk('local_files')->put('sliders/'.$imageName, $img, 'public');
 
-            $this->slider->photo = $imageName;
+            $this->slider->image = $imageName;
         }
 
         $this->slider->save();

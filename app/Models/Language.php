@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+declare(strict_types=1);
 
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,45 +20,54 @@ class Language extends Model
     ];
 
     protected $guarded = [];
-    
-    public function setting() {
+
+    public function setting()
+    {
         return $this->hasOne('App\Models\Setting');
     }
 
-    public function section() {
+    public function section()
+    {
         return $this->hasOne('App\Models\Section');
     }
 
-    public function teams() {
+    public function teams()
+    {
         return $this->hasMany('App\Models\Team');
     }
 
-    public function services() {
+    public function services()
+    {
         return $this->hasMany('App\Models\Service');
     }
 
-    public function portfolios() {
-        return $this->hasMany('App\Models\Portfolio');
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Project');
     }
 
-    public function faqs() {
+    public function faqs()
+    {
         return $this->hasMany('App\Models\Faq');
     }
 
-    public function bcategories() {
+    public function bcategories()
+    {
         return $this->hasMany('App\Models\Bcategory');
     }
 
-    public function blogs() {
+    public function blogs()
+    {
         return $this->hasMany('App\Models\Blog');
     }
-    
-    public function abouts() {
+
+    public function abouts()
+    {
         return $this->hasMany('App\Models\About');
     }
-    
-    public function menus() {
+
+    public function menus()
+    {
         return $this->hasMany('App\Models\Menu');
     }
-
 }

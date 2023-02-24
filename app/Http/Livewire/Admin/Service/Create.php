@@ -1,34 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Livewire\Admin\Service;
 
-use Livewire\WithFileUploads;
 use App\Models\Service;
-use App\Models\Language;
-use Livewire\Component;
-use Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Str;
 
 class Create extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
-    
+
     public Service $service;
-    
-    public $image, $icon;
+
+    public $image;
+    public $icon;
 
     protected $listeners = [
         'submit',
     ];
-    
-    protected $rules = [    
+
+    protected $rules = [
         'service.language_id' => 'required',
         'service.status' => 'required',
         'service.icon' => 'nullable',
         'service.title' => 'required|unique:services,title|max:191',
         'service.content' => 'required',
-    ]; 
+    ];
 
     public function mount(Service $service)
     {
@@ -43,20 +45,19 @@ class Create extends Component
     public function submit()
     {
         $this->validate();
-        
+
         $this->service->slug = Str::slug($this->service->title);
-        
-        if($this->image){
+
+        if ($this->image) {
             $imageName = Str::slug($this->service->title).'.'.$this->image->extension();
-            $this->image->storeAs('services',$imageName);
+            $this->image->storeAs('services', $imageName);
             $this->service->image = $imageName;
         }
 
         $this->service->save();
 
-        $this->alert('success', __('Service created successfully!') );
+        $this->alert('success', __('Service created successfully!'));
 
         return redirect()->route('admin.services.index');
     }
-  
 }

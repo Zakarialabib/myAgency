@@ -71,12 +71,13 @@
                         {{ $team->name }}
                     </x-table.td>
                     <x-table.td>
-                        <livewire:toggle-button :model="$team" field="status" key="{{ $team->id }}" />
+                        <livewire:utils.toggle-button :model="$team" field="status" key="{{ $team->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">
                             <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
-                                href="{{ route('admin.teams.edit', $team) }}">
+                                {{-- href="{{ route('admin.teams.edit', $team) }}" --}}
+                                >
                                 <x-heroicon-o-pencil-alt class="h-4 w-4" />
                             </a>
                             <button
@@ -139,13 +140,4 @@
     </div>
 </div>
 
-@push('scripts')
-    <script>
-        Livewire.on('confirm', e => {
-            if (!confirm("{{ __('Are you sure') }}")) {
-                return
-            }
-            @this[e.callback](...e.argv)
-        });
-    </script>
-@endpush
+

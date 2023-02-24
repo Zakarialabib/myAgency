@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
     use HasAdvancedFilter;
 
+    public const HOME_PAGE = 1;
+    public const ABOUT_PAGE = 2;
+    public const TEAM_PAGE = 3;
+    public const BLOG_PAGE = 4;
+    public const SERVICE_PAGE = 5;
+    public const PORTFOLIO_PAGE = 6;
+
     public $table = 'sections';
- 
-    const HOME_PAGE    = 1;
-    const ABOUT_PAGE    = 2;
-    const TEAM_PAGE = 3;
-    const BLOG_PAGE = 4;
-    const SERVICE_PAGE  = 5;
-    const PORTFOLIO_PAGE  = 6;
 
     public $orderable = [
         'id',
@@ -38,7 +40,7 @@ class Section extends Model
 
     public $filterable = [
         'id',
-       'language_id',
+        'language_id',
         'page_id',
         'title',
         'featured_title',
@@ -55,7 +57,7 @@ class Section extends Model
     ];
 
     protected $fillable = [
-       'language_id',
+        'language_id',
         'page_id',
         'title',
         'featured_title',
@@ -71,8 +73,13 @@ class Section extends Model
         'status',
     ];
 
-    
-    public function language() {
-        return $this->belongsTo('App\Models\Language');
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+    public function page()
+    {
+        return $this->belongsTo(Page::class);
     }
 }

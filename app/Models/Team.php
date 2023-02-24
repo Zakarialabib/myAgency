@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Support\HasAdvancedFilter;
+use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
     use HasAdvancedFilter;
-    
+
     public $table = 'teams';
 
     public $orderable = [
@@ -18,9 +20,9 @@ class Team extends Model
         'role',
         'description',
         'status',
-        'language_id'
+        'language_id',
     ];
-    
+
     public $filterable = [
         'id',
         'name',
@@ -28,9 +30,9 @@ class Team extends Model
         'role',
         'description',
         'status',
-        'language_id'
+        'language_id',
     ];
-    
+
     protected $fillable = [
         'id',
         'name',
@@ -38,10 +40,11 @@ class Team extends Model
         'role',
         'description',
         'status',
-        'language_id'
+        'language_id',
     ];
 
-    public function language() {
+    public function language()
+    {
         return $this->belongsTo('App\Models\Language');
     }
 }

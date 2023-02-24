@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use Livewire\Component;
 use App\Models\Popup;
+use Livewire\Component;
 
 class Popups extends Component
 {
@@ -29,7 +29,7 @@ class Popups extends Component
 
     public string $ctaUrl;
 
-    protected $listeners = ['showDelay','showDuration','showInterval'];
+    protected $listeners = ['showDelay', 'showDuration', 'showInterval'];
 
     public function showDelay($delay)
     {

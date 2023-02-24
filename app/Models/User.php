@@ -21,13 +21,13 @@ class User extends Authenticatable
     use HasRoles;
 
     public $orderable = [
-        'id', 'first_name', 'last_name',  'zip', 'city', 'state', 'country', 'address',
+        'id', 'name', 'city', 'country', 'address',
         'phone', 'email', 'password', 'created_at', 'updated_at',
     ];
 
     protected $filterable = [
-        'first_name', 'last_name',  'zip', 'city', 'state', 'country', 'address',
-        'phone', 'email', 'password', 'favorite_brands', 'created_at', 'updated_at',
+        'name', 'city', 'country', 'address',
+        'phone', 'email', 'password', 'created_at', 'updated_at',
     ];
 
     /**
@@ -36,7 +36,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id', 'first_name', 'last_name',  'zip', 'city', 'state', 'country', 'address',
+        'id', 'name', 'city', 'country', 'address',
         'phone', 'email', 'password', 'created_at', 'updated_at',
     ];
 
@@ -59,11 +59,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getFullNameAttribute()
-    {
-        return $this->first_name.' '.$this->last_name;
-    }
-
     public function isAdmin()
     {
         return $this->roles->pluck('name')->contains(Role::ROLE_ADMIN);
@@ -77,10 +72,5 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class, 'user_id');
     }
 }

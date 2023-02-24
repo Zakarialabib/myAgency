@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->tinyInteger('status')->default(true);
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
