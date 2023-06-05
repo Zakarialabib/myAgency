@@ -20,41 +20,14 @@ class Section extends Model
 
     public $table = 'sections';
 
-    public $orderable = [
+    public const ATTRIBUTES = [
         'id',
-        'language_id',
-        'page_id',
         'title',
-        'featured_title',
-        'subtitle',
-        'text',
-        'main_color',
-        'button',
-        'position',
-        'label',
-        'link',
-        'description',
-        'embeded_video',
         'status',
     ];
 
-    public $filterable = [
-        'id',
-        'language_id',
-        'page_id',
-        'title',
-        'featured_title',
-        'subtitle',
-        'text',
-        'main_color',
-        'button',
-        'position',
-        'label',
-        'link',
-        'description',
-        'embeded_video',
-        'status',
-    ];
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'language_id',
@@ -73,6 +46,18 @@ class Section extends Model
         'status',
     ];
 
+     /**
+     * Scope a query to only include active products.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('status', 1);
+    }
+    
     public function language()
     {
         return $this->belongsTo(Language::class);

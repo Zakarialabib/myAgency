@@ -17,15 +17,13 @@ return new class () extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('city');
-            $table->string('country');
-            $table->string('address');
-            $table->string('phone');
             $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('statut')->default(false);
-            $table->foreignId('role_id')->nullable()->constrained('roles')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

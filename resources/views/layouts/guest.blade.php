@@ -29,7 +29,7 @@
         <meta name="description" content="{{ settings()->seo_meta_description }}">
         <meta property="og:title" content="{{ settings()->site_title }}">
         <meta property="og:description" content="{{ settings()->seo_meta_description }}">
-        <meta property="og:url" content="{{ route('front.index')}}" />
+        <meta property="og:url" content="{{ route('front.index') }}" />
     @endif
 
     <meta property="og:locale" content="{{ app()->getLocale() }}" />
@@ -39,7 +39,7 @@
     {{-- <link rel="canonical" href="{{ URL::current() }}"> --}}
     <meta name="robots" content="all,follow">
 
-    <link rel="icon" href="{{ asset('images/' . settings()->site_favicon)}}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/' . settings()->site_favicon) }}" type="image/x-icon">
 
     {{-- Styles --}}
     @vite('resources/css/app.css')
@@ -50,27 +50,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+ 
     @stack('styles')
-
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 
-<body class="antialiased bg-body text-body font-body" x-data="{ showCart: false }">
+<body class="antialiased bg-gray-50 text-body font-body" x-data="{ showCart: false }">
     <!-- Body Tags -->
 
     @if (settings()->body_tags)
         {!! settings()->body_tags !!}
     @endif
     
-    {{-- <x-loading-mask /> --}}
-
     <section class="relative">
 
-        <x-topheader />
+        {{-- <x-topheader /> --}}
 
-        <x-header />
-
-        <x-bottomheader />
+        <x-header vertical />
+        
+        {{-- <x-bottomheader /> --}}
 
         @yield('content')
 
@@ -85,9 +87,13 @@
     </section>
 
     @vite('resources/js/app.js')
+
     @livewireScripts
+    
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <x-livewire-alert::scripts />
+    
     @stack('scripts')
 </body>
 

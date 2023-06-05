@@ -70,7 +70,7 @@
                     <x-input-error :messages="$errors->get('section.image')" for="section.image" class="mt-2" />
                 </div>
                 
-                <div class="w-full px-2">
+                <div class="w-full text-center py-4">
                     <x-button type="submit" primary>
                         {{ __('Save') }}
                     </x-button>

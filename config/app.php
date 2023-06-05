@@ -187,7 +187,7 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Brotzka\DotenvEditor\DotenvEditorServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

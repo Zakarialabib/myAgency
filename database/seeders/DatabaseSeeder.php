@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             SectionSeeder::class,
             SettingSeeder::class,
-            FeaturedBannerSeeder::class,
+            // FeaturedBannerSeeder::class,
             BlogSeeder::class,
             SliderSeeder::class,
-            RolesSeeder::class,
-            PermissionsSeeder::class,
-            PermissionRoleSeeder::class,
-            SuperUserSeeder::class,
-            RoleUserSeeder::class,
+            PermissionSeeder::class,
+            ServiceSeeder::class,
+            ProjectSeeder::class,
+            PartnerSeeder::class,
+            
         ]);
     }
 }

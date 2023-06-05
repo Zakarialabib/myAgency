@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Admin\BlogCategoryController;
-use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedBannerController;
 use App\Http\Controllers\Admin\LanguageController;
@@ -13,12 +12,15 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SectionController;
-use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Livewire\Admin\Contacts;
+use App\Http\Livewire\Admin\Project\Index as ProjectIndex;
+use App\Http\Livewire\Admin\Users\Index as UserIndex;
+use App\Http\Livewire\Admin\Blog\Index as BlogIndex;
+use App\Http\Livewire\Admin\Service\Index as ServiceIndex;
+use App\Http\Livewire\Admin\Category\Index as CategoryIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,29 +33,28 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:ADMIN']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
     // Dashboard
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
     // Contact
     Route::get('/contact', Contacts::class)->name('contact');
 
     // Categories
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::get('/categories', CategoryIndex::class)->name('categories.index');
 
     // FeaturedBanners
     Route::get('/featuredBanners', [FeaturedBannerController::class, 'index'])->name('featuredBanners');
 
     // Sliders
-    
     Route::get('/sliders', [SliderController::class, 'index'])->name('sliders');
 
     // Pages
     Route::get('/pages', [PageController::class, 'index'])->name('pages');
 
     // Blogs
-    Route::resource('blogs', BlogController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('blogs', BlogIndex::class)->name('blogs.index');
 
     // Bcategories
     Route::get('blog-categories', [BlogCategoryController::class,'index'])->name('blog-categories.index');
@@ -62,13 +63,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('language', [LanguageController::class, 'index'])->name('language.index');
 
     // Project
-    Route::resource('projects', ProjectController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('projects', ProjectIndex::class)->name('projects.index');
 
     // Service
-    Route::resource('services', ServiceController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('/services', ServiceIndex::class)->name('services.index');
 
     // Sections
-    Route::resource('sections', SectionController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('sections', [SectionController::class, 'index'])->name('sections');
 
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
@@ -77,7 +78,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::resource('roles', RoleController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Users
-    Route::resource('users', UserController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('users', UserIndex::class)->name('users.index');
 
     // Notification
     Route::get('/notification', [NotificationController::class, 'index'])->name('notification');

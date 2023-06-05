@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Slider;
 
 use App\Models\Language;
-use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -34,31 +31,30 @@ class Create extends Component
     ];
 
     public array $rules = [
-        'slider.title' => ['required', 'string', 'max:255'],
-        'slider.subtitle' => ['nullable', 'string'],
-        'slider.details' => ['nullable', 'string'],
-        'slider.link' => ['nullable', 'string'],
-        'slider.language_id' => ['nullable'],
-        'slider.bg_color' => ['nullable'],
+        'slider.title'         => ['required', 'string', 'max:255'],
+        'slider.subtitle'      => ['nullable', 'string'],
+        'slider.description'       => ['nullable'],
+        'slider.link'          => ['nullable', 'string'],
+        'slider.language_id'   => ['nullable'],
+        'slider.bg_color'      => ['nullable'],
         'slider.embeded_video' => ['nullable'],
-        'image' => ['required'],
+        'image'                => ['required'],
     ];
-
-    public function mount(Slider $slider)
-    {
-        $this->slider = $slider;
-    }
 
     public function render(): View|Factory
     {
-        // abort_if(Gate::denies('slider_create'), 403);
+        abort_if(Gate::denies('slider_create'), 403);
 
         return view('livewire.admin.slider.create');
     }
 
     public function createSlider()
     {
-        $this->reset();
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->slider = new Slider();
 
         $this->createSlider = true;
     }
@@ -71,11 +67,9 @@ class Create extends Component
             if ($this->image) {
                 $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
 
-                $img = Image::make($this->image->getRealPath())->encode('webp', 85);
-
-                $img->stream();
-
-                Storage::disk('local_files')->put('sliders/'.$imageName, $img, 'public');
+                $this->slider->addMediaFromDisk($this->image->getRealPath())
+                    ->usingFileName($imageName)
+                    ->toMediaCollection('local_files');
 
                 $this->slider->image = $imageName;
             }

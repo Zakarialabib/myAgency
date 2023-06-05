@@ -19,9 +19,9 @@ class SectionSeeder extends Seeder
         Section::insert([
             [
                 'id'             => 1,
-                'title'          => 'Welcome to appAgency',
+                'title'          => 'Welcome to',
                 'image'          => 'image.jpg',
-                'featured_title' => 'appAgency',
+                'featured_title' => 'Agency',
                 'subtitle'       => 'appAgency',
                 'label'          => 'appAgency',
                 'link'           => 'https://appAgency.com/',

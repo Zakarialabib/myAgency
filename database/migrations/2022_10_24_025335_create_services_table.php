@@ -17,12 +17,14 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->nullable();
+            $table->string('title', 50)->nullable();
             $table->string('slug')->nullable();
+            $table->string('type')->nullable();
             $table->string('image')->nullable();
             $table->text('content')->nullable();
             $table->boolean('status')->default(true);
-            $table->foreignId('page_id')->nullable()->constrained('pages')->nullOnDelete();
+            $table->json('features')->nullable();
+            $table->json('options')->nullable();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();

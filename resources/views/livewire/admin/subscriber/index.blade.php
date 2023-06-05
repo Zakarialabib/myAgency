@@ -68,7 +68,7 @@
                     </x-table.td>
 
                     <x-table.td>
-                        <livewire:utils.toggle-button :model="$category" field="status" key="{{ $category->id }}" />
+                        <livewire:toggle-button :model="$category" field="status" key="{{ $category->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <x-dropdown

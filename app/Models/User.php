@@ -20,15 +20,14 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
 
-    public $orderable = [
-        'id', 'name', 'city', 'country', 'address',
-        'phone', 'email', 'password', 'created_at', 'updated_at',
+    public const ATTRIBUTES = [
+        'id',
+        'name',
+        'status',
     ];
 
-    protected $filterable = [
-        'name', 'city', 'country', 'address',
-        'phone', 'email', 'password', 'created_at', 'updated_at',
-    ];
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +35,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'id', 'name', 'city', 'country', 'address',
+        'id', 'name', 'city', 'country',
         'phone', 'email', 'password', 'created_at', 'updated_at',
     ];
 
@@ -69,8 +68,9 @@ class User extends Authenticatable
         return $this->roles->pluck('name')->contains(Role::ROLE_CLIENT);
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
-    }
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    // }
 }
+ 

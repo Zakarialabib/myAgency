@@ -1,31 +1,44 @@
+@props(['vertical' => false])
+
 <div>
-    <nav class="flex justify-between bg-black border-b">
-        <div class="px-4 lg:px-12 py-5 flex w-full items-center">
+    <header x-data="{ isSticky: true, scrollPosition: 0 }" x-init="window.addEventListener('scroll', () => { scrollPosition = window.scrollY;
+        isSticky = scrollPosition > 0; })"
+        :class="{ 'top-0 bg-black shadow': isSticky, 'bg-transparent': !isSticky }"
+        class="fixed left-0 w-full z-50 {{ $vertical ? 'flex flex-col items-center' : 'flex items-center' }} transition-all duration-300">
+        <div class="container flex justify-between items-center py-4">
             <a class="lg:mr-8 2xl:mr-20 lg:text-3xl sm:text-xl font-bold font-heading text-white"
                 href="{{ route('front.index') }}">
-                <img class="w-auto h-10" src="{{ asset('images/' . settings()->site_logo) }}"
-                    loading="lazy" alt="{{ settings()->site_title }}" />
+                <img class="w-auto h-10" src="{{ asset('images/' . settings()->site_logo) }}" loading="lazy"
+                    alt="{{ settings()->site_title }}" />
             </a>
 
             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading">
-                <li class="mr-12"><a class="text-gray-100 hover:text-red-600 hover:underline" href="{{ route('front.projects') }}">
-                        {{ __('Projects') }}
+                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
+                        href="">
+                        {{ __('The Digital Hub') }}
                     </a>
                 </li>
-                <li class="mr-12"><a class="text-gray-100 hover:text-red-600 hover:underline" href="{{ route('front.blogs') }}">
-                        {{ __('Blog') }}
+                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
+                        href="">
+                        {{ __('The Startup Hub') }}
                     </a>
                 </li>
-                <li><a class="text-gray-100 hover:text-red-600 hover:underline" href="{{ route('front.contact') }}">
-                        {{ __('contact') }}
+                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
+                        href="">
+                        {{ __('Partners') }}
+                    </a>
+                </li>
+                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
+                        href="">
+                        {{ __('About Us') }}
+                    </a>
+                </li>
+                <li><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
+                        href="{{ route('front.contact') }}">
+                        {{ __('Contact') }}
                     </a>
                 </li>
             </ul>
-            <div class="hidden md:flex items-center text-gray-100 space-x-2">
-
-                <livewire:front.search-box />
-
-            </div>
         </div>
 
         <a class="navbar-burger self-center mr-8 md:hidden" href="#">
@@ -35,7 +48,7 @@
                     fill="#8594A5"></path>
             </svg>
         </a>
-    </nav>
+    </header>
 </div>
 <div class="hidden navbar-menu fixed top-0 left-0 bottom-0 w-5/6 max-w-sm z-50">
     <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -55,20 +68,36 @@
         </div>
         <div class="border-t border-gray-900 py-2"></div>
 
-        <div class="flex justify-center bg-red-600 px-2">
-            <livewire:front.search-box />
-        </div>
-
-        <div class="border-t border-gray-900 mb-4 py-2"></div>
-
         <ul class="lg:text-3xl sm:text-xl font-bold font-heading">
-            <li class="mb-8 hover:underline"><a href="{{ route('front.projects') }}">{{ __('Projects') }}</a></li>
-            <li class="mb-8 hover:underline"><a href="{{ route('front.blogs') }}">{{ __('Blog') }}</a></li>
-            <li class="hover:underline"><a href="{{ route('front.contact') }}">{{ __('Contact') }}</a></li>
+            <li class="mb-8 hover:underline">
+                <a href="">
+                    {{ __('The Digital Hub') }}
+                </a>
+            </li>
+            <li class="mb-8 hover:underline">
+                <a href="">
+                    {{ __('The Startup Hub') }}
+                </a>
+            </li>
+            <li class="mb-8 hover:underline">
+                <a href="">
+                    {{ __('Partners') }}
+                </a>
+            </li>
+            <li class="mb-8 hover:underline">
+                <a href="">
+                    {{ __('About Us') }}
+                </a>
+            </li>
+            <li class="hover:underline">
+                <a href="">
+                    {{ __('Contact') }}
+                </a>
+            </li>
         </ul>
-        
+
         <div class="border-t border-gray-900 mt-6 py-2"></div>
-        
+
         <div class="flex justify-between">
             @if (Auth::check())
                 <div class="w-full lg:text-3xl sm:text-xl font-bold font-heading">
@@ -89,30 +118,27 @@
                             </a>
                         </div>
                     @else
-                    <div class="py-3">
-                        <a class="hover:text-red-500" href="{{ route('front.myaccount') }}">
-                            {{ __('My account') }}
-                        </a>
-                    </div>
+                        <div class="py-3">
+                            <a class="hover:text-red-500" href="{{ route('front.myaccount') }}">
+                                {{ __('My account') }}
+                            </a>
+                        </div>
                     @endif
                 </div>
             @else
                 <div class="border-t border-gray-900 py-2"></div>
                 <div class="w-full lg:text-3xl sm:text-xl font-bold font-heading">
                     <div class="py-3">
-                        <a class="hover:text-red-500" href="{{ route('login') }}">{{ __('Login') }} </a>
+                        <a class="hover:text-red-500" href="{{ route('auth') }}">{{ __('Login') }} </a>
                     </div>
                     {{ __('or') }}
                     <div class="py-3">
-                        <a class="hover:text-red-500" href="{{ route('register') }}"> {{ __('Register') }}</a>
+                        <a class="hover:text-red-500" href="{{ route('auth') }}"> {{ __('Register') }}</a>
                     </div>
                 </div>
             @endif
         </div>
-
     </nav>
-</div>
-
 </div>
 
 @push('scripts')

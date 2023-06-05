@@ -28,8 +28,18 @@ class Index extends Component
     public array $paginationOptions;
 
     public $language_id;
+    
+    public $service;
 
-    public array $listsForFields = [];
+    public $deleteModal = false;
+
+    public $showModal = false;
+
+    public $listeners = [
+        'refreshIndex' => '$refresh',
+        'showModal','delete',
+    ];
+
 
     protected $queryString = [
         'search' => [
@@ -70,7 +80,6 @@ class Index extends Component
         $this->perPage = 100;
         $this->paginationOptions = config('project.pagination.options');
         $this->orderable = (new Service())->orderable;
-        $this->initListsForFields();
     }
 
     public function render()
@@ -87,16 +96,52 @@ class Index extends Component
 
         $services = $query->paginate($this->perPage);
 
-        return view('livewire.admin.service.index', compact('services'));
+        return view('livewire.admin.service.index', compact('services'))
+            ->extends('layouts.dashboard');
     }
 
-      // Service  Delete
-      public function delete(Service $service)
-      {
-          // abort_if(Gate::denies('service_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-          $service->delete();
-          //   $this->alert('warning', __('Service Deleted successfully!') );
-      }
+    public function showModal(Service $service)
+    {
+        // abort_if(Gate::denies('service_show'), 403);
+
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->service = $service;
+
+        $this->showModal = true;
+    }
+
+    public function deleteModal($service)
+    {
+        $this->confirm(__('Are you sure you want to delete this?'), [
+            'toast'             => false,
+            'position'          => 'center',
+            'showConfirmButton' => true,
+            'cancelButtonText'  => __('Cancel'),
+            'onConfirmed'       => 'delete',
+        ]);
+        $this->service = $service;
+    }
+
+    public function deleteSelected()
+    {
+        abort_if(Gate::denies('service_delete'), 403);
+
+        Service::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
+    }
+
+    public function delete()
+    {
+        abort_if(Gate::denies('service_delete'), 403);
+
+        Service::findOrFail($this->service)->delete();
+
+        $this->alert('success', __('Service deleted successfully.'));
+    }
 
      // Service  Clone
      public function clone(Service $service)
@@ -114,8 +159,5 @@ class Index extends Component
          // $this->alert('success', __('Service Cloned successfully!') );
      }
 
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
-    }
+    
 }

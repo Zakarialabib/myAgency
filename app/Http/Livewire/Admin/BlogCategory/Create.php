@@ -18,34 +18,23 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $createBlogCategory;
+    public $createBlogCategory = false;
 
     public $listeners = ['createBlogCategory'];
 
-    public array $listsForFields = [];
-
     public $blogcategory;
 
-    public array $rules = [
-        'blogcategory.title' => ['required', 'string', 'max:255'],
-        'blogcategory.description' => ['nullable'],
-        'blogcategory.meta_title' => ['nullable'],
-        'blogcategory.meta_description' => ['nullable'],
-        'blogcategory.featured' => ['nullable'],
-        'blogcategory.language_id' => ['required', 'integer'],
+    protected $rules = [
+        'blogcategory.title'       => 'required|string|max:255',
+        'blogcategory.description' => 'nullable',
+        'blogcategory.meta_title'  => 'nullable|max:100',
+        'blogcategory.meta_desc'   => 'nullable|max:200',
+        'blogcategory.language_id' => 'required|integer',
     ];
-
-    public function mount(BlogCategory $blogcategory)
-    {
-        $this->blogcategory = $blogcategory;
-        $this->blogcategory->language_id = 1;
-
-        $this->initListsForFields();
-    }
 
     public function render(): View|Factory
     {
-        // abort_if(Gate::denies('blogcategory_create'), 403);
+        abort_if(Gate::denies('blogcategory_create'), 403);
 
         return view('livewire.admin.blog-category.create');
     }
@@ -56,6 +45,8 @@ class Create extends Component
 
         $this->resetValidation();
 
+        $this->blogcategory = new BlogCategory();
+
         $this->createBlogCategory = true;
     }
 
@@ -63,17 +54,17 @@ class Create extends Component
     {
         $this->validate();
 
-        if ($this->blogcategory->save()) {
-            $this->alert('success', __('BlogCategory created successfully.'));
-            $this->createBlogCategory = false;
-            $this->emit('refreshIndex');
-        } else {
-            $this->alert('error', __('BlogCategory not created'));
-        }
+        $this->blogcategory->save();
+
+        $this->alert('success', __('BlogCategory created successfully.'));
+
+        $this->createBlogCategory = false;
+
+        $this->emit('refreshIndex');
     }
 
-    protected function initListsForFields(): void
+    public function getLanguagesProperty(): Collection
     {
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+        return Language::select('name', 'id')->get();
     }
 }

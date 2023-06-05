@@ -19,339 +19,339 @@ class PermissionsSeeder extends Seeder
         $permissions = [
             [
                 'id'    => 1,
-                'title' => 'section_access',
+                'name' => 'section_access',
             ],
             [
                 'id'    => 2,
-                'title' => 'section_create',
+                'name' => 'section_create',
             ],
             [
                 'id'    => 3,
-                'title' => 'section_update',
+                'name' => 'section_update',
             ],
             [
                 'id'    => 4,
-                'title' => 'section_delete',
+                'name' => 'section_delete',
             ],
             [
                 'id'    => 5,
-                'title' => 'section_show',
+                'name' => 'section_show',
             ],
             [
                 'id'    => 6,
-                'title' => 'role_access',
+                'name' => 'role_access',
             ],
             [
                 'id'    => 7,
-                'title' => 'role_create',
+                'name' => 'role_create',
             ],
             [
                 'id'    => 8,
-                'title' => 'role_update',
+                'name' => 'role_update',
             ],
             [
                 'id'    => 9,
-                'title' => 'role_delete',
+                'name' => 'role_delete',
             ],
             [
                 'id'    => 10,
-                'title' => 'role_show',
+                'name' => 'role_show',
             ],
             [
                 'id'    => 11,
-                'title' => 'permission_access',
+                'name' => 'permission_access',
             ],
             [
                 'id'    => 12,
-                'title' => 'permission_create',
+                'name' => 'permission_create',
             ],
             [
                 'id'    => 13,
-                'title' => 'permission_update',
+                'name' => 'permission_update',
             ],
             [
                 'id'    => 14,
-                'title' => 'permission_delete',
+                'name' => 'permission_delete',
             ],
             [
                 'id'    => 15,
-                'title' => 'permission_show',
+                'name' => 'permission_show',
             ],
             [
                 'id'    => 16,
-                'title' => 'user_access',
+                'name' => 'user_access',
             ],
             [
                 'id'    => 17,
-                'title' => 'user_create',
+                'name' => 'user_create',
             ],
             [
                 'id'    => 18,
-                'title' => 'user_update',
+                'name' => 'user_update',
             ],
             [
                 'id'    => 19,
-                'title' => 'user_delete',
+                'name' => 'user_delete',
             ],
             [
                 'id'    => 20,
-                'title' => 'user_show',
+                'name' => 'user_show',
             ],
             [
                 'id'    => 21,
-                'title' => 'product_access',
+                'name' => 'product_access',
             ],
             [
                 'id'    => 22,
-                'title' => 'product_create',
+                'name' => 'product_create',
             ],
             [
                 'id'    => 23,
-                'title' => 'product_update',
+                'name' => 'product_update',
             ],
             [
                 'id'    => 24,
-                'title' => 'product_delete',
+                'name' => 'product_delete',
             ],
             [
                 'id'    => 25,
-                'title' => 'product_show',
+                'name' => 'product_show',
             ],
             [
                 'id'    => 26,
-                'title' => 'blog_access',
+                'name' => 'blog_access',
             ],
             [
                 'id'    => 27,
-                'title' => 'blog_create',
+                'name' => 'blog_create',
             ],
             [
                 'id'    => 28,
-                'title' => 'blog_update',
+                'name' => 'blog_update',
             ],
             [
                 'id'    => 29,
-                'title' => 'blog_delete',
+                'name' => 'blog_delete',
             ],
             [
                 'id'    => 30,
-                'title' => 'blog_show',
+                'name' => 'blog_show',
             ],
             [
                 'id'    => 31,
-                'title' => 'order_access',
+                'name' => 'order_access',
             ],
             [
                 'id'    => 32,
-                'title' => 'order_create',
+                'name' => 'order_create',
             ],
             [
                 'id'    => 33,
-                'title' => 'order_update',
+                'name' => 'order_update',
             ],
             [
                 'id'    => 34,
-                'title' => 'order_delete',
+                'name' => 'order_delete',
             ],
             [
                 'id'    => 35,
-                'title' => 'order_show',
+                'name' => 'order_show',
             ],
             [
                 'id'    => 36,
-                'title' => 'subcategory_access',
+                'name' => 'subcategory_access',
             ],
             [
                 'id'    => 37,
-                'title' => 'subcategory_create',
+                'name' => 'subcategory_create',
             ],
             [
                 'id'    => 38,
-                'title' => 'subcategory_update',
+                'name' => 'subcategory_update',
             ],
             [
                 'id'    => 39,
-                'title' => 'subcategory_delete',
+                'name' => 'subcategory_delete',
             ],
             [
                 'id'    => 40,
-                'title' => 'subcategory_show',
+                'name' => 'subcategory_show',
             ],
             [
                 'id'    => 41,
-                'title' => 'setting_access',
+                'name' => 'setting_access',
             ],
             [
                 'id'    => 42,
-                'title' => 'dashboard_access',
+                'name' => 'dashboard_access',
             ],
             [
                 'id'    => 43,
-                'title' => 'page_access',
+                'name' => 'page_access',
             ],
             [
                 'id'    => 44,
-                'title' => 'page_settings',
+                'name' => 'page_settings',
             ],
             [
                 'id'    => 45,
-                'title' => 'category_access',
+                'name' => 'category_access',
             ],
             [
                 'id'    => 46,
-                'title' => 'category_create',
+                'name' => 'category_create',
             ],
             [
                 'id'    => 47,
-                'title' => 'category_update',
+                'name' => 'category_update',
             ],
             [
                 'id'    => 48,
-                'title' => 'category_delete',
+                'name' => 'category_delete',
             ],
             [
                 'id'    => 49,
-                'title' => 'category_show',
+                'name' => 'category_show',
             ],
             [
                 'id'    => 50,
-                'title' => 'brand_access',
+                'name' => 'brand_access',
             ],
             [
                 'id'    => 51,
-                'title' => 'brand_create',
+                'name' => 'brand_create',
             ],
             [
                 'id'    => 52,
-                'title' => 'brand_update',
+                'name' => 'brand_update',
             ],
             [
                 'id'    => 53,
-                'title' => 'brand_delete',
+                'name' => 'brand_delete',
             ],
             [
                 'id'    => 54,
-                'title' => 'brand_show',
+                'name' => 'brand_show',
             ],
             [
                 'id'    => 55,
-                'title' => 'slider_access',
+                'name' => 'slider_access',
             ],
             [
                 'id'    => 56,
-                'title' => 'slider_create',
+                'name' => 'slider_create',
             ],
             [
                 'id'    => 57,
-                'title' => 'slider_update',
+                'name' => 'slider_update',
             ],
             [
                 'id'    => 58,
-                'title' => 'slider_delete',
+                'name' => 'slider_delete',
             ],
             [
                 'id'    => 59,
-                'title' => 'slider_show',
+                'name' => 'slider_show',
             ],
             [
                 'id'    => 60,
-                'title' => 'featuredbanner_access',
+                'name' => 'featuredbanner_access',
             ],
             [
                 'id'    => 61,
-                'title' => 'featuredbanner_create',
+                'name' => 'featuredbanner_create',
             ],
             [
                 'id'    => 62,
-                'title' => 'featuredbanner_update',
+                'name' => 'featuredbanner_update',
             ],
             [
                 'id'    => 63,
-                'title' => 'featuredbanner_delete',
+                'name' => 'featuredbanner_delete',
             ],
             [
                 'id'    => 64,
-                'title' => 'featuredbanner_show',
+                'name' => 'featuredbanner_show',
             ],
             [
                 'id'    => 65,
-                'title' => 'subcategory_access',
+                'name' => 'subcategory_access',
             ],
             [
                 'id'    => 66,
-                'title' => 'subcategory_create',
+                'name' => 'subcategory_create',
             ],
             [
                 'id'    => 67,
-                'title' => 'subcategory_update',
+                'name' => 'subcategory_update',
             ],
             [
                 'id'    => 68,
-                'title' => 'subcategory_delete',
+                'name' => 'subcategory_delete',
             ],
             [
                 'id'    => 69,
-                'title' => 'subcategory_show',
+                'name' => 'subcategory_show',
             ],
             [
                 'id'    => 70,
-                'title' => 'blogcategory_access',
+                'name' => 'blogcategory_access',
             ],
             [
                 'id'    => 71,
-                'title' => 'blogcategory_create',
+                'name' => 'blogcategory_create',
             ],
             [
                 'id'    => 72,
-                'title' => 'blogcategory_update',
+                'name' => 'blogcategory_update',
             ],
             [
                 'id'    => 73,
-                'title' => 'blogcategory_delete',
+                'name' => 'blogcategory_delete',
             ],
             [
                 'id'    => 74,
-                'title' => 'blogcategory_show',
+                'name' => 'blogcategory_show',
             ],
             [
                 'id'    => 75,
-                'title' => 'currency_access',
+                'name' => 'currency_access',
             ],
             [
                 'id'    => 76,
-                'title' => 'currency_create',
+                'name' => 'currency_create',
             ],
             [
                 'id'    => 77,
-                'title' => 'currency_update',
+                'name' => 'currency_update',
             ],
             [
                 'id'    => 78,
-                'title' => 'currency_delete',
+                'name' => 'currency_delete',
             ],
             [
                 'id'    => 79,
-                'title' => 'currency_show',
+                'name' => 'currency_show',
             ],
             [
                 'id'    => 80,
-                'title' => 'email_access',
+                'name' => 'email_access',
             ],
             [
                 'id'    => 81,
-                'title' => 'email_create',
+                'name' => 'email_create',
             ],
             [
                 'id'    => 82,
-                'title' => 'email_update',
+                'name' => 'email_update',
             ],
             [
                 'id'    => 83,
-                'title' => 'email_delete',
+                'name' => 'email_delete',
             ],
             [
                 'id'    => 84,
-                'title' => 'email_show',
+                'name' => 'email_show',
             ],
         ];
 

@@ -27,10 +27,10 @@ class Edit extends Component
         'section.language_id' => 'required',
         'section.page_id' => 'required',
         'section.title' => 'nullable',
-        'section.featured_title' => 'nullable',
+        'section.featured_title' => 'nullable', 
         'section.subtitle' => 'nullable',
-        'section.text' => 'nullable',
-        'section.main_color' => 'nullable',
+        'section.bg_color' => 'nullable',
+        'section.text_color' => 'nullable',
         'section.button' => 'nullable',
         'section.position' => 'nullable',
         'section.label' => 'nullable',
@@ -39,45 +39,47 @@ class Edit extends Component
         'section.embeded_video' => 'nullable',
     ];
 
-    public function mount(Section $section)
-    {
-        $this->section = $section;
-    }
 
     public function render()
     {
         return view('livewire.admin.section.edit');
     }
 
-    public function editModal(Section $section)
+    public function editModal($section)
     {
         $this->resetErrorBag();
 
         $this->resetValidation();
 
-        $this->section = $section;
+        $this->section = Section::findOrFail($section);
+
+        $this->image = $this->section->image;
+
+        $this->description = $this->section->description;
 
         $this->editModal = true;
     }
+    
+    public function update()
+    {
+        try {
+            $this->validate();
 
-     public function update()
-     {
-         try {
-             $this->validate();
+            if ($this->image) {
+                $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
+                $this->image->storeAs('sections', $imageName);
+                $this->section->image = $imageName;
+            }
 
-             if ($this->image) {
-                 $imageName = Str::slug($this->section->title).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
-                 $this->image->storeAs('sections', $imageName);
-                 $this->section->image = $imageName;
-             }
+            $this->section->save();
 
-             $this->section->save();
+            $this->alert('success', __('Section updated successfully!'));
+            
+            $this->emit('refreshIndex');
 
-             $this->alert('success', __('Section updated successfully!'));
-
-             $this->editModal = false;
-         } catch (Throwable $th) {
-             $this->alert('warning', __('Section was not updated!'));
-         }
-     }
+            $this->editModal = false;
+        } catch (Throwable $th) {
+            $this->alert('warning', __('Section was not updated!'));
+        }
+    }
 }

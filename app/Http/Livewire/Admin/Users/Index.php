@@ -21,7 +21,7 @@ class Index extends Component
     use LivewireAlert;
 
     public $listeners = [
-        'refreshIndex' => '$refresh', 'showModal', 'editModal',
+        'refreshIndex' => '$refresh', 'delete',
     ];
 
     public $showModal = false;
@@ -30,7 +30,7 @@ class Index extends Component
 
     public $role;
 
-    public $editModal = false;
+    public $filterRole;
 
     public int $perPage;
 
@@ -42,16 +42,14 @@ class Index extends Component
 
     public array $paginationOptions;
 
-    public $refreshIndex;
-
     public array $rules = [
-        'user.name' => 'required|string|max:255',
-        'user.email' => 'required|email|unique:users,email',
-        'user.password' => 'required|string|min:8',
-        'user.phone' => 'required|numeric',
-        'user.city' => 'nullable',
-        'user.country' => 'nullable',
-        'user.address' => 'nullable',
+        'user.name'       => 'required|string|max:255',
+        'user.email'      => 'required|email|unique:users,email',
+        'user.password'   => 'required|string|min:8',
+        'user.phone'      => 'required|numeric',
+        'user.city'       => 'nullable',
+        'user.country'    => 'nullable',
+        'user.address'    => 'nullable',
         'user.tax_number' => 'nullable',
     ];
 
@@ -87,6 +85,12 @@ class Index extends Component
         $this->selected = [];
     }
 
+    public function filterRole($role)
+    {
+        $this->filterRole = $role;
+        $this->resetPage(); // Reset pagination to the first page
+    }
+
     public function mount()
     {
         $this->sortBy = 'id';
@@ -98,17 +102,17 @@ class Index extends Component
 
     public function render(): View|Factory
     {
-        // abort_if(Gate::denies('user_access'), 403);
+        abort_if(Gate::denies('user_access'), 403);
 
         $query = User::with('roles')->advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
         $users = $query->paginate($this->perPage);
 
-        return view('livewire.admin.users.index', compact('users'));
+        return view('livewire.admin.users.index', compact('users'))->extends('layouts.dashboard');
     }
 
     // getrolesproperty
@@ -125,7 +129,7 @@ class Index extends Component
 
     public function deleteSelected()
     {
-        // abort_if(Gate::denies('user_delete'), 403);
+        abort_if(Gate::denies('user_delete'), 403);
 
         User::whereIn('id', $this->selected)->delete();
 
@@ -134,7 +138,7 @@ class Index extends Component
 
     public function delete(User $user)
     {
-        // abort_if(Gate::denies('user_delete'), 403);
+        abort_if(Gate::denies('user_delete'), 403);
 
         $user->delete();
 
@@ -146,29 +150,5 @@ class Index extends Component
         $this->user = $user;
 
         $this->showModal = true;
-    }
-
-    public function editModal(User $user)
-    {
-        // abort_if(Gate::denies('user_edit'), 403);
-
-        $this->resetErrorBag();
-
-        $this->resetValidation();
-
-        $this->user = $user;
-
-        $this->editModal = true;
-    }
-
-    public function update()
-    {
-        $this->validate();
-
-        $this->user->save();
-
-        $this->alert('success', __('User Updated Successfully'));
-
-        $this->editModal = false;
     }
 }

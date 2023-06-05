@@ -1,88 +1,72 @@
 <div>
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+    <!-- Edit Modal -->
+    <x-modal wire:model="editModal">
+        <x-slot name="title">
+            {{ __('Edit Blog') }}
+        </x-slot>
 
-    <form class="py-10" enctype="multipart/form-data" wire:submit.prevent="submit">
-        <div class="w-full">
-            <x-label for="language_id" :value="__('Language')" />
-            <select
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 lang"
-                wire:model="blog.language_id" name="language_id">
-                @foreach ($langs as $lang)
-                    <option value="{{ $lang->id }}">
-                        {{ $lang->name }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-        <div class="w-full">
-            <x-label for="title" :value="__('Title')" />
-            <input type="text" wire:model.lazy="blog.title"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="title" placeholder="{{ __('Title') }}" value="{{ old('title') }}">
-            <x-input-error for="blog.title" />
-        </div>
-        <div class="w-full">
-            <x-label for="bcategory_id" :value="__('Category')" />
-            <x-select-list
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required id="bcategory_id" name="bcategory_id" wire:model="blog.bcategory_id"
-                :options="$this->listsForFields['bcategories']" />
-            <x-input-error for="blog.bcategory_id" />
-        </div>
-        <div class="w-full">
-            <x-label for="content" :value="__('Content')" />
-            <x-input.rich-text wire:model.lazy="blog.content" id="description" />
-            <x-input-error for="blog.content" />
-        </div>
-        <div class="w-full">
-            <x-label for="meta_keywords" :value="__('Meta Keywords')" />
-            <input type="text"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                data-role="tagsinput" name="meta_keywords" wire:model.lazy="blog.meta_keywords"
-                placeholder="{{ __('Meta Keywords') }}" value="{{ old('meta_keywords') }}">
-            <x-input-error for="blog.meta_keywords" />
-        </div>
-        <div class="w-full">
-            <x-label for="meta_description" :value="__('Meta Description')" />
-            <textarea class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="meta_description" wire:model.lazy="blog.meta_description" placeholder="{{ __('Meta Description') }}"
-                rows="4">{{ old('meta_description') }}</textarea>
-            <x-input-error for="blog.meta_description" />
-        </div>
-        <div class="w-full">
-            <x-label for="image" :value="__('Image')" />
-            <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
-            <x-input-error for="image" />
-            <p class="help-block text-info">
-                {{ __('Upload 730X455 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-            </p>
-        </div>
-        <div class="w-full">
-            <x-label for="status" :value="__('Status')" />
-            <select wire:model="blog.status"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                name="status">
-                <option value="0" selected>{{ __('Unpublish') }}</option>
-                <option value="1">{{ __('Publish') }}</option>
-            </select>
-            <x-input-error for="blog.status" />
-        </div>
+        <x-slot name="content">
+            <!-- Validation Errors -->
+            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+            <form wire:submit.prevent="update">
+                <div class="flex flex-wrap -mx-3 space-y-0">
+                    <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="title" :value="__('Name')" />
+                        <x-input id="title" class="block mt-1 w-full" type="text" name="title"
+                            wire:model.lazy="blog.title" />
+                        <x-input-error :messages="$errors->get('blog.title')" for="blog.title" class="mt-2" />
+                    </div>
+                    <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="slug" :value="__('Slug')" />
+                        <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                            wire:model.lazy="blog.slug" />
+                        <x-input-error :messages="$errors->get('blog.slug')" for="blog.slug" class="mt-2" />
+                    </div>
+                    <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="category_id" :value="__('Category')" required />
+                        <x-select-list
+                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                            id="category_id" name="category_id" wire:model.lazy="blog.category_id" :options="$this->categories" />
+                        <x-input-error :messages="$errors->get('blog.category_id')" for="blog.category_id" class="mt-2" />
+                    </div>
+                    <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="language_id" :value="__('Language')" required />
+                        <x-select-list
+                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
+                            id="language_id" name="language_id" wire:model.lazy="blog.language_id" :options="$this->languages" />
+                        <x-input-error :messages="$errors->get('blog.language_id')" for="blog.language_id" class="mt-2" />
+                    </div>
 
-        <div class="float-right p-2 mb-4">
-            <button type="submit"
-                class="leading-4 md:text-sm sm:text-xs bg-blue-900 text-white hover:text-blue-800 hover:bg-blue-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-center">
-                {{ __('Save') }}
-            </button>
-            <a href="{{ route('admin.blogs.index') }}"
-                class="leading-4 md:text-sm sm:text-xs bg-gray-400 text-black hover:text-blue-800 hover:bg-gray-100 active:bg-blue-200 focus:ring-blue-300 font-medium uppercase px-6 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-                {{ __('Go back') }}
-            </a>
-        </div>
-    </form>
+                    <div class="w-full px-3 mb-4">
+                        <x-label for="details" :value="__('Description')" required />
+                        <x-input.rich-text wire:model.lazy="blog.details" id="details" name="details"
+                            endpoint="/uploads" {{-- value="{!! $this->blog->details !!}" --}}  />
+                    </div>
+                    <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="meta_title" :value="__('Meta title')" />
+                        <x-input id="meta_title" class="block mt-1 w-full" type="text" name="meta_title"
+                            wire:model.lazy="blog.meta_title" />
+                        <x-input-error :messages="$errors->get('blog.meta_title')" for="blog.meta_title" class="mt-2" />
+                    </div>
+                    <div class="xl:w-1/2 md:w-full px-2">
+                        <x-label for="meta_desc" :value="__('Meta Description')" />
+                        <x-input id="meta_desc" class="block mt-1 w-full" type="text" name="meta_desc"
+                            wire:model.lazy="blog.meta_desc" />
+                        <x-input-error :messages="$errors->get('blog.meta_desc')" for="blog.meta_desc" class="mt-2" />
+                    </div>
+                    <div class="w-full py-2 px-3">
+                        <x-label for="image" :value="__('Image')" />
+                        <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+                        <x-input-error :messages="$errors->get('image')" for="image" class="mt-2" />
+                    </div>
+                    <div class="w-full px-3">
+                        <x-button primary type="submit" class="w-full" wire:loading.attr="disabled">
+                            {{ __('Update') }}
+                        </x-button>
+                    </div>
+                </div>
+            </form>
+        </x-slot>
+    </x-modal>
+    <!-- End Create Modal -->
 </div>
-
-@push('scripts')
-     <!-- Image Upload -->
-     <script type="text/javascript"  src="{{ asset('js/image-upload.js') }}"></script>
-@endpush

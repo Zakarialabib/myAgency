@@ -96,19 +96,19 @@
                                 <div class="inline-flex">
                                     <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
                                         href="{{ route('admin.about.edit', $about) }}">
-                                        <x-heroicon-o-pencil-alt class="h-4 w-4" />
+                                        <i class="fa fas-pen h-4 w-4" ></i>
                                     </a>
                                     <button
                                         class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
                                         type="button" wire:click="confirm('delete', {{ $about->id }})"
                                         wire:loading.attr="disabled">
-                                        <x-heroicon-o-trash class="h-4 w-4" />
+                                        <i class="fa fas-trash h-4 w-4" ></i>
                                     </button>
                                     <button
                                         class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
                                         type="button" wire:click="confirm('clone', {{ $about->id }})"
                                         wire:loading.attr="disabled">
-                                        <x-heroicon-o-duplicate class="h-4 w-4" />
+                                        <i class="fa fas-bin h-4 w-4" ></i>
                                     </button>
 
                                 </div>

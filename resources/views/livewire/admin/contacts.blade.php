@@ -21,7 +21,7 @@
                     <button
                         class="text-blue-500 dark:text-zinc-300 bg-transparent dark:bg-dark-eval-2 border border-blue-500 dark:border-zinc-300 hover:text-blue-700  active:bg-blue-600 font-bold uppercase text-xs p-3 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                         type="button" wire:click="$toggle('showDeleteModal')" wire:loading.attr="disabled">
-                        <x-heroicon-o-trash class="h-4 w-4" />
+                        <i class="fa fas-trash h-4 w-4" ></i>
                     </button>
                 </div>
 
@@ -87,7 +87,7 @@
                                 <button
                                     class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
                                     wire:click="confirm('delete', {{ $contact->id }})" type="button">
-                                    <x-heroicon-o-trash class="h-4 w-4" />
+                                    <i class="fa fas-trash h-4 w-4" ></i>
                                 </button>
                             </x-table.td>
                         </x-table.tr>

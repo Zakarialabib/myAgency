@@ -13,7 +13,7 @@ class Permission extends Model
     use HasFactory;
     use HasAdvancedFilter;
 
-    public $table = 'permissions';
+    // public $table = 'permissions';
 
     public $orderable = [
         'id',

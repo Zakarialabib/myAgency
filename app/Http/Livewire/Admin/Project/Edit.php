@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Admin\Project;
 
 use App\Models\Project;
 use App\Models\Service;
+use App\Models\Language;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -16,7 +17,7 @@ class Edit extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public Project $project;
+    public $project;
 
     public $images;
 
@@ -24,26 +25,34 @@ class Edit extends Component
 
     public array $listsForFields = [];
 
+    public $editModal = false;
+
     protected $listeners = [
-        'submit',
+        'editModal',
     ];
 
     protected $rules = [
         'project.title' => 'required|max:191',
-        'project.status' => 'required',
         'project.content' => 'required',
         'project.client_name' => 'required',
         'project.link' => 'required',
         'project.service_id' => 'required',
-        'project.meta_keywords' => 'required',
-        'project.meta_description' => 'required',
+        'project.meta_keywords' => 'nullable',
+        'project.meta_description' => 'nullable',
         'project.language_id' => 'required',
     ];
 
-    public function mount(Project $project)
+    public function editModal($project)
     {
-        $this->project = $project;
-        $this->initListsForFields();
+        // abort_if(Gate::denies('project_update'), 403);
+
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->project = Project::findOrfail($project);
+
+        $this->editModal = true;
     }
 
     public function submit()
@@ -71,9 +80,12 @@ class Edit extends Component
 
         $this->project->save();
 
+        $this->editModal = false;
+
+        $this->emit('refreshIndex');
+
         $this->alert('success', __('Service updated successfully!'));
 
-        return redirect()->route('admin.projects.index');
     }
 
     public function render()
@@ -81,8 +93,13 @@ class Edit extends Component
         return view('livewire.admin.project.edit');
     }
 
-    protected function initListsForFields(): void
+    public function getLanguagesProperty()
     {
-        $this->listsForFields['services'] = Service::pluck('title', 'id')->toArray();
+        return Language::pluck('name', 'id')->toArray();
+    }
+    
+    public function getServicesProperty()
+    {
+        return Service::select('title', 'id')->get();
     }
 }

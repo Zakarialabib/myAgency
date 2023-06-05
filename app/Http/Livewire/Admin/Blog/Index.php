@@ -6,8 +6,6 @@ namespace App\Http\Livewire\Admin\Blog;
 
 use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Blog;
-use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -22,18 +20,15 @@ class Index extends Component
     use LivewireAlert;
 
     public $listeners = [
-        'editModal', 'refreshIndex' => '$refresh',
+        'refreshIndex' => '$refresh',
+        'delete'
     ];
-
-    public int $perPage;
-
-    public $editModal = false;
 
     public $blog;
 
-    public $confirmDelete;
+    public int $perPage;
 
-    public $refreshIndex;
+    public $deleteModal = false;
 
     public array $orderable;
 
@@ -42,18 +37,6 @@ class Index extends Component
     public array $selected = [];
 
     public array $paginationOptions;
-
-    public array $listsForFields = [];
-
-    public array $rules = [
-        'blog.title' => ['required', 'string', 'max:255'],
-        'blog.category_id' => ['required', 'integer'],
-        'blog.details' => ['required'],
-        'blog.meta_tag' => ['nullable'],
-        'blog.meta_description' => ['nullable'],
-        'blog.featured' => ['nullable'],
-        'blog.language_id' => ['nullable', 'integer'],
-    ];
 
     protected $queryString = [
         'search' => [
@@ -94,61 +77,48 @@ class Index extends Component
         $this->perPage = 25;
         $this->paginationOptions = [25, 50, 100];
         $this->orderable = (new Blog())->orderable;
-        $this->initListsForFields();
+    }
+
+    public function delete()
+    {
+        abort_if(Gate::denies('blog_delete'), 403);
+
+        Blog::findOrFail($this->blog)->delete();
+
+        $this->alert('success', __('Blog deleted successfully.'));
+    }
+
+    public function deleteSelected()
+    {
+        abort_if(Gate::denies('blog_delete'), 403);
+
+        Blog::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
+    }
+
+    public function deleteModal($blog)
+    {
+        $this->confirm(__('Are you sure you want to delete this?'), [
+            'toast'             => false,
+            'position'          => 'center',
+            'showConfirmButton' => true,
+            'cancelButtonText'  => __('Cancel'),
+            'onConfirmed' => 'delete',
+        ]);
+        $this->blog = $blog;
     }
 
     public function render(): View|Factory
     {
         $query = Blog::advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
         $blogs = $query->paginate($this->perPage);
 
-        return view('livewire.admin.blog.index', compact('blogs'));
-    }
-
-    public function editModal(Blog $blog)
-    {
-        // abort_if(Gate::denies('blog_edit'), 403);
-
-        $this->resetErrorBag();
-
-        $this->resetValidation();
-
-        $this->blog = $blog;
-
-        $this->editModal = true;
-    }
-
-    public function update()
-    {
-        // abort_if(Gate::denies('blog_edit'), 403);
-
-        $this->validate();
-
-        if ($this->blog->save()) {
-            $this->editModal = false;
-            $this->alert('success', __('Blog updated successfully'));
-        } else {
-            $this->alert('error', __('Blog not updated'));
-        }
-    }
-
-    public function delete(Blog $blog)
-    {
-        abort_if(Gate::denies('blog_delete'), 403);
-
-        $blog->delete();
-
-        $this->alert('success', __('Blog deleted successfully.'));
-    }
-
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['categories'] = BlogCategory::pluck('title', 'id')->toArray();
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
+        return view('livewire.admin.blog.index', compact('blogs'))->extends('layouts.dashboard');
     }
 }

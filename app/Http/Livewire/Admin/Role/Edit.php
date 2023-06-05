@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Role;
 
-use App\Models\Permission;
-use App\Models\Role;
+// use App\Models\Permission;
+use Spatie\Permission\Models\Permission;
+// use App\Models\Role;
+use Spatie\Permission\Models\Role;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -42,7 +44,7 @@ class Edit extends Component
         $this->validate();
 
         $this->role->save();
-        $this->role->permissions()->sync($this->permissions);
+        $this->role->syncPermissions($this->permissions);
 
         // $this->alert('success', __('Role updated successfully!') );
 

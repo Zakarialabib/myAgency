@@ -7,7 +7,6 @@ namespace App\Http\Livewire\Admin\Project;
 use App\Http\Livewire\Utils\WithSorting;
 use App\Models\Language;
 use App\Models\Project;
-use App\Models\Section;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Str;
@@ -28,8 +27,18 @@ class Index extends Component
     public array $paginationOptions;
 
     public $language_id;
+    
+    public $project;
+    
+    public $showModal = false;
 
-    public array $listsForFields = [];
+    public $deleteModal = false;
+    
+    public $listeners = [
+        'refreshIndex' => '$refresh',
+        'showModal', 'importModal',
+        'delete',
+    ];
 
     protected $queryString = [
         'search' => [
@@ -42,6 +51,12 @@ class Index extends Component
             'except' => 'desc',
         ],
     ];
+
+    public function confirmed()
+    {
+        $this->emit('delete');
+    }
+
 
     public function getSelectedCountProperty()
     {
@@ -70,12 +85,10 @@ class Index extends Component
         $this->perPage = 100;
         $this->paginationOptions = config('project.pagination.options');
         $this->orderable = (new Project())->orderable;
-        $this->initListsForFields();
     }
 
     public function render()
     {
-        // $static = Section::where('page', 5)->where('language_id', $this->language_id)->first();
 
         $query = Project::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
@@ -87,16 +100,52 @@ class Index extends Component
 
         $projects = $query->paginate($this->perPage);
 
-        return view('livewire.admin.project.index', compact('projects'));
+        return view('livewire.admin.project.index', compact('projects'))->extends('layouts.dashboard');
     }
 
-     // Project Category  Delete
-     public function delete(Project $project)
-     {
-         // abort_if(Gate::denies('portfolio_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    public function showModal(Project $project)
+    {
+        // abort_if(Gate::denies('project_show'), 403);
 
-         $project->delete();
-     }
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->project = $project;
+
+        $this->showModal = true;
+    }
+
+    public function deleteModal($project)
+    {
+        $this->confirm(__('Are you sure you want to delete this?'), [
+            'toast'             => false,
+            'position'          => 'center',
+            'showConfirmButton' => true,
+            'cancelButtonText'  => __('Cancel'),
+            'onConfirmed'       => 'delete',
+        ]);
+        $this->project = $project;
+    }
+
+    public function deleteSelected()
+    {
+        abort_if(Gate::denies('project_delete'), 403);
+
+        Project::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
+    }
+
+    public function delete()
+    {
+        abort_if(Gate::denies('project_delete'), 403);
+
+        Project::findOrFail($this->project)->delete();
+
+        $this->alert('success', __('Project deleted successfully.'));
+    }
+
 
       // Project  Clone
     public function clone(Project $project)
@@ -118,10 +167,5 @@ class Index extends Component
             'meta_description' => $portfolio_details->meta_description,
         ]);
         // $this->alert('success', __('Project Cloned successfully!') );
-    }
-
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
     }
 }

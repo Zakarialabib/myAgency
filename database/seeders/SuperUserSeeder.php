@@ -23,7 +23,6 @@ class SuperUserSeeder extends Seeder
             'password'       => bcrypt('password'),
             'city'           => 'Casablanca',
             'country'        => 'Morocco',
-            'address'        => 'Casablanca',
             'phone'          => '123456789',
             'statut'         => 1,
             'role_id'        => 1,

@@ -5,69 +5,37 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\HasAdvancedFilter;
 
 class Language extends Model
 {
+    use HasAdvancedFilter;
+
     public $table = 'languages';
 
-    public $orderable = [
+    public const STATUS_ACTIVE = 1;
+
+    public const STATUS_INACTIVE = 0;
+
+    public const IS_DEFAULT = 1;
+
+    public const IS_NOT_DEFAULT = 0;
+
+    public const ATTRIBUTES = [
+        'id',
+        'name',
+        'status',
     ];
 
-    public $filterable = [
-    ];
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
+        'name',
+        'code',
+        'status',
+        'is_default',
     ];
 
-    protected $guarded = [];
 
-    public function setting()
-    {
-        return $this->hasOne('App\Models\Setting');
-    }
-
-    public function section()
-    {
-        return $this->hasOne('App\Models\Section');
-    }
-
-    public function teams()
-    {
-        return $this->hasMany('App\Models\Team');
-    }
-
-    public function services()
-    {
-        return $this->hasMany('App\Models\Service');
-    }
-
-    public function projects()
-    {
-        return $this->hasMany('App\Models\Project');
-    }
-
-    public function faqs()
-    {
-        return $this->hasMany('App\Models\Faq');
-    }
-
-    public function bcategories()
-    {
-        return $this->hasMany('App\Models\Bcategory');
-    }
-
-    public function blogs()
-    {
-        return $this->hasMany('App\Models\Blog');
-    }
-
-    public function abouts()
-    {
-        return $this->hasMany('App\Models\About');
-    }
-
-    public function menus()
-    {
-        return $this->hasMany('App\Models\Menu');
-    }
 }

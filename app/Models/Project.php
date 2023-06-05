@@ -7,10 +7,13 @@ namespace App\Models;
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
 {
     use HasAdvancedFilter;
+
+    use HasFactory;
 
     public $table = 'projects';
 
@@ -44,6 +47,6 @@ class Project extends Model
 
     public function language()
     {
-        return $this->belongsTo('App\Models\Language');
+        return $this->belongsTo(Language::class);
     }
 }

@@ -104,10 +104,6 @@ class SettingSeeder extends Seeder
             'value' => 'Site is under maintenance',
         ],
         [
-            'key'   => 'is_ecommerce',
-            'value' => '0',
-        ],
-        [
             'key'   => 'is_onepage',
             'value' => '0',
         ],

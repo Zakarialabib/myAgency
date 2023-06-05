@@ -10,9 +10,6 @@ use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -31,14 +28,12 @@ class Index extends Component
 
     public $listeners = [
         'refreshIndex' => '$refresh',
-        'showModal', 'editModal', 'delete',
+        'showModal', 'delete',
     ];
 
     public $showModal = false;
 
     public $refreshIndex;
-
-    public $editModal = false;
 
     public int $perPage;
 
@@ -63,12 +58,12 @@ class Index extends Component
     ];
 
     protected $rules = [
-        'slider.title' => ['required', 'string', 'max:255'],
-        'slider.subtitle' => ['nullable', 'string'],
-        'slider.details' => ['nullable'],
-        'slider.link' => ['nullable', 'string'],
-        'slider.language_id' => ['nullable', 'integer'],
-        'slider.bg_color' => ['nullable', 'string'],
+        'slider.title'         => ['required', 'string', 'max:255'],
+        'slider.subtitle'      => ['nullable', 'string'],
+        'slider.details'       => ['nullable'],
+        'slider.link'          => ['nullable', 'string'],
+        'slider.language_id'   => ['nullable', 'integer'],
+        'slider.bg_color'      => ['nullable', 'string'],
         'slider.embeded_video' => ['nullable'],
     ];
 
@@ -104,8 +99,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = Slider::advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -114,7 +109,7 @@ class Index extends Component
         return view('livewire.admin.slider.index', compact('sliders'));
     }
 
-    // public function getimagePreviewProperty()
+    // public function getPhotoPreviewProperty()
     // {
     //     return $this->slider->image;
     // }
@@ -127,40 +122,6 @@ class Index extends Component
         $slider->save();
 
         $this->alert('success', __('Slider featured successfully!'));
-    }
-
-    public function editModal(Slider $slider)
-    {
-        $this->resetErrorBag();
-
-        $this->resetValidation();
-
-        $this->slider = $slider;
-
-        $this->editModal = true;
-    }
-
-    public function update()
-    {
-        $this->validate();
-
-        if ($this->image) {
-            $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
-
-            $img = Image::make($this->image->getRealPath())->encode('webp', 85);
-
-            $img->stream();
-
-            Storage::disk('local_files')->put('sliders/'.$imageName, $img, 'public');
-
-            $this->slider->image = $imageName;
-        }
-
-        $this->slider->save();
-
-        $this->alert('success', __('Slider updated successfully.'));
-
-        $this->editModal = false;
     }
 
     public function showModal(Slider $slider)

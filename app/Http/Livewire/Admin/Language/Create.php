@@ -4,66 +4,53 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Language;
 
-use App;
-use App\Models\Language;
-use DateTime;
-use Exception;
-use File;
-use Illuminate\Support\Facades\Storage;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use File;
+use App;
 
 class Create extends Component
 {
-    public $languages = [];
+    use LivewireAlert;
+
+    /** @var string[] */
+    public $listeners = ['createLanguage'];
+
+    public array $languages = [];
+
+    public $language;
     public $name;
     public $code;
-    public $show;
+
+    public $createLanguage = false;
 
     protected $rules = [
         'name' => 'required|max:191',
         'code' => 'required',
     ];
 
-    public function mount()
+    public function createLanguage()
     {
-        $this->languages = Storage::disk('public')->get('languages.json');
-
-        $this->emitTo('create', 'show');
+        $this->createLanguage = true;
     }
 
-    /**
-     * -------------------------------------------------------------------------------
-     *  Add New Language
-     * -------------------------------------------------------------------------------
-     */
     public function create()
     {
-        try {
-            $trans = new Language();
-            $trans->name = $this->name;
-            $trans->code = $this->code;
-            $trans->created_at = new DateTime();
-            $trans->save();
+        $this->validate();
 
-            File::copy(App::langPath().'/default.json', App::langPath().('/'.$this->code.'.json'));
-            // $this->alert('success', __('Data created successfully!') );
+        $this->language->save();
 
-            $this->resetInputFields();
-            // $this->emit('sendUpdateLanguageStatus');
-        } catch (Exception $e) {
-            $this->alert('error', __('Unable to create new language!') );
-        }
+        File::copy(App::langPath().('/en.json'), App::langPath().('/'.$this->code.'.json'));
 
-        $this->show = false;
+        $this->alert('success', __('Data created successfully!'));
+
+        $this->emit('resetIndex');
+
+        $this->createLanguage = false;
     }
 
     public function render()
     {
         return view('livewire.admin.language.create');
-    }
-
-    private function resetInputFields()
-    {
-        $this->reset(['name', 'code']);
     }
 }

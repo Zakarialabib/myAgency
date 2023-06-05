@@ -4,49 +4,62 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Blog;
 
-use App\Models\Bcategory;
 use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\Language;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Str;
 
 class Edit extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
 
-    public Blog $blog;
+    public $editModal = false;
 
     public $image;
 
-    public array $listsForFields = [];
+    public $blog;
 
-    protected $listeners = [
-        'submit',
-    ];
+    public $listeners = ['editModal'];
 
     protected $rules = [
-        'blog.title' => 'required|max:191',
-        'blog.status' => 'required',
-        'blog.content' => 'required',
-        'blog.bcategory_id' => 'required',
-        'blog.meta_keywords' => 'required',
-        'blog.meta_description' => 'required',
-        'blog.language_id' => 'required',
+        'blog.title'       => 'required|min:3|max:255',
+        'blog.category_id' => 'required|integer',
+        'blog.slug'        => 'required|string',
+        'blog.details'     => 'required|min:3',
+        'blog.language_id' => 'nullable|integer',
+        'blog.meta_title'  => 'nullable|max:100',
+        'blog.meta_desc'   => 'nullable|max:200',
     ];
 
-    public function mount(Blog $blog)
+    public function render(): View|Factory
     {
-        $this->blog = $blog;
-        $this->initListsForFields();
+        // abort_if(Gate::denies('blog_create'), 403);
+
+        return view('livewire.admin.blog.edit');
     }
 
-    // Store Blog
-    public function submit()
+    public function editModal($id)
+    {
+        // abort_if(Gate::denies('blog_edit'), 403);
+
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->blog = Blog::where('id', $id)->firstOrFail();
+
+        $this->editModal = true;
+    }
+
+    public function update()
     {
         $this->validate();
-        $this->blog->slug = Str::slug($this->blog->title);
 
         if ($this->image) {
             $imageName = Str::slug($this->blog->title).'.'.$this->image->extension();
@@ -56,18 +69,20 @@ class Edit extends Component
 
         $this->blog->save();
 
-        $this->alert('success', __('Blog Updated successfully!'));
+        $this->alert('success', __('Blog updated successfully.'));
+        
+        $this->emit('refreshIndex');
 
-        return redirect()->route('admin.blogs.index');
+        $this->editModal = false;
     }
 
-    public function render()
+    public function getBlogCategoriesProperty()
     {
-        return view('livewire.admin.blog.edit');
+        return BlogCategory::select('title', 'id')->get();
     }
 
-    protected function initListsForFields(): void
+    public function getLanguagesProperty()
     {
-        $this->listsForFields['bcategories'] = Bcategory::pluck('name', 'id')->toArray();
+        return Language::select('name', 'id')->get();
     }
 }

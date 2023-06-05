@@ -1,26 +1,38 @@
 <div>
     <div class="flex flex-wrap justify-center">
-        <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-wrap my-md-0 my-2">
-            <select wire:model="perPage"
-                class="w-20 block p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm focus:shadow-outline-blue focus:border-blue-300 mr-3">
-                @foreach ($paginationOptions as $value)
-                    <option value="{{ $value }}">{{ $value }}</option>
-                @endforeach
-            </select>
-            <x-select-list
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required id="language_id" name="language_id" wire:model="language_id" :options="$this->listsForFields['languages']" />
+        <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
+            <div class="my-2 my-md-0">
+                <p class="leading-5 text-black mb-1 text-sm ">
+                    {{ __('Show items per page') }}
+                </p>
+                <select wire:model="perPage" name="perPage"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
+                    @foreach ($paginationOptions as $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @if ($this->selected)
+                <x-button danger type="button" wire:click="deleteSelected" class="mx-3">
+                    <i class="fas fa-trash-alt"></i>
+                </x-button>
+            @endif
+            @if ($this->selectedCount)
+                <p class="text-sm items-center leading-5">
+                    <span class="font-medium ml-2">
+                        {{ $this->selectedCount }}
+                    </span>
+                    {{ __('Entries selected') }}
+                </p>
+            @endif
         </div>
         <div class="lg:w-1/2 md:w-1/2 sm:w-full my-2 my-md-0">
-            <div class="my-2 my-md-0">
-                <input type="text" wire:model.debounce.300ms="search"
-                    class="p-3 leading-5 bg-white dark:bg-dark-eval-2 text-zinc700 dark:text-zinc-300 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                    placeholder="{{ __('Search') }}" />
+            <div class="flex items-center mr-3 pl-4">
+                <input wire:model="search" type="text"
+                    class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pr-10"
+                    placeholder="{{ __('Search...') }}" />
             </div>
         </div>
-    </div>
-    <div wire:loading.delay>
-        Loading...
     </div>
 
     <x-table>
@@ -78,19 +90,19 @@
                             <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
                                 {{-- href="{{ route('admin.teams.edit', $team) }}" --}}
                                 >
-                                <x-heroicon-o-pencil-alt class="h-4 w-4" />
+                                <i class="fa fas-pen h-4 w-4" ></i>
                             </a>
                             <button
                                 class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
                                 type="button" wire:click="confirm('delete', {{ $team->id }})"
                                 wire:loading.attr="disabled">
-                                <x-heroicon-o-trash class="h-4 w-4" />
+                                <i class="fa fas-trash h-4 w-4" ></i>
                             </button>
                             <button
                                 class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
                                 type="button" wire:click="confirm('clone', {{ $team->id }})"
                                 wire:loading.attr="disabled">
-                                <x-heroicon-o-duplicate class="h-4 w-4" />
+                                <i class="fa fas-bin h-4 w-4" ></i>
                             </button>
 
                         </div>

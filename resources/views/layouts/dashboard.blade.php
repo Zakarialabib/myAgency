@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html x-data="mainState" :class="{ dark: isDarkMode, rtl: isRtl }" class="scroll-smooth"
-    lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" 
+    x-data="mainState" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
+    $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"> 
+
 
 <head>
     <meta charset="utf-8">
@@ -27,12 +29,14 @@
 
 </head>
 
-<body class="antialiased bg-body text-body font-body" dir="ltr">
+<body class="antialiased bg-body text-body font-body" x-data="{ darkMode : false }" :class="{ 'dark': darkMode }">
     {{-- <x-loading-mask /> --}}
     <div @resize.window="handleWindowResize">
         <div class="min-h-screen">
             <!-- Sidebar -->
-            <x-sidebar.sidebar />
+            
+            @livewire('utils.sidebar')
+
             <!-- Page Wrapper -->
             <div class="flex flex-col min-h-screen"
                 :class="{
@@ -63,4 +67,5 @@
     @vite('resources/js/app.js')
 
 </body>
+
 </html>

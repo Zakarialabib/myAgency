@@ -1,7 +1,4 @@
 <div>
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
     <x-table>
         <x-slot name="thead">
             <x-table.th>#</x-table.th>
@@ -11,75 +8,86 @@
             <x-table.th>{{ __('Actions') }}</x-table.th>
         </x-slot>
         <x-table.tbody>
-            @if (!empty($languages))
+            @forelse ($languages as $language)
+                <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $language['id'] }}">
+                    <x-table.td>#</x-table.td>
+                    <x-table.td>{{ $language['name'] }}</x-table.td>
+                    <x-table.td>
+                        @if ($language['status'] == true)
+                            <x-badge primary>
+                                {{ __('Active') }}
+                            </x-badge>
+                        @elseif($language['status'] == false)
+                            <x-badge secondary>
+                                {{ __('Inactive') }}
+                            </x-badge>
+                        @endif
+                    </x-table.td>
+                    <x-table.td>
+                        @if ($language['is_default'] == true)
+                            <x-badge primary>
+                                {{ __('Yes') }}
+                            </x-badge>
+                        @endif
+                    </x-table.td>
+                    <x-table.td>
+                        @if ($language['is_default'] == false)
+                            <x-button type="button" secondary wire:click="onSetDefault( {{ $language['id'] }} )">
+                                {{ __('Set as Default') }}</x-button>
+                        @endif
 
-                @foreach ($languages as $language)
-                    <x-table.tr>
-                        <x-table.td>#</x-table.td>
-                        <x-table.td>{{ $language['name'] }}</x-table.td>
-                        <x-table.td>
-                            <span
-                                class="text-xs font-semibold inline-block py-1 px-2 rounded last:mr-0 mr-1 text-white bg-{{ $language['is_active'] == true ? 'green-500' : 'red-500' }}">
-                                {{ $language['is_active'] == true ? __('Active') : __('Inactive') }}
-                            </span>
-                        </x-table.td>
-                        <x-table.td>
-                            <span
-                                class="text-xs font-semibold inline-block py-1 px-2 rounded last:mr-0 mr-1 text-white bg-{{ $language['is_default'] == true ? 'green-500' : 'yellow-500' }}">
-                                {{ $language['is_default'] == true ? __('Yes') : __('No') }}
-                            </span>
-                        </x-table.td>
-                        <x-table.td>
-                            <a href="{{ route('admin.language-key', $language['id']) }}"
-                                class="font-bold  bg-orange-500 border-orange-800 hover:bg-orange-600 active:bg-orange-700 focus:ring-orange-300 uppercase justify-center text-xs py-2 px-3 rounded bg-orange-500 border-orange-800 focus:ring-orange-300 shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white">
-                                {{__('Translate')}}
-                            </a>
-                            @if ($language['is_default'] == false)
-                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer bg-green-500 text-white"
-                                    title="{{ __('Set as Default') }}"
-                                    wire:click="onSetDefault( {{ $language['id'] }} )">{{ __('Set as Default') }}</a>
-                            @endif
-                            <button
-                                class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
-                                type="button" wire:click="confirm('delete', {{ $language['id'] }})"
-                                wire:loading.attr="disabled">
-                                {{ __('Delete') }}
-                            </button>
-                            <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300"
-                                wire:click="sync({{ $language['id'] }})">
-                                {{ __('Sync') }}
-                            </a>
-                        </x-table.td>
-                    </x-table.tr>
-                @endforeach
-            @else
+                        <x-button type="button" primary wire:click="sync({{ $language['id'] }})">
+                            {{ __('Sync') }}
+                        </x-button>
+
+                        <x-button success  href="{{ route('admin.translation',  $language['id'] )}}">
+                            {{__('Translate')}}
+                        </x-button>
+
+                        <x-button success type="button" wire:click="$emit('editLanguage', {{ $language['id'] }}) ">
+                            <i class="fas fa-edit"></i>
+                        </x-button>
+
+                        <x-button danger type="button" wire:click="$emit('deleteModal', {{ $language['id'] }})">
+                            <i class="fas fa-trash"></i>
+                        </x-button>
+                    </x-table.td>
+                </x-table.tr>
+            @empty
                 <x-table.tr>
                     <x-table.td class="">{{ __('No record found') }}</x-table.td>
                 </x-table.tr>
-
-            @endif
-
+            @endforelse
         </x-table.tbody>
     </x-table>
 
-    <!-- Begin::Add New Language -->
+    <!-- Create Language-->
+    @livewire('admin.language.create')
 
-    <livewire:admin.language.create />
-
-    <!-- End::Add New Language -->
+    <!-- Update Language-->
+    @livewire('admin.language.edit', ['language' => $language])
 
 </div>
 
+
 @push('scripts')
     <script>
-        Livewire.on('confirm', e => {
-            if (!confirm("{{ __('Are you sure') }}")) {
-                return
-            }
-            @this[e.callback](...e.argv)
+        document.addEventListener('livewire:load', function() {
+            window.livewire.on('deleteModal', brandId => {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.livewire.emit('delete', languageId)
+                    }
+                })
+            })
         })
-    </script>
-    <script>
-        Livewire.emit('admin_language_create')
     </script>
 @endpush

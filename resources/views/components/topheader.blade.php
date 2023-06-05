@@ -43,10 +43,10 @@
         @else
             <button class="flex-shrink-0 hidden md:block px-4">
                 <div class="flex items-center text-white space-x-2">
-                    <a href="{{ route('login') }}"
+                    <a href="{{ route('auth') }}"
                         class="mr-2 text-xs text-center font-semibold font-heading hover:text-gray-400 hover:underline">{{ __('Login') }}
                     </a>
-                    <a href="{{ route('register') }}"
+                    <a href="{{ route('auth') }}"
                         class="ml-2 text-xs text-center font-semibold font-heading hover:text-gray-400 hover:underline">
                         {{ __('Register') }}</a>
                 </div>

@@ -33,10 +33,10 @@ class Create extends Component
         'section.language_id' => 'required',
         'section.page_id' => 'required',
         'section.title' => 'nullable',
-        'section.featured_title' => 'nullable',
+        'section.featured_title' => 'nullable', 
         'section.subtitle' => 'nullable',
-        'section.text' => 'nullable',
-        'section.main_color' => 'nullable',
+        'section.bg_color' => 'nullable',
+        'section.text_color' => 'nullable',
         'section.button' => 'nullable',
         'section.position' => 'nullable',
         'section.label' => 'nullable',
@@ -52,13 +52,10 @@ class Create extends Component
         $this->resetValidation();
 
         $this->createSection = true;
-    }
 
-    public function mount(Section $section)
-    {
-        $this->section = $section;
+        $this->section = new Section();
     }
-
+    
     public function render(): View|Factory
     {
         return view('livewire.admin.section.create');

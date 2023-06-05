@@ -39,7 +39,9 @@ Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact
 
 Route::get('/blog', [FrontController::class, 'blog'])->name('front.blogs');
 Route::get('/blog/{slug}', [FrontController::class, 'blogPage'])->name('front.blogPage');
+
 Route::get('/page/{slug}', [FrontController::class, 'dynamicPage'])->name('front.dynamicPage');
+
 Route::get('/generate-sitemap', [FrontController::class, 'generateSitemaps'])->name('generate-sitemaps');
 
 Route::get('/lang/{lang}', [FrontController::class, 'changelanguage'])->name('changeLanguage');

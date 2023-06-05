@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Service;
 
 use App\Models\Service;
+use App\Models\Language;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -15,27 +16,42 @@ class Edit extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public Service $service;
+    public $service;
 
     public $image;
-    public $icon;
+
+    public $description;
+
+    public $editModal = false;
 
     protected $listeners = [
-        'submit',
+        'editModal',
     ];
 
     protected $rules = [
         'service.language_id' => 'required',
-        'service.status' => 'required',
-        'service.icon' => 'nullable',
         'service.title' => 'required|max:191',
-        'service.content' => 'required',
+        'service.type' => 'required',
+        'service.features' => 'nullable',
+        'service.options' => 'nullable',
+        'service.content' => 'nullable',
     ];
 
-    public function mount(Service $service)
+    public function editModal($service)
     {
-        $this->service = $service;
+        $this->resetErrorBag();
+
+        $this->resetValidation();
+
+        $this->service = Service::findOrFail($service);
+
+        $this->image = $this->service->image;
+
+        $this->description = $this->service->content;
+
+        $this->editModal = true;
     }
+    
 
     public function render()
     {
@@ -57,7 +73,15 @@ class Edit extends Component
         $this->service->save();
 
         $this->alert('success', __('Service updated successfully!'));
+            
+        $this->emit('refreshIndex');
 
-        return redirect()->route('admin.services.index');
+        $this->editModal = false;
     }
+
+    public function getLanguagesProperty()
+    {
+        return Language::pluck('name', 'id')->toArray();
+    }
+    
 }
