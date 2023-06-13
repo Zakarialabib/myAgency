@@ -63,7 +63,7 @@
 
                     <div class="w-full py-2 px-3">
                         <x-label for="" :value="__('Image')" />
-                        <x-fileupload wire:model="" :file="$" accept="image/jpg,image/jpeg,image/png" />
+                        {{-- <x-fileupload wire:model="" :file="$" accept="image/jpg,image/jpeg,image/png" /> --}}
                         <x-input-error :messages="$errors->get('')" for="" class="mt-2" />
                     </div>
                     <div class="w-full flex justify-start space-x-2">

@@ -3,38 +3,37 @@
 <div>
     <header x-data="{ isSticky: true, scrollPosition: 0 }" x-init="window.addEventListener('scroll', () => { scrollPosition = window.scrollY;
         isSticky = scrollPosition > 0; })"
-        :class="{ 'top-0 bg-black shadow': isSticky, 'bg-transparent': !isSticky }"
-        class="fixed left-0 w-full z-50 {{ $vertical ? 'flex flex-col items-center' : 'flex items-center' }} transition-all duration-300">
-        <div class="container flex justify-between items-center py-4">
+        class="fixed top-0 bg-black shadow left-0 w-full z-50 flex justify-between items-center transition-all duration-300">
+        <div class="container flex justify-center items-center py-4">
             <a class="lg:mr-8 2xl:mr-20 lg:text-3xl sm:text-xl font-bold font-heading text-white"
                 href="{{ route('front.index') }}">
                 <img class="w-auto h-10" src="{{ asset('images/' . settings()->site_logo) }}" loading="lazy"
                     alt="{{ settings()->site_title }}" />
             </a>
 
-            <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading">
-                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
-                        href="">
+            <ul class="hidden md:flex px-4 justify-between gap-8 mx-auto font-semibold font-heading">
+                <li class="mb-4"> <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-xl lg:text-3xl hover:underline" 
+                        href="#digital">
                         {{ __('The Digital Hub') }}
                     </a>
                 </li>
-                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
-                        href="">
+                <li class="mb-4"> <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-xl lg:text-3xl hover:underline" 
+                        href="#startup">
                         {{ __('The Startup Hub') }}
                     </a>
                 </li>
-                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
-                        href="">
+                <li class="mb-4"> <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-xl lg:text-3xl hover:underline" 
+                        href="#partners">
                         {{ __('Partners') }}
                     </a>
                 </li>
-                <li class="mr-12"><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
-                        href="">
+                <li class="mb-4"> <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-xl lg:text-3xl hover:underline" 
+                        href="#about">
                         {{ __('About Us') }}
                     </a>
                 </li>
-                <li><a class="text-green-500 hover:text-green-800 uppercase text-3xl hover:underline"
-                        href="{{ route('front.contact') }}">
+                <li class="mb-4"> <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-xl lg:text-3xl hover:underline" 
+                        href="#contact">
                         {{ __('Contact') }}
                     </a>
                 </li>
@@ -68,29 +67,29 @@
         </div>
         <div class="border-t border-gray-900 py-2"></div>
 
-        <ul class="lg:text-3xl sm:text-xl font-bold font-heading">
-            <li class="mb-8 hover:underline">
-                <a href="">
+        <ul class="lg:text-3xl sm:text-xl space-y-4 font-bold font-heading">
+            <li class="hover:text-green-500 focus:text-green-500 hover:underline">
+                <a href="#digital">
                     {{ __('The Digital Hub') }}
                 </a>
             </li>
-            <li class="mb-8 hover:underline">
-                <a href="">
+            <li class="hover:text-green-500 focus:text-green-500 hover:underline">
+                <a href="startup">
                     {{ __('The Startup Hub') }}
                 </a>
             </li>
-            <li class="mb-8 hover:underline">
-                <a href="">
+            <li class="hover:text-green-500 focus:text-green-500 hover:underline">
+                <a href="#partners">
                     {{ __('Partners') }}
                 </a>
             </li>
-            <li class="mb-8 hover:underline">
-                <a href="">
+            <li class="hover:text-green-500 focus:text-green-500 hover:underline">
+                <a href="#about">
                     {{ __('About Us') }}
                 </a>
             </li>
-            <li class="hover:underline">
-                <a href="">
+            <li class="hover:text-green-500 focus:text-green-500 hover:underline">
+                <a href="#contact">
                     {{ __('Contact') }}
                 </a>
             </li>

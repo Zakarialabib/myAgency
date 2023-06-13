@@ -8,7 +8,6 @@
     <link rel="preconnect" href="{{ request()->getSchemeAndHttpHost() }}">
     <link rel="prefetch" href="{{ request()->getSchemeAndHttpHost() }}">
     <link rel="prerender" href="{{ request()->getSchemeAndHttpHost() }}">
-    <link rel="preload" href="{{ request()->getSchemeAndHttpHost() }}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -59,7 +58,7 @@
     </style>
 </head>
 
-<body class="antialiased bg-gray-50 text-body font-body" x-data="{ showCart: false }">
+<body class="antialiased bg-gray-100 text-body font-body" x-data="{ showCart: false }">
     <!-- Body Tags -->
 
     @if (settings()->body_tags)

@@ -10,7 +10,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\livewire\Auth\Index as AuthIndex;
+use App\Http\Livewire\Auth\Index as AuthIndex;
 
 use Illuminate\Support\Facades\Route;
 

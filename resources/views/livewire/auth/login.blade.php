@@ -11,7 +11,9 @@
             <div>
                 <x-input-label for="email" :value="__('Email')" />
 
-                <x-text-input id="email" class="block mt-1 w-full" wire:model.lazy="email" type="email"
+                <x-text-input id="email" class="block mt-1 w-full" 
+                    autocomplete="email"
+                    wire:model.lazy="email" type="email"
                     name="email" :value="old('email')" required autofocus />
 
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />

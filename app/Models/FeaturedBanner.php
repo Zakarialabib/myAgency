@@ -6,28 +6,31 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Status;
 
 class FeaturedBanner extends Model
 {
     use HasAdvancedFilter;
 
-    public const STATUSINACTIVE = 0;
-
-    public const STATUSACTIVE = 1;
-
-    public $orderable = [
-        'id', 'title', 'details', 'image', 'status', 'featured', 'language_id',
+    public const ATTRIBUTES = [
+        'id', 'title', 'status', 'language_id',
     ];
 
-    public $timestamps = false;
-
-    protected $filterable = [
-        'id', 'title', 'details', 'image', 'status', 'featured', 'language_id',
-    ];
-
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
+    
     protected $fillable = [
         'title', 'details', 'image', 'embeded_video', 'status', 'featured', 'link', 'language_id',
     ];
+
+    protected $casts = [
+        'satuts'   => Status::class,
+    ];
+
+    public function scopeActive($query): void
+    {
+        $query->where('status', true);
+    }
 
     public function language()
     {

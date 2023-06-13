@@ -1,6 +1,6 @@
 <div>
     <!-- Create Modal -->
-    <x-modal wire:model="createBlogCategory">
+    <x-modal wire:model="createModal">
         <x-slot name="title">
             {{ __('Create Blog Category') }}
         </x-slot>
@@ -19,10 +19,7 @@
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="language_id" :value="__('Language')" required />
-                        <x-select-list
-                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="language_id" name="language_id" wire:model="blogcategory.language_id"
-                            :options="$this->languages" />
+                        <x-select2 :options="getLanguages()" name="blog.language_id" id="blog.language_id" wire:model.lazy="blog.language_id" />
                         <x-input-error :messages="$errors->get('blogcategory.language_id')" for="blogcategory.language_id" class="mt-2" />
                     </div>
 
@@ -46,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="w-full px-3">
+                <div class="w-full py-4 px-3">
                     <x-button primary type="submit" wire:loading.attr="disabled" class="w-full">
                         {{ __('Create') }}
                     </x-button>

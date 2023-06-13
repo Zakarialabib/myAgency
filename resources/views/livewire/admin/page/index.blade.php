@@ -31,8 +31,11 @@
                 {{ __('Title') }}
                 @include('components.table.sort', ['field' => 'title'])
             </x-table.th>
-            <x-table.th>
+            <x-table.th sortable wire:click="sortBy('slug')" :direction="$sorts['slug'] ?? null">
                 {{ __('Slug') }}
+            </x-table.th>
+            <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
+                {{ __('Status') }}
             </x-table.th>
             <x-table.th>
                 {{ __('Actions') }}
@@ -51,6 +54,9 @@
                         <a href="{{ route('front.dynamicPage' , $page->slug )}}" target="_blank">
                             {{ $page->slug }}
                         </a>
+                    </x-table.td>
+                    <x-table.td>
+                        <livewire:toggle-button :model="$page" field="status" key="{{ $page->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <x-dropdown

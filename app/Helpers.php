@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Models\Category;
+use App\Models\Page;
 use App\Models\Settings;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -31,6 +32,14 @@ class Helpers
     {
         return Category::active()
             ->select('id', 'name')
+            ->get();
+    }
+
+    public static function getActivePages()
+    {
+        return Page::active()
+            ->select('id', 'title', 'slug')
+            ->limit(4)
             ->get();
     }
 

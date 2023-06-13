@@ -4,73 +4,57 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Models\Brand;
-use App\Models\FeaturedBanner;
-use App\Models\Product;
+use App\Models\Project;
+use App\Models\Service;
 use App\Models\Section;
 use App\Models\Slider;
+use App\Models\Partner;
 use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
+use App\Enums\PageType;
 
 class Index extends Component
 {
-    public function getSubcategoriesProperty(): Collection
+    public function getHomeSectionProperty()
     {
-        return Subcategory::inRandomOrder()->limit(3)->get();
+        return Section::where('type', PageType::HOME)->active()->first();
     }
 
-    public function getFeaturedProductsProperty(): Collection
+    public function getStartupServicesProperty(): Collection
     {
-        return Product::where('featured', 1)
-            ->active()
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
+        return Service::where('type', 'startup')->active()->get();
+    }
+    
+    public function getDigitalServicesProperty(): Collection
+    {
+        return Service::where('type', 'digital')->active()->get();
     }
 
-    public function getBestOffersProperty(): Collection
+    public function getPartnersProperty(): Collection
     {
-        return Product::where('best', 1)
-            ->active()
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
+        return Partner::active()->get();
     }
 
-    public function getHotProductsProperty(): Collection
+    public function getProjectsProperty(): Collection
     {
-        return Product::where('hot', 1)
-            ->active()
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
+        return Project::active()->limit(4)->get();
     }
 
-    public function getBrandsProperty(): Collection
+    public function getAboutSectionProperty()
     {
-        return Brand::with('products')->get();
+        return Section::where('type', PageType::ABOUT)->active()->first();
     }
 
-    public function getSlidersProperty(): Collection
+    public function getContactSectionProperty()
     {
-        return Slider::active()->get();
-    }
-
-    public function getFeaturedbannerProperty()
-    {
-        return FeaturedBanner::where('featured', 1)->first();
-    }
-
-    public function getSectionsProperty(): Collection
-    {
-        return Section::active()->limit(4)->get();
+        return Section::where('type', PageType::CONTACT)->active()->first();
     }
 
     public function render(): View|Factory
     {
-        return view('livewire.front.index');
+        return view('livewire.front.index')->extends('layouts.guest');
     }
 }

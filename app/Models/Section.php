@@ -6,17 +6,11 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Status;
 
 class Section extends Model
 {
     use HasAdvancedFilter;
-
-    public const HOME_PAGE = 1;
-    public const ABOUT_PAGE = 2;
-    public const TEAM_PAGE = 3;
-    public const BLOG_PAGE = 4;
-    public const SERVICE_PAGE = 5;
-    public const PORTFOLIO_PAGE = 6;
 
     public $table = 'sections';
 
@@ -46,16 +40,13 @@ class Section extends Model
         'status',
     ];
 
-     /**
-     * Scope a query to only include active products.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
-     * @return void
-     */
-    public function scopeActive($query)
+    protected $casts = [
+        'satuts'   => Status::class,
+    ];
+
+    public function scopeActive($query): void
     {
-        $query->where('status', 1);
+        $query->where('status', true);
     }
     
     public function language()

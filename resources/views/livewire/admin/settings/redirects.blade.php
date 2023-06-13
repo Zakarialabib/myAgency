@@ -70,7 +70,7 @@
                     </x-table.td>
 
                     <x-table.td>
-                        <livewire:toggle-button :model="$redirect" field="status" key="{{ $redirect->id }}" />
+                        <livewire:utils.toggle-button :model="$redirect" field="status" key="{{ $redirect->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <div class="inline-flex">

@@ -67,11 +67,11 @@
                         {{ $featuredbanner->title }}
                     </x-table.td>
                     <x-table.td>
-                        @if (\App\Models\FeaturedBanner::STATUSINACTIVE)
+                        @if (\App\Enum\Status::INACTIVE)
                             <x-badge danger>
                                 {{ __('Inactive') }}
                             </x-badge>
-                        @elseif(\App\Models\FeaturedBanner::STATUSACTIVE)
+                        @elseif(\App\Enums\Status::ACTIVE)
                             <x-badge info>
                                 {{ __('Active') }}
                             </x-badge>

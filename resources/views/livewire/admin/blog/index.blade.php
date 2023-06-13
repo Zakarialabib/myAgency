@@ -40,7 +40,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createBlog', 'show')">
+                <x-button primary type="button" onclick="Livewire.emit('createModal', 'show')">
                     {{ __('Create') }}
                 </x-button>
             </div>
@@ -115,10 +115,10 @@
                                 <img src="{{ $photo }}" alt="Image">
                             </x-table.td>
                             <x-table.td>
-                                {{ $blog->title }}
+                                {{ $blog->title }} -- {{ $blog->category->title }}
                             </x-table.td>
                             <x-table.td>
-                                <livewire:toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />
+                                <livewire:utils.toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />
                             </x-table.td>
                             <x-table.td>
                                 <x-button primary type="button" wire:click="$emit('editModal',{{ $blog->id }})"
@@ -152,7 +152,6 @@
 
             <!-- Edit Modal -->
             @livewire('admin.blog.edit', ['blog' => $blog])
-
         </div>
     </x-card>
 </div>

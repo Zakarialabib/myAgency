@@ -13,6 +13,7 @@
                     <x-input-label for="name" :value="__('Name')" required />
 
                     <x-text-input id="name" wire:model.lazy="name" class="block mt-1 w-full" type="text"
+                    autocomplete="name"
                         name="name" :value="old('name')" required autofocus />
 
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -23,6 +24,7 @@
                     <x-input-label for="email" :value="__('Email')" required />
 
                     <x-text-input id="email" wire:model.lazy="email" class="block mt-1 w-full" type="email"
+                    autocomplete="email"
                         name="email" :value="old('email')" required />
 
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
@@ -33,6 +35,7 @@
                     <x-input-label for="phone" :value="__('Phone')" required />
 
                     <x-text-input id="phone" wire:model.lazy="phone" class="block mt-1 w-full" type="number"
+                    autocomplete="mobile"
                         name="phone" :value="old('phone')" required />
 
                     <x-input-error :messages="$errors->get('phone')" class="mt-2" />
@@ -58,7 +61,7 @@
                 <div class="lg:w-1/2 sm:w-full px-2">
                     <x-input-label for="password" :value="__('Password')" required />
 
-                    <x-text-input id="password" wire:model.lazy="password" class="block mt-1 w-full" type="password"
+                    <x-text-input id="password" wire:model.lazy="password" class="block mt-1 w-full" type="password""
                         name="password" required autocomplete="new-password" />
 
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />

@@ -51,7 +51,6 @@ class Edit extends Component
 
         $this->editModal = true;
     }
-    
 
     public function render()
     {

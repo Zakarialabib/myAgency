@@ -28,6 +28,7 @@ return new class () extends Migration {
             $table->string('text_color')->nullable();
             $table->string('position')->nullable();
             $table->text('embeded_video')->nullable();
+            $table->string('type')->nullable();
             $table->foreignId('page_id')->nullable()->constrained('pages')->nullOnDelete();
             $table->foreignId('language_id')->nullable()->constrained('languages')->nullOnDelete();
             $table->timestamps();

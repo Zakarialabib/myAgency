@@ -17,10 +17,12 @@ class ServiceFactory extends Factory
      */
     public function definition()
     {
+        $type = $this->faker->randomElement(['startup', 'digital']);
+
         return [
             'title' => fake()->name(),
             'slug' => Str::slug(fake()->name()),
-            'type' => '1',
+            'type' => $type,
             'image' => 'image.jpg',
             'content' => fake()->sentence(),
             'status' => 1,

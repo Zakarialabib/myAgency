@@ -72,20 +72,20 @@
                         </p>
                     </div>
                     <div class="w-full">
-                        <x-label for="featured_image" :value="__('Featured Image')" />
-                        <x-fileupload wire:model="featured_image" :file="$featured_image"
+                        <x-label for="gallery" :value="__('Featured Image')" />
+                        <x-fileupload wire:model="gallery" :file="$gallery"
                             accept="image/jpg,image/jpeg,image/png" />
-                        <x-input-error :messages="$errors->get('project.featured_image')" for="featured_image" class="mt-2" />
+                        <x-input-error :messages="$errors->get('project.gallery')" for="gallery" class="mt-2" />
                         <p class="help-block text-info">
                             {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                         </p>
                     </div>
 
                     <div class="w-full">
-                        <x-label for="meta_keywords" :value="__('Meta Keywords')" />
-                        <x-input type="text" wire:model.lazy="project.meta_keywords" name="meta_keywords"
+                        <x-label for="meta_title" :value="__('Meta Keywords')" />
+                        <x-input type="text" wire:model.lazy="project.meta_title" name="meta_title"
                             placeholder="{{ __('Meta Keywords') }}" />
-                        <x-input-error :messages="$errors->get('project.meta_keywords')" for="meta_keywords" class="mt-2" />
+                        <x-input-error :messages="$errors->get('project.meta_title')" for="meta_title" class="mt-2" />
                     </div>
                     <div class="w-full">
                         <x-label for="meta_description" :value="__('Meta Description')" />

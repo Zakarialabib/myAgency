@@ -50,44 +50,7 @@
                     <x-table.td>
                         <input type="checkbox" value="{{ $section->id }}" wire:model="selected">
                     </x-table.td>
-                    {{-- <x-table.td>
-                        @if($section->page == \App\Models\Section::HOME_PAGE)
-                            <a href="{{ route('front.index') }}"
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Home') }}
-                            </a>
-                        @elseif($section->page == \App\Models\Section::BRAND_PAGE)
-                            <a href=""
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Brand') }}
-                            </a>
-                        @elseif($section->page == \App\Models\Section::BLOG_PAGE)
-                            <a href="{{ route('front.blogs') }}"
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Blog') }}
-                            </a>
-                        @elseif($section->page == \App\Models\Section::CATALOG_PAGE)
-                            <a href=""
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Catalog') }}
-                            </a>
-                        @elseif($section->page == \App\Models\Section::BRANDS_PAGE)
-                            <a href=""
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Brands') }}
-                            </a>
-                        @elseif($section->page == \App\Models\Section::PRODUCT_PAGE)
-                            <a href=""
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Products') }}
-                            </a>
-                        @elseif($section->page == \App\Models\Section::CONTACT_PAGE)
-                            <a href="{{ route('front.contact') }}"
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-900">
-                                {{ __('Contact') }}
-                            </a>
-                        @endif
-                    </x-table.td> --}}
+                   
                     <x-table.td>
                         {{ $section->title }}
                     </x-table.td>
@@ -157,13 +120,13 @@
                             class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
                             name="page">
                             <option value="" selected>{{ __('Select a Page') }}</option>
-                            <option value="1">{{ __('Home Page') }}</option>
-                            <option value="2">{{ __('About Page') }}</option>
-                            <option value="3">{{ __('Partner Page') }}</option>
-                            <option value="4">{{ __('Blog Page') }}</option>
-                            <option value="7">{{ __('Contact Page') }}</option>
-                            <option value="8">{{ __('Products Page') }}</option>
-                            <option value="9">{{ __('Privacy Page') }}</option>
+                            <option value="home">{{ __('Home Page') }}</option>
+                            <option value="about">{{ __('About Page') }}</option>
+                            <option value="team">{{ __('Team Page') }}</option>
+                            <option value="blog">{{ __('Blog Page') }}</option>
+                            <option value="service">{{ __('Service Page') }}</option>
+                            <option value="portfolio">{{ __('Portfolio Page') }}</option>
+                            <option value="project">{{ __('Project Page') }}</option>
                         </select>
                         <x-input-error :messages="$errors->get('section.page')" for="section.page" class="mt-2" />
                     </div>
@@ -214,13 +177,13 @@
         document.addEventListener('livewire:load', function() {
             window.livewire.on('deleteModal', sectionId => {
                 Swal.fire({
-                    title: __("Are you sure?") ,
-                    text: __("You won't be able to revert this!") ,
+                    title: __("Are you sure?"),
+                    text: __("You won't be able to revert this!"),
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: __("Yes, delete it!") 
+                    confirmButtonText: __("Yes, delete it!")
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.livewire.emit('delete', sectionId)

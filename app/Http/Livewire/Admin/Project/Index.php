@@ -163,7 +163,7 @@ class Index extends Component
             'featured_image' => $portfolio_details->featured_image,
             'gallery' => $portfolio_details->gallery,
             'status' => 0,
-            'meta_keywords' => $portfolio_details->meta_keywords,
+            'meta_title' => $portfolio_details->meta_title,
             'meta_description' => $portfolio_details->meta_description,
         ]);
         // $this->alert('success', __('Project Cloned successfully!') );

@@ -118,7 +118,7 @@
                                 @endforeach
                             </x-table.td>
                             <x-table.td>
-                                <livewire:toggle-button :model="$user" field="status" key="{{ $user->id }}" />
+                                <livewire:utils.toggle-button :model="$user" field="status" key="{{ $user->id }}" />
                             </x-table.td>
 
                             <x-table.td>

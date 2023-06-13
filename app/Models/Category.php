@@ -6,38 +6,31 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Status;
 
 class Category extends Model
 {
     use HasAdvancedFilter;
 
-    public const StatusInActive = 0;
-
-    public const STATUSACTIVE = 1;
-
-    public $orderable = [
-        'id', 'name', 'status', 'image',
+    public const ATTRIBUTES = [
+        'id', 'name'
     ];
 
-    public $filterable = [
-        'id', 'name', 'status', 'image',
-    ];
-
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
+    
     protected $fillable = [
         'name',
         'status',
         'image',
     ];
 
-    /**
-     * Scope a query to only include active products.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     *
-     * @return void
-     */
-    public function scopeActive($query)
+    protected $casts = [
+        'satuts'   => Status::class,
+    ];
+
+    public function scopeActive($query): void
     {
-        $query->where('status', 1);
+        $query->where('status', true);
     }
 }

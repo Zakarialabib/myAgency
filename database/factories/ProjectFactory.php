@@ -26,7 +26,7 @@ class ProjectFactory extends Factory
             'link'           => fake()->url(),
             'content'          => fake()->sentence(),
             'status'        => true,
-            'featured_image'=> 'image.jpg',
+            'image'=> 'image.jpg',
             'gallery'=> 'image.jpg',
             'meta_title'  => fake()->name(),
             'meta_description'  => fake()->sentence(),

@@ -22,7 +22,7 @@ return new class () extends Migration {
             $table->string('link')->nullable();
             $table->text('content')->nullable();
             $table->boolean('status')->default(true);
-            $table->text('featured_image')->nullable();
+            $table->text('image')->nullable();
             $table->text('gallery')->nullable();
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();

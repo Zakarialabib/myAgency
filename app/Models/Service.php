@@ -17,6 +17,7 @@ class Service extends Model
         'id',
         'title',
         'status',
+        'type',
     ];
 
     public $orderable = self::ATTRIBUTES;
@@ -26,12 +27,12 @@ class Service extends Model
         'title',
         'image',
         'content',
-        'language_id',
         'features',
         'options',
         'slug',
         'status',
-        'page_id',
+        'language_id',
+        'type',
     ];
 
      protected $casts = [
@@ -40,9 +41,16 @@ class Service extends Model
         'satuts'   => Status::class,
     ];
 
-    public function page()
+      /**
+     * Scope a query to only include active products.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     * @return void
+     */
+    public function scopeActive($query)
     {
-        return $this->belongsTo(Page::class);
+        $query->where('status', true);
     }
 
     public function language()

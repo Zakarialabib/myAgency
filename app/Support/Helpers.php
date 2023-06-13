@@ -2,6 +2,45 @@
 
 declare(strict_types=1);
 
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
+use App\Models\Language;
+use App\Models\Category;
+use App\Models\BlogCategory;
+
+if (!function_exists('getLanguages')) {
+    function getLanguages()
+    {
+        if (!Schema::hasTable('languages')) {
+            return [];
+        }
+
+        return cache()->rememberForever('languages', function () {
+            return Session::has('language')
+                ? Language::pluck('name', 'code')->toArray()
+                : Language::where('is_default', 1)->pluck('name', 'code')->toArray();
+        });
+    }
+}
+
+if (!function_exists('getCategories')) {
+    function getCategories()
+    {
+        return cache()->rememberForever('categories', function () {
+            return Category::pluck('name', 'id')->toArray();
+        });
+    }
+}
+
+if (!function_exists('getBlogCategories')) {
+    function getBlogCategories()
+    {
+        return cache()->rememberForever('blogCategories', function () {
+            return BlogCategory::pluck('name', 'id')->toArray();
+        });
+    }
+}
+
 if (! function_exists('settings')) {
     function settings()
     {
@@ -28,3 +67,5 @@ function getSlug($request, $key)
 
     return \Illuminate\Support\Str::slug($value);
 }
+
+

@@ -62,20 +62,22 @@
                         <x-input.rich-text wire:model.lazy="project.content" id="description" />
                         <x-input-error :messages="$errors->get('project.content')" for="content" class="mt-2" />
                     </div>
+                    
                     <div class="w-full">
-                        <x-label for="image" :value="__('Gallery')" />
-                        <x-fileupload wire:model="image" multiple :file="$images"
+                        <x-label for="image" :value="__('Featured Image')" />
+                        <x-fileupload wire:model="image" :file="$image"
                             accept="image/jpg,image/jpeg,image/png" />
                         <x-input-error :messages="$errors->get('project.image')" for="image" class="mt-2" />
                         <p class="help-block text-info">
                             {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                         </p>
                     </div>
+
                     <div class="w-full">
-                        <x-label for="featured_image" :value="__('Featured Image')" />
-                        <x-fileupload wire:model="featured_image" :file="$featured_image"
+                        <x-label for="image" :value="__('Gallery')" />
+                        <x-fileupload wire:model="image" multiple :file="$images"
                             accept="image/jpg,image/jpeg,image/png" />
-                        <x-input-error :messages="$errors->get('project.featured_image')" for="featured_image" class="mt-2" />
+                        <x-input-error :messages="$errors->get('project.image')" for="image" class="mt-2" />
                         <p class="help-block text-info">
                             {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                         </p>

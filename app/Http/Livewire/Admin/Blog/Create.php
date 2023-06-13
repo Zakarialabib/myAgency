@@ -6,7 +6,6 @@ namespace App\Http\Livewire\Admin\Blog;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -19,13 +18,13 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $createBlog = false;
+    public $createModal = false;
 
     public $image;
 
     public $blog;
 
-    public $listeners = ['createBlog'];
+    public $listeners = ['createModal'];
 
     protected $rules = [
         'blog.title'       => 'required|min:3|max:255',
@@ -33,15 +32,8 @@ class Create extends Component
         'blog.details'     => 'required|min:3',
         'blog.language_id' => 'nullable|integer',
         'blog.meta_title'  => 'nullable|max:100',
-        'blog.meta_desc'   => 'nullable|max:200',
+        'blog.meta_description'   => 'nullable|max:200',
     ];
-
-    public function mount(Blog $blog)
-    {
-        $this->blog = $blog;
-
-        $this->initListsForFields();
-    }
 
     public function render(): View|Factory
     {
@@ -50,13 +42,18 @@ class Create extends Component
         return view('livewire.admin.blog.create');
     }
 
-    public function createBlog()
+    public function createModal()
     {
         $this->resetErrorBag();
 
         $this->resetValidation();
 
-        $this->createBlog = true;
+        $this->blog = new Blog();
+
+        $this->blog->meta_title = $this->blog->title;
+        $this->blog->meta_description = $this->blog->details;
+
+        $this->createModal = true;
     }
 
     public function create()
@@ -77,12 +74,8 @@ class Create extends Component
 
         $this->alert('success', __('Blog created successfully.'));
 
-        $this->createBlog = false;
+        $this->createModal = false;
     }
 
-    protected function initListsForFields(): void
-    {
-        $this->listsForFields['categories'] = BlogCategory::pluck('title', 'id')->toArray();
-        $this->listsForFields['languages'] = Language::pluck('name', 'id')->toArray();
-    }
+    
 }

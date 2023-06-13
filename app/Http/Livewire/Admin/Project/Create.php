@@ -21,9 +21,9 @@ class Create extends Component
 
     public $image;
 
-    public $featured_image;
+    public $images;
     
-    public $createModal;
+    public $createModal = false;
 
     protected $listeners = [
         'createModal',
@@ -35,7 +35,7 @@ class Create extends Component
         'project.client_name' => 'required',
         'project.link' => 'required',
         'project.service_id' => 'required',
-        'project.meta_keywords' => 'nullable',
+        'project.meta_title' => 'nullable',
         'project.meta_description' => 'nullable',
         'project.language_id' => 'required',
     ];
@@ -56,10 +56,10 @@ class Create extends Component
     {
         $this->project->slug = Str::slug($this->project->title);
 
-        if ($this->featured_image) {
-            $imageName = Str::slug($this->project->title).'.'.$this->featured_image->extension();
-            $this->featured_image->storeAs('projects', $imageName);
-            $this->project->featured_image = $imageName;
+        if ($this->image) {
+            $imageName = Str::slug($this->project->title).'.'.$this->image->extension();
+            $this->image->storeAs('projects', $imageName);
+            $this->project->image = $imageName;
         }
 
         // Multiple images within an array

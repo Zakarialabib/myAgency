@@ -27,8 +27,8 @@
                         <select wire:model.lazy="service.type"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
                             <option value="" selected>{{ __('Type') }}</option>
-                            <option value="1">{{ __('Digital') }}</option>
-                            <option value="2">{{ __('Coaching') }}</option>
+                            <option value="digital">{{ __('Digital') }}</option>
+                            <option value="startup">{{ __('Startup') }}</option>
                         </select>
                         <x-input-error :messages="$errors->get('service.type')" for="service.type" class="mt-2" />
                     </div>
@@ -56,8 +56,6 @@
                     <x-input-error :messages="$errors->get('service.image')" for="service.image" class="mt-2" />
                 </div>
 
-               
-
                 <div class="w-full text-center py-4">
                     <x-button type="submit" primary>
                         {{ __('Save') }}
@@ -66,5 +64,4 @@
             </form>
         </x-slot>
     </x-modal>
-
 </div>

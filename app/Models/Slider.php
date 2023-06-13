@@ -6,29 +6,28 @@ namespace App\Models;
 
 use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Status;
 
 class Slider extends Model
 {
     use HasAdvancedFilter;
 
-    public const STATUSINACTIVE = 0;
-
-    public const STATUSACTIVE = 1;
-
     public $table = 'sliders';
 
-    public $orderable = [
-        'id', 'title', 'subtitle', 'featured', 'link', 'language_id',
+    public const ATTRIBUTES = [
+        'id', 'title', 'status', 'language_id',
     ];
 
-    public $filterable = [
-        'id', 'title', 'subtitle', 'featured', 'link', 'language_id',
-    ];
-
-    public $timestamps = false;
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
+    
 
     protected $fillable = [
         'title', 'subtitle', 'details', 'embeded_video', 'image', 'featured', 'link', 'language_id', 'bg_color', 'status',
+    ];
+
+    protected $casts = [
+        'satuts'   => Status::class,
     ];
 
     /**
@@ -40,6 +39,11 @@ class Slider extends Model
      */
     public function scopeActive($query)
     {
-        $query->where('status', 1);
+        $query->where('status', true);
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id');
     }
 }

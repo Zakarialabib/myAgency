@@ -28,12 +28,13 @@
                         class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500  lang"
                         name="page">
                         <option value="" selected>{{ __('Select a Page') }}</option>
-                        <option value="1">{{ __('Home Page') }}</option>
-                        <option value="3">{{ __('Partner Page') }}</option>
-                        <option value="4">{{ __('Blog Page') }}</option>
-                        <option value="7">{{ __('Contact Page') }}</option>
-                        <option value="8">{{ __('Products Page') }}</option>
-                        <option value="9">{{ __('Privacy Page') }}</option>
+                        <option value="home">{{ __('Home Page') }}</option>
+                        <option value="about">{{ __('About Page') }}</option>
+                        <option value="team">{{ __('Team Page') }}</option>
+                        <option value="blog">{{ __('Blog Page') }}</option>
+                        <option value="service">{{ __('Service Page') }}</option>
+                        <option value="portfolio">{{ __('Portfolio Page') }}</option>
+                        <option value="project">{{ __('Project Page') }}</option>
                     </select>
                     <x-input-error :messages="$errors->get('section.page')" for="section.page" class="mt-2" />
                 </div>

@@ -59,7 +59,7 @@
                         {{ $blogcategory->title }}
                     </x-table.td>
                     <x-table.td>
-                        <livewire:toggle-button :model="$blogcategory" field="featured" key="{{ $blogcategory->id }}" />
+                        <livewire:utils.toggle-button :model="$blogcategory" field="featured" key="{{ $blogcategory->id }}" />
                     </x-table.td>
                     <x-table.td>
                         <x-dropdown

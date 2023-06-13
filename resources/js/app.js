@@ -1,9 +1,16 @@
 import './bootstrap';
 import '../css/app.css';
 import "perfect-scrollbar/css/perfect-scrollbar.css";
+import "../css/theme.css";
 
 import swal from 'sweetalert2';
 window.Swal = swal;
+
+import {livewire_hot_reload} from 'virtual:livewire-hot-reload'
+livewire_hot_reload();
+
+import swiper from 'swiper';
+window.Swiper = swiper;
 
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
@@ -17,7 +24,27 @@ import PerfectScrollbar from "perfect-scrollbar";
 window.PerfectScrollbar = PerfectScrollbar;
 
 Alpine.data("mainState", () => {
-  
+    const init = function () {
+        window.addEventListener("scroll", () => {
+            let st =
+                window.pageYOffset || document.documentElement.scrollTop;
+            if (st > lastScrollTop) {
+                // downscroll
+                this.scrollingDown = true;
+                this.scrollingUp = false;
+            } else {
+                // upscroll
+                this.scrollingDown = false;
+                this.scrollingUp = true;
+                if (st == 0) {
+                    //  reset
+                    this.scrollingDown = false;
+                    this.scrollingUp = false;
+                }
+            }
+            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+        });
+    };
     const loadingMask = {
         pageLoaded: false,
         init() {
@@ -53,6 +80,7 @@ Alpine.data("mainState", () => {
     document.addEventListener("click", handleOutsideClick);
 
     return {
+        init,
         loadingMask,
         isDarkMode: getTheme(),
         toggleTheme() {

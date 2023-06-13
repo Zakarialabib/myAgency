@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\BlogCategory;
 
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -18,9 +17,9 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $createBlogCategory = false;
+    public $createModal = false;
 
-    public $listeners = ['createBlogCategory'];
+    public $listeners = ['createModal'];
 
     public $blogcategory;
 
@@ -28,7 +27,7 @@ class Create extends Component
         'blogcategory.title'       => 'required|string|max:255',
         'blogcategory.description' => 'nullable',
         'blogcategory.meta_title'  => 'nullable|max:100',
-        'blogcategory.meta_desc'   => 'nullable|max:200',
+        'blogcategory.meta_description'   => 'nullable|max:200',
         'blogcategory.language_id' => 'required|integer',
     ];
 
@@ -39,7 +38,7 @@ class Create extends Component
         return view('livewire.admin.blog-category.create');
     }
 
-    public function createBlogCategory()
+    public function createModal()
     {
         $this->resetErrorBag();
 
@@ -47,7 +46,10 @@ class Create extends Component
 
         $this->blogcategory = new BlogCategory();
 
-        $this->createBlogCategory = true;
+        $this->blogcategory->meta_title = $this->blogcategory->title;
+        $this->blogcategory->meta_description = $this->blogcategory->description;
+
+        $this->createModal = true;
     }
 
     public function create()
@@ -58,13 +60,10 @@ class Create extends Component
 
         $this->alert('success', __('BlogCategory created successfully.'));
 
-        $this->createBlogCategory = false;
+        $this->createModal = false;
 
         $this->emit('refreshIndex');
     }
 
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
-    }
+ 
 }

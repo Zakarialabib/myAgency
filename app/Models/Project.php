@@ -8,41 +8,47 @@ use App\Support\HasAdvancedFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\Status;
 
 class Project extends Model
 {
     use HasAdvancedFilter;
-
     use HasFactory;
 
     public $table = 'projects';
 
-    public $orderable = [
+    public const ATTRIBUTES = [
         'id', 'title', 'status', 'slug', 'client_name',
-        'featured_image', 'service_id', 'content', 'meta_title',
-        'meta_description', 'gallery',
     ];
 
-    public $filterable = [
-        'id', 'title', 'status', 'slug', 'client_name',
-        'featured_image', 'service_id', 'content', 'meta_title',
-        'meta_description', 'gallery',
-    ];
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'id', 'title', 'status', 'slug', 'client_name',
-        'featured_image', 'service_id', 'content', 'meta_title',
+        'image', 'service_id', 'content', 'meta_title',
         'meta_description', 'gallery', 'link', 'language_id',
     ];
+
+    protected $casts = [
+        'satuts'   => Status::class,
+    ];
+
+      /**
+     * Scope a query to only include active products.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     *
+     * @return void
+     */
+    public function scopeActive($query)
+    {
+        $query->where('status', true);
+    }
 
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class, 'service_id');
-    }
-
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class);
     }
 
     public function language()

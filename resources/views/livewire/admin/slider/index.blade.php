@@ -48,23 +48,22 @@
                         {{-- {{ $id }} --}}
                     </x-table.td>
                     <x-table.td>
-                        @if ($slider->)
+                        {{-- @if ($slider->omage)
                             <img src="{{ asset('images/sliders/' . $slider->) }}" alt="{{ $slider->title }}"
                                 class="w-10 h-10 rounded-full">
                         @else
                             {{ __('No image') }}
-                        @endif
+                        @endif --}}
                     </x-table.td>
                     <x-table.td>
                         {{ $slider->title }}
                     </x-table.td>
                     <x-table.td>
-                        {{-- STATUSINACTIVE - STATUSACTIVE --}}
-                        @if (\App\Models\Slider::STATUSINACTIVE)
+                        @if (\App\Enum\Status::INACTIVE)
                             <x-badge danger>
                                 {{ __('Inactive') }}
                             </x-badge>
-                        @elseif(\App\Models\Slider::STATUSACTIVE)
+                        @elseif(\App\Enums\Status::ACTIVE)
                             <x-badge info>
                                 {{ __('Active') }}
                             </x-badge>
@@ -178,9 +177,9 @@
 
                         <div class="w-full py-2 px-3">
                             <x-label for="image" :value="__('Image')" />
-                            <x-media-upload title="{{ __('Image') }}" name="" wire:model=""
-                                :file="$" {{-- :preview="$this->preview" --}} single types="PNG / JPEG / WEBP"
-                                fileTypes="image/*" />
+                            {{-- <x-media-upload title="{{ __('Image') }}" name="" wire:model=""
+                                :file="$" :preview="$this->preview" single types="PNG / JPEG / WEBP"
+                                fileTypes="image/*" /> --}}
                         </div>
 
                         <div class="w-full px-3">

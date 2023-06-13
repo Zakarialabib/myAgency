@@ -25,7 +25,9 @@ class Edit extends Component
 
     public $blog;
 
-    public $listeners = ['editModal'];
+    public $listeners = [
+        'editModal'
+    ];
 
     protected $rules = [
         'blog.title'       => 'required|min:3|max:255',
@@ -76,13 +78,4 @@ class Edit extends Component
         $this->editModal = false;
     }
 
-    public function getBlogCategoriesProperty()
-    {
-        return BlogCategory::select('title', 'id')->get();
-    }
-
-    public function getLanguagesProperty()
-    {
-        return Language::select('name', 'id')->get();
-    }
 }

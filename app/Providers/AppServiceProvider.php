@@ -45,14 +45,15 @@ class AppServiceProvider extends ServiceProvider
     /** @return \App\Models\Language|\Illuminate\Database\Eloquent\Model|array|null */
     private function getLanguages()
     {
-        if (! Schema::hasTable('languages')) {
-            return;
+        if (!Schema::hasTable('languages')) {
+            return [];
         }
-
+    
         return cache()->rememberForever('languages', function () {
             return Session::has('language')
                 ? Language::pluck('name', 'code')->toArray()
-                : Language::where('is_default', 1)->first();
+                : Language::where('is_default', 1)->pluck('name', 'code')->toArray();
         });
     }
+    
 }

@@ -24,23 +24,19 @@
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="category_id" :value="__('Category')" required />
-                        <x-select-list
-                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="category_id" name="category_id" wire:model.lazy="blog.category_id" :options="$this->categories" />
+                        <x-select2 :options="getBlogCategories()" name="blog.category_id" id="blog.category_id" wire:model.lazy="blog.category_id" />
                         <x-input-error :messages="$errors->get('blog.category_id')" for="blog.category_id" class="mt-2" />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="language_id" :value="__('Language')" required />
-                        <x-select-list
-                            class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                            id="language_id" name="language_id" wire:model.lazy="blog.language_id" :options="$this->languages" />
+                        <x-select2 :options="getLanguages()" name="blog.language_id" id="blog.language_id" wire:model.lazy="blog.language_id" />
                         <x-input-error :messages="$errors->get('blog.language_id')" for="blog.language_id" class="mt-2" />
                     </div>
 
                     <div class="w-full px-3 mb-4">
                         <x-label for="details" :value="__('Description')" required />
                         <x-input.rich-text wire:model.lazy="blog.details" id="details" name="details"
-                            endpoint="/uploads" {{-- value="{!! $this->blog->details !!}" --}}  />
+                            endpoint="/uploads" {{-- value="{!! $this->blog->details !!}" --}} />
                     </div>
                     <div class="xl:w-1/2 md:w-full px-2">
                         <x-label for="meta_title" :value="__('Meta title')" />
