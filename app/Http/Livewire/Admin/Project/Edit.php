@@ -22,6 +22,8 @@ class Edit extends Component
     public $images;
 
     public $image;
+    
+    public $description;
 
     public array $listsForFields = [];
 
@@ -32,15 +34,20 @@ class Edit extends Component
     ];
 
     protected $rules = [
-        'project.title' => 'required|max:191',
-        'project.content' => 'required',
-        'project.client_name' => 'required',
-        'project.link' => 'required',
-        'project.service_id' => 'required',
-        'project.meta_title' => 'nullable',
+        'project.title'            => 'required|max:191',
+        'description'          => 'required',
+        'project.client_name'      => 'required',
+        'project.link'             => 'required',
+        'project.service_id'       => 'required',
+        'project.meta_title'       => 'nullable',
         'project.meta_description' => 'nullable',
-        'project.language_id' => 'required',
+        'project.language_id'      => 'required',
     ];
+
+    public function updatedDescription($value)
+    {
+        $this->description = $value;
+    }
 
     public function editModal($project)
     {
@@ -51,6 +58,8 @@ class Edit extends Component
         $this->resetValidation();
 
         $this->project = Project::findOrfail($project);
+
+        $this->description = $this->project->content;
 
         $this->editModal = true;
     }
@@ -78,6 +87,8 @@ class Edit extends Component
 
         $this->project->gallery = $this->images;
 
+        $this->project->content = $this->description;
+
         $this->project->save();
 
         $this->editModal = false;
@@ -85,7 +96,6 @@ class Edit extends Component
         $this->emit('refreshIndex');
 
         $this->alert('success', __('Service updated successfully!'));
-
     }
 
     public function render()
@@ -97,7 +107,7 @@ class Edit extends Component
     {
         return Language::pluck('name', 'id')->toArray();
     }
-    
+
     public function getServicesProperty()
     {
         return Service::select('title', 'id')->get();

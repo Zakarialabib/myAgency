@@ -8,73 +8,27 @@
         </x-slot>
     </x-sidebar.link>
 
-    <x-sidebar.link title="{{ __('Contact') }}" href="{{ route('admin.contact') }}" :isActive="request()->routeIs('admin.contact')">
-        <x-slot name="icon">
-            <i class="fas fa-shopping-cart w-5 h-5"></i>
-        </x-slot>
-    </x-sidebar.link>
-
-    <x-sidebar.dropdown title="{{ 'Blog' }}" :active="Str::startsWith(
-        request()
-            ->route()
-            ->uri(),
-        'Blog',
-    )">
-        <x-slot name="icon">
-            <span class="inline-block mr-3">
-                <i class="fas fa-blog w-5 h-5"></i>
-            </span>
-        </x-slot>
-        {{-- @can('blog_access') --}}
-        <x-sidebar.sublink title="{{ __('All Blog') }}" href="{{ route('admin.blogs.index') }}" :active="request()->routeIs('admin.blogs.index')" />
-        <x-sidebar.sublink title="{{ __('Blog Categories') }}" href="{{ route('admin.blog-categories.index') }}"
-            :active="request()->routeIs('admin.blog-categories.index')" />
-        {{-- @endcan --}}
-    </x-sidebar.dropdown>
-    {{-- Settings --}}
 
     {{-- @can('user_access') --}}
-    <x-sidebar.dropdown title="{{ __('People') }}" :active="Str::startsWith(
+    <x-sidebar.dropdown title="{{ __('Agency') }}" :active="Str::startsWith(
         request()
             ->route()
             ->uri(),
-        'people',
+        'agency',
     )">
         <x-slot name="icon">
             <span class="inline-block mr-3">
                 <i class="fas fa-users w-5 h-5"></i>
             </span>
         </x-slot>
-        {{-- @can('user_access') --}}
-        <x-sidebar.sublink title="{{ __('Users') }}" href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users')" />
-        {{-- @endcan --}}
-        {{-- @can('role_access')  --}}
-        {{-- <x-sidebar.sublink title="{{ __('Roles') }}" href="{{ route('admin.roles') }}" :active="request()->routeIs('admin.roles')" /> --}}
-        {{-- @endcan --}}
-        {{-- @can('permission_access') --}}
-        {{-- <x-sidebar.sublink title="{{ __('Permissions') }}" href="{{ route('admin.permissions') }}"
-                    :active="request()->routeIs('admin.permissions')" /> --}}
-        {{-- @endcan --}}
+
+        <x-sidebar.sublink title="{{ __('Team') }}" href="{{ route('admin.teams.index') }}" :active="request()->routeIs('admin.teams.index')" />
+        <x-sidebar.sublink title="{{ __('Projects') }}" href="{{ route('admin.projects.index') }}" :active="request()->routeIs('admin.projects.index')" />
+        <x-sidebar.sublink title="{{ __('Services') }}" href="{{ route('admin.services.index') }}" :active="request()->routeIs('admin.services.index')" />
+    
     </x-sidebar.dropdown>
     {{-- @endcan --}}
-
-    <x-sidebar.link title="{{ __('Team') }}" href="{{ route('admin.teams.index') }}" :isActive="request()->routeIs('admin.teams.index')">
-        <x-slot name="icon">
-            <i class="fas fa-shopping-cart w-5 h-5"></i>
-        </x-slot>
-    </x-sidebar.link>
-
-    <x-sidebar.link title="{{ __('Projects') }}" href="{{ route('admin.projects.index') }}" :isActive="request()->routeIs('admin.projects.index')">
-        <x-slot name="icon">
-            <i class="fas fa-shopping-cart w-5 h-5"></i>
-        </x-slot>
-    </x-sidebar.link>
-
-    <x-sidebar.link title="{{ __('Services') }}" href="{{ route('admin.services.index') }}" :isActive="request()->routeIs('admin.services.index')">
-        <x-slot name="icon">
-            <i class="fas fa-shopping-cart w-5 h-5"></i>
-        </x-slot>
-    </x-sidebar.link>
+   
 
     <x-sidebar.dropdown title="{{ __('Content') }}" :active="Str::startsWith(
         request()
@@ -87,6 +41,11 @@
                 <i class="fas fa-file-alt w-5 h-5"></i>
             </span>
         </x-slot>
+        {{-- @can('blog_access') --}}
+        <x-sidebar.sublink title="{{ __('All Blog') }}" href="{{ route('admin.blogs.index') }}" :active="request()->routeIs('admin.blogs.index')" />
+        <x-sidebar.sublink title="{{ __('Blog Categories') }}" href="{{ route('admin.blog-categories.index') }}"
+                :active="request()->routeIs('admin.blog-categories.index')" />
+        {{-- @endcan --}}
         <x-sidebar.sublink title="{{ __('Pages') }}" href="{{ route('admin.pages') }}" :active="request()->routeIs('admin.pages')" />
         {{-- <x-sidebar.sublink title="{{ __('Page Settings') }}" href="{{ route('admin.page.settings') }}" :active="request()->routeIs('admin.page.settings')" /> --}}
         <x-sidebar.sublink title="{{ __('Sections') }}" href="{{ route('admin.sections') }}" :active="request()->routeIs('admin.sections')" />
@@ -106,9 +65,23 @@
                 <i class="fas fa-cog w-5 h-5"></i>
             </span>
         </x-slot>
+        {{-- @can('user_access') --}}
+        <x-sidebar.sublink title="{{ __('Users') }}" href="{{ route('admin.users.index') }}" :active="request()->routeIs('admin.users')" />
+            {{-- @endcan --}}
+            {{-- @can('role_access')  --}}
+            {{-- <x-sidebar.sublink title="{{ __('Roles') }}" href="{{ route('admin.roles') }}" :active="request()->routeIs('admin.roles')" /> --}}
+            {{-- @endcan --}}
+            {{-- @can('permission_access') --}}
+            {{-- <x-sidebar.sublink title="{{ __('Permissions') }}" href="{{ route('admin.permissions') }}"
+                        :active="request()->routeIs('admin.permissions')" /> --}}
+        {{-- @endcan --}}
         {{-- @can('setting_access') --}}
         <x-sidebar.sublink title="{{ __('Settings') }}" href="{{ route('admin.settings.index') }}"
             :active="request()->routeIs('admin.settings.index')" />
+        <x-sidebar.sublink title="{{ __('Email Templates') }}" href="{{ route('admin.email-templates.index') }}"
+            :active="request()->routeIs('admin.email-templates.index')" />
+        <x-sidebar.sublink title="{{ __('Menu Settings') }}" href="{{ route('admin.menu-settings.index') }}"
+            :active="request()->routeIs('admin.menu-settings.index')" />
         {{-- @endcan --}}
         {{-- <x-sidebar.sublink title="{{ __('Backup') }}" href="{{ route('admin.setting.backup') }}" :active="request()->routeIs('admin.setting.backup')" /> --}}
         <x-sidebar.sublink title="{{ __('Popup Settings') }}" href="{{ route('admin.setting.popupsettings') }}"

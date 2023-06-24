@@ -80,8 +80,8 @@ class Index extends Component
         $query = About::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
         })->advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -106,13 +106,13 @@ class Index extends Component
          $about_details = About::find($about->id);
          // dd($about_details);
          About::create([
-             'language_id' => $about_details->language_id,
-             'title' => $about_details->title,
-             'slug' => ! empty($about_details->slug) ? Str::slug($about_details->slug) : Str::slug($about_details->title),
-             'image' => $about_details->image,
-             'content' => $about_details->content,
+             'language_id'   => $about_details->language_id,
+             'title'         => $about_details->title,
+             'slug'          => ! empty($about_details->slug) ? Str::slug($about_details->slug) : Str::slug($about_details->title),
+             'image'         => $about_details->image,
+             'content'       => $about_details->content,
              'block_content' => $about_details->block_content,
-             'status' => 0,
+             'status'        => 0,
          ]);
          // $this->alert('success', __('About Cloned successfully!') );
      }

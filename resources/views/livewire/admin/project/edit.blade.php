@@ -2,7 +2,7 @@
     <!-- Create Modal -->
     <x-modal wire:model="editModal">
         <x-slot name="title">
-            {{ __('Create Project') }}
+            {{ __('Edit Project') }}
         </x-slot>
 
         <x-slot name="content">
@@ -56,33 +56,6 @@
                             placeholder="{{ __('Live Link') }}" />
                         <x-input-error :messages="$errors->get('project.link')" for="link" class="mt-2" />
                     </div>
-
-                    <div class="w-full">
-                        <x-label for="content" :value="__('Description')" />
-                        <x-input.rich-text wire:model.lazy="project.content" id="description" />
-                        <x-input-error :messages="$errors->get('project.content')" for="content" class="mt-2" />
-                    </div>
-                    
-                    <div class="w-full">
-                        <x-label for="image" :value="__('Featured Image')" />
-                        <x-fileupload wire:model="image" :file="$image"
-                            accept="image/jpg,image/jpeg,image/png" />
-                        <x-input-error :messages="$errors->get('project.image')" for="image" class="mt-2" />
-                        <p class="help-block text-info">
-                            {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                        </p>
-                    </div>
-
-                    <div class="w-full">
-                        <x-label for="image" :value="__('Gallery')" />
-                        <x-fileupload wire:model="image" multiple :file="$images"
-                            accept="image/jpg,image/jpeg,image/png" />
-                        <x-input-error :messages="$errors->get('project.image')" for="image" class="mt-2" />
-                        <p class="help-block text-info">
-                            {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                        </p>
-                    </div>
-
                     <div class="w-full">
                         <x-label for="meta_title" :value="__('Meta Title')" />
                         <x-input type="text" wire:model.lazy="project.meta_title" name="meta_title"
@@ -91,14 +64,38 @@
                     </div>
                     <div class="w-full">
                         <x-label for="meta_description" :value="__('Meta Description')" />
-                        <textarea
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            wire:model="project.meta_description" name="meta_description" placeholder="{{ __('Meta Description') }}"
-                            rows="4">{{ old('meta_description') }}</textarea>
+                        <x-input  wire:model="project.meta_description" name="meta_description" placeholder="{{ __('Meta Description') }}" />
                         <x-input-error :messages="$errors->get('project.meta_description')" for="meta_description" class="mt-2" />
                     </div>
-
                 </div>
+
+                <div class="w-full">
+                    <x-label for="description" :value="__('Description')" />
+                    <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                    <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
+                </div>
+
+                <div class="w-full">
+                    <x-label for="image" :value="__('Featured Image')" />
+                    <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
+                    <x-input-error :messages="$errors->get('project.image')" for="image" class="mt-2" />
+                    <p class="help-block text-info">
+                        {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+                    </p>
+                </div>
+
+                <div class="w-full">
+                    <x-label for="image" :value="__('Gallery')" />
+                    <x-fileupload wire:model="image" multiple :file="$images"
+                        accept="image/jpg,image/jpeg,image/png" />
+                    <x-input-error :messages="$errors->get('project.image')" for="image" class="mt-2" />
+                    <p class="help-block text-info">
+                        {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
+                    </p>
+                </div>
+
+
+
                 <div class="w-full text-center py-4">
                     <x-button type="submit" primary>
                         {{ __('Save') }}

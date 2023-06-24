@@ -11,7 +11,7 @@ enum PageType: string
     case TEAM = 'team';
     case BLOG = 'blog';
     case SERVICE = 'service';
-    case PORTFOLIO = 'portfolio'; 
+    case PORTFOLIO = 'portfolio';
     case PROJECT = 'project';
 
     public static function values(): array

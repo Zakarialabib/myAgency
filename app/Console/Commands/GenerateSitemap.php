@@ -32,7 +32,7 @@ class GenerateSitemap extends Command
     {
         $sitemapIndex = SitemapIndex::create();
 
-        if (! file_exists(public_path('sitemap'))) {
+        if ( ! file_exists(public_path('sitemap'))) {
             mkdir(public_path('sitemap'), 0775, true);
         }
 

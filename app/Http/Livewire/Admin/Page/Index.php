@@ -20,7 +20,9 @@ class Index extends Component
         'refreshIndex' => '$refresh',
         'delete',
     ];
-
+    
+    public $deleteModal = false;
+    
     public int $perPage;
 
     public array $orderable;
@@ -77,8 +79,8 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = Page::advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -87,12 +89,42 @@ class Index extends Component
         return view('livewire.admin.page.index', compact('pages'));
     }
 
-    public function delete(Page $page)
+    
+    public function delete()
     {
-        abort_if(Gate::denies('page_delete'), 403);
+        // abort_if(Gate::denies('page_delete'), 403);
 
-        $page->delete();
+        Page::findOrFail($this->page)->delete();
 
-        $this->alert('success', 'Page deleted successfully.');
+        $this->alert('success', __('Page deleted successfully.'));
     }
-}
+
+    public function deleteSelected()
+    {
+        // abort_if(Gate::denies('page_delete'), 403);
+
+        Page::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
+
+        $this->alert('success', __('Page deleted successfully.'));
+    }
+
+    public function confirmed()
+    {
+        $this->emit('delete');
+    }
+
+    public function deleteModal($page)
+    {
+        $this->confirm(__('Are you sure you want to delete this?'), [
+            'toast'             => false,
+            'position'          => 'center',
+            'showConfirmButton' => true,
+            'cancelButtonText'  => __('Cancel'),
+            'onConfirmed' => 'delete',
+        ]);
+        $this->page = $page;
+    }
+
+} 

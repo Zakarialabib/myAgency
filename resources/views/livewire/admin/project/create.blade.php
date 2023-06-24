@@ -58,9 +58,9 @@
                     </div>
 
                     <div class="w-full">
-                        <x-label for="content" :value="__('Description')" />
-                        <x-input.rich-text wire:model.lazy="project.content" id="description" />
-                        <x-input-error :messages="$errors->get('project.content')" for="content" class="mt-2" />
+                        <x-label for="description" :value="__('Description')" />
+                    <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                    <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
                     <div class="w-full">
                         <x-label for="image" :value="__('Gallery')" />
@@ -72,10 +72,10 @@
                         </p>
                     </div>
                     <div class="w-full">
-                        <x-label for="gallery" :value="__('Featured Image')" />
-                        <x-fileupload wire:model="gallery" :file="$gallery"
+                        <x-label for="images" :value="__('Gallery')" />
+                        <x-fileupload wire:model="images" :file="$images"
                             accept="image/jpg,image/jpeg,image/png" />
-                        <x-input-error :messages="$errors->get('project.gallery')" for="gallery" class="mt-2" />
+                        <x-input-error :messages="$errors->get('project.images')" for="images" class="mt-2" />
                         <p class="help-block text-info">
                             {{ __('Upload 710X400 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
                         </p>

@@ -6,11 +6,16 @@ import "../css/theme.css";
 import swal from 'sweetalert2';
 window.Swal = swal;
 
-import {livewire_hot_reload} from 'virtual:livewire-hot-reload'
+import Sortable from 'sortablejs';
+window.Sortable = Sortable;
+
+import { livewire_hot_reload } from 'virtual:livewire-hot-reload'
 livewire_hot_reload();
 
-import swiper from 'swiper';
-window.Swiper = swiper;
+// import swiper from 'swiper';
+// window.Swiper = swiper;
+
+import "@fortawesome/fontawesome-free/css/all.css";
 
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
@@ -45,14 +50,35 @@ Alpine.data("mainState", () => {
             lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
         });
     };
+
+    const scrollToAnchor = (anchor) => {
+        const element = document.querySelector(anchor);
+        if (element) {
+            window.scrollTo({
+                top: element.offsetTop,
+                behavior: 'smooth',
+            });
+        }
+    };
+
     const loadingMask = {
         pageLoaded: false,
         init() {
-            window.onload = (event) => {
+            window.onload = () => {
                 this.pageLoaded = true;
             };
+            this.animateCharge();
+        },
+        animateCharge() {
+            setInterval(() => {
+                this.showText = true;
+                setTimeout(() => {
+                    this.showText = false;
+                }, 2000);
+            }, 4000);
         },
     };
+
 
     const getTheme = () => {
         if (window.localStorage.getItem("dark")) {
@@ -82,6 +108,7 @@ Alpine.data("mainState", () => {
     return {
         init,
         loadingMask,
+        scrollToAnchor,
         isDarkMode: getTheme(),
         toggleTheme() {
             this.isDarkMode = !this.isDarkMode;

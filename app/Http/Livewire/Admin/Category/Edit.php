@@ -26,9 +26,9 @@ class Edit extends Component
     public $listeners = [
         'editModal',
     ];
-    
+
     protected $rules = [
-        'category.name' => ['required', 'max:255'],
+        'category.name'        => ['required', 'max:255'],
         'category.description' => ['required'],
     ];
 
@@ -36,7 +36,6 @@ class Edit extends Component
     {
         return Category::select('name', 'id')->get();
     }
-
 
     public function editModal($category)
     {
@@ -64,13 +63,12 @@ class Edit extends Component
         }
 
         $this->category->save();
-        
+
         $this->alert('success', __('Category updated successfully.'));
-        
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;
-
     }
 
     public function render(): View

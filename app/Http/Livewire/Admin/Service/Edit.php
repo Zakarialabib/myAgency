@@ -9,7 +9,7 @@ use App\Models\Language;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Str;
+use Illuminate\Support\Str;
 
 class Edit extends Component
 {
@@ -30,12 +30,17 @@ class Edit extends Component
 
     protected $rules = [
         'service.language_id' => 'required',
-        'service.title' => 'required|max:191',
-        'service.type' => 'required',
-        'service.features' => 'nullable',
-        'service.options' => 'nullable',
-        'service.content' => 'nullable',
+        'service.title'       => 'required|max:191',
+        'service.type'        => 'required',
+        'service.features'    => 'nullable',
+        'service.options'     => 'nullable',
+        'description'         => 'nullable',
     ];
+
+    public function updatedDescription($value)
+    {
+        $this->service->content = $value;
+    }
 
     public function editModal($service)
     {
@@ -63,16 +68,18 @@ class Edit extends Component
 
         $this->service->slug = Str::slug($this->service->title);
 
-        if ($this->image) {
+        if (empty($this->image)) {
             $imageName = Str::slug($this->service->title).'.'.$this->image->extension();
             $this->image->storeAs('services', $imageName);
             $this->service->image = $imageName;
         }
 
+        $this->service->content = $this->description;
+
         $this->service->save();
 
         $this->alert('success', __('Service updated successfully!'));
-            
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;
@@ -82,5 +89,4 @@ class Edit extends Component
     {
         return Language::pluck('name', 'id')->toArray();
     }
-    
 }

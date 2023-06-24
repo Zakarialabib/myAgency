@@ -26,7 +26,7 @@ class Create extends Component
     public $image;
 
     protected $rules = [
-        'category.name' => ['required', 'max:255'],
+        'category.name'        => ['required', 'max:255'],
         'category.description' => ['required'],
     ];
 
@@ -57,7 +57,7 @@ class Create extends Component
     public function create()
     {
         $this->validate();
-        
+
         $this->category->slug = Str::slug($this->category->name);
 
         if ($this->image) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,14 +22,14 @@ class ServiceFactory extends Factory
         $type = $this->faker->randomElement(['startup', 'digital']);
 
         return [
-            'title' => fake()->name(),
-            'slug' => Str::slug(fake()->name()),
-            'type' => $type,
-            'image' => 'image.jpg',
-            'content' => fake()->sentence(),
-            'status' => 1,
-            'features' => null,
-            'options' => null,
+            'title'       => fake()->name(),
+            'slug'        => Str::slug(fake()->name()),
+            'type'        => $type,
+            'image'       => 'image.jpg',
+            'content'     => fake()->sentence(),
+            'status'      => 1,
+            'features'    => null,
+            'options'     => null,
             'language_id' => 1,
         ];
     }

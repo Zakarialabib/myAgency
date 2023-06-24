@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +12,7 @@ class Partner extends Model
 {
     use HasAdvancedFilter;
     use HasFactory;
-    
+
     public $table = 'partners';
 
     public const ATTRIBUTES = [
@@ -21,7 +23,7 @@ class Partner extends Model
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
-    
+
     protected $fillable = [
         'id',
         'name',
@@ -29,10 +31,10 @@ class Partner extends Model
         'link',
         'content',
         'status',
-        'language_id'
+        'language_id',
     ];
 
-      /**
+    /**
      * Scope a query to only include active products.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -44,8 +46,8 @@ class Partner extends Model
         $query->where('status', true);
     }
 
-
-    public function language() {
+    public function language()
+    {
         return $this->belongsTo('App\Models\Language');
     }
 }

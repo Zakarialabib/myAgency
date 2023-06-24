@@ -9,7 +9,7 @@ use App\Models\Language;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Str;
+use Illuminate\Support\Str;
 
 class Create extends Component
 {
@@ -19,7 +19,9 @@ class Create extends Component
     public $service;
 
     public $image;
-    
+
+    public $description;
+
     public $createModal = false;
 
     protected $listeners = [
@@ -28,11 +30,11 @@ class Create extends Component
 
     protected $rules = [
         'service.language_id' => 'required',
-        'service.title' => 'required|unique:services,title|max:191',
-        'service.type' => 'required',
-        'service.features' => 'nullable',
-        'service.options' => 'nullable',
-        'service.content' => 'nullable',
+        'service.title'       => 'required|unique:services,title|max:191',
+        'service.type'        => 'required',
+        'service.features'    => 'nullable',
+        'service.options'     => 'nullable',
+        'description'         => 'nullable',
     ];
 
     public function createModal()
@@ -41,9 +43,12 @@ class Create extends Component
 
         $this->resetValidation();
 
+        $this->service = new Service();
+
+        $this->description = "";
+        
         $this->createModal = true;
 
-        $this->service = new Service();
     }
 
     public function render()
@@ -56,12 +61,14 @@ class Create extends Component
         $this->validate();
 
         $this->service->slug = Str::slug($this->service->title);
- 
+
         if ($this->image) {
             $imageName = Str::slug($this->service->title).'.'.$this->image->extension();
             $this->image->storeAs('services', $imageName);
             $this->service->image = $imageName;
         }
+
+        $this->service->content = $this->description;
 
         $this->service->save();
 
@@ -70,7 +77,6 @@ class Create extends Component
         $this->emit('refreshIndex');
 
         $this->createModal = false;
-
     }
 
     public function getLanguagesProperty()

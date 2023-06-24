@@ -6,10 +6,7 @@ namespace App\Http\Livewire\Auth;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Validation\ValidationException;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use App\Models\User;
 
 class Login extends Component
@@ -31,9 +28,8 @@ class Login extends Component
     public function authenticate()
     {
         $this->validate();
-        
-        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
 
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
             $user = User::where(['email' => $this->email])->first();
 
             auth()->login($user, $this->remember_me);
@@ -41,21 +37,20 @@ class Login extends Component
             switch (true) {
                 case $user->hasRole('admin'):
                     $homePage = RouteServiceProvider::ADMIN_HOME;
+
                     break;
-                        default:
-                        $homePage = RouteServiceProvider::CLIENT_HOME;
-                        break;
+                default:
+                    $homePage = RouteServiceProvider::CLIENT_HOME;
+
+                    break;
             }
-                    
+
             return redirect()->intended($homePage);
-            
         } else {
             $this->addError('email', __('These credentials do not match our records'));
         }
-
     }
 
-   
     public function render()
     {
         return view('livewire.auth.login');

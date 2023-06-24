@@ -23,39 +23,46 @@ class Create extends Component
 
     public $image;
 
-    public $createSection = false;
+    public $description;
+
+    public $createModal = false;
 
     public $listeners = [
-        'createSection',
+        'createModal',
     ];
 
     protected $rules = [
-        'section.language_id' => 'required',
-        'section.page_id' => 'required',
-        'section.title' => 'nullable',
-        'section.featured_title' => 'nullable', 
-        'section.subtitle' => 'nullable',
-        'section.bg_color' => 'nullable',
-        'section.text_color' => 'nullable',
-        'section.button' => 'nullable',
-        'section.position' => 'nullable',
-        'section.label' => 'nullable',
-        'section.link' => 'nullable',
-        'section.description' => 'nullable',
-        'section.embeded_video' => 'nullable',
+        'section.language_id'    => 'required',
+        'section.page_id'        => 'required',
+        'section.title'          => 'nullable',
+        'section.featured_title' => 'nullable',
+        'section.subtitle'       => 'nullable',
+        // 'section.bg_color' => 'nullable',
+        // 'section.text_color' => 'nullable',
+        // 'section.button' => 'nullable',
+        // 'section.position' => 'nullable',
+        // 'section.label' => 'nullable',
+        // 'section.link' => 'nullable',
+        'description' => 'nullable',
+        // 'section.embeded_video' => 'nullable',
     ];
 
-    public function createSection()
+    public function updatedDescription($value)
+    {
+        $this->description = $value;
+    }
+
+    public function createModal()
     {
         $this->resetErrorBag();
 
         $this->resetValidation();
 
-        $this->createSection = true;
-
         $this->section = new Section();
+
+        $this->createModal = true;
     }
-    
+
     public function render(): View|Factory
     {
         return view('livewire.admin.section.create');
@@ -75,13 +82,13 @@ class Create extends Component
             $this->image->storeAs('sections', $imageName);
             $this->section->image = $imageName;
         }
-
+        $this->section->description = $this->description;
         $this->section->save();
 
         $this->emit('refreshIndex');
 
         $this->alert('success', __('Section created successfully!'));
 
-        $this->createSection = false;
+        $this->createModal = false;
     }
 }

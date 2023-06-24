@@ -13,7 +13,6 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
-use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -92,7 +91,6 @@ class Index extends Component
         $categories = $query->paginate($this->perPage);
 
         return view('livewire.admin.category.index', compact('categories'))->extends('layouts.dashboard');
-        
     }
 
     public function deleteSelected()

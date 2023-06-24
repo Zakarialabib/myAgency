@@ -20,14 +20,13 @@ class Slider extends Model
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
-    
 
     protected $fillable = [
-        'title', 'subtitle', 'details', 'embeded_video', 'image', 'featured', 'link', 'language_id', 'bg_color', 'status',
+        'title', 'subtitle', 'description', 'embeded_video', 'image', 'featured', 'link', 'language_id', 'bg_color', 'status',
     ];
 
     protected $casts = [
-        'satuts'   => Status::class,
+        'satuts' => Status::class,
     ];
 
     /**

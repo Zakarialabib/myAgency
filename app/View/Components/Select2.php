@@ -24,7 +24,7 @@ class Select2 extends Component
         $this->multiple = $multiple;
         $this->searchable = $searchable;
     }
-    
+
     /**
      * Get the view / contents that represent the component.
      *

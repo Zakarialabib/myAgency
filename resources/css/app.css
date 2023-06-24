@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+  }
 
 .toggle-checkbox:checked {
     @apply right-0 border-green-400;

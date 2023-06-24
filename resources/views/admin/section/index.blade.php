@@ -42,7 +42,7 @@
                     {{ __('Create from template') }}
                 </x-button>
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createSection')">
+                <x-button primary type="button" onclick="Livewire.emit('createModal')">
                     {{ __('Create Section') }}
                 </x-button>
             </div>

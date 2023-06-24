@@ -21,7 +21,7 @@ class Index extends Component
 
     public $listeners = [
         'refreshIndex' => '$refresh',
-        'delete'
+        'delete',
     ];
 
     public $blogcategory;
@@ -71,10 +71,9 @@ class Index extends Component
     }
 
       public function confirmed()
-    {
-        $this->emit('delete');
-    }
-
+      {
+          $this->emit('delete');
+      }
 
     public function mount()
     {

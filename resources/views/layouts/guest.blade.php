@@ -12,33 +12,33 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Head Tags -->
-    @if (settings()->head_tags)
-        {!! settings()->head_tags !!}
+    @if (Helpers::settings('head_tags'))
+        {!! Helpers::settings('head_tags') !!}
     @endif
 
     <title>
-        @yield('title') || {{ settings()->site_title }}
+        @yield('title') || {{ Helpers::settings('site_title') }}
     </title>
 
 
     @hasSection('meta')
         @yield('meta')
     @else
-        <meta name="title" content="{{ settings()->seo_meta_title }}">
-        <meta name="description" content="{{ settings()->seo_meta_description }}">
-        <meta property="og:title" content="{{ settings()->site_title }}">
-        <meta property="og:description" content="{{ settings()->seo_meta_description }}">
+        <meta name="title" content="{{ Helpers::settings('seo_meta_title') }}">
+        <meta name="description" content="{{ Helpers::settings('seo_meta_description') }}">
+        <meta property="og:title" content="{{ Helpers::settings('site_title') }}">
+        <meta property="og:description" content="{{ Helpers::settings('seo_meta_description') }}">
         <meta property="og:url" content="{{ route('front.index') }}" />
     @endif
 
     <meta property="og:locale" content="{{ app()->getLocale() }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="{{ settings()->company_name }}" />
-    <meta name="author" content="{{ settings()->company_name }}">
+    <meta property="og:site_name" content="{{ Helpers::settings('company_name') }}" />
+    <meta name="author" content="{{ Helpers::settings('company_name') }}">
     {{-- <link rel="canonical" href="{{ URL::current() }}"> --}}
     <meta name="robots" content="all,follow">
 
-    <link rel="icon" href="{{ asset('images/' . settings()->site_favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/' . Helpers::settings('site_favicon')) }}" type="image/x-icon">
 
     {{-- Styles --}}
     @vite('resources/css/app.css')
@@ -61,11 +61,13 @@
 <body class="antialiased bg-gray-100 text-body font-body" x-data="{ showCart: false }">
     <!-- Body Tags -->
 
-    @if (settings()->body_tags)
-        {!! settings()->body_tags !!}
+    @if (Helpers::settings('body_tags'))
+        {!! Helpers::settings('body_tags') !!}
     @endif
     
-    <section class="relative">
+    <x-loading-mask />
+
+    <section class="relative mt-6">
 
         {{-- <x-topheader /> --}}
 

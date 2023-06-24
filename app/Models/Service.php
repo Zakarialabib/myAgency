@@ -12,7 +12,7 @@ class Service extends Model
 {
     use HasAdvancedFilter;
     use HasFactory;
-    
+
     public const ATTRIBUTES = [
         'id',
         'title',
@@ -35,13 +35,13 @@ class Service extends Model
         'type',
     ];
 
-     protected $casts = [
+    protected $casts = [
         'options'  => 'json',
         'features' => 'json',
         'satuts'   => Status::class,
     ];
 
-      /**
+    /**
      * Scope a query to only include active products.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query
@@ -55,6 +55,6 @@ class Service extends Model
 
     public function language()
     {
-        return $this->belongsTo(language::class);
+        return $this->belongsTo(Language::class);
     }
 }

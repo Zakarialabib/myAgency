@@ -51,7 +51,6 @@ class Create extends Component
         return redirect()->route('admin.roles.index');
     }
 
-
     protected function rules(): array
     {
         return [

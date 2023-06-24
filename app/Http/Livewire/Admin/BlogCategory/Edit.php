@@ -52,11 +52,10 @@ class Edit extends Component
         $this->blogcategory->save();
 
         $this->alert('success', __('BlogCategory updated successfully'));
-        
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;
-
     }
 
     public function getLanguagesProperty(): Collection

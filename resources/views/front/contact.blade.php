@@ -1,6 +1,6 @@
 <x-guest-layout>
 {{-- @section('meta-keywords', "$seo->blog_meta_key")
-@section('meta-description', "$seo->blog_meta_desc") --}}
+@section('meta-description', "$seo->meta_description") --}}
 
     <header class="container-fluid header">
         <div class="row">

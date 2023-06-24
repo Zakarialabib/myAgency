@@ -10,8 +10,9 @@ use App\Models\Page;
 use App\Models\Service;
 use App\Models\Project;
 use App\Models\Section;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 use Throwable;
 
 class FrontController extends Controller
@@ -33,7 +34,7 @@ class FrontController extends Controller
         $services = Service::all();
         $projects = Project::all();
 
-        return view('front.index', compact('section','services', 'projects'));
+        return view('front.index', compact('section', 'services', 'projects'));
     }
 
     public function categories()
@@ -53,20 +54,8 @@ class FrontController extends Controller
         return view('front.contact');
     }
 
-    public function blog()
-    {
-        $blogs = Blog::with('category')->get();
-
-        return view('front.blog', compact('blogs'));
-    }
-
-    public function blogPage($slug)
-    {
-        $blog = Blog::where('slug', $slug)->firstOrFail();
-
-        return view('front.blog-page', compact('blog'));
-    }
-
+    
+   
     public function dynamicPage($slug)
     {
         $page = Page::where('slug', $slug)->firstOrFail();

@@ -23,18 +23,22 @@
                         <x-input-error :messages="$errors->get('partner.description')" for="partner.description" class="mt-2" />
                     </div>
 
-                    <div class="w-full py-2 px-3">
-                        <x-label for="Brand Logo" :value="__('Brand Logo')" />
-                        <x-media-upload title="{{ __('Brand Logo') }}" name="image" wire:model="image"
-                                :file="$image" :preview="$this->imagepreview" single types="PNG / JPEG / WEBP"
-                                fileTypes="image/*" />
+                    <div class="flex flex-col space-y-4 py-10 px-2">
+                        <div class="block">
+                            <img class="w-52 rounded-full" src="{{ asset('uploads/sections/' . $image) }}"
+                                alt="">
+                        </div>
+                        <div class="block">
+                            <x-label for="image" :value="__('Image')" />
+                            <x-fileupload wire:model="image" accept="image/jpg,image/jpeg,image/png" />
+                            <x-input-error :messages="$errors->get('section.image')" for="section.image" class="mt-2" />
+                        </div>
                     </div>
 
                     <div class="w-full py-2 px-3">
                         <x-label for="Brand Logo" :value="__('Featured image')" />
-                        <x-media-upload title="{{ __('Featured Image') }}" name="featured_image"
-                             :file="$featured_image" :preview="$this->featuredimagepreview" single types="PNG / JPEG / WEBP"
-                            fileTypes="image/*" />
+                        <x-media-upload title="{{ __('Featured Image') }}" name="featured_image" :file="$featured_image"
+                            :preview="$this->featuredimagepreview" single types="PNG / JPEG / WEBP" fileTypes="image/*" />
                     </div>
 
                     <div class="w-full px-3">

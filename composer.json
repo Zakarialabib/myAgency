@@ -50,12 +50,12 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
+        },
         "files": [
             "app/Support/Helpers.php"
-        ],
+        ]
+    },
+    "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
         }

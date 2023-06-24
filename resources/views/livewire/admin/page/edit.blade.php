@@ -14,16 +14,16 @@
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="title" :value="__('Title')" />
                         <x-input wire:model="page.title" type="text" />
+                        <x-input-error :messages="$errors->get('page.title')" for="page.title" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="slug" :value="__('Slug')" />
-                        <x-input wire:model="page.slug" type="text" />
+                        <x-input wire:model="page.slug" type="text" disabled name="slug" />
                     </div>
                     <div class="w-full px-2">
-                        <x-label for="details" :value="__('Details')" />
-                        <x-input.textarea wire:model="page.details" id="details" />
-                        {{-- <x-input.rich-text wire:model.debounce.2000ms="page.details" id="details" /> --}}
-                        <x-input-error :messages="$errors->get('page.details')" for="page.details" class="mt-2" />
+                        <x-label for="description" :value="__('description')" />
+                        <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                        <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
 
                     <div class="xl:w-1/2 md:w-1/2 px-3">
@@ -44,7 +44,7 @@
                         <x-input-error :messages="$errors->get('image')" for="image" class="mt-2" />
                     </div>
 
-                    <div class="w-full px-3">
+                    <div class="text-center py-4">
                         <x-button primary type="submit" wire:loading.attr="disabled">
                             {{ __('Update') }}
                         </x-button>

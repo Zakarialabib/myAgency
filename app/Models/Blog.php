@@ -33,7 +33,7 @@ class Blog extends Model
 
     protected $fillable = [
         'title',
-        'details',
+        'description',
         'image',
         'slug',
         'status',
@@ -47,11 +47,11 @@ class Blog extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Models\BlogCategory', 'category_id')->withDefault();
+        return $this->belongsTo(BlogCategory::class);
     }
 
     public function language()
     {
-        return $this->belongsTo('App\Models\Language', 'language_id')->withDefault();
+        return $this->belongsTo(Language::class);
     }
 }

@@ -32,10 +32,10 @@
                         <x-input-error :messages="$errors->get('blogcategory.meta_title')" for="blogcategory.meta_title" class="mt-2" />
                     </div>
                     <div class="lg:w-1/2 sm:w-full px-2">
-                        <x-label for="meta_desc" :value="__('Meta Description')" />
-                        <x-input id="meta_desc" class="block mt-1 w-full" type="text" name="meta_desc"
-                            wire:model.lazy="blogcategory.meta_desc" />
-                        <x-input-error :messages="$errors->get('blogcategory.meta_desc')" for="blogcategory.meta_desc" class="mt-2" />
+                        <x-label for="meta_description" :value="__('Meta Description')" />
+                        <x-input id="meta_description" class="block mt-1 w-full" type="text" name="meta_description"
+                            wire:model.lazy="blogcategory.meta_description" />
+                        <x-input-error :messages="$errors->get('blogcategory.meta_description')" for="blogcategory.meta_description" class="mt-2" />
                     </div>
 
                     <div class="w-full px-2">

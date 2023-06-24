@@ -79,8 +79,8 @@ class Index extends Component
         $query = Team::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
         })->advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -104,11 +104,11 @@ class Index extends Component
          // dd($team_details);
          Team::create([
              'language_id' => $team_details->language_id,
-             'name' => $team_details->name,
-             'image' => $team_details->image,
-             'content' => $team_details->content,
-             'role' => $team_details->role,
-             'status' => 0,
+             'name'        => $team_details->name,
+             'image'       => $team_details->image,
+             'content'     => $team_details->content,
+             'role'        => $team_details->role,
+             'status'      => 0,
          ]);
          // $this->alert('success', __('Team Cloned successfully!') );
      }

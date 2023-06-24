@@ -23,11 +23,14 @@
         "@alpinejs/focus": "^3.10.4",
         "@alpinejs/intersect": "^3.10.4",
         "@tailwindcss/forms": "^0.5.3",
+        "@fortawesome/fontawesome-free": "^6.4.0",
         "alpinejs": "^3.5.0",
         "perfect-scrollbar": "^1.5.5",
         "ponyfill": "^0.0.1",
         "select2": "^4.1.0-rc.0",
+        "sortablejs": "^1.15.0",
         "sweetalert2": "^11.6.1",
+        "swiper": "^9.4.0",
         "tailwindcss-tables": "^0.4.0"
     }
 }

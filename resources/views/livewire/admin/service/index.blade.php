@@ -60,12 +60,12 @@
                             <option value="{{ $value }}">{{ $value }}</option>
                         @endforeach
                     </select>
+                    @if ($this->selected)
+                        <x-button danger type="button" wire:click="deleteSelected" class="mx-3">
+                            <i class="fas fa-trash-alt"></i>
+                        </x-button>
+                    @endif
                 </div>
-                @if ($this->selected)
-                    <x-button danger type="button" wire:click="deleteSelected" class="mx-3">
-                        <i class="fas fa-trash-alt"></i>
-                    </x-button>
-                @endif
                 @if ($this->selectedCount)
                     <p class="text-sm items-center leading-5">
                         <span class="font-medium ml-2">
@@ -94,11 +94,13 @@
                     {{ __('Title') }}
                     @include('components.table.sort', ['field' => 'title'])
                 </x-table.th>
-                <x-table.th>
-                    {{ __('Image') }}
+                <x-table.th sortable wire:click="sortBy('type')" :direction="$sorts['type'] ?? null">
+                    {{ __('Type') }}
+                    @include('components.table.sort', ['field' => 'type'])
                 </x-table.th>
-                <x-table.th>
+                <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
                     {{ __('Status') }}
+                    @include('components.table.sort', ['field' => 'status'])
                 </x-table.th>
                 <x-table.th>
                     {{ __('Actions') }}
@@ -106,75 +108,92 @@
 
             </x-slot>
             <x-table.tbody>
-                @forelse($services as $service)
-                    <x-table.tr class="panel-group" id="accordion-{{ $service->id }}" role="tablist"
-                        aria-multiselectable="true">
-                        <x-table.td id="accordion-collapse-{{ $service->id }}" data-accordion="collapse">
-                            <div id="accordion-collapse-heading-{{ $service->id }}">
-                                <button type="button"
-                                    class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                    data-accordion-target="#accordion-collapse-body-{{ $service->id }}"
-                                    aria-expanded="false" aria-controls="accordion-collapse-body-{{ $service->id }}">
-                                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
+                @forelse($services as $index => $service)
+                    <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $index }}" 
+                        x-data="{ 'isMenuOpen({{ $index }})': false }">
+                            <x-table.td class="flex flex-wrap gap-4">
+                                <button @click="isMenuOpen = true">
+                                    <i class="fa fa-caret-down"
+                                        :class="{
+                                            'fa-caret-up': 'isMenuOpen({{ $index }})',
+                                            'fa-caret-down': !'isMenuOpen({{ $index }})',
+                                        }"
+                                        aria-hidden="true">
+                                    </i>
                                 </button>
-                            </div>
-                            {{-- <input type="checkbox" value="{{ $service->id }}" wire:model="selected"> --}}
-                        </x-table.td>
-                        <x-table.td>
-                            {{ $service->language->name }}
-                        </x-table.td>
-                        <x-table.td>
-                            {{ $service->title }}
-                        </x-table.td>
+                                <input type="checkbox" value="{{ $service->id }}" wire:model="selected">
+                            </x-table.td>
 
-                        <x-table.td>
-                            <livewire:utils.toggle-button :model="$service" field="status" key="{{ $service->id }}" />
-                        </x-table.td>
-                        <x-table.td>
-                            <div class="inline-flex">
-                                <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
-                                    wire:click="$emit('editModal', {{ $service->id }})">
-                                    <i class="fa fa-pen h-4 w-4"></i>
-                                </a>
-                                <button
-                                    class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
-                                    type="button" wire:click="confirm('delete', {{ $service->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fa fa-trash h-4 w-4"></i>
-                                </button>
-                                <button
-                                    class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
-                                    type="button" wire:click="confirm('clone', {{ $service->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fa fa-bin h-4 w-4"></i>
-                                </button>
+                            <x-table.td>
+                                <img src="{{ flagImageUrl($service->language->code) }}">
+                            </x-table.td>
 
-                            </div>
-                        </x-table.td>
-                    </x-table.tr>
-                    <tr id="accordion-collapse-body-{{ $service->id }}" class="hidden"
-                        aria-labelledby="accordion-collapse-heading-{{ $service->id }}">
-                        <td colspan="12">
-                            <div class="panel-body text-center p-5">
-                                <h1>{{ $service->title }}</h1>
-                                <p>{!! $service->content !!}</p>
-                                <div class="container">
-                                    @if (empty($service->image))
-                                        {{ __('No images') }}
-                                    @else
-                                        <img class="w-52 rounded-full"
-                                            src="{{ asset('uploads/services/' . $service->image) }}" alt="">
-                                    @endif
+
+                            <x-table.td>
+                                {{ $service->title }}
+                            </x-table.td>
+
+                            <x-table.td>
+                                {{ $service->type }}
+                            </x-table.td>
+
+                            <x-table.td>
+                                <livewire:utils.toggle-button :model="$service" field="status"
+                                    key="{{ $service->id }}" />
+                            </x-table.td>
+                            <x-table.td>
+                                <div class="inline-flex">
+                                    <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
+                                        wire:click="$emit('editModal', {{ $service->id }})">
+                                        <i class="fa fa-pen h-4 w-4"></i>
+                                    </a>
+                                    <button
+                                        class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
+                                        type="button" wire:click="$emit('deleteModal', {{ $service->id }})"
+                                        wire:loading.attr="disabled">
+                                        <i class="fa fa-trash h-4 w-4"></i>
+                                    </button>
+                                    <button
+                                        class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
+                                        type="button" wire:click="confirm('clone', {{ $service->id }})"
+                                        wire:loading.attr="disabled">
+                                        <i class="fa fa-bin h-4 w-4"></i>
+                                    </button>
+
                                 </div>
+                            </x-table.td>
 
-                            </div>
-                        </td>
-                    </tr>
+
+                            <tr x-show="isMenuOpen({{ $index }})"
+                                x-transition:enter="transition ease-out duration-300"
+                                x-transition:enter-start="opacity-0 transform scale-95"
+                                x-transition:enter-end="opacity-100 transform scale-100"
+                                x-transition:leave="transition ease-in duration-200"
+                                x-transition:leave-start="opacity-100 transform scale-100"
+                                x-transition:leave-end="opacity-0 transform scale-95" x-cloak>
+                                <td class="py-4" colspan="12">
+                                    <div class="panel-body text-center p-5">
+                                        <h1>{{ $service->title }}</h1>
+                                        <p>{!! $service->content !!}</p>
+                                        <div class="container">
+                                            @if (empty($service->image))
+                                                {{ __('No images') }}
+                                            @else
+                                                <img class="w-52 rounded-full"
+                                                    src="{{ asset('uploads/services/' . $service->image) }}"
+                                                    alt="">
+                                            @endif
+                                        </div>
+                                        <div class="mt-4">
+                                            <button @click="isMenuOpen = false"
+                                                class="px-4 py-2 text-sm font-medium text-gray-800 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                                                Collapse
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                    </x-table.tr>
                 @empty
                     <x-table.tr>
                         <x-table.td colspan="10" class="text-center">
@@ -199,9 +218,9 @@
             </div>
         </div>
     </x-card>
-    
-    @livewire('admin.service.edit', ['service'=>$service])
+
+    @livewire('admin.service.edit', ['service' => $service])
 
     @livewire('admin.service.create')
-    
+
 </div>

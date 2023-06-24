@@ -14,15 +14,15 @@ return new class () extends Migration {
 
             $table->string('name');
             $table->string('width')->nullable();
-            $table->string('background_color')->nullable();
+            $table->string('backgroundColor')->nullable();
             $table->string('frequency')->nullable();
             $table->string('timing')->nullable();
             $table->integer('delay')->nullable();
             $table->integer('duration')->nullable();
             $table->integer('visits')->nullable();
             $table->text('content')->nullable();
-            $table->string('cta_text')->nullable();
-            $table->string('cta_url')->nullable();
+            $table->string('ctaText')->nullable();
+            $table->string('ctaUrl')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('is_default')->default(false);
 

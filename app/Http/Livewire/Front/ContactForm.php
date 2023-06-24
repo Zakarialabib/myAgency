@@ -27,10 +27,10 @@ class ContactForm extends Component
     ];
 
     protected $rules = [
-        'contact.name' => 'required',
-        'contact.email' => 'required|email',
+        'contact.name'         => 'required',
+        'contact.email'        => 'required|email',
         'contact.phone_number' => 'required',
-        'contact.message' => 'required',
+        'contact.message'      => 'required',
     ];
 
     public function mount(Contact $contact)

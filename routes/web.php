@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ErrorController;
+use App\Http\Controllers\FrontController;
 use App\Http\Livewire\Front\Index as FrontIndex;
+use App\Http\Livewire\Front\Blogs as BlogIndex;
+use App\Http\Livewire\Front\ShowBlog as BlogShow;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +40,8 @@ Route::get('/project/{slug}', [FrontController::class, 'portfolioDetails'])->nam
 
 Route::get('/contact', [FrontController::class, 'contact'])->name('front.contact');
 
-Route::get('/blog', [FrontController::class, 'blog'])->name('front.blogs');
-Route::get('/blog/{slug}', [FrontController::class, 'blogPage'])->name('front.blogPage');
+Route::get('/blog', BlogIndex::class)->name('front.blogs');
+Route::get('/blog/{slug}', BlogShow::class)->name('front.blogPage');
 
 Route::get('/page/{slug}', [FrontController::class, 'dynamicPage'])->name('front.dynamicPage');
 

@@ -25,11 +25,11 @@ class Edit extends Component
 
     protected $rules = [
         'team.language_id' => 'required',
-        'team.status' => 'required',
-        'team.image' => 'nullable',
-        'team.name' => 'required|max:191',
-        'team.content' => 'required',
-        'team.role' => 'required',
+        'team.status'      => 'required',
+        'team.image'       => 'nullable',
+        'team.name'        => 'required|max:191',
+        'team.content'     => 'required',
+        'team.role'        => 'required',
     ];
 
     public function mount(Team $team)

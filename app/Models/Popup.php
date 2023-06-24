@@ -18,6 +18,7 @@ class Popup extends Model
      * @var array<string>
      */
     protected $fillable = [
+        'name',
         'width',
         'frequency',
         'timing',
@@ -37,10 +38,10 @@ class Popup extends Model
      * @var array
      */
     protected $casts = [
-        'status' => 'boolean',
-        'delay' => 'integer',
-        'duration' => 'integer',
-        'visits' => 'integer',
+        'status'     => 'boolean',
+        'delay'      => 'integer',
+        'duration'   => 'integer',
+        'visits'     => 'integer',
         'is_default' => 'boolean',
     ];
 

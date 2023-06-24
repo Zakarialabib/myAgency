@@ -176,29 +176,6 @@
                     <x-checkbox name="site_contact" id="site_contact" wire:model="site_contact" />
                 </div>
             </div>
-            <div class="flex flex-wrap mb-4">
-                <div class="lg:w-1/2 sm:w-full px-2">
-                    <x-label for="currency_code" :value="__('Currency code')" />
-                    <x-input wire:model="currency_code" type="text" id="currency_code" name="currency_code" />
-                    <x-input-error for="currency_code" :messages="$errors->first('currency_code')" />
-                </div>
-                <div class="lg:w-1/2 sm:w-full px-2">
-                    <x-label for="currency_symbol" :value="__('Currency symbol')" />
-                    <x-input wire:model="currency_symbol" type="text" id="currency_symbol"
-                        name="currency_symbol" />
-                    <x-input-error for="currency_symbol" :messages="$errors->first('currency_symbol')" />
-                </div>
-                <div class="lg:w-1/2 sm:w-full px-2">
-                    <x-label for="currency_position" :value="__('Currency Position')" />
-                    <select wire:model="currency_position" name="currency_position" id="currency_position"
-                        class="p-3 leading-5 bg-white text-gray-700 rounded border border-zinc-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
-                        <option selected option>
-                        <option value="left">{{ __('Left') }}</option>
-                        <option value="right">{{ __('Right') }}</option>
-                    </select>
-                    <x-input-error for="currency_position" :messages="$errors->first('currency_position')" />
-                </div>
-            </div>
             <div class="w-full">
                 <div class="mb-4 px-2">
                     <x-label for="seo_meta_title" :value="__('Seo Meta Title')" />

@@ -36,6 +36,4 @@ class Language extends Model
         'status',
         'is_default',
     ];
-
-
 }

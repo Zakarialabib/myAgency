@@ -4,45 +4,43 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Section;
 
+use Livewire\Component;
+use Illuminate\Contracts\View\View;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Illuminate\Support\Collection;
 use App\Models\Section;
 use Illuminate\Support\Str;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\Language;
 
 class Edit extends Component
 {
     use LivewireAlert;
     use WithFileUploads;
 
-    public $section;
-
-    public $editModal = false;
-
-    protected $listeners = [
+    public $listeners = [
         'editModal',
     ];
 
+    public $editModal = false;
+
+    public $section;
+
+    public $image;
+
+    public $description;
+
     protected $rules = [
-        'section.language_id' => 'required',
-        'section.page_id' => 'required',
-        'section.title' => 'nullable',
-        'section.featured_title' => 'nullable', 
-        'section.subtitle' => 'nullable',
-        'section.bg_color' => 'nullable',
-        'section.text_color' => 'nullable',
-        'section.button' => 'nullable',
-        'section.position' => 'nullable',
-        'section.label' => 'nullable',
-        'section.link' => 'nullable',
-        'section.description' => 'nullable',
-        'section.embeded_video' => 'nullable',
+        'section.language_id' => ['required'],
+        'section.page_id'     => ['nullable'],
+        'section.title'       => ['nullable', 'string', 'max:255'],
+        'section.subtitle'    => ['nullable', 'string', 'max:255'],
+        'description'         => ['nullable'],
     ];
 
-
-    public function render()
+    public function updatedDescription($value)
     {
-        return view('livewire.admin.section.edit');
+        $this->description = $value;
     }
 
     public function editModal($section)
@@ -59,27 +57,38 @@ class Edit extends Component
 
         $this->editModal = true;
     }
-    
+
     public function update()
     {
-        try {
-            $this->validate();
+        // try {
+        $this->validate();
 
-            if ($this->image) {
-                $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
-                $this->image->storeAs('sections', $imageName);
-                $this->section->image = $imageName;
-            }
-
-            $this->section->save();
-
-            $this->alert('success', __('Section updated successfully!'));
-            
-            $this->emit('refreshIndex');
-
-            $this->editModal = false;
-        } catch (Throwable $th) {
-            $this->alert('warning', __('Section was not updated!'));
+        if (empty($this->image)) {
+            $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
+            $this->image->storeAs('sections', $imageName);
+            $this->section->image = $imageName;
         }
+        $this->section->description = $this->description;
+
+        $this->section->save();
+
+        $this->alert('success', __('Section updated successfully!'));
+
+        $this->emit('refreshIndex');
+
+        $this->editModal = false;
+        // } catch (Throwable $th) {
+        //     $this->alert('warning', __('Section was not updated!'));
+        // }
+    }
+
+    public function getLanguagesProperty(): Collection
+    {
+        return Language::select('name', 'id')->get();
+    }
+
+    public function render(): View
+    {
+        return view('livewire.admin.section.edit');
     }
 }

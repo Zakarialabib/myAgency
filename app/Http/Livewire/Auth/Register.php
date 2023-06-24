@@ -11,7 +11,6 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
-use App\Enums\RoleType;
 use App\Enums\Status;
 
 class Register extends Component
@@ -24,7 +23,6 @@ class Register extends Component
     public $city; // Set the default city to 'Casablanca'
     public $country; // Set
 
-    
     public function mount()
     {
         $this->city = 'Casablanca';
@@ -47,9 +45,9 @@ class Register extends Component
             'phone'    => $this->phone,
             'city'     => $this->city,
             'country'  => $this->country,
-            'status'        => Status::INACTIVE, // Set status to inactive by default
+            'status'   => Status::INACTIVE, // Set status to inactive by default
         ]);
-        
+
         $role = Role::where('name', 'client')->first();
 
         $user->assignRole($role);
@@ -57,18 +55,19 @@ class Register extends Component
         event(new Registered($user));
 
         Auth::login($user, true);
-        
+
         switch (true) {
             case $user->hasRole('admin'):
                 $homePage = RouteServiceProvider::ADMIN_HOME;
+
                 break;
             default:
                 $homePage = RouteServiceProvider::CLIENT_HOME;
+
                 break;
         }
 
         return redirect()->intended($homePage);
-
     }
 
     public function render()

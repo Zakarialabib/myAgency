@@ -21,6 +21,8 @@ class PopupSettings extends Component
 
     public $popupModal = false;
 
+    public $name;
+    
     public $width;
 
     public $frequency;
@@ -38,17 +40,23 @@ class PopupSettings extends Component
     public $ctaText;
 
     public $ctaUrl;
+    
+    public $editing;
+
+    public $listners = [
+        'popupModal'
+    ];
 
     public array $rules = [
-        'width' => ['required', 'string', 'max:15'],
-        'frequency' => ['nullable', 'string'],
-        'timing' => ['nullable', 'string', 'max:255'],
-        'delay' => ['nullable', 'string'],
-        'duration' => ['nullable', 'string', 'max:255'],
+        'width'           => ['required', 'string', 'max:15'],
+        'frequency'       => ['nullable', 'string'],
+        'timing'          => ['nullable', 'string', 'max:255'],
+        'delay'           => ['nullable', 'string'],
+        'duration'        => ['nullable', 'string', 'max:255'],
         'backgroundColor' => ['nullable', 'string', 'max:15'],
-        'content' => ['required', 'string'],
-        'ctaText' => ['required', 'string'],
-        'ctaUrl' => ['required', 'string'],
+        'content'         => ['required', 'string'],
+        'ctaText'         => ['required', 'string'],
+        'ctaUrl'          => ['required', 'string'],
     ];
 
     public array $orderable;
@@ -102,71 +110,64 @@ class PopupSettings extends Component
         $this->popup->save();
     }
 
-    public function popupModal($popup = null)
+    public function popupModal(Popup $popup = null)
     {
-        $this->popup = $popup;
+        $this->resetValidation(); // Reset any previous validation errors
+    
+        if ($popup) {
+            $this->popup = $popup;
+            $this->editing = true;
+        } else {
+            $this->popup = new Popup();
+            $this->editing = false;
+        }
+    
         $this->popupModal = true;
     }
+    
 
-    public function create()
+    public function save()
     {
-        try {
-            // save new popup
-            $this->popup = Popup::create([
-                'width' => $this->width,
-                'frequency' => $this->frequency,
-                'timing' => $this->timing,
-                'delay' => $this->delay,
-                'duration' => $this->duration,
+        $this->validate();
+
+        if ($this->editing) {
+            // Editing an existing popup
+            $this->popup->update([
+                'name'           => $this->name,
+                'width'          => $this->width,
+                'frequency'      => $this->frequency,
+                'timing'         => $this->timing,
+                'delay'          => $this->delay,
+                'duration'       => $this->duration,
                 'backgroundColor' => $this->backgroundColor,
-                'content' => $this->content,
-                'ctaText' => $this->ctaText,
-                'ctaUrl' => $this->ctaUrl,
+                'content'        => $this->content,
+                'ctaText'        => $this->ctaText,
+                'ctaUrl'         => $this->ctaUrl,
+            ]);
+    
+            $this->alert('success', __('Popup settings updated successfully!'));
+        } else {
+            $this->popup = Popup::create([
+                'name'           => $this->name,
+                'width'          => $this->width,
+                'frequency'      => $this->frequency,
+                'timing'         => $this->timing,
+                'delay'          => $this->delay,
+                'duration'       => $this->duration,
+                'backgroundColor' => $this->backgroundColor,
+                'content'        => $this->content,
+                'ctaText'        => $this->ctaText,
+                'ctaUrl'         => $this->ctaUrl,
             ]);
 
-            // show succes message
-            $this->alert§('succes', __('Popup settings created successfully !'));
+            $this->alert('success', __('Popup settings created successfully !'));
+        }
 
-            $this->popupModal = false;
-        } catch (Throwable $th) {
+        $this->popupModal = false;
+        // } catch (Throwable $th) {
             // show error message
-            $this->alert§('warning', __('Something not working !'));
-        }
-    }
-
-    public function update($popup)
-    {
-        $this->popup = Popup::find($popup->id); // retrieve the popup setting from the database
-
-        try {
-            $this->width = $this->popup->width;
-            $this->frequency = $this->popup->frequency;
-            $this->timing = $this->popup->timing;
-            $this->delay = $this->popup->delay;
-            $this->duration = $this->popup->duration;
-            $this->backgroundColor = $this->popup->background_color;
-            $this->content = $this->popup->content;
-            $this->ctaText = $this->popup->cta_text;
-            $this->ctaUrl = $this->popup->cta_url;
-
-            $this->popup->save();
-
-            // Emit an event based on the chosen timing option, passing along the corresponding delay/interval/duration value as an argument
-
-            match ($this->timing) {
-                'delay' => $this->emit('showDelay', $this->delay),
-                'duration' => $this->emit('showDuration', $this->duration),
-                'interval' => $this->emit('showInterval', $this->interval),
-            };
-
-            // Show success message
-            $this->alert§('succes', __('Popup settings updated successfully!'));
-
-            $this->popupModal = false;
-        } catch (Throwable $th) {
-            // Show error message
-            $this->alert§('warning', __('Something not working !'));
-        }
+            // $this->alert('warning', __('Something not working !'));
+        // }
     }
 
     public function render()

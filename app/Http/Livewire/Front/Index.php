@@ -7,9 +7,7 @@ namespace App\Http\Livewire\Front;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Section;
-use App\Models\Slider;
 use App\Models\Partner;
-use App\Models\Subcategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -27,7 +25,7 @@ class Index extends Component
     {
         return Service::where('type', 'startup')->active()->get();
     }
-    
+
     public function getDigitalServicesProperty(): Collection
     {
         return Service::where('type', 'digital')->active()->get();

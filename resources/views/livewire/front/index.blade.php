@@ -1,16 +1,13 @@
 <div>
-    {{-- @section('title', $section->title)
-        @section('meta-keywords', $section->title)
-        @section('meta-description', Str::limit($section->content, 50, '...')) --}}
     @section('title', __('Home'))
-    <section class="relative bg-black text-white">
+    <section class="relative bg-black text-white items-center h-screen">
         <div id="particles-js"></div>
         <div class="anime max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
             <div class="text-center md:text-left pb-12 md:pb-16">
                 <h1 h1 class="section-title mt-3 text-6xl sm:text-4xl lg:text-8xl font-extrabold text-white">
                     {{ $this->home_section->title }}
                     <p
-                        class="text-4xl sm:text-6xl lg:text-8xl bg-clip-text font-bold uppercase leading-none text-transparent uppercase bg-green-600 to-black py-10 typewriter">
+                        class="text-4xl sm:text-6xl lg:text-8xl bg-clip-text font-bold leading-none text-transparent uppercase bg-green-600 to-black py-10 typewriter">
                         <span id="typing-text"></span>
                     </p>
                 </h1>
@@ -23,148 +20,125 @@
         </div>
     </section>
 
-    <section class="mx-auto py-12" x-data="{ expanded: [] }">
-        <div class="mx-auto px-10 text-left py-5" id="digital">
-            <h2 class="mb-4 text-3xl md:text-5xl leading-tight text-gray-900 font-bold tracking-tighter">
-                <span class="border-b-2 border-green-600">ُThe Digital Hub </span>
-            </h2>
-        </div>
-        <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
-            @foreach ($this->digital_services as $index => $service)
-                <div class="relative flex flex-col items-center justify-center h-[300px] p-6 bg-black overflow-hidden w-full "
-                    style="background-image: url('{{ asset('uploads/services/' . $service->image) }}'); background-size: cover; background-position: center;">
-                    <div class="absolute inset-0 bg-green-600 opacity-0 hover:opacity-75 transition duration-300"></div>
+    <section x-data="{ expanded: [] }">
+        <div class="mx-auto py-20 h-auto" id="digital">
+            <h3
+                class="text-3xl md:text-4xl lg:text-5xl px-10 text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
+                <span class="hover:underline transition duration-200 ease-in-out">The Digital Hub </span>
+            </h3>
 
-                    <h4 class="absolute bottom-10 text-lg text-center font-bold text-white mb-1 hover:text-gray-200 z-10 transition duration-200 ease-in-out"
-                        x-show="!expanded.includes('digital-' + {{ $index }})">
-                        {{ $service->title }}
-                    </h4>
-                    <p class="text-gray-600 text-center text-white line-clamp-3 z-10 transition duration-200 ease-in-out"
-                        x-show="expanded.includes('digital-' + {{ $index }})">
-                        {!! $service->content !!}
-                    </p>
-                    <button class="absolute top-2 right-2 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
-                        @click="expanded.includes('digital-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'digital-' + {{ $index }}) : expanded.push('digital-' + {{ $index }})">
-                        +
-                    </button>
-                </div>
-            @endforeach
+            <div class="py-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
+                @foreach ($this->digital_services as $index => $service)
+                    <div class="relative flex flex-col items-center justify-center md:h-[350px] xl:h-[380px] p-6 bg-black overflow-hidden w-full "
+                        style="background-image: url('{{ asset('uploads/services/' . $service->image) }}'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 bg-green-600 opacity-0 hover:opacity-75 transition duration-300">
+                        </div>
+
+                        <h4 class="absolute bottom-10 text-lg text-center font-bold text-white mb-1 hover:text-gray-200 z-10 transition duration-200 ease-in-out"
+                            x-show="!expanded.includes('digital-' + {{ $index }})">
+                            {{ $service->title }}
+                        </h4>
+                        <div class="text-center text-white text-md z-10 transition duration-200 ease-in-out"
+                            x-show="expanded.includes('digital-' + {{ $index }})">
+                            {!! $service->content !!}
+                        </div>
+                        <button class="absolute top-2 right-2 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
+                            @click="expanded.includes('digital-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'digital-' + {{ $index }}) : expanded.push('digital-' + {{ $index }})">
+                            +
+                        </button>
+                    </div>
+                @endforeach
+            </div>
         </div>
 
-        <div class="mx-auto px-10 text-left py-5" id="startup">
-            <h2 class="mb-4 text-3xl md:text-5xl leading-tight text-gray-900 font-bold tracking-tighter">
-                <span class="border-b-2 border-green-600">The Startup Hub</span>
-            </h2>
-        </div>
-        <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
-            @foreach ($this->startup_services as $index => $service)
-                <div class="relative flex flex-col items-center justify-center h-[300px] p-6 bg-black overflow-hidden w-full "
-                    style="background-image: url('{{ asset('uploads/services/' . $service->image) }}'); background-size: cover; background-position: center;">
-                    <div class="absolute inset-0 bg-green-600 opacity-0 hover:opacity-75 transition duration-300"></div>
+        <div class="mx-auto py-20 h-auto" id="startup">
+            <h3
+                class="text-3xl md:text-4xl lg:text-5xl px-10 text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
+                <span class="hover:underline transition duration-200 ease-in-out">ُThe Startup Hub </span>
+            </h3>
 
-                    <h4 class="absolute bottom-10 text-lg text-center font-bold text-white mb-1 hover:text-gray-200 z-10 transition duration-200 ease-in-out"
-                        x-show="!expanded.includes('startup-' + {{ $index }})">
-                        {{ $service->title }}
-                    </h4>
-                    <p class="text-gray-600 text-center text-white line-clamp-3 z-10 transition duration-200 ease-in-out"
-                        x-show="expanded.includes('startup-' + {{ $index }})">
-                        {!! $service->content !!}
-                    </p>
-                    <button class="absolute top-2 right-2 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
-                        @click="expanded.includes('startup-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'startup-' + {{ $index }}) : expanded.push('startup-' + {{ $index }})">
-                        +
-                    </button>
-                </div>
+            <div class="py-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
+                @foreach ($this->startup_services as $index => $service)
+                    <div class="relative flex flex-col items-center justify-center md:h-[350px] xl:h-[380px] p-6 bg-black overflow-hidden w-full "
+                        style="background-image: url('{{ asset('uploads/services/' . $service->image) }}'); background-size: cover; background-position: center;">
+                        <div class="absolute inset-0 bg-green-600 opacity-0 hover:opacity-75 transition duration-300">
+                        </div>
+
+                        <h4 class="absolute bottom-10 text-lg text-center font-bold text-white mb-1 hover:text-gray-200 z-10 transition duration-200 ease-in-out"
+                            x-show="!expanded.includes('startup-' + {{ $index }})">
+                            {{ $service->title }}
+                        </h4>
+                        <div class="text-center text-white text-md z-10 transition duration-200 ease-in-out"
+                            x-show="expanded.includes('startup-' + {{ $index }})">
+                            {!! $service->content !!}
+                        </div>
+                        <button class="absolute top-2 right-2 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
+                            @click="expanded.includes('startup-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'startup-' + {{ $index }}) : expanded.push('startup-' + {{ $index }})">
+                            +
+                        </button>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="mx-auto py-20 h-auto text-left bg-gray-50" id="partners">
+        <h3
+            class="py-10 text-3xl md:text-4xl lg:text-5xl px-10 text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
+            <span class="hover:underline transition duration-200 ease-in-out">Partners </span>
+        </h3>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 space-y-2 px-6 items-center">
+            @foreach ($this->partners as $partner)
+                <p class="p-5 relative bg-gray-100">
+                    <img class="mx-auto w-full h-24 my-4 rounded-xl filter grayscale transition duration-300 hover:grayscale-0"
+                        src="" alt="{{ $partner->name }}">
+                </p>
             @endforeach
         </div>
     </section>
 
-    {{-- @if ($this->projects)
-        <section class="relative max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="pt-12 md:pt-20">
-                <div class="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-                    <h1 class="mb-4">Powerful suite of tools</h1>
-                    <p class="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
-                </div>
-                <div class="md:grid md:grid-cols-12 md:gap-6">
-                    <div class="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6">
-                        <div class="mb-8 md:mb-0">
-                            @foreach ($this->projects as $project)
-                                <a class="flex items-center justify-between text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 bg-white shadow-md border-gray-200 hover:shadow-lg"
-                                    href="#0">
-                                    <div class="text-left">
-                                        <div class="font-bold leading-snug tracking-tight mb-1">{{ $project->title }}
-                                        </div>
-                                        <div class="text-gray-600">
-                                            {!! $project->description !!}
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
-    <div class="px-5 py-10 lg:px-16 bg-gray-50" id="partners">
-        <h2 class="mb-4 text-3xl md:text-5xl leading-tight text-gray-900 font-bold tracking-tighter cursor-pointer uppercase text-center">
-            <span class="border-b-2 border-green-600">{{ __('Partners') }}</span>
-        </h2>
-        <div class="flex flex-wrap justify-center gap-8 -mx-2">
-            @foreach ($this->partners as $partner)
-                <div class="w-1/2 md:w-1/3 lg:w-1/6 py-4 space-y-4">
-                    <div class="group relative">
-                        <img class="mx-auto w-56 h-auto my-4 rounded-xl filter grayscale transition duration-300 hover:grayscale-0"
-                            src="" alt="{{ $partner->name }}">
-                        <p
-                            class="text-center text-sm px-4 mb-4 absolute bottom-0 left-0 w-full text-white text-opacity-0 group-hover:text-opacity-100 transition-opacity duration-300 cursor-pointer">
-                            {{ $partner->name }}
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="px-10 py-12 mx-auto md:px-12 lg:px-24 bg-gray-100">
-        <div class="max-w-lg mb-12 lg:mb-0">
-            <h2
-                class="text-green-600 mb-6 uppercase font-bold text-3xl sm:text-4xl lg:text-3xl xl:text-4xl leading-tight">
-                <span class="text-4xl sm:text-5xl lg:text-4xl xl:text-5xl">
-                    {{ $this->about_section->title }}
-                </span>
-                <span class="text-5xl sm:text-6xl lg:text-5xl xl:text-6xl">
-                    {{ $this->about_section->subtitle }}
-                </span>
-                <span class="block mb-4 text-base text-gray-700 font-semibold">
-                    Discover the Innovation Within
-                </span>
-            </h2>
-
-            <div class="flex mb-8 max-w-[370px] w-full">
-                <p class="text-base text-gray-800">
-                    {!! $this->about_section->description !!}
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="px-10 py-12 mx-auto md:px-12 lg:px-24">
-        <div class="grid xl:grid-cols-2 sm:grid-cols-1 gap-4">
-            <div class="px-4 max-w-[570px] mb-5">
-                <h2 class="text-green-600 mb-6 uppercase font-bold text-3xl sm:text-4xl lg:text-3xl xl:text-4xl leading-tight">
-                    {{ __('GET IN TOUCH WITH US') }}
-                    <span class="block mb-4 text-base text-black font-semibold">
-                        {{ __('Contact Us') }}
+    <section class="mx-auto px-10 py-20 h-auto bg-gray-100" id="about">
+        <div class="flex flex-wrap items-center">
+            <div class="w-3/4">
+                <h3
+                    class="pb-10 text-3xl md:text-4xl lg:text-5xl text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
+                    <span class="hover:underline transition duration-200 ease-in-out">{{ $this->about_section->title }}
                     </span>
-                </h2>
+                </h3>
+
+                <div class="mb-8 max-w-3xl w-full">
+                    <p class="text-base text-gray-800">
+                        {!! $this->about_section->description !!}
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-1/4">
+                <div class="flex justify-center items-center pin bg-no-repeat md:bg-left w-full bg-center bg-cover h-screen"
+                    style="background-image: url({{ asset('uploads/sections/' . $this->about_section->image) }});">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mx-auto px-10  py-20 bg-white h-auto" id="contact">
+        <div class="grid xl:grid-cols-2 sm:grid-cols-1 gap-4 items-center">
+            <div class="px-4 max-w-[570px] mb-5">
+                <h3
+                    class="my-10 text-3xl md:text-4xl lg:text-5xl text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
+                    <span class="hover:underline transition duration-200 ease-in-out">{{ __('Contact Us') }} </span>
+                </h3>
+                <span class="block mb-4 text-base text-black font-semibold">
+                    {{ __('GET IN TOUCH WITH US') }}
+                </span>
                 <p class="text-base text-black leading-relaxed mb-9">
                     {{ __('For any inquiry, feel free to ask') }}
                 </p>
-                <div class="flex mb-8 max-w-[370px] w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6">
+                @livewire('front.contact-form')
+            </div>
+            <div class="flex flex-col mt-10 items-center space-y-6">
+                <div
+                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
                     <div
                         class="max-w-[60px] sm:max-w-[70px] w-full h-[60px] sm:h-[70px] flex items-center justify-center mr-6 overflow-hidden bg-white bg-opacity-25 text-white rounded-full">
                         <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
@@ -177,11 +151,12 @@
                             {{ __('Our Location') }}
                         </h4>
                         <p class="text-base text-white">
-                            {{ settings()->address }}
+                            {{ Helpers::settings('company_address') }}
                         </p>
                     </div>
                 </div>
-                <div class="flex mb-8 max-w-[370px] w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6">
+                <div
+                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
                     <div
                         class="max-w-[60px] sm:max-w-[70px] w-full h-[60px] sm:h-[70px] flex items-center justify-center mr-6 overflow-hidden bg-white bg-opacity-25 text-white rounded-full">
                         <svg width="24" height="26" viewBox="0 0 24 26" class="fill-current">
@@ -197,12 +172,13 @@
                         <h4 class="font-bold text-white text-xl mb-1">
                             {{ __('Phone Number') }}</h4>
                         <p class="text-base text-white">
-                            <a href="tel:{{ settings()->company_phone }}">{{ settings()->company_phone }}
+                            <a href="tel:{{ Helpers::settings('company_phone') }}">{{ Helpers::settings('company_phone') }}
                             </a>
                         </p>
                     </div>
                 </div>
-                <div class="flex mb-8 max-w-[370px] w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6">
+                <div
+                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
                     <div
                         class="max-w-[60px] sm:max-w-[70px] w-full h-[60px] sm:h-[70px] flex items-center justify-center mr-6 overflow-hidden bg-white bg-opacity-25 text-white rounded-full">
                         <svg width="28" height="19" viewBox="0 0 28 19" class="fill-current">
@@ -216,16 +192,13 @@
                         </h4>
                         <p class="text-base text-white">
                             <a
-                                href="mailto:{{ settings()->company_email_address }}">{{ settings()->company_email_address }}</a>
+                                href="mailto:{{ Helpers::settings('company_email_address') }}">{{ Helpers::settings('company_email_address') }}</a>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="px-4 w-full py-10 m-auto bg-white rounded-lg shadow-lg">
-                @livewire('front.contact-form')
-            </div>
         </div>
-    </div>
+    </section>
 
     @push('styles')
         <style>
@@ -246,7 +219,7 @@
     @push('scripts')
         <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
         <script>
             var text = "WeDigitall"; // The text to be displayed
             var delay = 200; // The delay between typing each character

@@ -115,7 +115,7 @@
                                 <img src="{{ $photo }}" alt="Image">
                             </x-table.td>
                             <x-table.td>
-                                {{ $blog->title }} -- {{ $blog->category->title }}
+                                {{ $blog->title }} -- {{ $blog->category?->title }}
                             </x-table.td>
                             <x-table.td>
                                 <livewire:utils.toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />

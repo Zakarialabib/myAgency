@@ -2,11 +2,9 @@
     <div class="flex flex-wrap justify-center">
         <div class="w-full lg:w-1/2 xl:w-6/12 px-4">
             <div class="max-w-[570px] mb-12 lg:mb-0">
-                <h2
-                    class="text-black mb-6 uppercase font-bold text-[32px] sm:text-[40px] lg:text-[36px] xl:text-[40px]">
+                <h2 class="text-black mb-6 uppercase font-bold text-[32px] sm:text-[40px] lg:text-[36px] xl:text-[40px]">
                     {{ __('GET IN TOUCH WITH US') }}
-                    <span
-                        class="block mb-4 text-base text-black font-semibold">
+                    <span class="block mb-4 text-base text-black font-semibold">
                         {{ __('Contact Us') }}
                     </span>
                 </h2>
@@ -27,7 +25,7 @@
                         <h4 class="font-bold text-black text-xl mb-1">
                             {{ __('Our Location') }}</h4>
                         <p class="text-base text-body-color ">
-                            {{ settings()->address }}
+                            {{ Helpers::settings('address') }}
                         </p>
                     </div>
                 </div>
@@ -47,7 +45,7 @@
                         <h4 class="font-bold text-black text-xl mb-1">
                             {{ __('Phone Number') }}</h4>
                         <p class="text-base text-body-color ">
-                            <a href="tel:{{ settings()->company_phone }}">{{ settings()->company_phone }}
+                            <a href="tel:{{ Helpers::settings('company_phone') }}">{{ Helpers::settings('company_phone') }}
                             </a>
                         </p>
                     </div>
@@ -65,7 +63,7 @@
                             {{ __('Email Address') }}
                         </h4>
                         <p class="text-bas  text-body-color"><a
-                                href="mailto:{{ settings()->company_email_address }}">{{ settings()->company_email_address }}</a>
+                                href="mailto:{{ Helpers::settings('company_email_address') }}">{{ Helpers::settings('company_email_address') }}</a>
                         </p>
                     </div>
                 </div>
@@ -73,7 +71,10 @@
         </div>
         <div class="w-full lg:w-1/2 xl:w-6/12 px-8">
             <div class="rounded-lg shadow-lg">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13297.411236160367!2d-7.6295218!3d33.5701878!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8d0b12bd9b88d0cb!2sBadr%20Luxury!5e0!3m2!1sen!2sma!4v1672402258196!5m2!1sen!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13297.411236160367!2d-7.6295218!3d33.5701878!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8d0b12bd9b88d0cb!2sBadr%20Luxury!5e0!3m2!1sen!2sma!4v1672402258196!5m2!1sen!2sma"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </div>

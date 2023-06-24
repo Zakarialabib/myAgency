@@ -25,10 +25,10 @@ class Create extends Component
 
     protected $rules = [
         'team.language_id' => 'required',
-        'team.status' => 'required',
-        'team.role' => 'nullable',
-        'team.name' => 'required|unique:teams,name|max:191',
-        'team.content' => 'required',
+        'team.status'      => 'required',
+        'team.role'        => 'nullable',
+        'team.name'        => 'required|unique:teams,name|max:191',
+        'team.content'     => 'required',
     ];
 
     public function mount(Team $team)

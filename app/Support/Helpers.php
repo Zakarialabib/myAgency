@@ -8,10 +8,10 @@ use App\Models\Language;
 use App\Models\Category;
 use App\Models\BlogCategory;
 
-if (!function_exists('getLanguages')) {
+if ( ! function_exists('getLanguages')) {
     function getLanguages()
     {
-        if (!Schema::hasTable('languages')) {
+        if ( ! Schema::hasTable('languages')) {
             return [];
         }
 
@@ -23,7 +23,7 @@ if (!function_exists('getLanguages')) {
     }
 }
 
-if (!function_exists('getCategories')) {
+if ( ! function_exists('getCategories')) {
     function getCategories()
     {
         return cache()->rememberForever('categories', function () {
@@ -32,16 +32,16 @@ if (!function_exists('getCategories')) {
     }
 }
 
-if (!function_exists('getBlogCategories')) {
+if ( ! function_exists('getBlogCategories')) {
     function getBlogCategories()
     {
         return cache()->rememberForever('blogCategories', function () {
-            return BlogCategory::pluck('name', 'id')->toArray();
+            return BlogCategory::pluck('title', 'id')->toArray();
         });
     }
 }
 
-if (! function_exists('settings')) {
+if ( ! function_exists('settings')) {
     function settings()
     {
         return cache()->rememberForever('settings', function () {
@@ -49,7 +49,6 @@ if (! function_exists('settings')) {
         });
     }
 }
-
 
 function flagImageUrl($language_code)
 {
@@ -67,5 +66,3 @@ function getSlug($request, $key)
 
     return \Illuminate\Support\Str::slug($value);
 }
-
-

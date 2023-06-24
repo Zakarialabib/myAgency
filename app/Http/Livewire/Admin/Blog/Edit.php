@@ -6,13 +6,14 @@ namespace App\Http\Livewire\Admin\Blog;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Models\Language;
+use Illuminate\Support\Collection;
 
 class Edit extends Component
 {
@@ -25,18 +26,20 @@ class Edit extends Component
 
     public $blog;
 
+    public $description;
+
     public $listeners = [
-        'editModal'
+        'editModal',
     ];
 
     protected $rules = [
         'blog.title'       => 'required|min:3|max:255',
         'blog.category_id' => 'required|integer',
         'blog.slug'        => 'required|string',
-        'blog.details'     => 'required|min:3',
+        'description'      => 'required|min:3',
         'blog.language_id' => 'nullable|integer',
         'blog.meta_title'  => 'nullable|max:100',
-        'blog.meta_desc'   => 'nullable|max:200',
+        'blog.meta_description' => 'nullable|max:200',
     ];
 
     public function render(): View|Factory
@@ -56,6 +59,8 @@ class Edit extends Component
 
         $this->blog = Blog::where('id', $id)->firstOrFail();
 
+        $this->description = $this->blog->description;
+
         $this->editModal = true;
     }
 
@@ -69,13 +74,25 @@ class Edit extends Component
             $this->blog->image = $imageName;
         }
 
+        $this->blog->description = $this->description;
+
         $this->blog->save();
 
         $this->alert('success', __('Blog updated successfully.'));
-        
+
         $this->emit('refreshIndex');
 
         $this->editModal = false;
+    }
+
+    public function getLanguagesProperty(): Collection
+    {
+        return Language::select('name', 'id')->get();
+    }
+
+    public function getBlogCategoriesProperty()
+    {
+        return BlogCategory::pluck('title', 'id')->toArray();
     }
 
 }

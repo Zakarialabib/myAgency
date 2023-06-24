@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Section;
 
 use App\Http\Livewire\Utils\WithSorting;
-use App\Models\Language;
 use App\Models\Section;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -35,6 +35,8 @@ class Index extends Component
 
     public $showModal = false;
 
+    public $deleteModal = false;
+
     public int $perPage;
 
     public array $orderable;
@@ -59,6 +61,14 @@ class Index extends Component
         ],
     ];
 
+    protected $rules = [
+        'section.language_id' => 'required',
+        'section.page_id'     => 'required',
+        'section.title'       => 'nullable',
+        'section.subtitle'    => 'nullable',
+        'section.description' => 'nullable',
+    ];
+
     public function getSelectedCountProperty()
     {
         return count($this->selected);
@@ -79,11 +89,6 @@ class Index extends Component
         $this->selected = [];
     }
 
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
-    }
-
     public function mount()
     {
         $this->sortBy = 'id';
@@ -93,13 +98,13 @@ class Index extends Component
         $this->orderable = (new Section())->orderable;
     }
 
-    public function render()
+    public function render(): View|Factory
     {
         $query = Section::when($this->language_id, function ($query) {
             return $query->where('language_id', $this->language_id);
         })->advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
@@ -108,15 +113,42 @@ class Index extends Component
         return view('livewire.admin.section.index', compact('sections'));
     }
 
-     // Section  Delete
-      public function delete(Section $section)
-      {
-        //   abort_if(Gate::denies('section_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    public function delete()
+    {
+        // abort_if(Gate::denies('section_delete'), 403);
 
-          $section->delete();
+        Section::findOrFail($this->section)->delete();
 
-          $this->alert('warning', __('Section Deleted successfully!'));
-      }
+        $this->alert('success', __('Section deleted successfully.'));
+    }
+
+    public function deleteSelected()
+    {
+        // abort_if(Gate::denies('section_delete'), 403);
+
+        Section::whereIn('id', $this->selected)->delete();
+
+        $this->resetSelected();
+
+        $this->alert('success', __('Section deleted successfully.'));
+    }
+
+    public function confirmed()
+    {
+        $this->emit('delete');
+    }
+
+    public function deleteModal($section)
+    {
+        $this->confirm(__('Are you sure you want to delete this?'), [
+            'toast'             => false,
+            'position'          => 'center',
+            'showConfirmButton' => true,
+            'cancelButtonText'  => __('Cancel'),
+            'onConfirmed' => 'delete',
+        ]);
+        $this->section = $section;
+    }
 
      // Section  Clone
      public function clone(Section $section)
@@ -125,16 +157,13 @@ class Index extends Component
 
          Section::create([
              'language_id' => $section_details->language_id,
-             'page' => $section_details->page,
-             'title' => $section_details->title,
-             'subtitle' => $section_details->subtitle,
-             'text' => $section_details->text,
-             'button' => $section_details->button,
-             'link' => $section_details->link,
-             'video' => $section_details->video,
-             'image' => $section_details->image,
-             'content' => $section_details->content,
-             'status' => 0,
+             'page'        => $section_details->page,
+             'title'       => $section_details->title,
+             'subtitle'    => $section_details->subtitle,
+             'link'        => $section_details->link,
+             'image'       => $section_details->image,
+             'description' => $section_details->description,
+             'status'      => 0,
          ]);
          $this->alert('success', __('Section Cloned successfully!'));
      }

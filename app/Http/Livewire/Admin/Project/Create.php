@@ -10,7 +10,7 @@ use App\Models\Language;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Str;
+use Illuminate\Support\Str;
 
 class Create extends Component
 {
@@ -23,6 +23,8 @@ class Create extends Component
 
     public $images;
     
+    public $description;
+
     public $createModal = false;
 
     protected $listeners = [
@@ -30,17 +32,21 @@ class Create extends Component
     ];
 
     protected $rules = [
-        'project.title' => 'required|unique:projects,title|max:191',
-        'project.content' => 'required',
-        'project.client_name' => 'required',
-        'project.link' => 'required',
-        'project.service_id' => 'required',
-        'project.meta_title' => 'nullable',
+        'project.title'            => 'required|unique:projects,title|max:191',
+        'description'          => 'required',
+        'project.client_name'      => 'required',
+        'project.link'             => 'required',
+        'project.service_id'       => 'required',
+        'project.meta_title'       => 'nullable',
         'project.meta_description' => 'nullable',
-        'project.language_id' => 'required',
+        'project.language_id'      => 'required',
     ];
 
-  
+    public function updatedDescription($value)
+    {
+        $this->description = $value;
+    }
+
     public function createModal()
     {
         $this->resetErrorBag();
@@ -48,7 +54,9 @@ class Create extends Component
         $this->resetValidation();
 
         $this->project = new Project();
-        
+
+        $this->description = "";
+
         $this->createModal = true;
     }
 
@@ -72,14 +80,15 @@ class Create extends Component
 
         $this->project->gallery = $this->images;
 
+        $this->project->description = $this->description;
+
         $this->project->save();
 
         $this->alert('success', __('Service created successfully!'));
-        
+
         $this->emit('refreshIndex');
 
         $this->createModal = false;
-
     }
 
     public function render()
@@ -91,7 +100,7 @@ class Create extends Component
     {
         return Language::pluck('name', 'id')->toArray();
     }
-    
+
     public function getServicesProperty()
     {
         return Service::select('title', 'id')->get();

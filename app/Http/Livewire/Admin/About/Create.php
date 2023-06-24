@@ -27,10 +27,10 @@ class Create extends Component
 
     protected $rules = [
         'about.language_id' => 'required',
-        'about.status' => 'required',
-        'about.image' => 'nullable',
-        'about.title' => 'required|unique:abouts,title|max:191',
-        'about.content' => 'required',
+        'about.status'      => 'required',
+        'about.image'       => 'nullable',
+        'about.title'       => 'required|unique:abouts,title|max:191',
+        'about.content'     => 'required',
     ];
 
     public function mount(About $about)
@@ -65,6 +65,4 @@ class Create extends Component
 
         return redirect()->route('admin.about.index');
     }
-
-  
 }

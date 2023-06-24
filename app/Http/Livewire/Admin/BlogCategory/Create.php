@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\BlogCategory;
 
 use App\Models\BlogCategory;
+use App\Models\Language;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
@@ -24,11 +25,11 @@ class Create extends Component
     public $blogcategory;
 
     protected $rules = [
-        'blogcategory.title'       => 'required|string|max:255',
-        'blogcategory.description' => 'nullable',
-        'blogcategory.meta_title'  => 'nullable|max:100',
-        'blogcategory.meta_description'   => 'nullable|max:200',
-        'blogcategory.language_id' => 'required|integer',
+        'blogcategory.title'            => 'required|string|max:255',
+        'blogcategory.description'      => 'nullable',
+        'blogcategory.meta_title'       => 'nullable|max:100',
+        'blogcategory.meta_description' => 'nullable|max:200',
+        'blogcategory.language_id'      => 'required|integer',
     ];
 
     public function render(): View|Factory
@@ -65,5 +66,9 @@ class Create extends Component
         $this->emit('refreshIndex');
     }
 
- 
+    public function getLanguagesProperty()
+    {
+        return Language::pluck('name', 'id')->toArray();
+    }
+
 }

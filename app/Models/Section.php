@@ -41,14 +41,14 @@ class Section extends Model
     ];
 
     protected $casts = [
-        'satuts'   => Status::class,
+        'satuts' => Status::class,
     ];
 
     public function scopeActive($query): void
     {
         $query->where('status', true);
     }
-    
+
     public function language()
     {
         return $this->belongsTo(Language::class);

@@ -20,11 +20,10 @@
                         <x-input wire:model="page.slug" type="text" />
                     </div>
                     <div class="w-full px-2">
-                        <x-label for="details" :value="__('Details')" />
-                        <x-input.textarea wire:model="page.details" id="details" />
-                        <x-input-error :messages="$errors->get('page.details')" for="page.details" class="mt-2" />
+                        <x-label for="description" :value="__('Description')" />
+                        <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                        <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                     </div>
-                    {{-- <x-input.rich-text wire:model.debounce.2000ms="page.details" id="details" /> --}}
 
                     <div class="xl:w-1/2 md:w-1/2 px-3">
                         <x-label for="meta_title" :value="__('Meta title')" />
@@ -43,7 +42,7 @@
                         <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
                         <x-input-error :messages="$errors->get('image')" for="image" class="mt-2" />
                     </div>
-                    <div class="w-full flex justify-start space-x-2">
+                    <div class="text-center py-4">
                         <x-button primary type="submit" wire:loading.attr="disabled">
                             {{ __('Create') }}
                         </x-button>

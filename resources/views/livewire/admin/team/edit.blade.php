@@ -34,8 +34,8 @@
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Description')" />
-            <x-input.rich-text wire:model.lazy="team.content" id="description" />
-            <x-input-error for="team.content" />
+            <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                        <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
         </div>
         <div class="flex flex-wrap py-10">
             <div class="lg:w-2/5 sm:w-full">

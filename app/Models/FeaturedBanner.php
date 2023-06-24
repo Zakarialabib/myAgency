@@ -18,13 +18,13 @@ class FeaturedBanner extends Model
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
-    
+
     protected $fillable = [
-        'title', 'details', 'image', 'embeded_video', 'status', 'featured', 'link', 'language_id',
+        'title', 'description', 'image', 'embeded_video', 'status', 'featured', 'link', 'language_id',
     ];
 
     protected $casts = [
-        'satuts'   => Status::class,
+        'satuts' => Status::class,
     ];
 
     public function scopeActive($query): void

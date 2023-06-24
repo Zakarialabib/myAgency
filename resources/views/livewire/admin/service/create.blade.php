@@ -43,20 +43,17 @@
 
                 <div class="w-full">
                     <x-label for="content" :value="__('Description')" />
-                    <x-input.rich-text wire:model.lazy="service.content" id="description" />
+                    <x-trix name="description" wire:model.lazy="description" class="mt-1" />
                     <x-input-error :messages="$errors->get('service.content')" for="service.content" class="mt-2" />
                 </div>
 
                 <div class="w-full">
                     <x-label for="image" :value="__('Feature Image')" />
                     <x-fileupload wire:model="image" :file="$image" accept="image/jpg,image/jpeg,image/png" />
-                    <p class="help-block text-info">
-                        {{ __('Upload 670X418 (Pixel) Size image for best quality. Only jpg, jpeg, png image is allowed.') }}
-                    </p>
                     <x-input-error :messages="$errors->get('service.image')" for="service.image" class="mt-2" />
                 </div>
 
-                <div class="w-full text-center py-4">
+                <div class="text-center py-4">
                     <x-button type="submit" primary>
                         {{ __('Save') }}
                     </x-button>

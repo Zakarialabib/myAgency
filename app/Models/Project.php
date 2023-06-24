@@ -31,10 +31,10 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'satuts'   => Status::class,
+        'satuts' => Status::class,
     ];
 
-      /**
+    /**
      * Scope a query to only include active products.
      *
      * @param  \Illuminate\Database\Eloquent\Builder  $query

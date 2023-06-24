@@ -24,7 +24,7 @@ class SetLangMiddleware
         } else {
             $defaultLang = Language::where('is_default', 1)->first();
 
-            if (! empty($defaultLang)) {
+            if ( ! empty($defaultLang)) {
                 app()->setLocale($defaultLang->code);
             }
         }

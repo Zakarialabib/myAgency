@@ -18,15 +18,19 @@ class Index extends Component
 
     public int $perPage;
 
+    public $email;
+
     public array $orderable;
 
     public string $search = '';
 
     public array $selected = [];
 
+    protected $listeners = [
+        'refreshIndex' => '$refresh'
+    ];
+    
     public array $paginationOptions;
-
-    public array $listsForFields = [];
 
     protected $queryString = [
         'search' => [
@@ -72,14 +76,14 @@ class Index extends Component
     public function render(): View|Factory
     {
         $query = EmailTemplate::advancedFilter([
-            's' => $this->search ?: null,
-            'order_column' => $this->sortBy,
+            's'               => $this->search ?: null,
+            'order_column'    => $this->sortBy,
             'order_direction' => $this->sortDirection,
         ]);
 
         $emails = $query->paginate($this->perPage);
 
-        return view('livewire.admin.email.index', compact('emails'));
+        return view('livewire.admin.email.index', compact('emails'))->extends('layouts.dashboard');
     }
 
      // Blog Category  Delete

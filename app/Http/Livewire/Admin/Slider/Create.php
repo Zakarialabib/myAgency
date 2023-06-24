@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Admin\Slider;
 
 use App\Models\Language;
+use App\Models\Slider;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
@@ -20,20 +21,22 @@ class Create extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $createSlider = false;
+    public $createModal = false;
 
     public $slider;
 
     public $image;
 
+    public $description;
+
     public $listeners = [
-        'createSlider',
+        'createModal',
     ];
 
     public array $rules = [
         'slider.title'         => ['required', 'string', 'max:255'],
         'slider.subtitle'      => ['nullable', 'string'],
-        'slider.description'       => ['nullable'],
+        'description'          => ['nullable'],
         'slider.link'          => ['nullable', 'string'],
         'slider.language_id'   => ['nullable'],
         'slider.bg_color'      => ['nullable'],
@@ -48,7 +51,7 @@ class Create extends Component
         return view('livewire.admin.slider.create');
     }
 
-    public function createSlider()
+    public function createModal()
     {
         $this->resetErrorBag();
 
@@ -56,7 +59,7 @@ class Create extends Component
 
         $this->slider = new Slider();
 
-        $this->createSlider = true;
+        $this->createModal = true;
     }
 
     public function create()
@@ -74,13 +77,15 @@ class Create extends Component
                 $this->slider->image = $imageName;
             }
 
+            $this->slider->description = $this->description;
+
             $this->slider->save();
 
             $this->alert('success', __('Slider created successfully.'));
 
             $this->emit('refreshIndex');
 
-            $this->createSlider = false;
+            $this->createModal = false;
         } catch (Throwable $th) {
             $this->alert('warning', __('An error happend Slider was not created.'));
         }

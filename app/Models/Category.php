@@ -13,12 +13,12 @@ class Category extends Model
     use HasAdvancedFilter;
 
     public const ATTRIBUTES = [
-        'id', 'name'
+        'id', 'name',
     ];
 
     public $orderable = self::ATTRIBUTES;
     public $filterable = self::ATTRIBUTES;
-    
+
     protected $fillable = [
         'name',
         'status',
@@ -26,7 +26,7 @@ class Category extends Model
     ];
 
     protected $casts = [
-        'satuts'   => Status::class,
+        'satuts' => Status::class,
     ];
 
     public function scopeActive($query): void

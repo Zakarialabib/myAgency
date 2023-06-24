@@ -37,7 +37,6 @@
                 </div>
             </div>
             <div class="float-right">
-                <!-- Button trigger livewire modal -->
                 <x-button primary type="button" onclick="Livewire.emit('popupModal')">
                     {{ __('Create') }}
                 </x-button>

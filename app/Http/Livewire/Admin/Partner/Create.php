@@ -83,7 +83,7 @@ class Create extends Component
         $this->partner->save();
 
         $this->alert('success', __('Partner created successfully.'));
-        
+
         $this->emit('refreshIndex');
 
         $this->createModal = false;

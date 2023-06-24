@@ -40,11 +40,11 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:150',
-            'content' => 'required',
+            'title'         => 'required|max:150',
+            'content'       => 'required',
             'serial_number' => 'required|numeric',
-            'language_id' => 'required',
-            'status' => 'required',
+            'language_id'   => 'required',
+            'status'        => 'required',
         ]);
 
         $faq = new Faq();
@@ -57,7 +57,7 @@ class FaqController extends Controller
 
         $notification = [
             'messege' => 'Faq Added successfully!',
-            'alert' => 'success',
+            'alert'   => 'success',
         ];
 
         return redirect()->back()->with('notification', $notification);
@@ -71,7 +71,7 @@ class FaqController extends Controller
 
         $notification = [
             'messege' => 'FAQ Deleted successfully!',
-            'alert' => 'success',
+            'alert'   => 'success',
         ];
 
         return redirect()->back()->with('notification', $notification);
@@ -90,11 +90,11 @@ class FaqController extends Controller
     {
         $id = $request->id;
         $request->validate([
-            'title' => 'required|max:150',
-            'content' => 'required',
+            'title'         => 'required|max:150',
+            'content'       => 'required',
             'serial_number' => 'required|numeric',
-            'language_id' => 'required',
-            'status' => 'required',
+            'language_id'   => 'required',
+            'status'        => 'required',
         ]);
 
         $faq = Faq::find($id);
@@ -107,7 +107,7 @@ class FaqController extends Controller
 
         $notification = [
             'messege' => 'Faq Updated successfully!',
-            'alert' => 'success',
+            'alert'   => 'success',
         ];
 
         return redirect(route('admin.faq').'?language='.$this->lang->code)->with('notification', $notification);

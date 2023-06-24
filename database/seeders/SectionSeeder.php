@@ -28,10 +28,10 @@ class SectionSeeder extends Seeder
                 'description'    => 'WeDigitall',
                 'status'         => '1',
                 'bg_color'       => 'bg-green-500',
-                'text_color'       => 'bg-green-500',
+                'text_color'     => 'bg-green-500',
                 'position'       => '1',
                 'language_id'    => '1',
-                'type'  => 'home',
+                'type'           => 'home',
             ],
             [
                 'id'             => 2,
@@ -44,10 +44,10 @@ class SectionSeeder extends Seeder
                 'description'    => 'WeDigitall',
                 'status'         => '1',
                 'bg_color'       => 'bg-green-500',
-                'text_color'       => 'bg-green-500',
+                'text_color'     => 'bg-green-500',
                 'position'       => '1',
                 'language_id'    => '1',
-                'type'  => 'about',
+                'type'           => 'about',
             ],
             [
                 'id'             => 3,
@@ -60,10 +60,10 @@ class SectionSeeder extends Seeder
                 'description'    => 'WeDigitall',
                 'status'         => '1',
                 'bg_color'       => 'bg-green-500',
-                'text_color'       => 'bg-green-500',
+                'text_color'     => 'bg-green-500',
                 'position'       => '1',
                 'language_id'    => '1',
-                'type'  => 'contat',
+                'type'           => 'contat',
             ],
         ]);
     }
