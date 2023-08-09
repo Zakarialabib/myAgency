@@ -146,7 +146,7 @@ class Index extends Component
         $this->alert('success', __('Project deleted successfully.'));
     }
 
-      // Project  Clone
+    // Project  Clone
     public function clone(Project $project)
     {
         $portfolio_details = Project::find($project->id);

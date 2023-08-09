@@ -45,10 +45,9 @@ class Create extends Component
 
         $this->service = new Service();
 
-        $this->description = "";
-        
-        $this->createModal = true;
+        $this->description = '';
 
+        $this->createModal = true;
     }
 
     public function render()

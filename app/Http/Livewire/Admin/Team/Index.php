@@ -89,29 +89,29 @@ class Index extends Component
         return view('livewire.admin.team.index', compact('teams'));
     }
 
-      // Team  Delete
-      public function delete(Team $team)
-      {
-          // abort_if(Gate::denies('team_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-          $team->delete();
-          //   $this->alert('warning', __('Team Deleted successfully!') );
-      }
+    // Team  Delete
+    public function delete(Team $team)
+    {
+        // abort_if(Gate::denies('team_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $team->delete();
+        //   $this->alert('warning', __('Team Deleted successfully!') );
+    }
 
-     // Team  Clone
-     public function clone(Team $team)
-     {
-         $team_details = Team::find($team->id);
-         // dd($team_details);
-         Team::create([
-             'language_id' => $team_details->language_id,
-             'name'        => $team_details->name,
-             'image'       => $team_details->image,
-             'content'     => $team_details->content,
-             'role'        => $team_details->role,
-             'status'      => 0,
-         ]);
-         // $this->alert('success', __('Team Cloned successfully!') );
-     }
+    // Team  Clone
+    public function clone(Team $team)
+    {
+        $team_details = Team::find($team->id);
+        // dd($team_details);
+        Team::create([
+            'language_id' => $team_details->language_id,
+            'name'        => $team_details->name,
+            'image'       => $team_details->image,
+            'content'     => $team_details->content,
+            'role'        => $team_details->role,
+            'status'      => 0,
+        ]);
+        // $this->alert('success', __('Team Cloned successfully!') );
+    }
 
     protected function initListsForFields(): void
     {

@@ -19,7 +19,7 @@
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
             </path>
         </svg>
-        <span class="hidden w-6 w-10 w-14 w-24 w-36 h-6 h-10 h-14 h-24 h-36"></span>
+        <span class="hidden h-{{ $sizing[$size] }} w-{{ $sizing[$size] }}"></span>
         <div class="absolute top-0 left-0 w-full h-full animate-charge"></div>
         <p x-show="showText" class="w-full text-green-500 text-center font-bold text-xl py-6">
             WeDigitall

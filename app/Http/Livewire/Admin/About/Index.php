@@ -92,30 +92,30 @@ class Index extends Component
             ->section('content');
     }
 
-      // About  Delete
-      public function delete(About $about)
-      {
-          // abort_if(Gate::denies('about_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-          $about->delete();
-          //   $this->alert('warning', __('About Deleted successfully!') );
-      }
+    // About  Delete
+    public function delete(About $about)
+    {
+        // abort_if(Gate::denies('about_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $about->delete();
+        //   $this->alert('warning', __('About Deleted successfully!') );
+    }
 
-     // About  Clone
-     public function clone(About $about)
-     {
-         $about_details = About::find($about->id);
-         // dd($about_details);
-         About::create([
-             'language_id'   => $about_details->language_id,
-             'title'         => $about_details->title,
-             'slug'          => ! empty($about_details->slug) ? Str::slug($about_details->slug) : Str::slug($about_details->title),
-             'image'         => $about_details->image,
-             'content'       => $about_details->content,
-             'block_content' => $about_details->block_content,
-             'status'        => 0,
-         ]);
-         // $this->alert('success', __('About Cloned successfully!') );
-     }
+    // About  Clone
+    public function clone(About $about)
+    {
+        $about_details = About::find($about->id);
+        // dd($about_details);
+        About::create([
+            'language_id'   => $about_details->language_id,
+            'title'         => $about_details->title,
+            'slug'          => ! empty($about_details->slug) ? Str::slug($about_details->slug) : Str::slug($about_details->title),
+            'image'         => $about_details->image,
+            'content'       => $about_details->content,
+            'block_content' => $about_details->block_content,
+            'status'        => 0,
+        ]);
+        // $this->alert('success', __('About Cloned successfully!') );
+    }
 
     protected function initListsForFields(): void
     {

@@ -22,7 +22,7 @@ class PopupSettings extends Component
     public $popupModal = false;
 
     public $name;
-    
+
     public $width;
 
     public $frequency;
@@ -40,11 +40,11 @@ class PopupSettings extends Component
     public $ctaText;
 
     public $ctaUrl;
-    
+
     public $editing;
 
     public $listners = [
-        'popupModal'
+        'popupModal',
     ];
 
     public array $rules = [
@@ -113,7 +113,7 @@ class PopupSettings extends Component
     public function popupModal(Popup $popup = null)
     {
         $this->resetValidation(); // Reset any previous validation errors
-    
+
         if ($popup) {
             $this->popup = $popup;
             $this->editing = true;
@@ -121,10 +121,9 @@ class PopupSettings extends Component
             $this->popup = new Popup();
             $this->editing = false;
         }
-    
+
         $this->popupModal = true;
     }
-    
 
     public function save()
     {
@@ -133,31 +132,31 @@ class PopupSettings extends Component
         if ($this->editing) {
             // Editing an existing popup
             $this->popup->update([
-                'name'           => $this->name,
-                'width'          => $this->width,
-                'frequency'      => $this->frequency,
-                'timing'         => $this->timing,
-                'delay'          => $this->delay,
-                'duration'       => $this->duration,
+                'name'            => $this->name,
+                'width'           => $this->width,
+                'frequency'       => $this->frequency,
+                'timing'          => $this->timing,
+                'delay'           => $this->delay,
+                'duration'        => $this->duration,
                 'backgroundColor' => $this->backgroundColor,
-                'content'        => $this->content,
-                'ctaText'        => $this->ctaText,
-                'ctaUrl'         => $this->ctaUrl,
+                'content'         => $this->content,
+                'ctaText'         => $this->ctaText,
+                'ctaUrl'          => $this->ctaUrl,
             ]);
-    
+
             $this->alert('success', __('Popup settings updated successfully!'));
         } else {
             $this->popup = Popup::create([
-                'name'           => $this->name,
-                'width'          => $this->width,
-                'frequency'      => $this->frequency,
-                'timing'         => $this->timing,
-                'delay'          => $this->delay,
-                'duration'       => $this->duration,
+                'name'            => $this->name,
+                'width'           => $this->width,
+                'frequency'       => $this->frequency,
+                'timing'          => $this->timing,
+                'delay'           => $this->delay,
+                'duration'        => $this->duration,
                 'backgroundColor' => $this->backgroundColor,
-                'content'        => $this->content,
-                'ctaText'        => $this->ctaText,
-                'ctaUrl'         => $this->ctaUrl,
+                'content'         => $this->content,
+                'ctaText'         => $this->ctaText,
+                'ctaUrl'          => $this->ctaUrl,
             ]);
 
             $this->alert('success', __('Popup settings created successfully !'));
@@ -165,8 +164,8 @@ class PopupSettings extends Component
 
         $this->popupModal = false;
         // } catch (Throwable $th) {
-            // show error message
-            // $this->alert('warning', __('Something not working !'));
+        // show error message
+        // $this->alert('warning', __('Something not working !'));
         // }
     }
 

@@ -26,7 +26,7 @@
             </li>
             <li>
                 <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-lg lg:text-1xl hover:underline cursor-pointer"
-                    href="{{ url('/') }}#learning">
+                    href="{{ url('/') }}#startup">
                     {{ __('Learning Hub') }}
                 </a>
             </li>
@@ -39,7 +39,7 @@
             <li>
                 <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-lg lg:text-1xl hover:underline cursor-pointer"
                     href="{{ route('front.blogs') }}">
-                    {{ __('Blog') }}
+                    {{ __('Resources') }}
                 </a>
             </li>
             <li>
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
-                    <a href="{{ url('/') }}#learning" x-on:click="isSidebar = false">
+                    <a href="{{ url('/') }}#startup" x-on:click="isSidebar = false">
                         {{ __('Learning Hub') }}
                     </a>
                 </li>
@@ -110,7 +110,7 @@
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
                     <a href="{{ route('front.blogs') }}">
-                        {{ __('Blog') }}
+                        {{ __('Resources') }}
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">

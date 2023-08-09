@@ -11,7 +11,6 @@ use Livewire\WithPagination;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-
 class Index extends Component
 {
     use WithPagination;
@@ -145,24 +144,24 @@ class Index extends Component
             'position'          => 'center',
             'showConfirmButton' => true,
             'cancelButtonText'  => __('Cancel'),
-            'onConfirmed' => 'delete',
+            'onConfirmed'       => 'delete',
         ]);
         $this->service = $service;
     }
 
-     // Service  Clone
-     public function clone(Service $service)
-     {
-         $service_details = Service::find($service->id);
-         // dd($service_details);
-         Service::create([
-             'language_id' => $service_details->language_id,
-             'title'       => $service_details->title,
-             'slug'        => $service_details->slug,
-             'image'       => $service_details->image,
-             'content'     => $service_details->content,
-             'status'      => 0,
-         ]);
-         $this->alert('success', __('Service Cloned successfully!') );
-     }
+    // Service  Clone
+    public function clone(Service $service)
+    {
+        $service_details = Service::find($service->id);
+        // dd($service_details);
+        Service::create([
+            'language_id' => $service_details->language_id,
+            'title'       => $service_details->title,
+            'slug'        => $service_details->slug,
+            'image'       => $service_details->image,
+            'content'     => $service_details->content,
+            'status'      => 0,
+        ]);
+        $this->alert('success', __('Service Cloned successfully!'));
+    }
 }

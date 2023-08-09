@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Service;
@@ -54,8 +53,6 @@ class FrontController extends Controller
         return view('front.contact');
     }
 
-    
-   
     public function dynamicPage($slug)
     {
         $page = Page::where('slug', $slug)->firstOrFail();
@@ -63,26 +60,26 @@ class FrontController extends Controller
         return view('front.dynamic-page', compact('page'));
     }
 
-      //Project page
-      public function project(Request $request)
-      {
-          $section = Section::where('page', 6)->firstOrFail();
+    //Project page
+    public function project(Request $request)
+    {
+        $section = Section::where('page', 6)->firstOrFail();
 
-          $projects = Project::where('status', 1)
-              ->when($catid, function ($query, $catid) {
-                  return $query->where('service_id', $catid);
-              })
-              ->paginate(8);
+        $projects = Project::where('status', 1)
+            ->when($catid, function ($query, $catid) {
+                return $query->where('service_id', $catid);
+            })
+            ->paginate(8);
 
-          return view('front.project', compact('project', 'section'));
-      }
+        return view('front.project', compact('project', 'section'));
+    }
 
-     public function portfolioDetails($slug)
-     {
-         $project = Project::where('slug', $slug)->firstOrFail();
+    public function portfolioDetails($slug)
+    {
+        $project = Project::where('slug', $slug)->firstOrFail();
 
-         return view('front.project-details', compact('project'));
-     }
+        return view('front.project-details', compact('project'));
+    }
 
     public function generateSitemaps()
     {
@@ -99,12 +96,12 @@ class FrontController extends Controller
         }
     }
 
-      // Change Language
-      public function changeLanguage($lang)
-      {
-          session()->put('lang', $lang);
-          app()->setLocale($lang);
+    // Change Language
+    public function changeLanguage($lang)
+    {
+        session()->put('lang', $lang);
+        app()->setLocale($lang);
 
-          return redirect()->route('front.index');
-      }
+        return redirect()->route('front.index');
+    }
 }

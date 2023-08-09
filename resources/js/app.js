@@ -29,27 +29,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 window.PerfectScrollbar = PerfectScrollbar;
 
 Alpine.data("mainState", () => {
-    const init = function () {
-        window.addEventListener("scroll", () => {
-            let st =
-                window.pageYOffset || document.documentElement.scrollTop;
-            if (st > lastScrollTop) {
-                // downscroll
-                this.scrollingDown = true;
-                this.scrollingUp = false;
-            } else {
-                // upscroll
-                this.scrollingDown = false;
-                this.scrollingUp = true;
-                if (st == 0) {
-                    //  reset
-                    this.scrollingDown = false;
-                    this.scrollingUp = false;
-                }
-            }
-            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-        });
-    };
+  
 
     const scrollToAnchor = (anchor) => {
         const element = document.querySelector(anchor);
@@ -63,6 +43,7 @@ Alpine.data("mainState", () => {
 
     const loadingMask = {
         pageLoaded: false,
+        showText: false,
         init() {
             window.onload = () => {
                 this.pageLoaded = true;
@@ -106,7 +87,6 @@ Alpine.data("mainState", () => {
     document.addEventListener("click", handleOutsideClick);
 
     return {
-        init,
         loadingMask,
         scrollToAnchor,
         isDarkMode: getTheme(),

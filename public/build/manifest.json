@@ -32,11 +32,11 @@
     "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.ttf"
   },
   "resources/js/app.js": {
-    "file": "assets/app.fba7cc66.js",
+    "file": "assets/app.945e76be.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app.daad2ff0.css"
+      "assets/app.13c8dd37.css"
     ],
     "assets": [
       "assets/fa-brands-400.faae6fc0.woff2",
@@ -50,12 +50,12 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app.d6046f3d.css",
+    "file": "assets/app.183aa924.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.css": {
-    "file": "assets/app.daad2ff0.css",
+    "file": "assets/app.13c8dd37.css",
     "src": "resources/js/app.css"
   }
 }

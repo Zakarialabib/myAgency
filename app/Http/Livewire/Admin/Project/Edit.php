@@ -22,7 +22,7 @@ class Edit extends Component
     public $images;
 
     public $image;
-    
+
     public $description;
 
     public array $listsForFields = [];
@@ -35,7 +35,7 @@ class Edit extends Component
 
     protected $rules = [
         'project.title'            => 'required|max:191',
-        'description'          => 'required',
+        'description'              => 'required',
         'project.client_name'      => 'required',
         'project.link'             => 'required',
         'project.service_id'       => 'required',

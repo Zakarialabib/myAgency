@@ -22,7 +22,7 @@ class Create extends Component
     public $image;
 
     public $images;
-    
+
     public $description;
 
     public $createModal = false;
@@ -33,7 +33,7 @@ class Create extends Component
 
     protected $rules = [
         'project.title'            => 'required|unique:projects,title|max:191',
-        'description'          => 'required',
+        'description'              => 'required',
         'project.client_name'      => 'required',
         'project.link'             => 'required',
         'project.service_id'       => 'required',
@@ -55,7 +55,7 @@ class Create extends Component
 
         $this->project = new Project();
 
-        $this->description = "";
+        $this->description = '';
 
         $this->createModal = true;
     }

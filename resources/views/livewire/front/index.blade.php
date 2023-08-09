@@ -4,10 +4,10 @@
         <div id="particles-js"></div>
         <div class="anime max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40">
             <div class="text-center md:text-left pb-12 md:pb-16">
-                <h1 h1 class="section-title mt-3 text-6xl sm:text-4xl lg:text-8xl font-extrabold text-white">
+                <h1 h1 class="section-title mt-3 text-4xl md:text-6xl lg:text-8xl  font-extrabold text-white">
                     WeDigitall
                     <p
-                        class="text-4xl sm:text-6xl lg:text-8xl bg-clip-text font-bold leading-none text-transparent uppercase bg-green-600 to-black py-10 typewriter">
+                        class="text-2xl md:text-3xl lg:text-4xl bg-clip-text font-bold leading-none text-transparent uppercase bg-green-600 to-black py-10 typewriter">
                         <span id="typing-text"></span>
                     </p>
                 </h1>
@@ -25,7 +25,7 @@
             <div class="mx-12 relative">
                 <h2 class="text-blue-900 font-medium mb-8 mt-10 uppercase">Our Services</h2>
                 <div class="flex justify-between mb-10">
-                    <p class="text-6xl font-bold">Digital Hub</p>
+                    <p class="text-6xl font-bold border-b-2 border-green-600">Digital Hub</p>
                 </div>
                 <div class="py-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
                     @foreach ($this->digital_services as $index => $service)
@@ -162,7 +162,7 @@
             <div class="mx-12 relative">
                 <h2 class="text-blue-900 font-medium mb-8 mt-10 uppercase">Our Programs</h2>
                 <div class="flex justify-between mb-10">
-                    <p class="text-6xl font-bold">Learning Hub</p>
+                    <p class="text-6xl font-bold border-b-2 border-green-600">Learning Hub</p>
                 </div>
 
                 <div class="py-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center" x-cloak>
@@ -170,16 +170,16 @@
                         <div class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
                             style="background-image: url({{ asset('uploads/services/' . $service->image) }}); background-size: cover; background-position: center;">
                             <h3 class="text-lg font-medium mb-2"
-                                x-show="!expanded.includes('digital-' + {{ $index }})">
+                                x-show="!expanded.includes('learning-' + {{ $index }})">
                                 {{ $service->title }}
                             </h3>
                             <p class="text-center text-zinc-600"
-                                x-show="expanded.includes('digital-' + {{ $index }})">
+                                x-show="expanded.includes('learning-' + {{ $index }})">
                                 {!! $service->content !!}
                             </p>
                             <button
                                 class="absolute top-0 right-0 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
-                                @click="expanded.includes('digital-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'digital-' + {{ $index }}) : expanded.push('digital-' + {{ $index }})">
+                                @click="expanded.includes('learning-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'learning-' + {{ $index }}) : expanded.push('learning-' + {{ $index }})">
                                 +
                             </button>
                         </div>
@@ -281,7 +281,7 @@
     <section class="mx-auto py-20 h-auto text-left bg-gray-50" id="partners">
         <div class="mx-12 relative">
             <div class="flex justify-between mb-10">
-                <p class="text-6xl font-bold">Partners</p>
+                <p class="text-6xl font-bold border-b-2 border-green-600">Partners</p>
             </div>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 space-y-2 px-6 items-center">
@@ -320,7 +320,7 @@
     </section>
 
     <section class="mx-auto px-10  py-20 bg-white h-auto" id="contact">
-        <div class="grid xl:grid-cols-2 sm:grid-cols-1 gap-4 items-center">
+        <div class="grid xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4 items-center">
             <div class="px-4 max-w-[570px] mb-5">
                 <h3
                     class="my-10 text-3xl md:text-4xl lg:text-5xl text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
@@ -336,7 +336,7 @@
             </div>
             <div class="flex flex-col mt-10 items-center space-y-6">
                 <div
-                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
+                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 px-6 py-4 md:py-2 shadow-2xl md">
                     <div
                         class="max-w-[60px] sm:max-w-[70px] w-full h-[60px] sm:h-[70px] flex items-center justify-center mr-6 overflow-hidden bg-white bg-opacity-25 text-white rounded-full">
                         <svg width="24" height="24" viewBox="0 0 24 24" class="fill-current">
@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div
-                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
+                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 px-6 py-4 md:py-2 shadow-2xl md">
                     <div
                         class="max-w-[60px] sm:max-w-[70px] w-full h-[60px] sm:h-[70px] flex items-center justify-center mr-6 overflow-hidden bg-white bg-opacity-25 text-white rounded-full">
                         <svg width="24" height="26" viewBox="0 0 24 26" class="fill-current">
@@ -376,7 +376,7 @@
                     </div>
                 </div>
                 <div
-                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 p-6 transition duration-300 ease-in-out delay-200 transform shadow-2xl md:hover:translate-x-0 md:hover:translate-y-8">
+                    class="flex max-w-5xl w-full rounded-lg bg-gradient-to-r from-green-400 to-green-600 px-6 py-4 md:py-2 shadow-2xl md">
                     <div
                         class="max-w-[60px] sm:max-w-[70px] w-full h-[60px] sm:h-[70px] flex items-center justify-center mr-6 overflow-hidden bg-white bg-opacity-25 text-white rounded-full">
                         <svg width="28" height="19" viewBox="0 0 28 19" class="fill-current">
