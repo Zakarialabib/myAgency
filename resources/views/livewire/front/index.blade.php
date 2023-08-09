@@ -55,7 +55,7 @@
                     <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 justify-center order-2 pt-10">
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -74,7 +74,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -94,7 +94,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -114,7 +114,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -134,7 +134,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -195,7 +195,7 @@
                     <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 justify-center order-2 pt-10">
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -214,7 +214,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -234,7 +234,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
@@ -254,7 +254,7 @@
                         </div>
                         <div class="text-zinc-600 flex mb-6 rounded">
                             <button
-                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                class="h-auto my-auto p-4 start bg-green-100 text-green-500 cursor-pointer flex justify-center mr-8 rounded-full">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     class="h-6 w-6 self-center">
                                     <path
