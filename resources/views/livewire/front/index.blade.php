@@ -1,11 +1,11 @@
 <div>
     @section('title', __('Home'))
-    <section class="relative bg-black text-white items-center h-screen">
+    <section class="relative bg-black text-white items-center h-[480px]">
         <div id="particles-js"></div>
-        <div class="anime max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40 md:pb-20">
+        <div class="anime max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40">
             <div class="text-center md:text-left pb-12 md:pb-16">
                 <h1 h1 class="section-title mt-3 text-6xl sm:text-4xl lg:text-8xl font-extrabold text-white">
-                    {{ $this->home_section->title }}
+                    WeDigitall
                     <p
                         class="text-4xl sm:text-6xl lg:text-8xl bg-clip-text font-bold leading-none text-transparent uppercase bg-green-600 to-black py-10 typewriter">
                         <span id="typing-text"></span>
@@ -21,76 +21,273 @@
     </section>
 
     <section x-data="{ expanded: [] }">
-        <div class="mx-auto py-20 h-auto" id="digital">
-            <h3
-                class="text-3xl md:text-4xl lg:text-5xl px-10 text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
-                <span class="hover:underline transition duration-200 ease-in-out">The Digital Hub </span>
-            </h3>
-
-            <div class="py-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
-                @foreach ($this->digital_services as $index => $service)
-                    <div class="relative flex flex-col items-center justify-center md:h-[350px] xl:h-[380px] p-6 bg-black overflow-hidden w-full "
-                        style="background-image: url('{{ asset('uploads/services/' . $service->image) }}'); background-size: cover; background-position: center;">
-                        <div class="absolute inset-0 bg-green-600 opacity-0 hover:opacity-75 transition duration-300">
+        <div class="bg-white overflow-x-auto overflow-y-hidden py-6" id="digital">
+            <div class="mx-12 relative">
+                <h2 class="text-blue-900 font-medium mb-8 mt-10 uppercase">Our Services</h2>
+                <div class="flex justify-between mb-10">
+                    <p class="text-6xl font-bold">Digital Hub</p>
+                </div>
+                <div class="py-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
+                    @foreach ($this->digital_services as $index => $service)
+                        <div class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
+                            style="background-image: url({{ asset('uploads/services/' . $service->image) }}); background-size: cover; background-position: center;">
+                            <h3 class="text-lg font-medium mb-2"
+                                x-show="!expanded.includes('digital-' + {{ $index }})">
+                                {{ $service->title }}
+                            </h3>
+                            <p class="text-center text-zinc-600"
+                                x-show="expanded.includes('digital-' + {{ $index }})">
+                                {!! $service->content !!}
+                            </p>
+                            <button
+                                class="absolute top-0 right-0 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
+                                @click="expanded.includes('digital-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'digital-' + {{ $index }}) : expanded.push('digital-' + {{ $index }})">
+                                +
+                            </button>
                         </div>
-
-                        <h4 class="absolute bottom-10 text-lg text-center font-bold text-white mb-1 hover:text-gray-200 z-10 transition duration-200 ease-in-out"
-                            x-show="!expanded.includes('digital-' + {{ $index }})">
-                            {{ $service->title }}
-                        </h4>
-                        <div class="text-center text-white text-md z-10 transition duration-200 ease-in-out"
-                            x-show="expanded.includes('digital-' + {{ $index }})">
-                            {!! $service->content !!}
+                    @endforeach
+                </div>
+                <div class="mx-auto px-10 flex flex-col justify-center py-6">
+                    <h2
+                        class="text-xl hover:underline transition duration-200 ease-in-out text-center text-blue-900 font-bold my-6 uppercase">
+                        INDUSTRIES SERVED
+                    </h2>
+                    <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 justify-center order-2 pt-10">
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Retail and E-commerce</h3>
                         </div>
-                        <button class="absolute top-2 right-2 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
-                            @click="expanded.includes('digital-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'digital-' + {{ $index }}) : expanded.push('digital-' + {{ $index }})">
-                            +
-                        </button>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Financial Services and Banking
+                            </h3>
+                        </div>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Hospitality and Travel
+                            </h3>
+                        </div>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Education and EdTech
+                            </h3>
+                        </div>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Transportation and Logistics </h3>
+                        </div>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
 
-        <div class="mx-auto py-20 h-auto" id="startup">
-            <h3
-                class="text-3xl md:text-4xl lg:text-5xl px-10 text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
-                <span class="hover:underline transition duration-200 ease-in-out">ُThe Startup Hub </span>
-            </h3>
+        <hr>
 
-            <div class="py-12 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
-                @foreach ($this->startup_services as $index => $service)
-                    <div class="relative flex flex-col items-center justify-center md:h-[350px] xl:h-[380px] p-6 bg-black overflow-hidden w-full "
-                        style="background-image: url('{{ asset('uploads/services/' . $service->image) }}'); background-size: cover; background-position: center;">
-                        <div class="absolute inset-0 bg-green-600 opacity-0 hover:opacity-75 transition duration-300">
-                        </div>
+        <div class="bg-white overflow-x-auto overflow-y-hidden py-6" id="learning">
+            <div class="mx-12 relative">
+                <h2 class="text-blue-900 font-medium mb-8 mt-10 uppercase">Our Programs</h2>
+                <div class="flex justify-between mb-10">
+                    <p class="text-6xl font-bold">Learning Hub</p>
+                </div>
 
-                        <h4 class="absolute bottom-10 text-lg text-center font-bold text-white mb-1 hover:text-gray-200 z-10 transition duration-200 ease-in-out"
-                            x-show="!expanded.includes('startup-' + {{ $index }})">
-                            {{ $service->title }}
-                        </h4>
-                        <div class="text-center text-white text-md z-10 transition duration-200 ease-in-out"
-                            x-show="expanded.includes('startup-' + {{ $index }})">
-                            {!! $service->content !!}
+                <div class="py-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center" x-cloak>
+                    @foreach ($this->learning_services as $index => $service)
+                        <div class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
+                            style="background-image: url({{ asset('uploads/services/' . $service->image) }}); background-size: cover; background-position: center;">
+                            <h3 class="text-lg font-medium mb-2"
+                                x-show="!expanded.includes('digital-' + {{ $index }})">
+                                {{ $service->title }}
+                            </h3>
+                            <p class="text-center text-zinc-600"
+                                x-show="expanded.includes('digital-' + {{ $index }})">
+                                {!! $service->content !!}
+                            </p>
+                            <button
+                                class="absolute top-0 right-0 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
+                                @click="expanded.includes('digital-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'digital-' + {{ $index }}) : expanded.push('digital-' + {{ $index }})">
+                                +
+                            </button>
                         </div>
-                        <button class="absolute top-2 right-2 bg-green-600 p-2 text-white hover:text-gray-100 font-bold"
-                            @click="expanded.includes('startup-' + {{ $index }}) ? expanded = expanded.filter(i => i !== 'startup-' + {{ $index }}) : expanded.push('startup-' + {{ $index }})">
-                            +
-                        </button>
+                    @endforeach
+                </div>
+
+
+                <div class="mx-auto px-10 flex flex-col justify-center py-6">
+                    <h2
+                        class="text-xl hover:underline transition duration-200 ease-in-out text-center text-blue-900 font-bold my-6 uppercase">
+                        Prospective Partners
+                    </h2>
+                    <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 justify-center order-2 pt-10">
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Corporate Training</h3>
+                        </div>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Educational Institutions
+                            </h3>
+                        </div>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Startups and Entrepreneurs
+                            </h3>
+                        </div>
+                        <div class="text-zinc-600 flex mb-6 rounded">
+                            <button
+                                class="h-auto my-auto p-4 start bg-red-100 text-red-500 cursor-pointer flex justify-center mr-8 rounded-full">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    class="h-6 w-6 self-center">
+                                    <path
+                                        d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"
+                                        stroke="#6421f2" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" fill="none"></path>
+                                    <path d="M8.75 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M15.25 15.25V9.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                    <path d="M12 15.25V12.75" stroke="#6421f2" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                                </svg>
+                            </button>
+                            <h3 class="my-auto text-xl font-bold mb-5">Government Organizations
+                            </h3>
+                        </div>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </section>
 
     <section class="mx-auto py-20 h-auto text-left bg-gray-50" id="partners">
-        <h3
-            class="py-10 text-3xl md:text-4xl lg:text-5xl px-10 text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
-            <span class="hover:underline transition duration-200 ease-in-out">Partners </span>
-        </h3>
+        <div class="mx-12 relative">
+            <div class="flex justify-between mb-10">
+                <p class="text-6xl font-bold">Partners</p>
+            </div>
+        </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 space-y-2 px-6 items-center">
             @foreach ($this->partners as $partner)
-                <p class="p-5 relative bg-gray-100">
-                    <img class="mx-auto w-full h-24 my-4 rounded-xl filter grayscale transition duration-300 hover:grayscale-0"
+                <p class="p-5 relative bg-gray-100 flex items-center">
+                    <img class="mx-auto my-auto w-full rounded-xl filter grayscale transition duration-300 hover:grayscale-0"
                         src="" alt="{{ $partner->name }}">
                 </p>
             @endforeach
@@ -102,7 +299,8 @@
             <div class="w-3/4">
                 <h3
                     class="pb-10 text-3xl md:text-4xl lg:text-5xl text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
-                    <span class="hover:underline transition duration-200 ease-in-out">{{ $this->about_section->title }}
+                    <span
+                        class="hover:underline transition duration-200 ease-in-out">{{ $this->about_section->title }}
                     </span>
                 </h3>
 
@@ -221,7 +419,7 @@
 
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
         <script>
-            var text = "WeDigitall"; // The text to be displayed
+            var text = @js($this->home_section->title); // The text to be displayed
             var delay = 200; // The delay between typing each character
             var typingSpeed = 290; // The speed of typing animation
 

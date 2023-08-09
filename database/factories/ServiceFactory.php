@@ -19,7 +19,7 @@ class ServiceFactory extends Factory
      */
     public function definition()
     {
-        $type = $this->faker->randomElement(['startup', 'digital']);
+        $type = $this->faker->randomElement(['learning', 'digital']);
 
         return [
             'title'       => fake()->name(),

@@ -21,9 +21,9 @@ class Index extends Component
         return Section::where('type', PageType::HOME)->active()->first();
     }
 
-    public function getStartupServicesProperty(): Collection
+    public function getLearningServicesProperty(): Collection
     {
-        return Service::where('type', 'startup')->active()->get();
+        return Service::where('type', 'learning')->active()->get();
     }
 
     public function getDigitalServicesProperty(): Collection

@@ -21,13 +21,13 @@
             <li>
                 <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-lg lg:text-1xl hover:underline cursor-pointer"
                     href="{{ url('/') }}#digital">
-                    {{ __('The Digital Hub') }}
+                    {{ __('Digtal Hub') }}
                 </a>
             </li>
             <li>
                 <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-lg lg:text-1xl hover:underline cursor-pointer"
-                    href="{{ url('/') }}#startup">
-                    {{ __('The Startup Hub') }}
+                    href="{{ url('/') }}#learning">
+                    {{ __('Learning Hub') }}
                 </a>
             </li>
             <li>
@@ -95,12 +95,12 @@
             <ul class="lg:text-2xl sm:text-xl space-y-4 font-bold font-heading">
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
                     <a href="{{ url('/') }}#digital" x-on:click="isSidebar = false">
-                        {{ __('The Digital Hub') }}
+                        {{ __('Digtal Hub') }}
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
-                    <a href="{{ url('/') }}#startup" x-on:click="isSidebar = false">
-                        {{ __('The Startup Hub') }}
+                    <a href="{{ url('/') }}#learning" x-on:click="isSidebar = false">
+                        {{ __('Learning Hub') }}
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
