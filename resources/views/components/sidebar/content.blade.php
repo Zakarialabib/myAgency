@@ -78,8 +78,8 @@
         {{-- @can('setting_access') --}}
         <x-sidebar.sublink title="{{ __('Settings') }}" href="{{ route('admin.settings.index') }}"
             :active="request()->routeIs('admin.settings.index')" />
-        <x-sidebar.sublink title="{{ __('Email Templates') }}" href="{{ route('admin.email-templates.index') }}"
-            :active="request()->routeIs('admin.email-templates.index')" />
+        <x-sidebar.sublink title="{{ __('Email Templates') }}" href="{{ route('admin.email-templates') }}"
+            :active="request()->routeIs('admin.email-templates')" />
         <x-sidebar.sublink title="{{ __('Menu Settings') }}" href="{{ route('admin.menu-settings.index') }}"
             :active="request()->routeIs('admin.menu-settings.index')" />
         {{-- @endcan --}}

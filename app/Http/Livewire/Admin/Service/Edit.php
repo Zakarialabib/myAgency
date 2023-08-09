@@ -68,7 +68,7 @@ class Edit extends Component
 
         $this->service->slug = Str::slug($this->service->title);
 
-        if (empty($this->image)) {
+        if ($this->image) {
             $imageName = Str::slug($this->service->title).'.'.$this->image->extension();
             $this->image->storeAs('services', $imageName);
             $this->service->image = $imageName;

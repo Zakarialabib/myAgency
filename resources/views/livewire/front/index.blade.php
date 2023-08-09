@@ -4,7 +4,7 @@
         <div id="particles-js"></div>
         <div class="anime max-w-6xl mx-auto px-4 sm:px-6 pt-32 pb-12 md:pt-40">
             <div class="text-center md:text-left pb-12 md:pb-16">
-                <h1 h1 class="section-title mt-3 text-4xl md:text-6xl lg:text-8xl  font-extrabold text-white">
+                <h1 h1 class="section-title mt-3 text-4xl md:text-6xl lg:text-8xl uppercase font-extrabold text-white">
                     WeDigitall
                     <p
                         class="text-2xl md:text-3xl lg:text-4xl bg-clip-text font-bold leading-none text-transparent uppercase bg-green-600 to-black py-10 typewriter">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="mx-auto px-10 flex flex-col justify-center py-6">
                     <h2
-                        class="text-xl hover:underline transition duration-200 ease-in-out text-center text-blue-900 font-bold my-6 uppercase">
+                        class="text-xl hover:underline transition duration-200 ease-in-out text-left text-blue-900 font-bold my-6 uppercase">
                         INDUSTRIES SERVED
                     </h2>
                     <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 justify-center order-2 pt-10">
@@ -189,7 +189,7 @@
 
                 <div class="mx-auto px-10 flex flex-col justify-center py-6">
                     <h2
-                        class="text-xl hover:underline transition duration-200 ease-in-out text-center text-blue-900 font-bold my-6 uppercase">
+                        class="text-xl hover:underline transition duration-200 ease-in-out text-left text-blue-900 font-bold my-6 uppercase">
                         Prospective Partners
                     </h2>
                     <div class="grid gap-2 sm:grid-cols-1 lg:grid-cols-2 justify-center order-2 pt-10">

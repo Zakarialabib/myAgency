@@ -63,7 +63,7 @@ class Edit extends Component
         // try {
         $this->validate();
 
-        if (empty($this->image)) {
+        if ($this->image) {
             $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
             $this->image->storeAs('sections', $imageName);
             $this->section->image = $imageName;

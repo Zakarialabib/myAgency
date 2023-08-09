@@ -92,7 +92,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/redirects', [SettingController::class, 'redirects'])->name('setting.redirects');
     Route::get('/backup', BackupIndex::class)->name('setting.backup');
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::get('/email-template', EmailIndex::class)->name('email-templates.index');
+    Route::get('/email-template', EmailIndex::class)->name('email-templates');
     Route::get('/email-settings', [SettingController::class, 'emailSettings'])->name('email-settings');
     Route::get('/menu-settings', MenuIndex::class)->name('menu-settings.index');
 });
