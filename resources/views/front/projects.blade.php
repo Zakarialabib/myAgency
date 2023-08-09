@@ -1,36 +1,36 @@
 <x-guest-layout>
-    @section('title', $section->title )
-    @section('meta-keywords', $section->title )
-@section('meta-description', {{ Str::limit($section->content, 20, '...') }})
+    @section('title', $section->title)
+    @section('meta-keywords', $section->title)
+    @section('meta-description', Str::limit($section->content, 20, '...'))
 
     <header class="container-fluid header"
-    style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover; background-color:{{ $theme_color }};"> 
+        style="background-image: url({{ asset('/uploads/sections/' . $section->image) }});background-size: cover; background-color:{{ $theme_color }};">
         @if (empty($section))
-        <div class="mouse-scroll"></div>
-        @if (empty($sectiontitle))
-            <div class="row">
-                <div class="col">
-                    <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
-                        <span>perfection is</span><br>
-                        <span>not a myth</span><br>
-                        <span class="other-color">check our</span><br>
-                        <span class="other-color">work.</span>
+            <div class="mouse-scroll"></div>
+            @if (empty($sectiontitle))
+                <div class="row">
+                    <div class="col">
+                        <div class="xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl lg-text">
+                            <span>perfection is</span><br>
+                            <span>not a myth</span><br>
+                            <span class="other-color">check our</span><br>
+                            <span class="other-color">work.</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @else
-            <div>
-                <div class="flex-grow">
-                    <div class="lg-text">
-                        <span>{{ $section->title }}</span>
-                        <span class="other-color">{{ $section->subtitle }}</span>
-                    </div>
-                    <div class="normal-text">
-                        <p>{!! $section->content !!}</p>
+            @else
+                <div>
+                    <div class="flex-grow">
+                        <div class="lg-text">
+                            <span>{{ $section->title }}</span>
+                            <span class="other-color">{{ $section->subtitle }}</span>
+                        </div>
+                        <div class="normal-text">
+                            <p>{!! $section->content !!}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif
     </header>
     <div class="container-fluid box-content">
         <div class="flex flex-wrap">

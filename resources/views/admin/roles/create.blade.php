@@ -63,7 +63,7 @@
                                                         <input type="checkbox" class="custom-control-input"
                                                                id="show_total_stats" name="permissions[]"
                                                                value="show_total_stats" {{ old('show_total_stats') ? 'checked' : '' }}>
-                                                        <label class="custom-control-label" for="show_total_stats">{{(__'Total Stats')}}</label>
+                                                        <label class="custom-control-label" for="show_total_stats">{{__('Total Stats')}}</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">

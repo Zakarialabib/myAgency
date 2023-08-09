@@ -58,7 +58,7 @@
                                 class="attribute text-white" data-toggle="modal" data-target="#attribute"> <i
                                     class="fas fa-edit"></i>{{ __('Create') }}</a>
                             @if ($category->attributes()->count() > 0)
-                                <a href="{{ route('admin-attr-manage', $category->id), '?type=category' }}"
+                                <a href="{{ route('admin-attr-manage', $category->id). '?type=category' }}"
                                     class="edit">
                                     <i class="fas fa-edit"></i>
                                     {{ __('Manage') }}
