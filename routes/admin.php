@@ -5,25 +5,25 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedBannerController;
-use App\Http\Livewire\Admin\Language\Index as LanguageIndex;
-use App\Http\Livewire\Admin\Language\EditTranslation;
+use App\Livewire\Admin\Language\EditTranslation;
 use App\Http\Controllers\Admin\NotificationController;
-use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Livewire\Admin\Contacts;
-use App\Http\Livewire\Admin\Project\Index as ProjectIndex;
-use App\Http\Livewire\Admin\Users\Index as UserIndex;
-use App\Http\Livewire\Admin\Blog\Index as BlogIndex;
-use App\Http\Livewire\Admin\Service\Index as ServiceIndex;
-use App\Http\Livewire\Admin\Category\Index as CategoryIndex;
-use App\Http\Livewire\Admin\Email\Index as EmailIndex;
-use App\Http\Livewire\Admin\Menu\Index as MenuIndex;
-use App\Http\Livewire\Admin\Backup\Index as BackupIndex;
+use App\Livewire\Admin\Contacts;
+use App\Livewire\Admin\Page\Index as PageIndex;
+use App\Livewire\Admin\Language\Index as LanguageIndex;
+use App\Livewire\Admin\Slider\Index as SliderIndex;
+use App\Livewire\Admin\Section\Index as SectionIndex;
+use App\Livewire\Admin\Project\Index as ProjectIndex;
+use App\Livewire\Admin\Users\Index as UserIndex;
+use App\Livewire\Admin\Blog\Index as BlogIndex;
+use App\Livewire\Admin\Service\Index as ServiceIndex;
+use App\Livewire\Admin\Category\Index as CategoryIndex;
+use App\Livewire\Admin\Email\Index as EmailIndex;
+use App\Livewire\Admin\Menu\Index as MenuIndex;
+use App\Livewire\Admin\Backup\Index as BackupIndex;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,10 +51,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/featuredBanners', [FeaturedBannerController::class, 'index'])->name('featuredBanners');
 
     // Sliders
-    Route::get('/sliders', [SliderController::class, 'index'])->name('sliders');
+    Route::get('/sliders', SliderIndex::class)->name('sliders');
 
     // Pages
-    Route::get('/pages', [PageController::class, 'index'])->name('pages');
+    Route::get('/pages', PageIndex::class)->name('pages');
 
     // Blogs
     Route::get('/blogs', BlogIndex::class)->name('blogs.index');
@@ -73,7 +73,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/services', ServiceIndex::class)->name('services.index');
 
     // Sections
-    Route::get('/sections', [SectionController::class, 'index'])->name('sections');
+    Route::get('/sections', SectionIndex::class)->name('sections');
 
     // Permissions
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);

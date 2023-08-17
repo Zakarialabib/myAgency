@@ -38,7 +38,7 @@
             </div>
             {{-- <div class="float-right">
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createUser')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createUser')">
                     {{ __('Create') }}
                 </x-button>
             </div> --}}

@@ -4,7 +4,7 @@
             {{ __('Create Language') }}
         </x-slot>
         <x-slot name="content">
-            <form wire:submit.prevent="create">
+            <form wire:submit="create">
                 <div class="flex flex-wrap justify-center">
                     <div class="lg:w-1/2 sm:w-full px-3">
                         <x-label for="name" :value="__('Name')" />

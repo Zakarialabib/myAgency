@@ -40,7 +40,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal', 'show')">
+                <x-button primary type="button" wire:click="dispatchTo('admin.blog.create', 'createModal')">
                     {{ __('Create') }}
                 </x-button>
             </div>
@@ -118,11 +118,12 @@
                                 {{ $blog->title }} -- {{ $blog->category?->title }}
                             </x-table.td>
                             <x-table.td>
-                                <livewire:utils.toggle-button :model="$blog" field="status" key="{{ $blog->id }}" />
+                                <livewire:utils.toggle-button :model="$blog" field="status"
+                                    key="{{ $blog->id }}" lazy />
                             </x-table.td>
                             <x-table.td>
-                                <x-button primary type="button" wire:click="$emit('editModal',{{ $blog->id }})"
-                                    wire:loading.attr="disabled">
+                                <x-button primary type="button" wire:loading.attr="disabled"
+                                    wire:click="$dispatchTo('admin.blog.edit', 'editModal', { id: {{ $blog->id }} })">
                                     <i class="fas fa-edit"></i>
                                 </x-button>
                                 <x-button danger type="button" wire:click="deleteModal({{ $blog->id }})"
@@ -148,10 +149,10 @@
             </div>
 
             <!-- Create Modal -->
-            @livewire('admin.blog.create')
+            <livewire:admin.blog.create lazy />
 
             <!-- Edit Modal -->
-            @livewire('admin.blog.edit', ['blog' => $blog])
+            <livewire:admin.blog.edit blog="{{ $blog }}" lazy />
         </div>
     </x-card>
 </div>

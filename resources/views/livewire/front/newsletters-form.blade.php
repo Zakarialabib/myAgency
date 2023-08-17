@@ -1,7 +1,7 @@
 <div>
     <div class="px-4">
         <x-auth-validation-errors class="mb-4 text-red-400 text-center" :errors="$errors" />
-        <form wire:submit.prevent="newsletterform" class="flex items-center justify-center">
+        <form wire:submit="newsletterform" class="flex items-center justify-center">
             <input type="email" wire:model="newsletter.email" id="email" name="email"
                 autocomplete="email"
                 placeholder="{{ __('Enter your email') }}" value="{{ old('email') }}"

@@ -20,7 +20,7 @@
                     <p class="truncate">{{ $key }}</p>
                 </x-table.td>
                 <x-table.td>
-                    <x-input type="text"  wire:model.lazy="translations.{{ $key }}.value" />
+                    <x-input type="text"  wire:model="translations.{{ $key }}.value" />
                 </x-table.td>
                 <x-table.td>
                     {{-- <x-button type="button" danger

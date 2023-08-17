@@ -9,13 +9,13 @@
             <div class="flex justify-center gap-4 mt-2">
                 <button
                     class="px-4 py-2 text-sm font-semibold text-green-500 border-2 border-green-500 rounded-full hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white"
-                    wire:click="$emit('categorySelected', null)">
+                    wire:click="$dispatch('categorySelected', null)">
                     {{ __('All') }}
                 </button>
                 @foreach ($this->categories as $category)
-                    <button
+                    <button wire:key="{{ $category->id }}"
                         class="px-4 py-2 text-sm font-semibold text-green-500 border-2 border-green-500 rounded-full hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white"
-                        wire:click="$emit('categorySelected', {{ $category->id }})">
+                        wire:click="$dispatch('categorySelected', {{ $category->id }})">
                         {{ $category->title }}
                     </button>
                 @endforeach
@@ -23,7 +23,7 @@
 
             <div class="grid grid-cols-1 gap-4 mt-8 md:grid-cols-2 lg:grid-cols-3">
                 @forelse ($blogs as $post)
-                    <div
+                    <div wire:key="{{ $post->id }}"
                         class="bg-green-600 text-whhite hover:bg-green-900 hover:text-green-200 transition duration-300 max-w-sm rounded overflow-hidden shadow-lg py-4 px-8">
                         <a href="{{ route('front.blogPage', $post->slug) }}">
                             <h4 class="text-lg mb-3 font-semibold">{{ $post->title }}</h4>

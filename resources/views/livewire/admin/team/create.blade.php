@@ -2,7 +2,7 @@
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-    <form class="py-10" enctype="multipart/form-data" wire:submit.prevent="submit">
+    <form class="py-10" enctype="multipart/form-data" wire:submit="submit">
         <div class="w-full">
             <x-label for="language_id" :value="__('Language')" />
             <select wire:model="team.language_id"
@@ -22,14 +22,14 @@
         <div class="flex flex-wrap">
             <div class="w-1/2 sm:w-full">
                 <x-label for="name" :value="__('Name')" />
-                <input type="text" name="name" wire:model.lazy="team.name"
+                <input type="text" name="name" wire:model="team.name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 placeholder="{{ __('Name') }}" value="{{ old('name') }}">
                 <x-input-error for="team.name" />
             </div>
             <div class="w-1/2 sm:w-full">
                 <x-label for="role" :value="__('Role')" />
-                <input type="text" name="role" wire:model.lazy="team.role"
+                <input type="text" name="role" wire:model="team.role"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 placeholder="{{ __('Role') }}" value="{{ old('role') }}">
                 <x-input-error for="team.role" />
@@ -37,7 +37,7 @@
         </div>
         <div class="w-full">
             <x-label for="content" :value="__('Description')" />
-            <x-input.rich-text wire:model.lazy="team.content" id="description" />
+            <x-input.rich-text wire:model="team.content" id="description" />
             <x-input-error for="team.content" />
         </div>
         <div class="w-full">

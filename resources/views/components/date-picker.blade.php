@@ -14,7 +14,7 @@
 
 @push('page_scripts')
     <script>
-        document.addEventListener("livewire:load", () => {
+        document.addEventListener("livewire:init", () => {
     function update(value) {
         let el = document.getElementById('clear-{{ $attributes['id'] }}')
 

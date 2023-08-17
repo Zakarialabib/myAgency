@@ -37,9 +37,7 @@
                 </div>
             </div>
             <div class="float-right">
-
-                <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create Project') }}
                 </x-button>
             </div>
@@ -47,7 +45,6 @@
     </section>
 
     <x-card>
-
         <div class="flex flex-wrap justify-center">
             <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
                 <div class="my-2 my-md-0">
@@ -84,123 +81,113 @@
             </div>
         </div>
 
-        <x-table>
-            <x-slot name="thead">
-                <x-table.th>#</x-table.th>
-                {{-- <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
-                {{ __('Title') }}
-                @include('components.table.sort', ['field' => 'title'])
-            </x-table.th> --}}
-                <x-table.th>
-                    {{ __('Language') }}
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
-                    {{ __('Title') }}
-                    @include('components.table.sort', ['field' => 'title'])
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Service') }}
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Status') }}
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Action') }}
-                </x-table.th>
-            </x-slot>
-            <x-table.tbody>
-                @forelse($projects as $project)
-                    <x-table.tr class="panel-group" id="accordion-{{ $project->id }}" role="tablist"
-                        aria-multiselectable="true">
-                        <x-table.td id="accordion-collapse-{{ $project->id }}" data-accordion="collapse">
-                            <div id="accordion-collapse-heading-{{ $project->id }}">
-                                <button type="button"
-                                    class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
-                                    data-accordion-target="#accordion-collapse-body-{{ $project->id }}"
-                                    aria-expanded="false" aria-controls="accordion-collapse-body-{{ $project->id }}">
-                                    <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            {{-- <input type="checkbox" value="{{ $project->id }}" wire:model="selected"> --}}
-                        </x-table.td>
-                        <x-table.td>
-                            <img src="{{ flagImageUrl($project->language->code) }}">
-
-                        </x-table.td>
-                        <x-table.td>
-                            {{ $project->title }}
-                        </x-table.td>
-                        <x-table.td>
-                            @if (empty($project->service_id))
-                                {{ __('No relation') }}
-                            @else
-                                {{ $project->service->title }}
-                            @endif
-                        </x-table.td>
-                        <x-table.td>
-                            <livewire:utils.toggle-button :model="$project" field="status" key="{{ $project->id }}" />
-                        </x-table.td>
-                        <x-table.td>
-                            <div class="inline-flex">
-                                <a class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300mr-2"
-                                     wire:click="$emit('editModal', {{ $project->id }})">
-                                    <i class="fa fa-pen h-4 w-4"></i>
-                                </a>
+        <div x-data="{ openMenuIndex: null }">
+            <x-table>
+                <x-slot name="thead">
+                    <x-table.th>#</x-table.th>
+                    <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
+                        {{ __('Title') }}
+                        @include('components.table.sort', ['field' => 'title'])
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Service') }}
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Status') }}
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Action') }}
+                    </x-table.th>
+                </x-slot>
+                <x-table.tbody>
+                    @forelse($projects as $index => $project)
+                        <tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $index }}">
+                            <x-table.td class="flex flex-wrap gap-4">
                                 <button
-                                    class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 mr-1 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300"
-                                    type="button" wire:click="confirm('delete', {{ $project->id }})"
-                                    wire:loading.attr="disabled">
-                                    <i class="fa fa-trash h-4 w-4"></i>
+                                    @click="openMenuIndex = (openMenuIndex === {{ $index }}) ? null : {{ $index }}">
+                                    <i class="fa fa-caret-down"
+                                        :class="{
+                                            'fa-caret-up': openMenuIndex === {{ $index }},
+                                            'fa-caret-down': openMenuIndex !== {{ $index }}
+                                        }"
+                                        aria-hidden="true">
+                                    </i>
                                 </button>
-                                <button
-                                    class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
-                                    type="button" wire:click='clone({{ $project->id }})'
-                                    wire:loading.attr="disabled">
-                                    <i class="fa fa-bin h-4 w-4"></i>
-                                </button>
-                            </div>
-                        </x-table.td>
-                    </x-table.tr>
-                    <tr id="accordion-collapse-body-{{ $project->id }}" class="hidden"
-                        aria-labelledby="accordion-collapse-heading-{{ $project->id }}">
-                        <td colspan="12">
-                            <div class="panel-body text-center p-5">
-                                <h1>{{ $project->title }}</h1>
-                                <p>{!! $project->content !!}</p>
-                                <p>{{ $project->link }}</p>
-                                <p>{{ $project->meta_keywords }}</p>
-                                <p>{{ $project->meta_description }}</p>
-                                <div class="container">
-                                    @if (empty($project->gallery))
-                                        {{ __('No images') }}
-                                    @else
-                                        @php
-                                            $images = explode(',', $project->gallery);
-                                        @endphp
-                                        @foreach ($images as $image)
-                                            <img class="w-52 rounded-full" src="{{ asset('uploads/' . $image) }}"
-                                                alt="">
-                                        @endforeach
-                                    @endif
+                                <input type="checkbox" value="{{ $project->id }}" wire:model="selected">
+                            </x-table.td>
+                            <x-table.td>
+                                {{ $project->title }}
+                            </x-table.td>
+                            <x-table.td>
+                                @if (empty($project->service_id))
+                                    {{ __('No relation') }}
+                                @else
+                                    {{ $project->service->title }}
+                                @endif
+                            </x-table.td>
+                            <x-table.td>
+                                <livewire:utils.toggle-button :model="$project" field="status"
+                                    key="{{ $project->id }}" lazy />
+                            </x-table.td>
+                            <x-table.td>
+                                <div class="inline-flex">
+                                    <x-button info type="button"
+                                        wire:click="$dispatchTo('admin.project.edit','editModal', { id: {{ $project->id }} })"
+                                        wire:loading.attr="disabled">
+                                        <i class="fa fa-pen h-4 w-4"></i>
+                                    </x-button>
+                                    <x-button danger type="button"
+                                        wire:click="$dispatch('deleteModal', { id: {{ $project->id }} })"
+                                        wire:loading.attr="disabled">
+                                        <i class="fa fa-trash h-4 w-4"></i>
+                                    </x-button>
+                                    <x-button warning type="button" wire:click='clone({{ $project->id }})'
+                                        wire:loading.attr="disabled">
+                                        {{ __('Clone') }}
+                                    </x-button>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <x-table.tr>
-                        <x-table.td colspan="10" class="text-center">
-                            {{ __('No entries found.') }}
-                        </x-table.td>
-                    </x-table.tr>
-                @endforelse
-            </x-table.tbody>
-        </x-table>
-
+                            </x-table.td>
+                        </tr>
+                        <tr x-show="openMenuIndex === {{ $index }}"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95" x-cloak>
+                            <td colspan="12">
+                                <div class="text-center p-5">
+                                    <h1>{{ $project->title }}</h1>
+                                    <p>{!! $project->content !!}</p>
+                                    <p>{{ $project->link }}</p>
+                                    <p>{{ $project->meta_keywords }}</p>
+                                    <p>{{ $project->meta_description }}</p>
+                                    <div class="container">
+                                        @if (empty($project->gallery))
+                                            {{ __('No images') }}
+                                        @else
+                                            @php
+                                                $images = explode(',', $project->gallery);
+                                            @endphp
+                                            @foreach ($images as $image)
+                                                <img class="w-52 rounded-full" src="{{ asset('uploads/' . $image) }}"
+                                                    alt="">
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <x-table.tr>
+                            <x-table.td colspan="10" class="text-center">
+                                {{ __('No entries found.') }}
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforelse
+                </x-table.tbody>
+            </x-table>
+        </div>
         <div class="card-body">
             <div class="pt-3">
                 @if ($this->selectedCount)
@@ -214,9 +201,10 @@
                 {{ $projects->links() }}
             </div>
         </div>
+
+        <livewire.admin.project.edit project="{{ $project }}" lazy />
+
+        <livewire:admin.project.create lazy />
     </x-card>
-    
-    @livewire('admin.project.edit', [$project])
-    
-    @livewire('admin.project.create')
+
 </div>

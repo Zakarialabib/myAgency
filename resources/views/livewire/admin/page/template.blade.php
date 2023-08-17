@@ -15,7 +15,7 @@
                 </select>
             </div>
             @if ($selectedTemplate)
-                <form wire:submit.prevent="create" class="w-full">
+                <form wire:submit="create" class="w-full">
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <div class="flex flex-wrap space-y-2">
@@ -29,20 +29,20 @@
                         </div>
                         <div class="w-full px-2">
                             <x-label for="description" :value="__('description')" />
-                            <x-trix name="description" wire:model.lazy="description" class="mt-1" />
+                            <x-trix name="description" wire:model="description" class="mt-1" />
                             <x-input-error :messages="$errors->get('description')" for="description" class="mt-2" />
                         </div>
 
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="meta_title" :value="__('Meta title')" />
                             <x-input id="meta_title" class="block mt-1 w-full" type="text" name="meta_title"
-                                wire:model.defer="selectedTemplate.meta_title" />
+                                wire:model="selectedTemplate.meta_title" />
                             <x-input-error :messages="$errors->get('selectedTemplate.meta_title')" for="selectedTemplate.meta_title" class="mt-2" />
                         </div>
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="meta_description" :value="__('Meta description')" />
                             <x-input id="meta_description" class="block mt-1 w-full" type="text"
-                                name="meta_description" wire:model.defer="selectedTemplate.meta_description" />
+                                name="meta_description" wire:model="selectedTemplate.meta_description" />
                             <x-input-error :messages="$errors->get('selectedTemplate.meta_description')" for="selectedTemplate.meta_description" class="mt-2" />
                         </div>
 

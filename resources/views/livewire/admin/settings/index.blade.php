@@ -2,7 +2,7 @@
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-    <form wire:submit.prevent="save" enctype="multipart/form-data">
+    <form wire:submit="save" enctype="multipart/form-data">
 
         <div>
             <div class="w-full flex flex-wrap">

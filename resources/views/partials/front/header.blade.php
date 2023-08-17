@@ -13,7 +13,7 @@
     </div>
     <div class="menu-links">
         <ul>
-            <li><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
+            <li><a href="/">{{ __('Home') }}</a></li>
             <li><a href="{{ route('front.project') }}">{{ __('Work') }}</a></li>
             <li><a href="{{ route('front.blogs') }}">{{ __('Blog') }}</a></li>
             <li><a href="{{ route('front.contact') }}">{{ __('Contact') }}</a></li>
@@ -24,7 +24,7 @@
     <div class="flex flex-wrap">
         <div class="flex-grow">
             <div class="logo-holder">
-                <a href="{{ route('front.index') }}"><img class="logo"
+                <a href="/"><img class="logo"
                         src="{{ asset('images/logo.svg') }}" alt="{{ $website_title }}"></a>
             </div>
         </div>

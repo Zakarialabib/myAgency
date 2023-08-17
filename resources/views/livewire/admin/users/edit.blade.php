@@ -5,11 +5,11 @@
         </x-slot>
 
         <x-slot name="content">
-            <form wire:submit.prevent="update">
+            <form wire:submit="update">
                 <div class="flex flex-wrap mb-3 space-y-2">
                     <div class="w-full lg:w-1/2 px-2">
                         <x-label for="name" :value="__('Name')" required />
-                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model.defer="user.name"
+                        <x-input id="name" class="block mt-1 w-full" type="text" wire:model="user.name"
                             required />
                         <x-input-error :messages="$errors->get('user.name')" class="mt-2" />
                     </div>
@@ -17,13 +17,13 @@
                     <div class="w-full lg:w-1/2 px-2">
                         <x-label for="phone" :value="__('Phone')" required />
                         <x-input id="phone" class="block mt-1 w-full" required type="text"
-                            wire:model.defer="user.phone" />
+                            wire:model="user.phone" />
                         <x-input-error :messages="$errors->get('user.phone')" class="mt-2" />
                     </div>
 
                     <div class="w-full lg:w-1/2 px-2">
                         <label for="role">{{ __('Role') }} <span class="text-red-500">*</span></label>
-                        <select wire:model.defer="user.role"
+                        <select wire:model="user.role"
                             class="block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md mt-1"
                             name="role" id="role" required>
                             <option value="" selected disabled>{{ __('Select Role') }}</option>
@@ -36,14 +36,14 @@
                     <div class="w-full lg:w-1/2 px-2">
                         <x-label for="password" :value="__('Password')" />
                         <x-input id="password" class="block mt-1 w-full" type="password"
-                            wire:model.defer="user.password" />
+                            wire:model="user.password" />
                         <x-input-error :messages="$errors->get('user.password')" class="mt-2" />
                     </div>
 
                     <div class="w-full lg:w-1/2 px-2">
                         <x-label for="password_confirmation" :value="__('Confirm password')" />
                         <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
-                            wire:model.defer="user.password_confirmation" />
+                            wire:model="user.password_confirmation" />
                         <x-input-error :messages="$errors->get('user.password_confirmation')" class="mt-2" />
                     </div>
 
@@ -53,28 +53,28 @@
                             <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                                 <x-label for="email" :value="__('Email')" />
                                 <x-input id="email" class="block mt-1 w-full" type="email"
-                                    wire:model.defer="user.email" />
+                                    wire:model="user.email" />
                                 <x-input-error :messages="$errors->get('user.email')" class="mt-2" />
                             </div>
 
                             <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                                 <x-label for="address" :value="__('Address')" />
                                 <x-input id="address" class="block mt-1 w-full" type="text"
-                                    wire:model.defer="user.address" />
+                                    wire:model="user.address" />
                                 <x-input-error :messages="$errors->get('user.address')" class="mt-2" />
                             </div>
 
                             <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                                 <x-label for="city" :value="__('City')" />
                                 <x-input id="city" class="block mt-1 w-full" type="text"
-                                    wire:model.defer="user.city" />
+                                    wire:model="user.city" />
                                 <x-input-error :messages="$errors->get('user.city')" class="mt-2" />
                             </div>
 
                             <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                                 <x-label for="tax_number" :value="__('Tax Number')" />
                                 <x-input id="tax_number" class="block mt-1 w-full" type="text"
-                                    wire:model.defer="user.tax_number" />
+                                    wire:model="user.tax_number" />
                                 <x-input-error :messages="$errors->get('user.tax_number')" for="" class="mt-2" />
                             </div>
                         </div>

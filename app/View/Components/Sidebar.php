@@ -23,7 +23,7 @@ class Sidebar extends Component
      *
      * @return \Illuminate\Contracts\View\View|Closure|string
      */
-    public function render(): View|Factory
+    public function render()
     {
         return view('components.sidebar.sidebar');
     }

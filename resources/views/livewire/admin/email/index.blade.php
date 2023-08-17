@@ -38,7 +38,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create') }}
                 </x-button>
             </div>
@@ -105,7 +105,7 @@
                         <x-table.td>
                             <div class="inline-flex">
                                 <x-button type="button" secondary
-                                    wire:click="$emit('editModal', {{ $email->id }})">
+                                    wire:click="$dispatch('editModal', {{ $email->id }})">
                                     {{ __('Edit') }}
                                 </x-button>
                             </div>

@@ -38,7 +38,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" wire:click="$emit('createModal')">
+                <x-button primary type="button" wire:click="$dispatch('createModal')">
                     {{ __('Create Category') }}
                 </x-button>
             </div>
@@ -110,17 +110,18 @@
                                 {{-- {{ $category->name }} --}}
                             </x-table.td>
                             <x-table.td>
-                                <livewire:utils.toggle-button :model="$category" field="status" key="{{ $category->id }}" />
+                                <livewire:utils.toggle-button :model="$category" field="status"
+                                    key="{{ $category->id }}" />
                             </x-table.td>
                             <x-table.td>
                                 <div class="flex justify-start space-x-2">
                                     <x-button primary type="button"
-                                        wire:click="$emit('editModal', {{ $category->id }})"
+                                        wire:click="$dispatch('editModal', { id:  {{ $category->id }} })"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-edit"></i>
                                     </x-button>
                                     <x-button danger type="button"
-                                        wire:click="$emit('deleteModal', {{ $category->id }})"
+                                        wire:click="$dispatch('deleteModal', {{ $category->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-trash-alt"></i>
                                     </x-button>
@@ -144,10 +145,11 @@
             </div>
 
             <!-- Create Modal -->
-            @livewire('admin.category.create')
+            <livewire:admin.category.create lazy />
+            
 
             <!-- Edit Modal -->
-            @livewire('admin.category.edit', ['category' => $category])
+            <livewire:admin.category.edit', category="{{ $category }}" lazy />
 
             <!-- Import Modal -->
             <x-modal wire:model="importModal">
@@ -156,12 +158,12 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <form wire:submit.prevent="import">
+                    <form wire:submit="import">
                         <div class="space-y-4">
                             <div class="mt-4">
                                 <x-label for="import" :value="__('Import')" />
                                 <x-input id="import" class="block mt-1 w-full" type="file" name="import"
-                                    wire:model.defer="import" />
+                                    wire:model="import" />
                                 <x-input-error :messages="$errors->get('import')" for="import" class="mt-2" />
                             </div>
 

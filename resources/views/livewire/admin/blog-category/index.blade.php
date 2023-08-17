@@ -72,7 +72,7 @@
                             </x-slot>
                             <x-slot name="content">
                                 <x-button primary type="button"
-                                    wire:click="$emit('editModal', {{ $blogcategory->id }})"
+                                    wire:click="$dispatch('editModal', { id: {{ $blogcategory->id }} })"
                                     wire:loading.attr="disabled">
                                     <i class="fas fa-edit"></i>
                                 </x-button>
@@ -101,8 +101,7 @@
     </div>
 
     <!-- Create Modal -->
-    @livewire('admin.blog-category.create')
-
+    <livewire:'admin.blog-category.create  >
     <!-- Edit Modal -->
     @livewire('admin.blog-category.edit', ['blogcategory' => $blogcategory])
 

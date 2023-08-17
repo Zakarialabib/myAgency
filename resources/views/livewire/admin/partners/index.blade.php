@@ -39,7 +39,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create Partner') }}
                 </x-button>
             </div>
@@ -119,7 +119,7 @@
                     </x-table.td>
                     <x-table.td>
                         <div class="flex justify-start space-x-2">
-                            <x-button primary type="button" wire:click="$emit('editModal', {{ $partner->id }})"
+                            <x-button primary type="button" wire:click="$dispatch('editModal', { id:  {{ $partner->id }} })"
                                 wire:loading.attr="disabled">
                                 <i class="fas fa-edit"></i>
                             </x-button>
@@ -147,7 +147,7 @@
     </div>
 
     <!-- Create Modal -->
-    @livewire('admin.partners.create')
+    <livewire:admin.partners.create lazy />
 
     <!-- Edit Modal -->
     @livewire('admin.partners.edit', ['partner' => $partner])

@@ -9,18 +9,18 @@
             <!-- Validation Errors -->
             <x-validation-errors class="mb-4" :errors="$errors" />
 
-            <form wire:submit.prevent="create">
+            <form wire:submit="create">
                 <div class="flex flex-wrap space-y-2 px-2">
                     <div class="lg:w-1/2 sm:w-full px-2">
                         <x-label for="name" :value="__('Name')" />
                         <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                            wire:model.lazy="partner.name" />
+                            wire:model="partner.name" />
                         <x-input-error :messages="$errors->get('partner.name')" for="partner.name" class="mt-2" />
                     </div>
                     
                     <div class="w-full px-2">
                         <x-label for="description" :value="__('Description')" />
-                        <x-input.textarea wire:model.lazy="partner.description" id="description" />
+                        <x-input.textarea wire:model="partner.description" id="description" />
                         <x-input-error :messages="$errors->get('partner.description')" for="partner.description" class="mt-2" />
                     </div>
 
