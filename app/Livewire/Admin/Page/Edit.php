@@ -31,7 +31,7 @@ class Edit extends Component
     public array $rules = [
         'title'            => ['required', 'string', 'max:255'],
         'slug'             => ['required', 'unique:pages', 'max:255'],
-        'description'           => ['required'],
+        'description'      => ['required'],
         'meta_title'       => ['nullable|max:255'],
         'meta_description' => ['nullable|max:255'],
     ];

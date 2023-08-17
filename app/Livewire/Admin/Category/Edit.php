@@ -24,7 +24,6 @@ class Edit extends Component
 
     public $image;
 
-
     protected $rules = [
         'category.name'        => ['required', 'max:255'],
         'category.description' => ['required'],
@@ -34,6 +33,7 @@ class Edit extends Component
     {
         return Category::select('name', 'id')->get();
     }
+
     #[On('editModal')]
     public function editModal($category)
     {

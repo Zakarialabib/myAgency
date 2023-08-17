@@ -26,7 +26,6 @@ class Login extends Component
     public function authenticate()
     {
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
-
             $user = User::where(['email' => $this->email])->first();
 
             auth()->login($user, $this->remember_me);
@@ -36,11 +35,9 @@ class Login extends Component
             } else {
                 return $this->redirect('/');
             }
-
         } else {
             session()->flash('error', 'Invalid credentials.');
         }
-
     }
 
     public function render()

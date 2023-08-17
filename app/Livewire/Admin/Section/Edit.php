@@ -7,11 +7,9 @@ namespace App\Livewire\Admin\Section;
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use Illuminate\Support\Collection;
 use App\Models\Section;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use App\Models\Language;
 use Livewire\Attributes\On;
 
 class Edit extends Component
@@ -42,7 +40,7 @@ class Edit extends Component
         'page_id'     => ['nullable'],
         'title'       => ['nullable', 'string', 'max:255'],
         'subtitle'    => ['nullable', 'string', 'max:255'],
-        'description'         => ['nullable'],
+        'description' => ['nullable'],
     ];
 
     public function updatedDescription($value)
@@ -84,7 +82,7 @@ class Edit extends Component
         $this->validate();
 
         if ($this->image) {
-            $imageName = Str::slug($this->section->title) . '-' . Str::random(3) . '.' . $this->image->extension();
+            $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
             $this->image->storeAs('sections', $imageName);
             $this->section->image = $imageName;
         }
@@ -103,7 +101,6 @@ class Edit extends Component
         //     $this->alert('warning', __('Section was not updated!'));
         // }
     }
-
 
     public function render(): View
     {

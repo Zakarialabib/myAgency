@@ -35,18 +35,18 @@ class ContactForm extends Component
         $validated = Validator::make(
             // Data to validate...
             [
-                'name' => $this->name,
-                'email' => $this->email,
+                'name'         => $this->name,
+                'email'        => $this->email,
                 'phone_number' => $this->phone_number,
-                'message' => $this->message,
+                'message'      => $this->message,
             ],
 
             // Validation rules to apply...
             [
-                'name' => 'required|min:3',
-                'email' => 'required|email|min:3',
+                'name'         => 'required|min:3',
+                'email'        => 'required|email|min:3',
                 'phone_number' => 'required|numeric|min:3',
-                'message' => 'required|min:3',
+                'message'      => 'required|min:3',
             ],
 
             // Custom validation messages...
@@ -62,7 +62,7 @@ class ContactForm extends Component
         $user = User::find(1);
         $user_email = $user->email;
         Mail::to($user_email)->send(new MailContactForm($contact));
-        
+
         $this->reset(
             'name',
             'email',
@@ -70,7 +70,6 @@ class ContactForm extends Component
             'message'
         );
     }
-
 
     /**
      * The attributes that are mass assignable.

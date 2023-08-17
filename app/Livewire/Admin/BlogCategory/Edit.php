@@ -28,6 +28,7 @@ class Edit extends Component
         'blogcategory.meta_desc'   => 'nullable|max:200',
         'blogcategory.language_id' => 'required|integer',
     ];
+
     #[On('editModal')]
     public function editModal($blogcategory)
     {

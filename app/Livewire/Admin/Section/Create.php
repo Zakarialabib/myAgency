@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Admin\Section;
 
-use App\Models\Language;
 use App\Models\Section;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -40,12 +38,12 @@ class Create extends Component
         'title'          => 'nullable',
         'featured_title' => 'nullable',
         'subtitle'       => 'nullable',
-        'label' => 'nullable',
-        'link' => 'nullable',
-        'bg_color' => 'nullable',
-        'text_color' => 'nullable',
-        'embeded_video' => 'nullable',
-        'description' => 'nullable',
+        'label'          => 'nullable',
+        'link'           => 'nullable',
+        'bg_color'       => 'nullable',
+        'text_color'     => 'nullable',
+        'embeded_video'  => 'nullable',
+        'description'    => 'nullable',
     ];
 
     public function updatedDescription($value)

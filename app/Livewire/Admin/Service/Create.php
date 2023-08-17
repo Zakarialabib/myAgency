@@ -11,6 +11,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
+
 class Create extends Component
 {
     use LivewireAlert;
@@ -28,14 +29,13 @@ class Create extends Component
     public $features;
     #[Rule('nullable')]
     public $options;
-    
+
     #[Rule('min:3')]
     public $content;
     public $slug;
     public $language_id;
 
     public $createModal = false;
-
 
     #[On('createModal')]
     public function createModal()
@@ -56,7 +56,7 @@ class Create extends Component
 
     public function submit()
     {
-        $validated =  $this->validate();
+        $validated = $this->validate();
 
         $this->slug = Str::slug($this->title);
 
@@ -78,5 +78,4 @@ class Create extends Component
 
         $this->createModal = false;
     }
-
 }

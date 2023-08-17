@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\Language;
 use Livewire\Attributes\On;
 
 class Create extends Component
@@ -33,7 +32,7 @@ class Create extends Component
         'title'            => 'required|min:3|max:255',
         'category_id'      => 'required|integer',
         'slug'             => 'required|string',
-        'description'           => 'required|min:3',
+        'description'      => 'required|min:3',
         'meta_title'       => 'nullable|max:100',
         'meta_description' => 'nullable|max:200',
     ];

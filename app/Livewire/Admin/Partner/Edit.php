@@ -28,7 +28,7 @@ class Edit extends Component
     {
         return $this->partner?->image;
     }
-    
+
     #[On('editModal')]
     public function editModal($partner)
     {

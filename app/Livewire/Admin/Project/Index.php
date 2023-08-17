@@ -157,7 +157,7 @@ class Index extends Component
             'service_id'       => $portfolio_details->service_id,
             'language_id'      => 1,
             'title'            => $portfolio_details->title,
-            'slug'             => !empty($portfolio_details->slug) ? Str::slug($portfolio_details->slug) : Str::slug($portfolio_details->title),
+            'slug'             => ! empty($portfolio_details->slug) ? Str::slug($portfolio_details->slug) : Str::slug($portfolio_details->title),
             'content'          => $portfolio_details->content,
             'client_name'      => $portfolio_details->client_name,
             'link'             => $portfolio_details->link,

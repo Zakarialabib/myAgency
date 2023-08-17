@@ -63,18 +63,17 @@ class Edit extends Component
 
     public function submit()
     {
-
         $validated = $this->validate();
 
         if ($this->image) {
-            $imageName = Str::slug($this->project->title) . '.' . $this->image->extension();
+            $imageName = Str::slug($this->project->title).'.'.$this->image->extension();
             $this->image->storeAs('projects', $imageName);
             $this->project->image = $imageName;
         }
 
         if (empty($this->gallery)) {
             foreach ($this->gallery as $key => $image) {
-                $this->gallery[$key] = $image->storeAs('projects', Str::slug($this->project->title) . '-' . $key . '.' . $image->extension());
+                $this->gallery[$key] = $image->storeAs('projects', Str::slug($this->project->title).'-'.$key.'.'.$image->extension());
             }
         }
 
@@ -85,9 +84,9 @@ class Edit extends Component
         $this->project->update($validated);
 
         $this->dispatch('refreshIndex');
-        
+
         $this->alert('success', __('Project updated successfully!'));
-        
+
         $this->editModal = false;
     }
 

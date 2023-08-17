@@ -6,7 +6,6 @@ namespace App\Livewire\Admin\Project;
 
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\Language;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -35,8 +34,6 @@ class Create extends Component
     public $meta_description;
     public $content;
     public $createModal = false;
-
-  
 
     #[On('createModal')]
     public function createModal()

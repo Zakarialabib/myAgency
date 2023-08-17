@@ -15,7 +15,6 @@ class Edit extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-
     public $editModal;
     public $email_setting;
     public $description;

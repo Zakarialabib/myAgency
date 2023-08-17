@@ -43,7 +43,7 @@ class Edit extends Component
 
         $this->service = Service::where('id', $id)->first();
 
-        $this->image = $this->service->image ?? "";
+        $this->image = $this->service->image ?? '';
 
         $this->content = $this->service->content;
 
@@ -61,21 +61,20 @@ class Edit extends Component
 
     public function submit()
     {
-
         $this->service->slug = Str::slug($this->service->title);
 
-        if (!$this->image) {
+        if ( ! $this->image) {
             $this->service->image = null;
         } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
-            $imageName = Str::slug($this->service->title) . '.' . $this->image->extension();
+            $imageName = Str::slug($this->service->title).'.'.$this->image->extension();
             $this->image->storeAs('services', $imageName);
             $this->service->image = $imageName;
-        }        
+        }
 
         $this->service->language_id = 1;
 
         $validated = $this->validate();
-        
+
         $this->service->update($validated);
 
         $this->alert('success', __('Service updated successfully!'));
@@ -83,7 +82,7 @@ class Edit extends Component
         $this->dispatch('refreshIndex');
 
         $this->reset(['title', 'type', 'features', 'options', 'image', 'content']);
-        
+
         $this->editModal = false;
     }
 

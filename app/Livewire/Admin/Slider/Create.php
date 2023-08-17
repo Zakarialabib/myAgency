@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Livewire\Admin\Slider;
 
 use App\Models\Slider;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -33,11 +32,11 @@ class Create extends Component
     public array $rules = [
         'title'         => ['required', 'string', 'max:255'],
         'subtitle'      => ['nullable', 'string'],
-        'description'          => ['nullable'],
+        'description'   => ['nullable'],
         'link'          => ['nullable', 'string'],
         'bg_color'      => ['nullable'],
         'embeded_video' => ['nullable'],
-        'image'                => ['required'],
+        'image'         => ['required'],
     ];
 
     public function render()
@@ -86,5 +85,4 @@ class Create extends Component
             $this->alert('warning', __('An error happend Slider was not created.'));
         }
     }
-
 }

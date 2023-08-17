@@ -10,8 +10,6 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\Language;
-use Illuminate\Support\Collection;
 use Livewire\Attributes\On;
 
 class Edit extends Component
@@ -33,7 +31,7 @@ class Edit extends Component
         'title'            => 'required|min:3|max:255',
         'category_id'      => 'required|integer',
         'slug'             => 'required|string',
-        'description'           => 'required|min:3',
+        'description'      => 'required|min:3',
         'meta_title'       => 'nullable|max:100',
         'meta_description' => 'nullable|max:200',
     ];
@@ -65,7 +63,6 @@ class Edit extends Component
 
         return view('livewire.admin.blog.edit');
     }
-   
 
     public function update()
     {
@@ -88,8 +85,6 @@ class Edit extends Component
 
         $this->editModal = false;
     }
-
- 
 
     public function getBlogCategoriesProperty()
     {

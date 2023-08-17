@@ -6,12 +6,10 @@ namespace App\Livewire\Admin\Slider;
 
 use Livewire\Component;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use App\Models\Slider;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
-use App\Models\Language;
 use Livewire\Attributes\On;
 
 class Edit extends Component
@@ -34,11 +32,11 @@ class Edit extends Component
     protected $rules = [
         'title'         => ['required', 'string', 'max:255'],
         'subtitle'      => ['nullable', 'string', 'max:255'],
-        'description'          => ['nullable'],
+        'description'   => ['nullable'],
         'link'          => ['nullable', 'string'],
         'bg_color'      => ['nullable', 'string'],
         'embeded_video' => ['nullable'],
-        'image'                => ['nullable'],
+        'image'         => ['nullable'],
     ];
 
     public function updatedDescription($value)

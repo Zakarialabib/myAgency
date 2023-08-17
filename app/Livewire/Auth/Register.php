@@ -6,7 +6,6 @@ namespace App\Livewire\Auth;
 
 use App\Models\User;
 use Spatie\Permission\Models\Role;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -59,9 +58,11 @@ class Register extends Component
         switch (true) {
             case $user->hasRole('admin'):
                 $homePage = '/admin/dashboard';
+
                 break;
             default:
                 $homePage = '/';
+
                 break;
         }
 

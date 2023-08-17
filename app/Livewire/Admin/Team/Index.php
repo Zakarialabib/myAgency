@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Livewire\Admin\Team;
 
 use App\Livewire\Utils\WithSorting;
-use App\Models\Language;
-use App\Models\Section;
 use App\Models\Team;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -70,7 +68,6 @@ class Index extends Component
 
     public function render()
     {
-
         $query = Team::advancedFilter([
             's'               => $this->search ?: null,
             'order_column'    => $this->sortBy,
