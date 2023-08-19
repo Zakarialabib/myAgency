@@ -6,6 +6,7 @@ namespace App\Livewire\Front;
 
 use App\Mail\SubscribedMail;
 use App\Models\Newsletter;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -15,7 +16,7 @@ class NewslettersForm extends Component
     public $email;
 
     protected $rules = [
-        'newsletter.email' => 'required|email',
+        'email' => 'required|email',
     ];
 
     public function render()
@@ -23,11 +24,13 @@ class NewslettersForm extends Component
         return view('livewire.front.newsletters-form');
     }
 
-    public function newsletterform()
+    public function save()
     {
         $this->validate();
 
-        $this->newsletter->save();
+        Newsletter::create([
+            'email' => $this->email,
+        ]);
 
         $this->alert('success', __('Your are subscribed to our newsletters.'));
 

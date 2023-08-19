@@ -13,6 +13,7 @@ enum PageType: string
     case SERVICE = 'service';
     case PORTFOLIO = 'portfolio';
     case PROJECT = 'project';
+    case ِCONTACT = 'contact';
 
     public static function values(): array
     {

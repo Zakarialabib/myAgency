@@ -46,11 +46,6 @@ class Create extends Component
         'description'    => 'nullable',
     ];
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     #[On('createModal')]
     public function createModal()
     {
@@ -71,7 +66,7 @@ class Create extends Component
         $this->validate();
 
         if ($this->image) {
-            $imageName = Str::slug($this->section->title).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
+            $imageName = Str::slug($this->section->title).'.'.$this->image->extension();
             $this->image->storeAs('sections', $imageName);
             $this->section->image = $imageName;
         }

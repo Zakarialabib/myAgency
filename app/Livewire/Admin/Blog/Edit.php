@@ -11,6 +11,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
 
 class Edit extends Component
 {
@@ -19,7 +20,6 @@ class Edit extends Component
 
     public $editModal = false;
     public $blog;
-
     public $title;
     public $category_id;
     public $slug;
@@ -35,6 +35,12 @@ class Edit extends Component
         'meta_title'       => 'nullable|max:100',
         'meta_description' => 'nullable|max:200',
     ];
+
+    #[Computed]
+    public function blogCategories()
+    {
+        return BlogCategory::select('title', 'id')->get();
+    }
 
     #[On('editModal')]
     public function editModal($id)
@@ -66,9 +72,9 @@ class Edit extends Component
 
     public function update()
     {
-        $this->validate();
-
-        if ($this->image) {
+        if ( ! $this->image) {
+            $this->image = null;
+        } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
             $imageName = Str::slug($this->title).'.'.$this->image->extension();
             $this->image->storeAs('blogs', $imageName);
             $this->blog->image = $imageName;
@@ -77,17 +83,14 @@ class Edit extends Component
         $this->blog->description = $this->description;
         $this->blog->language_id = 1;
 
-        $this->blog->save();
+        $validated = $this->validate();
+
+        $this->blog->update($validated);
 
         $this->alert('success', __('Blog updated successfully.'));
 
         $this->dispatch('refreshIndex');
 
         $this->editModal = false;
-    }
-
-    public function getBlogCategoriesProperty()
-    {
-        return BlogCategory::pluck('title', 'id')->toArray();
     }
 }

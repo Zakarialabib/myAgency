@@ -6,7 +6,7 @@ use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\FrontController;
 use App\Livewire\Front\Index as FrontIndex;
 use App\Livewire\Front\Blogs as BlogIndex;
-use App\Livewire\Front\ShowBlog as BlogShow;
+use App\Livewire\Front\BlogShow;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

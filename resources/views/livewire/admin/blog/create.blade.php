@@ -27,8 +27,8 @@
                         <select name="category_id" id="category_id" wire:model="category_id"
                             class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500">
                             <option value="">{{ __('Select Category') }}</option>
-                            @foreach ($this->blog_categories as $index => $category)
-                                <option value="{{ $index }}">{{ $category }}</option>
+                            @foreach ($this->blogCategories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
                             @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('category_id')" for="category_id" class="mt-2" />

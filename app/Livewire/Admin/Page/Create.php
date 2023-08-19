@@ -32,11 +32,6 @@ class Create extends Component
     public $meta_description;
     public $image;
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     public function render()
     {
         // abort_if(Gate::denies('page_create'), 403);
@@ -60,13 +55,15 @@ class Create extends Component
 
         $this->slug = Str::slug($this->name);
 
-        if ($this->image) {
+        if ( ! $this->image) {
+            $this->image = null;
+        } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
             $imageName = Str::slug($this->name).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
             $this->image->storeAs('pages', $imageName);
             $this->page->image = $imageName;
         }
 
-        Post::create([
+        Page::create([
             'title'            => $this->title,
             'description'      => $this->description,
             'slug'             => $this->slug,

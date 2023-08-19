@@ -48,9 +48,7 @@
         <div class="flex flex-wrap justify-center">
             <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
                 <div class="my-2 my-md-0">
-                    <p class="leading-5 text-black mb-1 text-sm ">
-                        {{ __('Show items per page') }}
-                    </p>
+                    
                     <select wire:model="perPage" name="perPage"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                         @foreach ($paginationOptions as $value)

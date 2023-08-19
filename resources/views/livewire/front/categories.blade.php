@@ -5,7 +5,7 @@
                 <div class="py-4 flex items-center flex-wrap">
                     <ul class="flex flex-wrap items-center">
                         <li class="inline-flex items-center">
-                            <a href="/" class="text-gray-600 hover:text-blue-500">
+                            <a href="/" wire:navigate class="text-gray-600 hover:text-blue-500">
                                 <svg class="w-5 h-auto fill-current mx-2 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 24 24" fill="#000000">
                                     <path d="M0 0h24v24H0V0z" fill="none" />

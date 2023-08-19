@@ -78,7 +78,7 @@
             x-on:click="isSidebar = false"></div>
         <nav class="relative flex flex-col py-6 px-6 w-full h-full bg-white border-r overflow-y-auto">
             <div class="flex items-center mb-2">
-                <a class="mr-auto lg:text-2xl sm:text-xl font-bold font-heading" href="/">
+                <a class="mr-auto lg:text-2xl sm:text-xl font-bold font-heading" href="/" wureLnavigate>
                     <img class="w-full h-10" src="{{ asset('images/' . Helpers::settings('site_logo')) }}"
                         alt="{{ Helpers::settings('site_title') }}" loading="lazy" />
                 </a>
@@ -109,7 +109,7 @@
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
-                    <a href="{{ route('front.blogs') }}">
+                    <a href="{{ route('front.blogs') }}" wire:navigate>
                         {{ __('Resources') }}
                     </a>
                 </li>

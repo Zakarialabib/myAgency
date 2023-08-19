@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Admin\BlogCategory;
 
 use App\Models\BlogCategory;
-use App\Models\Language;
 use Livewire\Component;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -19,18 +17,22 @@ class Edit extends Component
 
     public $blogcategory;
 
+    public $title;
+    public $description;
+    public $meta_title;
+    public $meta_description;
+    public $language_id;
     public $editModal = false;
 
     protected $rules = [
-        'blogcategory.title'       => 'required|string|max:255',
-        'blogcategory.description' => 'nullable',
-        'blogcategory.meta_title'  => 'nullable|max:100',
-        'blogcategory.meta_desc'   => 'nullable|max:200',
-        'blogcategory.language_id' => 'required|integer',
+        'title'            => 'required|string|max:255',
+        'description'      => 'nullable',
+        'meta_title'       => 'nullable|max:100',
+        'meta_description' => 'nullable|max:200',
     ];
 
     #[On('editModal')]
-    public function editModal($blogcategory)
+    public function editModal($id)
     {
         // abort_if(Gate::denies('blogcategory_edit'), 403);
 
@@ -38,27 +40,26 @@ class Edit extends Component
 
         $this->resetValidation();
 
-        $this->blogcategory = BlogCategory::findOrFail($blogcategory);
+        $this->blogcategory = BlogCategory::where('id', $id)->firstOrFail();
 
+        $this->title = $this->blogcategory->title;
+        $this->description = $this->blogcategory->description;
+        $this->meta_title = $this->blogcategory->meta_title;
+        $this->meta_description = $this->blogcategory->meta_description;
         $this->editModal = true;
     }
 
     public function update()
     {
-        $this->validate();
+        $validated = $this->validate();
 
-        $this->blogcategory->save();
+        $this->blogcategory->update($validated);
 
         $this->alert('success', __('BlogCategory updated successfully'));
 
         $this->dispatch('refreshIndex');
 
         $this->editModal = false;
-    }
-
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
     }
 
     public function render(): View

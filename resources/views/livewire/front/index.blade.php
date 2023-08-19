@@ -283,7 +283,7 @@
     <section class="mx-auto py-20 h-auto text-left bg-gray-50" id="partners">
         <div class="mx-12 relative">
             <div class="flex justify-between mb-10">
-                <p class="text-6xl font-bold border-b-2 border-green-600">Partners</p>
+                <p class="text-6xl font-bold border-b-2 border-green-600">{{ __('Partners') }}</p>
             </div>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 space-y-2 px-6 items-center">
@@ -333,7 +333,7 @@
                 <p class="text-base text-black leading-relaxed mb-9">
                     {{ __('For any inquiry, feel free to ask') }}
                 </p>
-                <livewire:front.contact-form lazy />
+                <livewire:front.contact-form type="homeContact" lazy />
             </div>
             <div class="flex flex-col mt-10 items-center space-y-6">
                 <div

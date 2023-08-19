@@ -39,11 +39,6 @@ class Edit extends Component
         'image'         => ['nullable'],
     ];
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     #[On('editModal')]
     public function editModal($id)
     {
@@ -69,14 +64,11 @@ class Edit extends Component
     {
         $this->validate();
 
-        if ($this->image) {
+        if ( ! $this->image) {
+            $this->image = null;
+        } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
             $imageName = Str::slug($this->slider->title).'-'.Str::random(5).'.'.$this->image->extension();
-
-            $this->slider->clearMediaCollection('local_files');
-
-            $this->slider->addMedia($this->image->getRealPath())
-                ->toMediaCollection('local_files');
-
+            $this->image->storeAs('public/sliders', $imageName);
             $this->slider->image = $imageName;
         }
 

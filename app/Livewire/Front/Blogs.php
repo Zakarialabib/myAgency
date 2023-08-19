@@ -14,6 +14,8 @@ class Blogs extends Component
 {
     use WithPagination;
 
+    use WithPagination;
+
     public $category;
 
     protected $listeners = ['categorySelected'];
@@ -21,6 +23,12 @@ class Blogs extends Component
     public function categorySelected($category)
     {
         $this->category = $category;
+    }
+
+    #[Computed]
+    public function featuredBlogs()
+    {
+        return Blog::active()->where('featured', true)->get();
     }
 
     #[Computed]
@@ -36,6 +44,6 @@ class Blogs extends Component
                 $query->where('category_id', $this->category);
             })->paginate(6);
 
-        return view('livewire.front.blogs', compact('blogs'))->extends('layouts.guest');
+        return view('livewire.front.blogs', compact('blogs'));
     }
 }

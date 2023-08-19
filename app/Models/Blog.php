@@ -11,25 +11,16 @@ class Blog extends Model
 {
     use HasAdvancedFilter;
 
-    public $orderable = [
+    public const ATTRIBUTES = [
         'id',
         'title',
         'slug',
         'status',
         'featured',
-        'language_id',
     ];
 
-    public $timestamps = false;
-
-    protected $filterable = [
-        'id',
-        'title',
-        'slug',
-        'status',
-        'featured',
-        'language_id',
-    ];
+    public $orderable = self::ATTRIBUTES;
+    public $filterable = self::ATTRIBUTES;
 
     protected $fillable = [
         'title',
@@ -40,18 +31,15 @@ class Blog extends Model
         'featured',
         'meta_title',
         'meta_description',
-        'language_id',
     ];
 
-    protected $dates = ['created_at'];
+    public function scopeActive($query)
+    {
+        $query->where('status', true);
+    }
 
     public function category()
     {
         return $this->belongsTo(BlogCategory::class);
-    }
-
-    public function language()
-    {
-        return $this->belongsTo(Language::class);
     }
 }

@@ -25,6 +25,7 @@
         <x-sidebar.sublink title="{{ __('Team') }}" href="{{ route('admin.teams.index') }}" :active="request()->routeIs('admin.teams.index')" />
         <x-sidebar.sublink title="{{ __('Projects') }}" href="{{ route('admin.projects.index') }}" :active="request()->routeIs('admin.projects.index')" />
         <x-sidebar.sublink title="{{ __('Services') }}" href="{{ route('admin.services.index') }}" :active="request()->routeIs('admin.services.index')" />
+        <x-sidebar.sublink title="{{ __('Contacts') }}" href="{{ route('admin.contacts') }}" :active="request()->routeIs('admin.contacts')" />
     
     </x-sidebar.dropdown>
     {{-- @endcan --}}

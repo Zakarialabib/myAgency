@@ -162,11 +162,11 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <div class="flex flex-wrap -mx-2 mb-3">
+                    {{-- <div class="flex flex-wrap -mx-2 mb-3">
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="name" :value="__('Name')" />
                             <x-input id="name" class="block mt-1 w-full" disabled type="text"
-                                wire:model="user.first_name" />
+                                wire:model="user.name" />
                         </div>
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
@@ -198,7 +198,7 @@
                             <x-input id="tax_number" class="block mt-1 w-full" type="text"
                                 wire:model="user.tax_number" disabled />
                         </div>
-                    </div>
+                    </div> --}}
                 </x-slot>
             </x-modal>
 
@@ -209,25 +209,3 @@
         </div>
     </x-card>
 </div>
-
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:init', function() {
-            window.livewire.on('deleteModal', UserId => {
-                Swal.fire({
-                    title: __("Are you sure?"),
-                    text: __("You won't be able to revert this!"),
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: __("Yes, delete it!")
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.Livewire.dispatch('delete', UserId)
-                    }
-                })
-            })
-        })
-    </script>
-@endpush

@@ -12,6 +12,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use LiveWire\Attributes\On;
 use LiveWire\Attributes\Rule;
+use Livewire\Attributes\Computed;
 
 class Edit extends Component
 {
@@ -65,7 +66,9 @@ class Edit extends Component
     {
         $validated = $this->validate();
 
-        if ($this->image) {
+        if ( ! $this->image) {
+            $this->image = null;
+        } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
             $imageName = Str::slug($this->project->title).'.'.$this->image->extension();
             $this->image->storeAs('projects', $imageName);
             $this->project->image = $imageName;
@@ -95,7 +98,8 @@ class Edit extends Component
         return view('livewire.admin.project.edit');
     }
 
-    public function getServicesProperty()
+    #[Computed]
+    public function services()
     {
         return Service::select('title', 'id')->get();
     }

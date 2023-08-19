@@ -16,7 +16,7 @@ class BlogCategory extends Model
 
     public $orderable = [
         'id',
-        'name',
+        'title',
         'status',
         'language_id',
     ];
@@ -33,20 +33,14 @@ class BlogCategory extends Model
     protected $fillable = [
         'title',
         'description',
-        'meta_tag',
+        'meta_title',
         'meta_description',
         'featured',
-        'language_id',
     ];
 
     public function blogs()
     {
         return $this->hasMany(Blog::class);
-    }
-
-    public function language()
-    {
-        return $this->belongsTo(Language::class);
     }
 
     public function setSlugAttribute($value)

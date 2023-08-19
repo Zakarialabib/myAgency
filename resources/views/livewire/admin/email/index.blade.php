@@ -57,9 +57,7 @@
                     </p>
                 @endif
                 <div class="my-2 my-md-0">
-                    <p class="leading-5 text-black mb-1 text-sm ">
-                        {{ __('Show items per page') }}
-                    </p>
+                    
                     <select wire:model="perPage" name="perPage"
                         class="w-20 p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-2 text-sm focus:shadow-outline-blue focus:border-blue-300">
                         @foreach ($paginationOptions as $value)

@@ -12,7 +12,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.dashboard')]
 class Index extends Component
 {
     use WithPagination;

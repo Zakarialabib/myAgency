@@ -27,11 +27,6 @@ class Template extends Component
         'createTemplate',
     ];
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     public function mount()
     {
         $this->templates = config('templates');

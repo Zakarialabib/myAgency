@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Livewire\Admin\Slider;
 
 use App\Livewire\Utils\WithSorting;
-use App\Models\Language;
 use App\Models\Slider;
-use Illuminate\Support\Collection;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -56,16 +54,6 @@ class Index extends Component
         'sortDirection' => [
             'except' => 'desc',
         ],
-    ];
-
-    protected $rules = [
-        'slider.title'         => ['required', 'string', 'max:255'],
-        'slider.subtitle'      => ['nullable', 'string'],
-        'slider.details'       => ['nullable'],
-        'slider.link'          => ['nullable', 'string'],
-        'slider.language_id'   => ['nullable', 'integer'],
-        'slider.bg_color'      => ['nullable', 'string'],
-        'slider.embeded_video' => ['nullable'],
     ];
 
     #[Computed]
@@ -137,10 +125,5 @@ class Index extends Component
         $slider->delete();
 
         $this->alert('success', __('Slider deleted successfully.'));
-    }
-
-    public function getLanguagesProperty(): Collection
-    {
-        return Language::select('name', 'id')->get();
     }
 }

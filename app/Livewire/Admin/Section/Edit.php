@@ -43,11 +43,6 @@ class Edit extends Component
         'description' => ['nullable'],
     ];
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     #[On('editModal')]
     public function editModal($id)
     {
@@ -81,7 +76,9 @@ class Edit extends Component
         // try {
         $this->validate();
 
-        if ($this->image) {
+        if ( ! $this->image) {
+            $this->image = null;
+        } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
             $imageName = Str::slug($this->section->title).'-'.Str::random(3).'.'.$this->image->extension();
             $this->image->storeAs('sections', $imageName);
             $this->section->image = $imageName;

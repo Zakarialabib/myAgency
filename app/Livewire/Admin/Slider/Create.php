@@ -61,7 +61,9 @@ class Create extends Component
         try {
             $this->validate();
 
-            if ($this->image) {
+            if ( ! $this->image) {
+                $this->image = null;
+            } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
                 $imageName = Str::slug($this->title).'-'.Str::random(5).'.'.$this->image->extension();
 
                 // $this->slider->addMediaFromDisk($this->image->getRealPath())

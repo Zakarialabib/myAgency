@@ -20,11 +20,6 @@ class Edit extends Component
     public $description;
     public $message;
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     public function updatedMessage($value)
     {
         $this->message = $value;

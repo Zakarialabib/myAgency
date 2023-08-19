@@ -36,11 +36,6 @@ class Edit extends Component
         'meta_description' => ['nullable|max:255'],
     ];
 
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
-
     public function render()
     {
         // abort_if(Gate::denies('page_edit'), 403);
@@ -67,8 +62,10 @@ class Edit extends Component
 
         $this->page->slug = Str::slug($this->page->name);
 
-        if ($this->image) {
-            $imageName = Str::slug($this->page->name).'-'.date('Y-m-d H:i:s').'.'.$this->image->extension();
+        if ( ! $this->image) {
+            $this->image = null;
+        } elseif (is_object($this->image) && method_exists($this->image, 'extension')) {
+            $imageName = Str::slug($this->page->name).'.'.$this->image->extension();
             $this->image->storeAs('pages', $imageName);
             $this->page->image = $imageName;
         }

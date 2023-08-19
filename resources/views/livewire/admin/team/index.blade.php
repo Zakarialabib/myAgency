@@ -2,9 +2,6 @@
     <div class="flex flex-wrap justify-center">
         <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
             <div class="my-2 my-md-0">
-                <p class="leading-5 text-black mb-1 text-sm ">
-                    {{ __('Show items per page') }}
-                </p>
                 <select wire:model="perPage" name="perPage"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                     @foreach ($paginationOptions as $value)
@@ -66,8 +63,8 @@
                                 class="font-bold border-transparent uppercase justify-center text-xs py-1 px-2 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-blue-500 border-blue-800 hover:bg-blue-600 active:bg-blue-700 focus:ring-blue-300 mr-2"
                                 data-accordion-target="#accordion-collapse-body-{{ $team->id }}"
                                 aria-expanded="false" aria-controls="accordion-collapse-body-{{ $team->id }}">
-                                <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd"></path>
@@ -88,21 +85,20 @@
                     <x-table.td>
                         <div class="inline-flex">
                             <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
-                                {{-- href="{{ route('admin.teams.edit', $team) }}" --}}
-                                >
-                                <i class="fa fas-pen h-4 w-4" ></i>
+                                {{-- href="{{ route('admin.teams.edit', $team) }}" --}}>
+                                <i class="fa fas-pen h-4 w-4"></i>
                             </a>
                             <button
                                 class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
                                 type="button" wire:click="confirm('delete', {{ $team->id }})"
                                 wire:loading.attr="disabled">
-                                <i class="fa fas-trash h-4 w-4" ></i>
+                                <i class="fa fas-trash h-4 w-4"></i>
                             </button>
                             <button
                                 class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
                                 type="button" wire:click="confirm('clone', {{ $team->id }})"
                                 wire:loading.attr="disabled">
-                                <i class="fa fas-bin h-4 w-4" ></i>
+                                <i class="fa fas-bin h-4 w-4"></i>
                             </button>
 
                         </div>
@@ -151,5 +147,3 @@
         </div>
     </div>
 </div>
-
-

@@ -11,6 +11,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
 
 class Create extends Component
 {
@@ -36,11 +37,6 @@ class Create extends Component
         'meta_title'       => 'nullable|max:100',
         'meta_description' => 'nullable|max:200',
     ];
-
-    public function updatedDescription($value)
-    {
-        $this->description = $value;
-    }
 
     public function render()
     {
@@ -77,6 +73,8 @@ class Create extends Component
             $this->blog->image = $imageName;
         }
 
+        $this->blog->language_id = 1;
+
         $this->blog->description = $this->description;
 
         $this->blog->save();
@@ -88,8 +86,9 @@ class Create extends Component
         $this->createModal = false;
     }
 
-    public function getBlogCategoriesProperty()
+    #[Computed]
+    public function blogCategories()
     {
-        return BlogCategory::pluck('title', 'id')->toArray();
+        return BlogCategory::select('title', 'id')->get();
     }
 }

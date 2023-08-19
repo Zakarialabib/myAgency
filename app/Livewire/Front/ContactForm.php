@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Front;
 
-use App\Mail\ContactForm as MailContactForm;
 use App\Models\Contact;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Illuminate\Support\Facades\Validator;
@@ -24,10 +21,26 @@ class ContactForm extends Component
     public $phone_number;
 
     public $message;
+    public $subject;
 
     public function render()
     {
         return view('livewire.front.contact-form');
+    }
+
+    public function mount($type = null)
+    {
+        $this->subject = $type;
+    }
+
+    public function placeholder()
+    {
+        return <<<'HTML'
+            <div>
+                <!-- Loading spinner... -->
+                <i class="fas fa-spinner fa-spin fa-fw"></i>
+            </div>
+            HTML;
     }
 
     public function submit()
@@ -39,6 +52,7 @@ class ContactForm extends Component
                 'email'        => $this->email,
                 'phone_number' => $this->phone_number,
                 'message'      => $this->message,
+                'subject'      => $this->subject,
             ],
 
             // Validation rules to apply...
@@ -57,30 +71,11 @@ class ContactForm extends Component
 
         $this->alert('success', __('Your Message is sent succesfully.'));
 
-        $this->resetInputFields();
-
-        $user = User::find(1);
-        $user_email = $user->email;
-        Mail::to($user_email)->send(new MailContactForm($contact));
-
         $this->reset(
             'name',
             'email',
             'phone_number',
             'message'
         );
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    private function resetInputFields()
-    {
-        $this->name = '';
-        $this->email = '';
-        $this->phone_number = '';
-        $this->message = '';
     }
 }

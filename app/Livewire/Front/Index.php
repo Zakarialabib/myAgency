@@ -59,6 +59,6 @@ class Index extends Component
 
     public function render()
     {
-        return view('livewire.front.index')->extends('layouts.guest');
+        return view('livewire.front.index');
     }
 }

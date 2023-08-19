@@ -1,17 +1,14 @@
 <?php
 
 declare(strict_types=1);
-
-use App\Http\Controllers\Admin\BlogCategoryController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FeaturedBannerController;
-use App\Livewire\Admin\Language\EditTranslation;
-use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PermissionController;
-use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Livewire\Admin\Contacts;
+use App\Livewire\Admin\Language\EditTranslation;
+use App\Livewire\Admin\Dashboard as DashboardIndex;
 use App\Livewire\Admin\Page\Index as PageIndex;
 use App\Livewire\Admin\Language\Index as LanguageIndex;
 use App\Livewire\Admin\Slider\Index as SliderIndex;
@@ -19,6 +16,7 @@ use App\Livewire\Admin\Section\Index as SectionIndex;
 use App\Livewire\Admin\Project\Index as ProjectIndex;
 use App\Livewire\Admin\Users\Index as UserIndex;
 use App\Livewire\Admin\Blog\Index as BlogIndex;
+use App\Livewire\Admin\BlogCategory\Index as BlogCategoryIndex;
 use App\Livewire\Admin\Service\Index as ServiceIndex;
 use App\Livewire\Admin\Category\Index as CategoryIndex;
 use App\Livewire\Admin\Email\Index as EmailIndex;
@@ -38,11 +36,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', DashboardIndex::class)->name('dashboard');
 
     Route::get('/teams', [TeamController::class, 'index'])->name('teams.index');
     // Contact
-    Route::get('/contact', Contacts::class)->name('contact');
+    Route::get('/contact', Contacts::class)->name('contacts');
 
     // Categories
     Route::get('/categories', CategoryIndex::class)->name('categories.index');
@@ -60,7 +58,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::get('/blogs', BlogIndex::class)->name('blogs.index');
 
     // Bcategories
-    Route::get('/blog-categories', [BlogCategoryController::class, 'index'])->name('blog-categories.index');
+    Route::get('/blog-categories', BlogCategoryIndex::class)->name('blog-categories.index');
 
     // Languages
     Route::get('/language', LanguageIndex::class)->name('language');
@@ -79,13 +77,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'r
     Route::resource('permissions', PermissionController::class, ['except' => ['store', 'update', 'destroy']]);
 
     // Roles
-    Route::resource('roles', RoleController::class, ['except' => ['store', 'update', 'destroy']]);
+    Route::get('/roles', [RolesController::class, 'index'])->name('roles');
 
     // Users
     Route::get('users', UserIndex::class)->name('users.index');
-
-    // Notification
-    Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
 
     // Setting
     Route::get('/popupsettings', [SettingController::class, 'popupsettings'])->name('setting.popupsettings');

@@ -9,7 +9,10 @@ use App\Models\Contact;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
+use Livewire\Attributes\Layout;
 
+#[Layout('components.layouts.dashboard')]
 class Contacts extends Component
 {
     use WithPagination;
@@ -78,9 +81,7 @@ class Contacts extends Component
 
         $contacts = $query->paginate($this->perPage);
 
-        return view('livewire.admin.contacts', compact('contacts'))
-            ->extends('layouts.dashboard')
-            ->section('content');
+        return view('livewire.admin.contacts', compact('contacts'));
     }
 
     public function deleteSelected()
