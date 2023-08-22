@@ -88,7 +88,7 @@
 
 @push('page_scripts')
     <script>
-        document.addEventListener('livewire:load', function() {
+        document.addEventListener('livewire:init', function() {
             window.livewire.on('deleteModal', categoryId => {
                 Swal.fire({
                     title: "Are you sure?",
@@ -100,7 +100,7 @@
                     confirmButtonText: "Yes, delete it!",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.livewire.emit('delete', categoryId)
+                        window.Livewire.dispatch('delete', categoryId)
                     }
                 })
             })

@@ -15,7 +15,7 @@
                 </select>
             </div>
             @if ($selectedTemplate)
-                <form wire:submit.prevent="create" class="w-full">
+                <form wire:submit="create" class="w-full">
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
                     <div class="flex flex-wrap space-y-2">
@@ -35,14 +35,14 @@
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="bg_color" :value="__('Background Color')" />
                             <input id="bg_color" class="block mt-1 w-full" type="color" name="bg_color"
-                                wire:model.defer="selectedTemplate.bg_color" />
+                                wire:model="selectedTemplate.bg_color" />
                             <x-input-error :messages="$errors->get('selectedTemplate.bg_color')" for="selectedTemplate.bg_color" class="mt-2" />
                         </div>
     
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="link" :value="__('Link')" />
                             <x-input id="link" class="block mt-1 w-full" type="text" name="link"
-                                wire:model.defer="selectedTemplate.link" />
+                                wire:model="selectedTemplate.link" />
                             <x-input-error :messages="$errors->get('selectedTemplate.link')" for="selectedTemplate.link" class="mt-2" />
                         </div>
 

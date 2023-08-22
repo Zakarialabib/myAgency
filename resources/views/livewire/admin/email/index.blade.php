@@ -38,7 +38,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create') }}
                 </x-button>
             </div>
@@ -57,9 +57,7 @@
                     </p>
                 @endif
                 <div class="my-2 my-md-0">
-                    <p class="leading-5 text-black mb-1 text-sm ">
-                        {{ __('Show items per page') }}
-                    </p>
+                    
                     <select wire:model="perPage" name="perPage"
                         class="w-20 p-3 leading-5 bg-white text-gray-500 rounded border border-zinc-300 mb-2 text-sm focus:shadow-outline-blue focus:border-blue-300">
                         @foreach ($paginationOptions as $value)
@@ -105,7 +103,7 @@
                         <x-table.td>
                             <div class="inline-flex">
                                 <x-button type="button" secondary
-                                    wire:click="$emit('editModal', {{ $email->id }})">
+                                    wire:click="$dispatch('editModal', {{ $email->id }})">
                                     {{ __('Edit') }}
                                 </x-button>
                             </div>

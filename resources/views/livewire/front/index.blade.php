@@ -13,7 +13,7 @@
                 </h1>
                 <div class="max-w-3xl mx-auto md:mx-0">
                     <p class="text-lg text-gray-400 leading-relaxed mb-4 md:mb-8" id="home_section-description">
-                        {!! $this->home_section->content !!}
+                        {!! $this->homeSection->content !!}
                     </p>
                 </div>
             </div>
@@ -28,8 +28,9 @@
                     <p class="text-6xl font-bold border-b-2 border-green-600">Digital Hub</p>
                 </div>
                 <div class="py-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" x-cloak>
-                    @foreach ($this->digital_services as $index => $service)
-                        <div class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
+                    @foreach ($this->digitalServices as $index => $service)
+                        <div wire:key="{{ $service->id }}"
+                            class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
                             style="background-image: url({{ asset('uploads/services/' . $service->image) }}); background-size: cover; background-position: center;">
                             <h3 class="text-lg font-medium mb-2"
                                 x-show="!expanded.includes('digital-' + {{ $index }})">
@@ -166,8 +167,9 @@
                 </div>
 
                 <div class="py-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 items-center" x-cloak>
-                    @foreach ($this->learning_services as $index => $service)
-                        <div class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
+                    @foreach ($this->learningServices as $index => $service)
+                        <div wire:key="{{ $service->id }}"
+                            class="relative flex flex-col items-center justify-between h-auto overflow-hidden w-full bg-white cursor-pointer rounded-lg py-10 px-6 border"
                             style="background-image: url({{ asset('uploads/services/' . $service->image) }}); background-size: cover; background-position: center;">
                             <h3 class="text-lg font-medium mb-2"
                                 x-show="!expanded.includes('learning-' + {{ $index }})">
@@ -281,12 +283,12 @@
     <section class="mx-auto py-20 h-auto text-left bg-gray-50" id="partners">
         <div class="mx-12 relative">
             <div class="flex justify-between mb-10">
-                <p class="text-6xl font-bold border-b-2 border-green-600">Partners</p>
+                <p class="text-6xl font-bold border-b-2 border-green-600">{{ __('Partners') }}</p>
             </div>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 space-y-2 px-6 items-center">
             @foreach ($this->partners as $partner)
-                <p class="p-5 relative bg-gray-100 flex items-center">
+                <p class="p-5 relative bg-gray-100 flex items-center" wire:key="{{ $partner->id }}">
                     <img class="mx-auto my-auto w-full rounded-xl filter grayscale transition duration-300 hover:grayscale-0"
                         src="" alt="{{ $partner->name }}">
                 </p>
@@ -299,21 +301,20 @@
             <div class="w-3/4">
                 <h3
                     class="pb-10 text-3xl md:text-4xl lg:text-5xl text-left leading-tight text-green-600 font-bold tracking-tighter uppercase cursor-pointer">
-                    <span
-                        class="hover:underline transition duration-200 ease-in-out">{{ $this->about_section->title }}
+                    <span class="hover:underline transition duration-200 ease-in-out">{{ $this->aboutSection->title }}
                     </span>
                 </h3>
 
                 <div class="mb-8 max-w-3xl w-full">
                     <p class="text-base text-gray-800">
-                        {!! $this->about_section->description !!}
+                        {!! $this->aboutSection->description !!}
                     </p>
                 </div>
             </div>
 
             <div class="w-1/4">
                 <div class="flex justify-center items-center pin bg-no-repeat md:bg-left w-full bg-center bg-cover h-screen"
-                    style="background-image: url({{ asset('uploads/sections/' . $this->about_section->image) }});">
+                    style="background-image: url({{ asset('uploads/sections/' . $this->aboutSection->image) }});">
                 </div>
             </div>
         </div>
@@ -332,7 +333,7 @@
                 <p class="text-base text-black leading-relaxed mb-9">
                     {{ __('For any inquiry, feel free to ask') }}
                 </p>
-                @livewire('front.contact-form')
+                <livewire:front.contact-form type="homeContact" lazy />
             </div>
             <div class="flex flex-col mt-10 items-center space-y-6">
                 <div
@@ -419,7 +420,7 @@
 
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
         <script>
-            var text = @js($this->home_section->title); // The text to be displayed
+            var text = @js($this->homeSection->title); // The text to be displayed
             var delay = 200; // The delay between typing each character
             var typingSpeed = 290; // The speed of typing animation
 

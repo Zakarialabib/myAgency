@@ -38,11 +38,11 @@
             </div>
             <div class="float-right">
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createTemplate')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createTemplate')">
                     {{ __('Create from template') }}
                 </x-button>
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create Section') }}
                 </x-button>
             </div>

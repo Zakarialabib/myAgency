@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\FrontController;
-use App\Http\Livewire\Front\Index as FrontIndex;
-use App\Http\Livewire\Front\Blogs as BlogIndex;
-use App\Http\Livewire\Front\ShowBlog as BlogShow;
+use App\Livewire\Front\Index as FrontIndex;
+use App\Livewire\Front\Blogs as BlogIndex;
+use App\Livewire\Front\BlogShow;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,8 @@ Route::get('/lang/{lang}', [FrontController::class, 'changelanguage'])->name('ch
 
 Route::fallback(function (Request $request) {
     return app()->make(ErrorController::class)->notFound($request);
+});
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/custom/livewire/update', $handle);
 });

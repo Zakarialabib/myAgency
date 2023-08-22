@@ -17,13 +17,7 @@ livewire_hot_reload();
 
 import "@fortawesome/fontawesome-free/css/all.css";
 
-import Alpine from 'alpinejs';
-import collapse from '@alpinejs/collapse';
-import focus from "@alpinejs/focus";
-import intersect from "@alpinejs/intersect";
-
-Alpine.plugin(focus);
-Alpine.plugin(intersect);
+import { Livewire, Alpine } from '../../vendor/livewire/livewire/dist/livewire.esm';
 
 import PerfectScrollbar from "perfect-scrollbar";
 window.PerfectScrollbar = PerfectScrollbar;
@@ -123,8 +117,5 @@ Alpine.data("mainState", () => {
     };
 });
 
-Alpine.plugin(collapse)
+Livewire.start()
 
-window.Alpine = Alpine;
-
-Alpine.start();

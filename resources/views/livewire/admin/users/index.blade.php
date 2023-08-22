@@ -38,7 +38,7 @@
             </div>
             {{-- <div class="float-right">
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createUser')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createUser')">
                     {{ __('Create') }}
                 </x-button>
             </div> --}}
@@ -128,12 +128,12 @@
                                         <i class="fas fa-eye"></i>
                                     </x-button>
                                     <x-button primary type="button"
-                                        wire:click="$emit('editModal', {{ $user->id }})"
+                                        wire:click="$dispatch('editModal', {{ $user->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-edit"></i>
                                     </x-button>
                                     <x-button danger type="button"
-                                        wire:click="$emit('deleteModal', {{ $user->id }})"
+                                        wire:click="$dispatch('deleteModal', {{ $user->id }})"
                                         wire:loading.attr="disabled">
                                         <i class="fas fa-trash-alt"></i>
                                     </x-button>
@@ -162,43 +162,43 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <div class="flex flex-wrap -mx-2 mb-3">
+                    {{-- <div class="flex flex-wrap -mx-2 mb-3">
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="name" :value="__('Name')" />
                             <x-input id="name" class="block mt-1 w-full" disabled type="text"
-                                wire:model.defer="user.first_name" />
+                                wire:model="user.name" />
                         </div>
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="phone" :value="__('Phone')" />
                             <x-input id="phone" class="block mt-1 w-full" disabled type="text"
-                                wire:model.defer="user.phone" />
+                                wire:model="user.phone" />
                         </div>
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="email" :value="__('Email')" />
                             <x-input id="email" class="block mt-1 w-full" disabled type="email"
-                                wire:model.defer="user.email" />
+                                wire:model="user.email" />
                         </div>
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="address" :value="__('Address')" />
                             <x-input id="address" class="block mt-1 w-full" disabled type="text"
-                                wire:model.defer="user.address" />
+                                wire:model="user.address" />
                         </div>
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="city" :value="__('City')" />
                             <x-input id="city" class="block mt-1 w-full" type="text" disabled
-                                wire:model.defer="user.city" />
+                                wire:model="user.city" />
                         </div>
 
                         <div class="w-full lg:w-1/2 px-3 mb-6 lg:mb-0">
                             <x-label for="tax_number" :value="__('Tax Number')" />
                             <x-input id="tax_number" class="block mt-1 w-full" type="text"
-                                wire:model.defer="user.tax_number" disabled />
+                                wire:model="user.tax_number" disabled />
                         </div>
-                    </div>
+                    </div> --}}
                 </x-slot>
             </x-modal>
 
@@ -209,25 +209,3 @@
         </div>
     </x-card>
 </div>
-
-@push('scripts')
-    <script>
-        document.addEventListener('livewire:load', function() {
-            window.livewire.on('deleteModal', UserId => {
-                Swal.fire({
-                    title: __("Are you sure?"),
-                    text: __("You won't be able to revert this!"),
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: __("Yes, delete it!")
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.livewire.emit('delete', UserId)
-                    }
-                })
-            })
-        })
-    </script>
-@endpush

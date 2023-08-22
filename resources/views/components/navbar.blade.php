@@ -57,9 +57,9 @@
                         {{ __('Settings') }}
                     </x-dropdown-link>
 
-                    <x-dropdown-link>
-                        {{-- @livewire('admin.cache') --}}
-                    </x-dropdown-link>
+                    {{-- <x-dropdown-link>
+                        <livewire:admin.cache lazy />
+                    </x-dropdown-link> --}}
 
                     <div class="border-t border-gray-100"></div>
 

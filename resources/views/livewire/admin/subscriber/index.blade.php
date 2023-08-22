@@ -2,9 +2,6 @@
     <div class="flex flex-wrap justify-center">
         <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
             <div class="my-2 my-md-0">
-                <p class="leading-5 text-black mb-1 text-sm ">
-                    {{ __('Show items per page') }}
-                </p>
                 <select wire:model="perPage" name="perPage"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                     @foreach ($paginationOptions as $value)
@@ -22,7 +19,7 @@
         </div>
     </div>
 
-    
+
 
     <x-table>
         <x-slot name="thead">
@@ -58,7 +55,7 @@
                                 class="attribute text-white" data-toggle="modal" data-target="#attribute"> <i
                                     class="fas fa-edit"></i>{{ __('Create') }}</a>
                             @if ($category->attributes()->count() > 0)
-                                <a href="{{ route('admin-attr-manage', $category->id). '?type=category' }}"
+                                <a href="{{ route('admin-attr-manage', $category->id) . '?type=category' }}"
                                     class="edit">
                                     <i class="fas fa-edit"></i>
                                     {{ __('Manage') }}
@@ -80,8 +77,9 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link data-href="{{ route('admin-cat-edit', $category->id) }}" class="edit"
-                                    data-toggle="modal" data-target="#modal1"> <i class="fas fa-edit"></i>
+                                <x-dropdown-link data-href="{{ route('admin-cat-edit', $category->id) }}"
+                                    class="edit" data-toggle="modal" data-target="#modal1"> <i
+                                        class="fas fa-edit"></i>
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
                                 <x-dropdown-link href="javascript:;"

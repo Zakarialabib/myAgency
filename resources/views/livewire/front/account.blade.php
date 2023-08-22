@@ -1,16 +1,16 @@
 <div>
 
-    <form wire:submit.prevent="save">
+    <form wire:submit="save">
         <div class="flex flex-wrap space-y-2" x-data="{ show : false }">
             <div class="w-full md:w-1/2 px-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Full Name') }}</label>
-                <x-input wire:model.lazy="name" type="text" />
+                <x-input wire:model="name" type="text" />
                 <x-input-error :messages="$errors->get('name')" for="name" class="mt-2" />
             </div>
 
             <div class="w-full md:w-1/2 px-2">
                 <label class="font-bold font-heading text-gray-600" for="">{{ __('Phone') }}</label>
-                <x-input type="number" name="phone" wire:model.lazy="phone" />
+                <x-input type="number" name="phone" wire:model="phone" />
                 <x-input-error :messages="$errors->get('phone')" for="phone" class="mt-2" />
             </div>
             <div class="w-full md:w-1/2 px-2">

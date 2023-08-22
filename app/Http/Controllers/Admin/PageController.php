@@ -8,11 +8,6 @@ use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
-    public function index()
-    {
-        return view('admin.page.index');
-    }
-
     public function orderForms()
     {
         return view('admin.orderforms.index');

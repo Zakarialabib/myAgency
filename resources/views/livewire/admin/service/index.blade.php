@@ -39,7 +39,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create Service') }}
                 </x-button>
             </div>
@@ -51,9 +51,7 @@
         <div class="flex flex-wrap justify-center">
             <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
                 <div class="my-2 my-md-0">
-                    <p class="leading-5 text-black mb-1 text-sm ">
-                        {{ __('Show items per page') }}
-                    </p>
+                    
                     <select wire:model="perPage" name="perPage"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                         @foreach ($paginationOptions as $value)
@@ -83,127 +81,105 @@
                 </div>
             </div>
         </div>
+        <div x-data="{ openMenuIndex: null }">
+            <x-table>
+                <x-slot name="thead">
+                    <x-table.th>#</x-table.th>
+                    <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
+                        {{ __('Title') }}
+                        @include('components.table.sort', ['field' => 'title'])
+                    </x-table.th>
+                    <x-table.th sortable wire:click="sortBy('type')" :direction="$sorts['type'] ?? null">
+                        {{ __('Type') }}
+                        @include('components.table.sort', ['field' => 'type'])
+                    </x-table.th>
+                    <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
+                        {{ __('Status') }}
+                        @include('components.table.sort', ['field' => 'status'])
+                    </x-table.th>
+                    <x-table.th>
+                        {{ __('Actions') }}
+                    </x-table.th>
 
-        <x-table>
-            <x-slot name="thead">
-                <x-table.th>#</x-table.th>
-                <x-table.th>
-                    {{ __('Language') }}
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('title')" :direction="$sorts['title'] ?? null">
-                    {{ __('Title') }}
-                    @include('components.table.sort', ['field' => 'title'])
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('type')" :direction="$sorts['type'] ?? null">
-                    {{ __('Type') }}
-                    @include('components.table.sort', ['field' => 'type'])
-                </x-table.th>
-                <x-table.th sortable wire:click="sortBy('status')" :direction="$sorts['status'] ?? null">
-                    {{ __('Status') }}
-                    @include('components.table.sort', ['field' => 'status'])
-                </x-table.th>
-                <x-table.th>
-                    {{ __('Actions') }}
-                </x-table.th>
-
-            </x-slot>
-            <x-table.tbody>
-                @forelse($services as $index => $service)
-                    <x-table.tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $index }}" 
-                        x-data="{ 'isMenuOpen({{ $index }})': false }">
+                </x-slot>
+                <x-table.tbody>
+                    @forelse($services as $index => $service)
+                        <tr wire:loading.class.delay="opacity-50" wire:key="row-{{ $index }}">
                             <x-table.td class="flex flex-wrap gap-4">
-                                <button @click="isMenuOpen = true">
+                                <button
+                                    @click="openMenuIndex = (openMenuIndex === {{ $index }}) ? null : {{ $index }}">
                                     <i class="fa fa-caret-down"
                                         :class="{
-                                            'fa-caret-up': 'isMenuOpen({{ $index }})',
-                                            'fa-caret-down': !'isMenuOpen({{ $index }})',
+                                            'fa-caret-up': openMenuIndex === {{ $index }},
+                                            'fa-caret-down': openMenuIndex !== {{ $index }}
                                         }"
                                         aria-hidden="true">
                                     </i>
                                 </button>
                                 <input type="checkbox" value="{{ $service->id }}" wire:model="selected">
                             </x-table.td>
-
-                            <x-table.td>
-                                <img src="{{ flagImageUrl($service->language->code) }}">
-                            </x-table.td>
-
-
                             <x-table.td>
                                 {{ $service->title }}
                             </x-table.td>
-
                             <x-table.td>
                                 {{ $service->type }}
                             </x-table.td>
 
                             <x-table.td>
-                                <livewire:utils.toggle-button :model="$service" field="status"
+                                <livewire:utils.toggle-button :model="$service" field="status" lazy
                                     key="{{ $service->id }}" />
                             </x-table.td>
                             <x-table.td>
                                 <div class="inline-flex">
-                                    <a class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-green-500 border-green-800 hover:bg-green-600 active:bg-green-700 focus:ring-green-300 mr-2"
-                                        wire:click="$emit('editModal', {{ $service->id }})">
+                                    <x-button info type="button" wire:loading.attr="disabled"
+                                        wire:click="$dispatchTo('admin.service.edit', 'editModal', { id: {{ $service->id }} })">
                                         <i class="fa fa-pen h-4 w-4"></i>
-                                    </a>
-                                    <button
-                                        class="font-bold border-transparent uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ease-linear transition-all duration-150 cursor-pointer text-white bg-red-500 border-red-800 hover:bg-red-600 active:bg-red-700 focus:ring-red-300 mr-2"
-                                        type="button" wire:click="$emit('deleteModal', {{ $service->id }})"
+                                    </x-button>
+                                    <x-button danger type="button"
+                                        wire:click="$dispatch('deleteModal', { id: {{ $service->id }} })"
                                         wire:loading.attr="disabled">
                                         <i class="fa fa-trash h-4 w-4"></i>
-                                    </button>
-                                    <button
-                                        class="font-bold  bg-purple-500 border-purple-800 hover:bg-purple-600 active:bg-purple-700 focus:ring-purple-300 uppercase justify-center text-xs py-2 px-3 rounded shadow hover:shadow-md mr-1 ease-linear transition-all duration-150 cursor-pointer text-white"
-                                        type="button" wire:click="confirm('clone', {{ $service->id }})"
+                                    </x-button>
+                                    <x-button warning type="button" wire:click="confirm('clone', {{ $service->id }})"
                                         wire:loading.attr="disabled">
-                                        <i class="fa fa-bin h-4 w-4"></i>
-                                    </button>
-
+                                        {{ __('Clone') }}
+                                    </x-button>
                                 </div>
                             </x-table.td>
-
-
-                            <tr x-show="isMenuOpen({{ $index }})"
-                                x-transition:enter="transition ease-out duration-300"
-                                x-transition:enter-start="opacity-0 transform scale-95"
-                                x-transition:enter-end="opacity-100 transform scale-100"
-                                x-transition:leave="transition ease-in duration-200"
-                                x-transition:leave-start="opacity-100 transform scale-100"
-                                x-transition:leave-end="opacity-0 transform scale-95" x-cloak>
-                                <td class="py-4" colspan="12">
-                                    <div class="panel-body text-center p-5">
-                                        <h1>{{ $service->title }}</h1>
-                                        <p>{!! $service->content !!}</p>
-                                        <div class="container">
-                                            @if (empty($service->image))
-                                                {{ __('No images') }}
-                                            @else
-                                                <img class="w-52 rounded-full"
-                                                    src="{{ asset('uploads/services/' . $service->image) }}"
-                                                    alt="">
-                                            @endif
-                                        </div>
-                                        <div class="mt-4">
-                                            <button @click="isMenuOpen = false"
-                                                class="px-4 py-2 text-sm font-medium text-gray-800 bg-gray-200 rounded hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
-                                                Collapse
-                                            </button>
-                                        </div>
+                        </tr>
+                        <tr x-show="openMenuIndex === {{ $index }}"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 transform scale-95"
+                            x-transition:enter-end="opacity-100 transform scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 transform scale-100"
+                            x-transition:leave-end="opacity-0 transform scale-95" x-cloak>
+                            <td class="py-4" colspan="12">
+                                <div class="text-center p-5">
+                                    <h1>{{ $service->title }}</h1>
+                                    <p>{!! $service->content !!}</p>
+                                    <div class="container">
+                                        @if (empty($service->image))
+                                            {{ __('No images') }}
+                                        @else
+                                            <img class="w-52 rounded-full"
+                                                src="{{ asset('uploads/services/' . $service->image) }}"
+                                                alt="">
+                                        @endif
                                     </div>
-                                </td>
-                            </tr>
-                    </x-table.tr>
-                @empty
-                    <x-table.tr>
-                        <x-table.td colspan="10" class="text-center">
-                            {{ __('No entries found.') }}
-                        </x-table.td>
-                    </x-table.tr>
-                @endforelse
-            </x-table.tbody>
-        </x-table>
-
+                                </div>
+                            </td>
+                        </tr>
+                    @empty
+                        <x-table.tr>
+                            <x-table.td colspan="10" class="text-center">
+                                {{ __('No entries found.') }}
+                            </x-table.td>
+                        </x-table.tr>
+                    @endforelse
+                </x-table.tbody>
+            </x-table>
+        </div>
         <div class="card-body">
             <div class="pt-3">
                 @if ($this->selectedCount)
@@ -219,8 +195,8 @@
         </div>
     </x-card>
 
-    @livewire('admin.service.edit', ['service' => $service])
+    <livewire:admin.service.edit lazy service="{{ $service }}" wire:key="edit-service-{{ $service->id }}" />
 
-    @livewire('admin.service.create')
+    <livewire:admin.service.create lazy />
 
 </div>

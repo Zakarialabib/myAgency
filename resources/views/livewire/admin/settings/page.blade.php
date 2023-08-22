@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="update">
+    <form wire:submit="update">
 
         <x-form-alert />
 

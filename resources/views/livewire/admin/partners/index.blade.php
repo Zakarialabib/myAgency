@@ -39,7 +39,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create Partner') }}
                 </x-button>
             </div>
@@ -51,9 +51,7 @@
         <div class="flex flex-wrap justify-center">
             <div class="lg:w-1/2 md:w-1/2 sm:w-full flex flex-col my-md-0 my-2">
                 <div class="my-2 my-md-0">
-                    <p class="leading-5 text-black mb-1 text-sm ">
-                        {{ __('Show items per page') }}
-                    </p>
+                    
                     <select wire:model="perPage" name="perPage"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                         @foreach ($paginationOptions as $value)
@@ -119,7 +117,7 @@
                     </x-table.td>
                     <x-table.td>
                         <div class="flex justify-start space-x-2">
-                            <x-button primary type="button" wire:click="$emit('editModal', {{ $partner->id }})"
+                            <x-button primary type="button" wire:click="$dispatch('editModal', { id:  {{ $partner->id }} })"
                                 wire:loading.attr="disabled">
                                 <i class="fas fa-edit"></i>
                             </x-button>
@@ -147,7 +145,7 @@
     </div>
 
     <!-- Create Modal -->
-    @livewire('admin.partners.create')
+    <livewire:admin.partners.create lazy />
 
     <!-- Edit Modal -->
     @livewire('admin.partners.edit', ['partner' => $partner])

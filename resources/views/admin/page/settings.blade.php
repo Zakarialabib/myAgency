@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="float-right">
-                {{-- <x-button primary type="button" onclick="Livewire.emit('createTemplate')">
+                {{-- <x-button primary type="button" onclick="Livewire.dispatch('createTemplate')">
                     {{ __('Create from template') }}
                 </x-button>
                 --}}

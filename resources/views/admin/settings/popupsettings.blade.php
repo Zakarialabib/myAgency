@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="float-right">
-                <x-button primary type="button" onclick="Livewire.emit('popupModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('popupModal')">
                     {{ __('Create') }}
                 </x-button>
             </div>

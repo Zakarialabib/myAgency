@@ -44,11 +44,11 @@
                             {{__('Translate')}}
                         </x-button>
 
-                        <x-button success type="button" wire:click="$emit('editLanguage', {{ $language['id'] }}) ">
+                        <x-button success type="button" wire:click="$dispatch('editLanguage', {{ $language['id'] }}) ">
                             <i class="fas fa-edit"></i>
                         </x-button>
 
-                        <x-button danger type="button" wire:click="$emit('deleteModal', {{ $language['id'] }})">
+                        <x-button danger type="button" wire:click="$dispatch('deleteModal', {{ $language['id'] }})">
                             <i class="fas fa-trash"></i>
                         </x-button>
                     </x-table.td>
@@ -72,7 +72,7 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('livewire:load', function() {
+        document.addEventListener('livewire:init', function() {
             window.livewire.on('deleteModal', brandId => {
                 Swal.fire({
                     title: 'Are you sure?',
@@ -84,7 +84,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.livewire.emit('delete', languageId)
+                        window.Livewire.dispatch('delete', languageId)
                     }
                 })
             })

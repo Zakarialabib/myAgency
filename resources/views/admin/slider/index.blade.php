@@ -1,5 +1,5 @@
-@section('title', __('Sliders'))
 <x-dashboard-layout>
+    @section('title', __('Sliders'))
     <section class="py-3 px-4">
         <div class="flex flex-wrap items-center justify-between">
             <div class="mb-5 lg:mb-0">
@@ -37,9 +37,7 @@
                 </div>
             </div>
             <div class="float-right">
-
-                <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createModal')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createModal')">
                     {{ __('Create') }}
                 </x-button>
             </div>

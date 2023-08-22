@@ -57,7 +57,7 @@
                     </h3>
                 </x-slot>
                 <x-slot name="content">
-                    <form wire:submit.prevent="{{ $editing ? 'save(' . $popup->id . ')' : 'create' }}">
+                    <form wire:submit="{{ $editing ? 'save(' . $popup->id . ')' : 'create' }}">
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block font-bold mb-2 text-gray-700"

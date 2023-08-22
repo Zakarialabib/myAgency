@@ -9,7 +9,7 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Livewire\Auth\Index as AuthIndex;
+use App\Livewire\Auth\Index as AuthIndex;
 
 use Illuminate\Support\Facades\Route;
 

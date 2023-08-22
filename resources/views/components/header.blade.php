@@ -6,7 +6,7 @@
 })"
     class="fixed top-0 bg-black shadow left-0 w-full z-50 transition-all duration-300">
     <div class="mx-auto py-4 px-6 flex justify-between items-center">
-        <a class="lg:text-2xl sm:text-xl font-bold font-heading text-white" href="{{ route('front.index') }}">
+        <a class="lg:text-2xl sm:text-xl font-bold font-heading text-white" href="">
             <img class="w-full h-10" src="{{ asset('images/' . Helpers::settings('site_logo')) }}" loading="lazy"
                 alt="{{ Helpers::settings('site_title') }}" />
         </a>
@@ -26,7 +26,7 @@
             </li>
             <li>
                 <a class="text-green-500 hover:text-green-700 uppercase text-lg md:text-lg lg:text-1xl hover:underline cursor-pointer"
-                    href="{{ url('/') }}#startup">
+                    href="{{ url('/') }}#learning">
                     {{ __('Learning Hub') }}
                 </a>
             </li>
@@ -78,7 +78,7 @@
             x-on:click="isSidebar = false"></div>
         <nav class="relative flex flex-col py-6 px-6 w-full h-full bg-white border-r overflow-y-auto">
             <div class="flex items-center mb-2">
-                <a class="mr-auto lg:text-2xl sm:text-xl font-bold font-heading" href="{{ route('front.index') }}">
+                <a class="mr-auto lg:text-2xl sm:text-xl font-bold font-heading" href="/" wureLnavigate>
                     <img class="w-full h-10" src="{{ asset('images/' . Helpers::settings('site_logo')) }}"
                         alt="{{ Helpers::settings('site_title') }}" loading="lazy" />
                 </a>
@@ -99,7 +99,7 @@
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
-                    <a href="{{ url('/') }}#startup" x-on:click="isSidebar = false">
+                    <a href="{{ url('/') }}#learning" x-on:click="isSidebar = false">
                         {{ __('Learning Hub') }}
                     </a>
                 </li>
@@ -109,7 +109,7 @@
                     </a>
                 </li>
                 <li class="hover:text-green-500 focus:text-green-500 hover:underline">
-                    <a href="{{ route('front.blogs') }}">
+                    <a href="{{ route('front.blogs') }}" wire:navigate>
                         {{ __('Resources') }}
                     </a>
                 </li>

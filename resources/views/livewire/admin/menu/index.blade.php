@@ -48,16 +48,16 @@
                 <!-- Validation Errors -->
                 <x-validation-errors class="mb-4" :errors="$errors" />
                 <div class="border border-gray-300 rounded-md shadow-sm py-2 w-full">
-                    <form wire:submit.prevent="store" class="grid grid-cols gap-2 px-4">
+                    <form wire:submit="store" class="grid grid-cols gap-2 px-4">
                         <div class="w-full">
                             <x-label for="name" :value="__('Name')" />
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                wire:model.lazy="name" />
+                                wire:model="name" />
                             <x-input-error :messages="$errors->get('menu.name')" for="name" class="mt-2" />
                         </div>
                         <div class="w-full">
                             <x-label for="type" :value="__('Type')" />
-                            <select id="type" class="block mt-1 w-full" name="type" wire:model.lazy="type">
+                            <select id="type" class="block mt-1 w-full" name="type" wire:model="type">
                                 <option value="">{{ __('Select Type') }}</option>
                                 @foreach (\App\Enums\MenuType::cases() as $case)
                                     <option value="{{ $case->value }}"
@@ -71,7 +71,7 @@
                         <div class="w-full">
                             <x-label for="placement" :value="__('Placement')" />
                             <select id="placement" class="block mt-1 w-full" name="placement"
-                                wire:model.lazy="placement">
+                                wire:model="placement">
                                 <option value="">{{ __('Select Placement') }}</option>
                                 @foreach (\App\Enums\MenuPlacement::cases() as $case)
                                     <option value="{{ $case->value }}"
@@ -85,21 +85,21 @@
                         <div class="w-full">
                             <x-label for="label" :value="__('Label')" />
                             <x-input id="label" class="block mt-1 w-full" type="text" name="label"
-                                wire:model.lazy="label" />
+                                wire:model="label" />
                             <x-input-error :messages="$errors->get('menu.label')" for="label" class="mt-2" />
                         </div>
 
                         <div class="w-full">
                             <x-label for="url" :value="__('URL')" />
                             <x-input id="url" class="block mt-1 w-full" type="text" name="url"
-                                wire:model.lazy="url" />
+                                wire:model="url" />
                             <x-input-error :messages="$errors->get('menu.url')" for="url" class="mt-2" />
                         </div>
 
                         <div class="w-full">
                             <x-label for="parent_id" :value="__('Parent ID')" />
                             <select id="parent_id" class="block mt-1 w-full" name="parent_id"
-                                wire:model.lazy="parent_id">
+                                wire:model="parent_id">
                                 <option value="">None</option>
                                 @foreach ($this->menus as $menuItem)
                                     <option value="{{ $menuItem['id'] }}">{{ $menuItem['name'] }}</option>
@@ -112,7 +112,7 @@
                             <x-label for="new_window" :value="__('New Window')" />
                             <label class="flex items-center mt-2">
                                 <input id="new_window" name="new_window" type="checkbox" class="form-checkbox"
-                                    wire:model.lazy="new_window">
+                                    wire:model="new_window">
                                 <span class="ml-2">{{ __('New Window') }}</span>
                             </label>
                             <x-input-error :messages="$errors->get('menu.new_window')" for="new_window" class="mt-2" />
@@ -186,20 +186,20 @@
                                 x-transition:leave="transition ease-in duration-200 opacity-0 transform origin-top"
                                 x-transition:leave-start="opacity-100 translate-y-0 scale-100"
                                 x-transition:leave-end="-translate-y-4 scale-95">
-                                <form wire:submit.prevent="update({{ $menu['id'] }})">
+                                <form wire:submit="update({{ $menu['id'] }})">
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="w-full">
                                             <x-label for="name" :value="__('Name')" />
                                             <x-input id="name{{ $index }}" class="block mt-1 w-full"
                                                 type="text" name="name"
-                                                wire:model.lazy="menus.{{ $index }}.name" />
+                                                wire:model="menus.{{ $index }}.name" />
                                             <x-input-error :messages="$errors->get('menu.name')" for="name" class="mt-2" />
                                         </div>
                                         {{-- @dd($menu) --}}
                                         <div class="w-full">
                                             <x-label for="type" :value="__('Type')" />
                                             <select id="type{{ $index }}" class="block mt-1 w-full"
-                                                name="type" wire:model.lazy="menus.{{ $index }}.type">
+                                                name="type" wire:model="menus.{{ $index }}.type">
                                                 <option value="">{{ __('Select Type') }}</option>
                                                 @foreach (\App\Enums\MenuType::cases() as $case)
                                                     <option value="{{ $case->value }}"
@@ -214,7 +214,7 @@
                                             <x-label for="placement" :value="__('Placement')" />
                                             <select id="placement{{ $index }}" class="block mt-1 w-full"
                                                 name="placement"
-                                                wire:model.lazy="menus.{{ $index }}.placement">
+                                                wire:model="menus.{{ $index }}.placement">
                                                 <option value="">{{ __('Select Placement') }}</option>
                                                 @foreach (\App\Enums\MenuPlacement::cases() as $case)
                                                     <option value="{{ $case->value }}"
@@ -230,7 +230,7 @@
                                             <x-label for="label" :value="__('Label')" />
                                             <x-input id="label{{ $index }}" class="block mt-1 w-full"
                                                 type="text" name="label"
-                                                wire:model.lazy="menus.{{ $index }}.label" />
+                                                wire:model="menus.{{ $index }}.label" />
                                             <x-input-error :messages="$errors->get('menu.label')" for="label" class="mt-2" />
                                         </div>
 
@@ -238,7 +238,7 @@
                                             <x-label for="url" :value="__('URL')" />
                                             <div class="relative">
                                                 <x-input id="url" class="block mt-1 w-full" type="text"
-                                                    name="url" wire:model.lazy="url" />
+                                                    name="url" wire:model="url" />
                                                 <div
                                                     class="absolute right-0 top-0 h-full w-8 flex items-center justify-center">
                                                     <button @click="isOpen = !isOpen" type="button"
@@ -280,7 +280,7 @@
                                             <x-label for="parent_id" :value="__('Parent ID')" />
                                             <select id="parent_id{{ $index }}" class="block mt-1 w-full"
                                                 name="parent_id"
-                                                wire:model.lazy="menus.{{ $index }}.parent_id">
+                                                wire:model="menus.{{ $index }}.parent_id">
                                                 <option value="">None</option>
                                                 @foreach ($this->menus as $menuItem)
                                                     <option value="{{ $menuItem['id'] }}"
@@ -297,7 +297,7 @@
                                             <label class="flex items-center mt-2">
                                                 <input id="new_window{{ $index }}" name="new_window"
                                                     type="checkbox" class="form-checkbox"
-                                                    wire:model.lazy="new_window">
+                                                    wire:model="new_window">
                                                 <span class="ml-2">{{ __('New Window') }}</span>
                                             </label>
                                             <x-input-error :messages="$errors->get('menu.new_window')" for="new_window" class="mt-2" />

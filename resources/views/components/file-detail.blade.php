@@ -14,12 +14,12 @@
             <h3 class="font-medium text-gray-900">Metadata</h3>
 
             <div>
-                <x-input.text wire:model.defer="metadata.alt" label="Alt" placeholder="Alt"/>
+                <x-input.text wire:model="metadata.alt" label="Alt" placeholder="Alt"/>
             </div>
 
             <div>
                 <x-label for="caption" class="sr-only">{{__('Caption')}}</label>
-                <x-input.textarea wire:model.defer="metadata.caption" id="caption" placeholder="Caption"/>
+                <x-input.textarea wire:model="metadata.caption" id="caption" placeholder="Caption"/>
             </div>
         </div>
 

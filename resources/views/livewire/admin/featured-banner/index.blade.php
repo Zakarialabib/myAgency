@@ -10,9 +10,6 @@
                 </p>
             @endif
             <div class="my-2 my-md-0">
-                <p class="leading-5 text-black mb-1 text-sm ">
-                    {{ __('Show items per page') }}
-                </p>
                 <select wire:model="perPage" name="perPage"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-32 p-1">
                     @foreach ($paginationOptions as $value)
@@ -87,12 +84,12 @@
                     </x-table.td>
                     <x-table.td>
                         <div class="flex justify-start space-x-2">
-                            <x-button primary type="button" wire:click="$emit('editModal', {{ $featuredbanner->id }})"
+                            <x-button primary type="button" wire:click="$dispatch('editModal', {{ $featuredbanner->id }})"
                                 wire:loading.attr="disabled">
                                 <i class="fas fa-edit"></i>
                             </x-button>
                             <x-button danger type="button"
-                                wire:click="$emit('deleteModal', {{ $featuredbanner->id }})"
+                                wire:click="$dispatch('deleteModal', {{ $featuredbanner->id }})"
                                 wire:loading.attr="disabled">
                                 <i class="fas fa-trash-alt"></i>
                             </x-button>
@@ -126,19 +123,19 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                <form wire:submit.prevent="update">
+                <form wire:submit="update">
                     <div class="flex flex-wrap -mx-3 space-y-0">
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="title" :value="__('Title')" />
                             <x-input id="title" class="block mt-1 w-full" type="text" name="title"
-                                wire:model.defer="featuredbanner.title" />
+                                wire:model="featuredbanner.title" />
                             <x-input-error :messages="$errors->get('featuredbanner.title')" for="featuredbanner.title" class="mt-2" />
                         </div>
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="language_id" :value="__('Language')" required />
                             <x-select-list
                                 class="block bg-white text-gray-700 rounded border border-gray-300 mb-1 text-sm w-full focus:shadow-outline-blue focus:border-blue-500"
-                                id="language_id" name="language_id" wire:model.defer="featuredbanner.language_id"
+                                id="language_id" name="language_id" wire:model="featuredbanner.language_id"
                                 :options="$this->listsForFields['languages']" />
                             <x-input-error :messages="$errors->get('featuredbanner.language_id')" for="featuredbanner.language_id" class="mt-2" />
                         </div>
@@ -146,13 +143,13 @@
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="details" :value="__('Details')" />
                             <x-input id="details" class="block mt-1 w-full" type="text" name="details"
-                                wire:model.defer="featuredbanner.details" />
+                                wire:model="featuredbanner.details" />
                             <x-input-error :messages="$errors->get('featuredbanner.details')" for="featuredbanner.details" class="mt-2" />
                         </div>
                         <div class="xl:w-1/2 md:w-1/2 px-3">
                             <x-label for="link" :value="__('Link')" />
                             <x-input id="link" class="block mt-1 w-full" type="text" name="link"
-                                wire:model.defer="featuredbanner.link" />
+                                wire:model="featuredbanner.link" />
                             <x-input-error :messages="$errors->get('featuredbanner.link')" for="featuredbanner.link" class="mt-2" />
                         </div>
 
@@ -186,7 +183,7 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('livewire:load', function() {
+        document.addEventListener('livewire:init', function() {
             window.livewire.on('deleteModal', featuredbannerId => {
                 Swal.fire({
                     title: __("Are you sure?") ,
@@ -198,7 +195,7 @@
                     confirmButtonText: __("Yes, delete it!") 
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.livewire.emit('delete', featuredbannerId)
+                        window.Livewire.dispatch('delete', featuredbannerId)
                     }
                 })
             })

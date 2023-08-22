@@ -39,7 +39,7 @@
             <div class="float-right">
 
                 <!-- Button trigger livewire modal -->
-                <x-button primary type="button" onclick="Livewire.emit('createFeaturedBanner', 'show')">
+                <x-button primary type="button" onclick="Livewire.dispatch('createFeaturedBanner',)">
                     {{ __('Create') }}
                 </x-button>
             </div>

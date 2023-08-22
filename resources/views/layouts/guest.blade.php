@@ -29,7 +29,7 @@
         <meta name="description" content="{{ Helpers::settings('seo_meta_description') }}">
         <meta property="og:title" content="{{ Helpers::settings('site_title') }}">
         <meta property="og:description" content="{{ Helpers::settings('seo_meta_description') }}">
-        <meta property="og:url" content="{{ route('front.index') }}" />
+        <meta property="og:url" content="/" />
     @endif
 
     <meta property="og:locale" content="{{ app()->getLocale() }}" />
@@ -85,8 +85,8 @@
 
     @vite('resources/js/app.js')
 
-    @livewireScripts
-    
+    @livewireScriptConfig 
+        
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <x-livewire-alert::scripts />
