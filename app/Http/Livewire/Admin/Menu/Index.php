@@ -182,6 +182,7 @@ class Index extends Component
                 'new_window' => false,
             ],
         ];
+
         // create the menus
         foreach ($this->menus as $menu) {
             Menu::create($menu);
